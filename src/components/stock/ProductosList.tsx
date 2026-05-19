@@ -1,0 +1,124 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { IProduct } from '@/types'
+import { formatPeso } from '@/lib/utils'
+import { Pencil, Trash2, AlertTriangle } from 'lucide-react'
+
+interface Props {
+  onNuevo: () => void
+  onEditar: (producto: IProduct) => void
+}
+
+export default function ProductosList({ onNuevo, onEditar }: Props) {
+  const [productos, setProductos] = useState<IProduct[]>([])
+  const [loading, setLoading] = useState(true)
+  const [buscar, setBuscar] = useState('')
+
+  useEffect(() => {
+    const fetchProductos = async () => {
+      setLoading(true)
+      const res = await fetch(`/api/productos?buscar=${buscar}&limite=50`)
+      const json = await res.json()
+      if (json.ok) setProductos(json.data)
+      setLoading(false)
+    }
+    fetchProductos()
+  }, [buscar])
+
+  async function eliminar(id: string) {
+    const res = await fetch(`/api/productos/${id}`, { method: 'DELETE' })
+    const json = await res.json()
+    if (json.ok) setProductos((prev) => prev.filter((p) => p._id !== id))
+  }
+
+  return (
+    <div className="bg-white rounded-lg shadow-sm">
+      <div className="p-4 border-b border-slate-100 flex items-center gap-3">
+        <input
+          type="text"
+          placeholder="Buscar producto..."
+          value={buscar}
+          onChange={(e) => setBuscar(e.target.value)}
+          className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+        />
+        <button
+          onClick={onNuevo}
+          className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-colors"
+        >
+          + Nuevo
+        </button>
+      </div>
+
+      {loading ? (
+        <div className="p-8 text-center text-slate-400 text-sm">Cargando...</div>
+      ) : productos.length === 0 ? (
+        <div className="p-8 text-center text-slate-400 text-sm">
+          No hay productos cargados
+        </div>
+      ) : (
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="text-left text-slate-500 border-b border-slate-100">
+              <th className="px-4 py-3 font-medium">Producto</th>
+              <th className="px-4 py-3 font-medium">Categoria</th>
+              <th className="px-4 py-3 font-medium text-right">Stock</th>
+              <th className="px-4 py-3 font-medium text-right">Costo</th>
+              <th className="px-4 py-3 font-medium text-right">Venta</th>
+              <th className="px-4 py-3 font-medium text-right">Margen</th>
+              <th className="px-4 py-3 font-medium text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {productos.map((p) => {
+              const stockBajo = p.cantidad <= p.stockMinimo
+              return (
+                <tr key={p._id} className="border-b border-slate-50 hover:bg-slate-50">
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-2">
+                      {stockBajo && <AlertTriangle size={14} className="text-orange-500" />}
+                      <span className="font-medium text-slate-700">{p.nombre}</span>
+                    </div>
+                  </td>
+                  <td className="px-4 py-3 text-slate-500">
+                    {typeof p.categoria === 'object' ? p.categoria.nombre : p.categoria}
+                  </td>
+                  <td className={`px-4 py-3 text-right font-medium ${stockBajo ? 'text-red-500' : 'text-slate-700'}`}>
+                    {p.cantidad} {p.unidad}
+                  </td>
+                  <td className="px-4 py-3 text-right text-slate-500">
+                    {formatPeso(p.precioCosto)}
+                  </td>
+                  <td className="px-4 py-3 text-right font-medium text-slate-700">
+                    {formatPeso(p.precioVenta)}
+                  </td>
+                  <td className="px-4 py-3 text-right">
+                    <span className="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full font-medium">
+                      {p.margen}%
+                    </span>
+                  </td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center justify-center gap-2">
+                      <button
+                        onClick={() => onEditar(p)}
+                        className="text-slate-400 hover:text-blue-500 cursor-pointer transition-colors"
+                      >
+                        <Pencil size={15} />
+                      </button>
+                      <button
+                        onClick={() => eliminar(p._id)}
+                        className="text-slate-400 hover:text-red-500 cursor-pointer transition-colors"
+                      >
+                        <Trash2 size={15} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      )}
+    </div>
+  )
+}
