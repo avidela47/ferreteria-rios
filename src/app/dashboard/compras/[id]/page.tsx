@@ -1,4 +1,4 @@
-
+import { auth } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import OrdenDetalle from '@/components/compras/OrdenDetalle'
 
