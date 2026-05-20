@@ -32,9 +32,7 @@ export async function PUT(
   try {
     
 
-    if (session.user.rol !== 'admin') {
-      return NextResponse.json({ ok: false, error: 'Sin permisos' }, { status: 403 })
-    }
+    
 
     await connectDB()
     const { id } = await params
@@ -70,9 +68,7 @@ export async function DELETE(
   try {
     
 
-    if (session.user.rol !== 'admin') {
-      return NextResponse.json({ ok: false, error: 'Sin permisos' }, { status: 403 })
-    }
+    
 
     await connectDB()
     const { id } = await params
