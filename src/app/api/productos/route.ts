@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import connectDB from '@/lib/db/mongoose'
 import Product from '@/models/Product'
 import { calcularMargen } from '@/lib/utils'
+import '@/models/Category'
+import '@/models/Supplier'
 
 
 export async function GET(req: NextRequest) {
