@@ -10,11 +10,12 @@ export async function GET() {
     await connectDB()
 
     const ahora = new Date()
-    const inicioDia = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate())
-    const inicioSemana = new Date(ahora)
-    inicioSemana.setDate(ahora.getDate() - ahora.getDay())
-    inicioSemana.setHours(0, 0, 0, 0)
-    const inicioMes = new Date(ahora.getFullYear(), ahora.getMonth(), 1)
+const inicioDia = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate(), 3, 0, 0)
+inicioDia.setTime(inicioDia.getTime() - 3 * 60 * 60 * 1000)
+const inicioSemana = new Date(ahora)
+inicioSemana.setDate(ahora.getDate() - ahora.getDay())
+inicioSemana.setHours(0, 0, 0, 0)
+const inicioMes = new Date(ahora.getFullYear(), ahora.getMonth(), 1)
 
     const ventasHoy = await Sale.aggregate([
       { $match: { estado: 'completada', createdAt: { $gte: inicioDia } } },
