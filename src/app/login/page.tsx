@@ -64,7 +64,7 @@ export default function LoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-             className="w-full bg-blue-700 text-white py-2.5 rounded-md hover:bg-blue-800 transition font-medium disabled:opacity-50 cursor-pointer"
+             className="w-full border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="admin@ferreteriaros.com"
               required
             />
