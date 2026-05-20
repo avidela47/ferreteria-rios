@@ -7,9 +7,6 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Ferreteria Rios',
   description: 'Sistema de gestion',
-  icons: {
-    icon: '/favicon.png',
-  },
 }
 export default function RootLayout({
   children,
@@ -17,8 +14,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es">
-      <body className={inter.className}>{children}</body>
-    </html>
-  )
+  <html lang="es">
+    <head>
+      <link rel="icon" type="image/png" href="/favicon.png" />
+    </head>
+    <body className={inter.className}>{children}</body>
+  </html>
+)
 }
