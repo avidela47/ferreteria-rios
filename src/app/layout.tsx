@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Ferreteria Rios',
   description: 'Sistema de gestion',
   icons: {
-    icon: './favicon.png',
+    icon: '/favicon.png',
   },
 }
 export default function RootLayout({
