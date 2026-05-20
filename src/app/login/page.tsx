@@ -34,7 +34,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-900">
-      <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-md">
+      <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-sm">
         <div className="flex justify-center mb-6">
           <Image
             src="/logo.png"
@@ -85,7 +85,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-700 text-white py-2.5 rounded-md hover:bg-blue-800 transition font-medium disabled:opacity-50"
+            className="w-full bg-orange-500 text-white py-2.5 rounded-md hover:bg-orange-600 transition font-medium disabled:opacity-50 cursor-pointer"
           >
             {loading ? 'Ingresando...' : 'Ingresar'}
           </button>
