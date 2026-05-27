@@ -7,7 +7,7 @@ export async function GET() {
   try {
     await connectDB()
 
-    const existe = await User.findOne({ email: 'admin@ferreteriaros.com' })
+    const existe = await User.findOne({ email: 'admin@ferreteriarios.com' })
     if (existe) {
       return NextResponse.json({ ok: false, mensaje: 'El usuario admin ya existe' })
     }
@@ -16,7 +16,7 @@ export async function GET() {
 
     const user = await User.create({
       nombre: 'Ariel',
-      email: 'admin@ferreteriaros.com',
+      email: 'admin@ferreteriarios.com',
       password,
       rol: 'admin',
       activo: true,
