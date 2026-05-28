@@ -4958,12 +4958,12 @@
   },
   {
     "id": "315",
-    "nombre": "Tornillo madera 3.5x25/3.5x35/4x40/4.5x50",
+    "nombre": "Tornillo madera 3.5x25",
     "categoria": "Fijaciones y buloneria",
-    "descripcion": "Surtido de tornillos para madera en cuatro medidas: 3.5x25, 3.5x35, 4x40 y 4.5x50mm.",
-    "paraQueSirve": "Tener las medidas más usadas de tornillos de madera en un solo surtido.",
+    "descripcion": "Tornillo para madera de 3.5mm x 25mm para maderas.",
+    "paraQueSirve": "Unir maderas gruesas o fijar estructuras de madera.",
     "quienLoPide": "Carpintero o quien quiere tener un surtido completo de tornillos.",
-    "comoSeUsa": "Elegir la medida según el espesor de la madera y la carga.",
+    "comoSeUsa": "Con destornillador o atornillador. Pre-agujero recomendado.",
     "ventaCruzada": [
       "Destornillador Phillips PH2",
       "Cola vinílica",
