@@ -29,7 +29,6 @@ export default function CatalogoList({ onEditar }: Props) {
   const [categoriaFiltro, setCategoriaFiltro] = useState('')
   const [expandida, setExpandida] = useState<string | null>(null)
   const [pagina, setPagina] = useState(1)
-  const [nombresEnCatalogo, setNombresEnCatalogo] = useState<Set<string>>(new Set())
 
   useEffect(() => {
     const fetchFichas = async () => {
@@ -37,9 +36,6 @@ export default function CatalogoList({ onEditar }: Props) {
       const json = await res.json()
       if (json.ok) {
         setFichas(json.data)
-        setNombresEnCatalogo(
-          new Set(json.data.map((f: IFicha) => f.nombre.toLowerCase().trim()))
-        )
       }
     }
     fetchFichas()
@@ -56,17 +52,7 @@ export default function CatalogoList({ onEditar }: Props) {
     }
   }
 
-  function existeEnCatalogo(nombre: string): boolean {
-    const n = nombre.toLowerCase().trim()
-    if (nombresEnCatalogo.has(n)) return true
-    // Búsqueda parcial por palabras clave
-    for (const nombre_catalogo of nombresEnCatalogo) {
-      const palabras = n.split(' ').filter(p => p.length > 3)
-      const coincidencias = palabras.filter(p => nombre_catalogo.includes(p))
-      if (coincidencias.length >= 2) return true
-    }
-    return false
-  }
+
 
   const categorias = [...new Set(fichas.map((f) => f.categoria))].sort()
 
@@ -203,27 +189,15 @@ export default function CatalogoList({ onEditar }: Props) {
                       <div>
                         <p className="text-xs font-semibold text-green-600 uppercase tracking-wide mb-1">🔗 Venta cruzada</p>
                         <div className="flex flex-wrap gap-1">
-                          {ficha.ventaCruzada.map((v, i) => {
-                            const existe = existeEnCatalogo(v)
-                            return (
-                              <span
-                                key={i}
-                                className={`text-xs px-2 py-0.5 rounded-full border font-medium ${
-                                  existe
-                                    ? 'bg-green-50 text-green-700 border-green-300'
-                                    : 'bg-red-50 text-red-600 border-red-300'
-                                }`}
-                                title={existe ? 'Tenés ficha de este producto' : 'No tenés ficha de este producto'}
-                              >
-                                {existe ? '✓' : '✕'} {v}
-                              </span>
-                            )
-                          })}
-                        </div>
-                        <p className="text-xs text-slate-400 mt-1">
-                          <span className="text-green-600 font-medium">Verde</span> = en catálogo &nbsp;
-                          <span className="text-red-500 font-medium">Rojo</span> = falta ficha
-                        </p>
+                          {ficha.ventaCruzada.map((v, i) => (
+                            <span
+                              key={i}
+                              className="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded-full border border-green-200"
+                            >
+                              {v}
+                            </span>
+                          ))}
+                        </div>                        
                       </div>
                     </div>
                   </div>
@@ -259,11 +233,10 @@ export default function CatalogoList({ onEditar }: Props) {
                     <button
                       key={p}
                       onClick={() => setPagina(p as number)}
-                      className={`w-8 h-8 rounded text-sm transition-colors ${
-                        pagina === p
+                      className={`w-8 h-8 rounded text-sm transition-colors ${pagina === p
                           ? 'bg-orange-500 text-white font-medium'
                           : 'border border-slate-200 text-slate-600 hover:bg-slate-50'
-                      }`}
+                        }`}
                     >
                       {p}
                     </button>

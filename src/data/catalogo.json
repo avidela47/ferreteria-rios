@@ -1087,22 +1087,6 @@
   },
   {
     "id": "69",
-    "nombre": "Pintura Aerosol Negro Brillante 200 ml DOBLE A",
-    "categoria": "Pintureria",
-    "descripcion": "Pintura en aerosol color negro brillante. Secado rápido. Para múltiples materiales.",
-    "paraQuesSirve": "Pintar objetos metálicos, plásticos, madera. Retocar piezas, herramientas, muebles.",
-    "quienLoPide": "Quien quiere pintar algo rápido sin pincel. Muy pedido para retoques y objetos pequeños.",
-    "comoSeUsa": "Agitar 2 minutos. Rociar a 25-30cm de distancia. Dar varias manos finas.",
-    "ventaCruzada": [
-      "Aerosol blanco",
-      "Aerosol aluminio",
-      "Lija al agua #180"
-    ],
-    "datosClave": "200ml. Secado rápido. Negro brillante. Marca Doble A.",
-    "formaApariencia": "Lata de aerosol color negro."
-  },
-  {
-    "id": "70",
     "nombre": "Pincel Plano 2\" (50 mm)",
     "categoria": "Pintureria",
     "descripcion": "Pincel plano de 50mm para pintar superficies con látex, esmalte o barniz.",
@@ -1119,7 +1103,7 @@
     "formaApariencia": "Mango de madera con cerdas planas."
   },
   {
-    "id": "71",
+    "id": "70",
     "nombre": "Cinta ENMASCARAR 18 mm x 40 m",
     "categoria": "Seguridad y EPP",
     "descripcion": "Cinta de papel enmascarar de 18mm de ancho. Para proteger superficies al pintar.",
@@ -1136,7 +1120,7 @@
     "formaApariencia": "Rollo de cinta color beige/amarillo de papel."
   },
   {
-    "id": "72",
+    "id": "71",
     "nombre": "Gafas de Seguridad Transparentes (Policarbonato)",
     "categoria": "Seguridad y EPP",
     "descripcion": "Anteojos de seguridad de policarbonato transparente. Protegen los ojos de partículas y proyecciones.",
@@ -1153,7 +1137,7 @@
     "formaApariencia": "Anteojos con lente grande envolvente transparente."
   },
   {
-    "id": "73",
+    "id": "72",
     "nombre": "Guante Algodón Moteado (Talle 9)",
     "categoria": "Seguridad y EPP",
     "descripcion": "Guante de algodón con puntos de PVC antideslizante. Para trabajo manual general.",
@@ -1169,7 +1153,7 @@
     "formaApariencia": "Guante blanco con puntos azules o negros de PVC."
   },
   {
-    "id": "74",
+    "id": "73",
     "nombre": "Codo 90° H-H 1/2\" Giny Plas Polipropileno Roscado",
     "categoria": "Plomeria",
     "descripcion": "Codo de polipropileno hembra-hembra de 1/2\" para cambiar la dirección de la cañería de agua.",
@@ -1186,23 +1170,7 @@
     "formaApariencia": "Codo marrón o blanco con dos bocas roscadas internas."
   },
   {
-    "id": "75",
-    "nombre": "Teflon 3/4\" x 10m",
-    "categoria": "Plomeria",
-    "descripcion": "Cinta de PTFE (teflón) de 3/4\" de ancho para sellar roscas de plomería.",
-    "paraQuesSirve": "Sellar uniones roscadas de caños para evitar pérdidas de agua o gas.",
-    "quienLoPide": "Plomero o gasista. Producto básico de plomería.",
-    "comoSeUsa": "Enrollar en el sentido de la rosca macho, unas 3-4 vueltas. Apretar la unión.",
-    "ventaCruzada": [
-      "Codos polipropileno",
-      "Canillas",
-      "Adhesivo PVC"
-    ],
-    "datosClave": "3/4\". El más usado. 10m por rollo. Para agua y gas. Siempre envolver en el sentido correcto.",
-    "formaApariencia": "Cinta blanca finísima y resbaladiza, enrollada."
-  },
-  {
-    "id": "76",
+    "id": "74",
     "nombre": "Sifón Extensible Universal Blanco (40/50 mm)",
     "categoria": "Plomeria",
     "descripcion": "Sifón plástico con tubo extensible que se adapta a distintas distancias entre pileta y caño de desagüe.",
@@ -1218,7 +1186,7 @@
     "formaApariencia": "Pieza curva en S o U de plástico blanco con tubo extensible."
   },
   {
-    "id": "77",
+    "id": "75",
     "nombre": "Canilla Giny Plas 1/2\" con manga",
     "categoria": "Plomeria",
     "descripcion": "Canilla de paso de polipropileno de 1/2\" con manga de apertura. Para cortar el suministro de agua.",
@@ -1234,37 +1202,7 @@
     "formaApariencia": "Canilla plástica marrón o blanca con palanca o manga para girar."
   },
   {
-    "id": "78",
-    "nombre": "Trampa Laucha Madera",
-    "categoria": "Materiales de obra",
-    "descripcion": "Trampa mecánica de madera para capturar ratones. Sistema de resorte clásico.",
-    "paraQuesSirve": "Capturar ratones en casas, cocinas, depósitos.",
-    "quienLoPide": "Quien tiene problema de roedores en el hogar.",
-    "comoSeUsa": "Colocar cebo (queso, maní, pan) en el gancho. Armar el resorte. Colocar en el camino de los ratones.",
-    "ventaCruzada": [
-      "Trampa rata",
-      "Guante de goma"
-    ],
-    "datosClave": "Para ratones (laucha). Para ratas usar la trampa más grande. Colocar junto a las paredes.",
-    "formaApariencia": "Tabla de madera con resorte de alambre y gancho para el cebo."
-  },
-  {
-    "id": "79",
-    "nombre": "Trampa Rata Madera",
-    "categoria": "Materiales de obra",
-    "descripcion": "Trampa mecánica de madera más grande, diseñada para ratas.",
-    "paraQuesSirve": "Capturar ratas en sótanos, fondos, depósitos o lugares con infestación.",
-    "quienLoPide": "Quien tiene problema de ratas (más grandes que ratones).",
-    "comoSeUsa": "Igual que la de laucha pero más grande. Colocar cebo y ubicar en lugares con huellas o rasonaduras.",
-    "ventaCruzada": [
-      "Trampa laucha",
-      "Guante de goma"
-    ],
-    "datosClave": "Más grande que la de laucha. Para ratas. Manipular con guantes.",
-    "formaApariencia": "Igual que la de laucha pero de mayor tamaño."
-  },
-  {
-    "id": "80",
+    "id": "76",
     "nombre": "Electrodo 2,5 mm E 6013 (Caja cerrada de 5 kg)",
     "categoria": "Electricidad",
     "descripcion": "Electrodo revestido para soldadura eléctrica por arco. Tipo E6013, uso general.",
@@ -1281,7 +1219,7 @@
     "formaApariencia": "Varillas de 35cm aproximadamente con revestimiento beige/rosado."
   },
   {
-    "id": "81",
+    "id": "77",
     "nombre": "Boya de Telgopor Redonda 3/4\"",
     "categoria": "Plomeria",
     "descripcion": "Boya flotante de telgopor esférica para cisternas y depósitos de agua.",
@@ -1296,7 +1234,7 @@
     "formaApariencia": "Esfera de telgopor con rosca de plástico para unir a la varilla."
   },
   {
-    "id": "82",
+    "id": "78",
     "nombre": "Flotante Completo 1/2\" Válvula de alta presión - Plastico",
     "categoria": "Plomeria",
     "descripcion": "Mecanismo completo de flotante (válvula + varilla + boya) para cisternas de inodoro.",
@@ -1312,7 +1250,7 @@
     "formaApariencia": "Válvula con tubo vertical, varilla y boya de plástico o telgopor."
   },
   {
-    "id": "83",
+    "id": "79",
     "nombre": "ASIENTO - INODORO - BLANCO - (INFLADO) MONKOTO",
     "categoria": "Plomeria",
     "descripcion": "Tapa y asiento para inodoro color blanco, relleno inflado para mayor comodidad. Marca Monkoto.",
@@ -1328,23 +1266,7 @@
     "formaApariencia": "Tapa oval de plástico blanco con relleno acolchado."
   },
   {
-    "id": "84",
-    "nombre": "Regulador p/ Gas - Manguera de 1,50 m - Chico",
-    "categoria": "Electricidad",
-    "descripcion": "Regulador de gas domiciliario con manguera incluida de 1.50m. Para garrafa de 10kg.",
-    "paraQuesSirve": "Regular la presión del gas de la garrafa a los artefactos (cocina, calefón).",
-    "quienLoPide": "Quien tiene garrafa y le falló el regulador o necesita reemplazarlo.",
-    "comoSeUsa": "Conectar la válvula a la garrafa y la manguera al artefacto. Asegurarse que no haya pérdidas.",
-    "ventaCruzada": [
-      "Cinta de teflón amarillo (gas)",
-      "Abrazadera de gas",
-      "Flexible de gas"
-    ],
-    "datosClave": "Para garrafa de 10kg. Con manguera de 1.50m. IMPORTANTE: controlar que no tenga pérdidas antes de usar.",
-    "formaApariencia": "Regulador metálico con manguera naranja o negra."
-  },
-  {
-    "id": "85",
+    "id": "80",
     "nombre": "WD-40 Tradicional 155 grs / 235 ml",
     "categoria": "Herramientas",
     "descripcion": "Lubricante multiuso en aerosol. Desengrasante, anticorrosivo, lubricante y desplazador de humedad.",
@@ -1360,7 +1282,7 @@
     "formaApariencia": "Lata azul y amarilla inconfundible con tubito rojo aplicador."
   },
   {
-    "id": "86",
+    "id": "81",
     "nombre": "ACEITE con APLICADOR - 100 cc - MULTIUSO - ACEITODO",
     "categoria": "Herramientas",
     "descripcion": "Aceite lubricante multiuso en envase con aplicador de pico fino. Para lubricar piezas mecánicas en general.",
@@ -1376,7 +1298,7 @@
     "formaApariencia": "Envase plástico con pico aplicador largo y delgado."
   },
   {
-    "id": "87",
+    "id": "82",
     "nombre": "ACEITE en AEROSOL - MULTIUSO x 220 cc ACEITODO",
     "categoria": "Herramientas",
     "descripcion": "Aceite lubricante en aerosol para aplicación en superficies amplias o de difícil acceso.",
@@ -1392,7 +1314,7 @@
     "formaApariencia": "Lata de aerosol con tobera."
   },
   {
-    "id": "88",
+    "id": "83",
     "nombre": "Abrazadera Carbiz 12-17 mm (5/8\")",
     "categoria": "Plomeria",
     "descripcion": "Abrazadera de acero inoxidable para asegurar mangueras de gas a reguladores y artefactos.",
@@ -1408,7 +1330,7 @@
     "formaApariencia": "Aro metálico con tornillo de apriete."
   },
   {
-    "id": "89",
+    "id": "84",
     "nombre": "Acople Compresión 1/2\"",
     "categoria": "Plomeria",
     "descripcion": "Acople por compresión para unir caños de polipropileno o cobre de 1/2\" sin soldadura.",
@@ -1424,7 +1346,7 @@
     "formaApariencia": "Fitting de latón o plástico con tuerca de apriete."
   },
   {
-    "id": "90",
+    "id": "85",
     "nombre": "Acople Compresión 3/4\"",
     "categoria": "Plomeria",
     "descripcion": "Acople por compresión para caños de 3/4\".",
@@ -1440,7 +1362,7 @@
     "formaApariencia": "Igual al de 1/2\" pero de mayor tamaño."
   },
   {
-    "id": "91",
+    "id": "86",
     "nombre": "Acople Compresión 1\"",
     "categoria": "Plomeria",
     "descripcion": "Acople por compresión para caños de 1\".",
@@ -1455,7 +1377,7 @@
     "formaApariencia": "Igual a los anteriores pero más grande."
   },
   {
-    "id": "92",
+    "id": "87",
     "nombre": "Acople Compresión Duke 1/2\" Largo c/ traba",
     "categoria": "Plomeria",
     "descripcion": "Acople de compresión largo marca Duke con sistema de traba para mayor seguridad.",
@@ -1470,7 +1392,7 @@
     "formaApariencia": "Similar al acople estándar pero con sistema de clip o traba adicional."
   },
   {
-    "id": "93",
+    "id": "88",
     "nombre": "Acople Compresión Duke 3/4\" Largo c/ traba",
     "categoria": "Plomeria",
     "descripcion": "Acople de compresión largo marca Duke con traba para caños de 3/4\".",
@@ -1485,7 +1407,7 @@
     "formaApariencia": "Como el de 1/2\" Duke pero más grande."
   },
   {
-    "id": "94",
+    "id": "89",
     "nombre": "Acople Rápido 1/2\" REHAU (Sin Stop)",
     "categoria": "Plomeria",
     "descripcion": "Acople rápido de riego marca REHAU sin válvula de corte (sin stop). Para conectar mangueras.",
@@ -1500,7 +1422,7 @@
     "formaApariencia": "Fitting plástico con sistema de traba rápida."
   },
   {
-    "id": "95",
+    "id": "90",
     "nombre": "Adaptador de Bronce 3 a 10 kg",
     "categoria": "Plomeria",
     "descripcion": "Adaptador de bronce para conectar reguladores de garrafas de 3kg a válvulas de garrafas de 10kg y viceversa.",
@@ -1516,7 +1438,7 @@
     "formaApariencia": "Pieza pequeña de bronce con dos bocas roscadas de diferente tamaño."
   },
   {
-    "id": "96",
+    "id": "91",
     "nombre": "Adaptador de Bronce 10 a 3 kg",
     "categoria": "Plomeria",
     "descripcion": "Adaptador de bronce para conectar reguladores de garrafa de 10kg a válvulas de garrafa de 3kg.",
@@ -1532,7 +1454,7 @@
     "formaApariencia": "Similar al anterior pero con bocas invertidas."
   },
   {
-    "id": "97",
+    "id": "92",
     "nombre": "Adhesivo PVC (125cc)",
     "categoria": "Plomeria",
     "descripcion": "Adhesivo solvente para pegar caños y accesorios de PVC en 125cc.",
@@ -1548,7 +1470,7 @@
     "formaApariencia": "Pomo con pico y pincel."
   },
   {
-    "id": "98",
+    "id": "93",
     "nombre": "Arandela Plana 1/4 (M6)",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Arandela plana de acero de 1/4 pulgada (M6). Distribuye la carga del bulón sobre la superficie.",
@@ -1564,7 +1486,7 @@
     "formaApariencia": "Disco metálico delgado con agujero central."
   },
   {
-    "id": "99",
+    "id": "94",
     "nombre": "Arandela Presión (Grover) M6",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Arandela de presión (grover) M6. Evita que la tuerca se afloje por vibración.",
@@ -1580,7 +1502,7 @@
     "formaApariencia": "Arandela metálica partida en espiral."
   },
   {
-    "id": "100",
+    "id": "95",
     "nombre": "Arandela Presión (Grover) M8",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Arandela grover M8.",
@@ -1596,7 +1518,7 @@
     "formaApariencia": "Igual a la M6 pero más grande."
   },
   {
-    "id": "101",
+    "id": "96",
     "nombre": "Arandela Presión (Grover) M10",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Arandela grover M10.",
@@ -1612,7 +1534,7 @@
     "formaApariencia": "Igual a las anteriores pero más grande."
   },
   {
-    "id": "102",
+    "id": "97",
     "nombre": "Autoperforante Surtido (Mecha)",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Surtido de tornillos autoperforantes. Se usan sin taladro previo en chapas y materiales blandos.",
@@ -1628,7 +1550,7 @@
     "formaApariencia": "Tornillo con cabeza Phillips o hexagonal y punta de broca."
   },
   {
-    "id": "103",
+    "id": "98",
     "nombre": "BARRAL de MADERA SIMPLE - KIT - 22 mm x 1,40 m",
     "categoria": "Herramientas",
     "descripcion": "Kit de barral de madera de 22mm de diámetro y 1.40m de largo con soportes y terminales incluidos.",
@@ -1645,7 +1567,7 @@
     "formaApariencia": "Barra cilíndrica de madera con terminales decorativos en los extremos."
   },
   {
-    "id": "104",
+    "id": "99",
     "nombre": "BARRAL de MADERA SIMPLE - KIT - 22 mm x 1,60 m",
     "categoria": "Herramientas",
     "descripcion": "Kit de barral de madera de 22mm y 1.60m para ventanas medianas.",
@@ -1661,7 +1583,7 @@
     "formaApariencia": "Igual al de 1.40m pero más largo."
   },
   {
-    "id": "105",
+    "id": "100",
     "nombre": "BARRAL de MADERA SIMPLE - KIT - 22 mm x 1,80 m",
     "categoria": "Herramientas",
     "descripcion": "Kit de barral de madera de 22mm y 1.80m para ventanas grandes.",
@@ -1677,7 +1599,7 @@
     "formaApariencia": "Igual a los anteriores pero más largo."
   },
   {
-    "id": "106",
+    "id": "101",
     "nombre": "BARRAL de MADERA SIMPLE - KIT - 22 mm x 2,00 m",
     "categoria": "Herramientas",
     "descripcion": "Kit de barral de madera de 22mm y 2.00m para ventanas muy grandes o puertas dobles.",
@@ -1693,7 +1615,7 @@
     "formaApariencia": "Igual a los anteriores pero de 2 metros."
   },
   {
-    "id": "107",
+    "id": "102",
     "nombre": "BASE - ARO DOBLE y DESPLAZADO - APOYO INODORO FIELTRET",
     "categoria": "Plomeria",
     "descripcion": "Base con aro doble y desplazado para fijar el inodoro al piso cuando la conexión está descentrada.",
@@ -1709,7 +1631,7 @@
     "formaApariencia": "Aro de goma o PVC con dos anillos, uno desplazado respecto al otro."
   },
   {
-    "id": "108",
+    "id": "103",
     "nombre": "BASE - ARO SIMPLE - APOYO INODORO",
     "categoria": "Plomeria",
     "descripcion": "Base simple para fijar el inodoro al piso cuando la salida está centrada.",
@@ -1725,7 +1647,7 @@
     "formaApariencia": "Aro de goma o PVC simple."
   },
   {
-    "id": "109",
+    "id": "104",
     "nombre": "Barbijo para Polvo (tipo 3M o económicos)",
     "categoria": "Seguridad y EPP",
     "descripcion": "Mascarilla de protección respiratoria desechable para polvo y partículas no tóxicas.",
@@ -1741,7 +1663,7 @@
     "formaApariencia": "Mascarilla plegable o con forma de copa, color blanco con elásticos."
   },
   {
-    "id": "110",
+    "id": "105",
     "nombre": "Barrita Silicona FINA",
     "categoria": "Adhesivos y selladores",
     "descripcion": "Barritas de silicona transparente para pistola de silicona caliente. Diámetro fino (7mm).",
@@ -1756,7 +1678,7 @@
     "formaApariencia": "Varillas cilíndricas transparentes de 7mm de diámetro."
   },
   {
-    "id": "111",
+    "id": "106",
     "nombre": "Barrita Silicona GRUESA",
     "categoria": "Adhesivos y selladores",
     "descripcion": "Barritas de silicona transparente para pistola de silicona caliente. Diámetro grueso (11mm).",
@@ -1771,7 +1693,7 @@
     "formaApariencia": "Varillas cilíndricas transparentes de 11mm de diámetro."
   },
   {
-    "id": "112",
+    "id": "107",
     "nombre": "Brocha / Pincel Plano 4\"",
     "categoria": "Pintureria",
     "descripcion": "Brocha de 4 pulgadas (100mm) para pintar superficies amplias con látex o esmalte.",
@@ -1788,7 +1710,7 @@
     "formaApariencia": "Mango de madera con cerdas anchas y planas de 100mm."
   },
   {
-    "id": "113",
+    "id": "108",
     "nombre": "CARTUCHO RECARGA de GAS p/ ENCENDEDOR - 250 cc o 300 cc",
     "categoria": "Electricidad",
     "descripcion": "Cartucho de gas butano para recargar encendedores, mecheros y sopletes.",
@@ -1803,7 +1725,7 @@
     "formaApariencia": "Lata pequeña de aerosol con válvula de punta."
   },
   {
-    "id": "114",
+    "id": "109",
     "nombre": "CARRETEL PORTA TANZA - AUTOMATICO - STANDARD",
     "categoria": "Herramientas",
     "descripcion": "Carretel con mecanismo de retracción automática para guardar y extender la tanza de albañil.",
@@ -1819,7 +1741,7 @@
     "formaApariencia": "Dispositivo plástico circular con carrete interno y ganchito."
   },
   {
-    "id": "115",
+    "id": "110",
     "nombre": "CARRETEL PORTA TANZA - C/ RANURA - 2 pzs",
     "categoria": "Herramientas",
     "descripcion": "Carretel de tanza simple con ranura para anudar. Pack de 2 piezas.",
@@ -1835,7 +1757,7 @@
     "formaApariencia": "Pequeño carretel plástico con ranura lateral."
   },
   {
-    "id": "116",
+    "id": "111",
     "nombre": "CAPA AISLADORA - 15 cm x 50 m - FILM de 200 mc",
     "categoria": "Electricidad",
     "descripcion": "Film plástico polietileno de 200 micrones para aislación hidrófuga en construcción.",
@@ -1850,7 +1772,7 @@
     "formaApariencia": "Rollo de film plástico transparente grueso."
   },
   {
-    "id": "117",
+    "id": "112",
     "nombre": "CAÑO - ALUMINIO - 4\" x 2 m - COMPACTADO",
     "categoria": "Plomeria",
     "descripcion": "Caño de aluminio compactado de 4 pulgadas y 2 metros para ventilaciones y conductos.",
@@ -1866,7 +1788,7 @@
     "formaApariencia": "Tubo flexible de aluminio plateado acordonado."
   },
   {
-    "id": "118",
+    "id": "113",
     "nombre": "CAÑO - CHAPA - 100 mm x 1 m (4\") - GALVANIZADA",
     "categoria": "Plomeria",
     "descripcion": "Caño de chapa galvanizada de 4 pulgadas (100mm) para conductos de ventilación rígidos.",
@@ -1884,7 +1806,7 @@
     "formaApariencia": "Tubo metálico rígido de chapa galvanizada."
   },
   {
-    "id": "119",
+    "id": "114",
     "nombre": "CAÑO - CHAPA - 75 mm x 1 m (3\") - GALVANIZADA",
     "categoria": "Plomeria",
     "descripcion": "Caño de chapa galvanizada de 3 pulgadas para conductos de ventilación más pequeños.",
@@ -1900,7 +1822,7 @@
     "formaApariencia": "Igual al de 100mm pero más angosto."
   },
   {
-    "id": "120",
+    "id": "115",
     "nombre": "CAÑO - CHAPA - 125 mm x 1 m (5\") - GALVANIZADA",
     "categoria": "Plomeria",
     "descripcion": "Caño de chapa galvanizada de 5 pulgadas para conductos de mayor caudal.",
@@ -1916,7 +1838,7 @@
     "formaApariencia": "Igual a los anteriores pero más grueso."
   },
   {
-    "id": "121",
+    "id": "116",
     "nombre": "CAÑO - EXTENSIBLE - 2,20 m - BLANCO p/ BAÑO",
     "categoria": "Plomeria",
     "descripcion": "Caño extensible blanco para duchas, de 2.20m de longitud máxima.",
@@ -1931,7 +1853,7 @@
     "formaApariencia": "Tubo blanco telescópico con rosca en los extremos."
   },
   {
-    "id": "122",
+    "id": "117",
     "nombre": "CAÑO - EXTENSIBLE - 2,00 m - ALUMINIO p/ BAÑO",
     "categoria": "Plomeria",
     "descripcion": "Caño extensible de aluminio para duchas de 2.00m.",
@@ -1946,7 +1868,7 @@
     "formaApariencia": "Tubo metálico extensible color aluminio."
   },
   {
-    "id": "123",
+    "id": "118",
     "nombre": "Caño Corrugado Blanco 7/8\" (Rollo 25m)",
     "categoria": "Electricidad",
     "descripcion": "Caño corrugado plástico blanco de 7/8\" para proteger cables eléctricos. Versión económica.",
@@ -1962,7 +1884,7 @@
     "formaApariencia": "Tubo flexible acordonado de plástico blanco."
   },
   {
-    "id": "124",
+    "id": "119",
     "nombre": "Caño Corrugado Naranja 7/8\" (Rollo 25m)",
     "categoria": "Electricidad",
     "descripcion": "Caño corrugado plástico naranja de 7/8\" para cables eléctricos. Versión reforzada.",
@@ -1978,7 +1900,7 @@
     "formaApariencia": "Tubo flexible acordonado de plástico naranja."
   },
   {
-    "id": "125",
+    "id": "120",
     "nombre": "Caño Cortina 5/8\"",
     "categoria": "Herramientas",
     "descripcion": "Caño metálico de 5/8\" para sostener cortinas. Se vende por tira.",
@@ -1994,7 +1916,7 @@
     "formaApariencia": "Tubo metálico delgado."
   },
   {
-    "id": "126",
+    "id": "121",
     "nombre": "Caño PVC 110 mm (4\") Desagüe (Pared fina)",
     "categoria": "Plomeria",
     "descripcion": "Caño de PVC de 110mm para desagüe cloacal. Pared fina para uso en instalaciones internas.",
@@ -2011,7 +1933,7 @@
     "formaApariencia": "Tubo de PVC blanco o gris de gran diámetro."
   },
   {
-    "id": "127",
+    "id": "122",
     "nombre": "Cepillo Cónico Trenzado 115",
     "categoria": "Herramientas",
     "descripcion": "Cepillo metálico de acero trenzado en forma cónica para amoladora angular de 115mm.",
@@ -2027,7 +1949,7 @@
     "formaApariencia": "Cepillo metálico cónico con hebras de acero trenzadas."
   },
   {
-    "id": "128",
+    "id": "123",
     "nombre": "Cepillo Lava Jean Make",
     "categoria": "Herramientas",
     "descripcion": "Cepillo de cerdas duras para lavar ropa de trabajo, jean y telas resistentes.",
@@ -2042,7 +1964,7 @@
     "formaApariencia": "Cepillo rectangular con cerdas de nylon duro y mango ergonómico."
   },
   {
-    "id": "129",
+    "id": "124",
     "nombre": "Cinta Aisladora Doble A 18mm X10m negro",
     "categoria": "Electricidad",
     "descripcion": "Cinta aisladora negra de 18mm x 10m, marca Doble A. Para aislar conexiones eléctricas.",
@@ -2058,7 +1980,7 @@
     "formaApariencia": "Rollo de cinta plástica negra."
   },
   {
-    "id": "130",
+    "id": "125",
     "nombre": "Cinta Aisladora Doble A 18mm X10m verde",
     "categoria": "Electricidad",
     "descripcion": "Cinta aisladora verde de 18mm x 10m. Se usa para identificar el cable de tierra.",
@@ -2073,7 +1995,7 @@
     "formaApariencia": "Rollo de cinta plástica verde."
   },
   {
-    "id": "131",
+    "id": "126",
     "nombre": "Cinta Destapa Cañerías (5 m)",
     "categoria": "Plomeria",
     "descripcion": "Cinta plástica flexible de 5m para destapar cañerías obstruidas.",
@@ -2088,7 +2010,7 @@
     "formaApariencia": "Cinta plástica enrollada con mango y punta ganchuda."
   },
   {
-    "id": "132",
+    "id": "127",
     "nombre": "Cinta Doble faz",
     "categoria": "Adhesivos y selladores",
     "descripcion": "Cinta adhesiva de doble cara para pegar superficies sin que se vea el adhesivo.",
@@ -2104,7 +2026,7 @@
     "formaApariencia": "Rollo de cinta con papel protector en ambos lados."
   },
   {
-    "id": "133",
+    "id": "128",
     "nombre": "Cinta ENMASCARAR 24 mm x 40 m",
     "categoria": "Seguridad y EPP",
     "descripcion": "Cinta de papel enmascarar de 24mm de ancho para proteger superficies al pintar.",
@@ -2120,7 +2042,7 @@
     "formaApariencia": "Rollo de cinta beige de 24mm."
   },
   {
-    "id": "134",
+    "id": "129",
     "nombre": "Cinta ENMASCARAR 36 mm x 40 m",
     "categoria": "Seguridad y EPP",
     "descripcion": "Cinta de papel enmascarar de 36mm de ancho. Para proteger superficies amplias.",
@@ -2136,7 +2058,7 @@
     "formaApariencia": "Rollo de cinta beige de 36mm."
   },
   {
-    "id": "135",
+    "id": "130",
     "nombre": "Cinta ENMASCARAR AZUL 48 mm",
     "categoria": "Seguridad y EPP",
     "descripcion": "Cinta enmascarar azul de 48mm. Mayor resistencia que la beige. Para bordes perfectos.",
@@ -2152,7 +2074,7 @@
     "formaApariencia": "Rollo de cinta azul de 48mm."
   },
   {
-    "id": "136",
+    "id": "131",
     "nombre": "Cinta Jazak Negra 10m",
     "categoria": "Electricidad",
     "descripcion": "Cinta aisladora negra marca Jazak de 10m. Calidad reconocida en el mercado.",
@@ -2167,7 +2089,7 @@
     "formaApariencia": "Rollo de cinta negra."
   },
   {
-    "id": "137",
+    "id": "132",
     "nombre": "Cinta Métrica (Metro) 5 m",
     "categoria": "Herramientas",
     "descripcion": "Cinta métrica retráctil de 5 metros para medir distancias.",
@@ -2183,7 +2105,7 @@
     "formaApariencia": "Carcasa plástica amarilla con cinta de acero flexible y números."
   },
   {
-    "id": "138",
+    "id": "133",
     "nombre": "Cinta Pasacable 15 m (Viyilant)",
     "categoria": "Electricidad",
     "descripcion": "Cinta guía plástica de 15m para pasar cables por dentro de caños y paredes.",
@@ -2199,7 +2121,7 @@
     "formaApariencia": "Cinta plástica rígida y flexible enrollada."
   },
   {
-    "id": "139",
+    "id": "134",
     "nombre": "Cinta de Embalar (Transparente)",
     "categoria": "Adhesivos y selladores",
     "descripcion": "Cinta de embalaje transparente para cerrar y sellar cajas.",
@@ -2214,7 +2136,7 @@
     "formaApariencia": "Rollo grande de cinta transparente con núcleo de cartón."
   },
   {
-    "id": "140",
+    "id": "135",
     "nombre": "Cinta de Persiana (50 m)",
     "categoria": "Materiales de obra",
     "descripcion": "Cinta de poliéster para persiana enrollable de 50m. Reemplaza la cinta rota.",
@@ -2229,23 +2151,7 @@
     "formaApariencia": "Cinta de tela o poliéster enrollada, ancho aprox 14mm."
   },
   {
-    "id": "141",
-    "nombre": "Cinta de Teflón 3/4\" x 10m",
-    "categoria": "Plomeria",
-    "descripcion": "Cinta PTFE (teflón) estándar de 3/4\" para sellar roscas de agua.",
-    "paraQueSirve": "Sellar uniones roscadas de plomería para evitar pérdidas de agua.",
-    "quienLoPide": "Plomero o cualquier persona que hace instalación de agua.",
-    "comoSeUsa": "Enrollar 3-4 vueltas en el sentido de la rosca macho. Apretar la conexión.",
-    "ventaCruzada": [
-      "Teflon amarillo (gas)",
-      "Codos polipropileno",
-      "Canillas"
-    ],
-    "datosClave": "3/4\". Blanco = para agua. El amarillo es para gas. No intercambiar.",
-    "formaApariencia": "Cinta blanca muy fina y resbaladiza."
-  },
-  {
-    "id": "142",
+    "id": "136",
     "nombre": "Cinta de Teflón Amarillo 3/4\" Alta Densidad (Gas)",
     "categoria": "Plomeria",
     "descripcion": "Cinta PTFE amarilla de alta densidad especialmente formulada para instalaciones de gas.",
@@ -2261,7 +2167,7 @@
     "formaApariencia": "Cinta amarilla fina y resbaladiza, igual a la blanca pero color amarillo."
   },
   {
-    "id": "143",
+    "id": "137",
     "nombre": "Clavo cabeza 1\"",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Clavo de acero con cabeza plana de 1 pulgada (25mm).",
@@ -2277,7 +2183,7 @@
     "formaApariencia": "Clavo metálico pequeño con cabeza plana."
   },
   {
-    "id": "144",
+    "id": "138",
     "nombre": "Clavo cabeza 1.5\"",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Clavo de 1.5 pulgadas (38mm) para carpintería general.",
@@ -2293,7 +2199,7 @@
     "formaApariencia": "Clavo metálico de tamaño mediano."
   },
   {
-    "id": "145",
+    "id": "139",
     "nombre": "Clavo cabeza 2.5\"",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Clavo de 2.5 pulgadas (63mm) para estructuras de madera medianas.",
@@ -2309,7 +2215,7 @@
     "formaApariencia": "Clavo metálico largo."
   },
   {
-    "id": "146",
+    "id": "140",
     "nombre": "Clavo cabeza 3\"",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Clavo de 3 pulgadas (75mm) para estructuras de madera pesadas.",
@@ -2325,7 +2231,7 @@
     "formaApariencia": "Clavo metálico largo y grueso."
   },
   {
-    "id": "147",
+    "id": "141",
     "nombre": "CLAVO ESPIRALADO - 25 mm ACINDAR",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Clavo espiralado de 25mm marca Acindar. La espiral le da mayor agarre que el clavo liso.",
@@ -2341,7 +2247,7 @@
     "formaApariencia": "Clavo con cuerpo en espiral."
   },
   {
-    "id": "148",
+    "id": "142",
     "nombre": "CLAVO ESPIRALADO - 38 mm ACINDAR",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Clavo espiralado de 38mm marca Acindar para pisos y revestimientos.",
@@ -2357,7 +2263,7 @@
     "formaApariencia": "Clavo con cuerpo en espiral, más largo que el de 25mm."
   },
   {
-    "id": "149",
+    "id": "143",
     "nombre": "CLAVO PUNTA PARIS - 38 mm ACINDAR",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Clavo de punta cuadrada de 38mm marca Acindar. Menos rajamiento de la madera.",
@@ -2372,7 +2278,7 @@
     "formaApariencia": "Clavo con punta cuadrada en lugar de redonda."
   },
   {
-    "id": "150",
+    "id": "144",
     "nombre": "CLAVO PUNTA PARIS - 50 mm ACINDAR",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Clavo de punta cuadrada de 50mm para maderas más gruesas.",
@@ -2387,7 +2293,7 @@
     "formaApariencia": "Clavo largo con punta cuadrada."
   },
   {
-    "id": "151",
+    "id": "145",
     "nombre": "Clips Cocodrilo 10A Con funda plástica (Rojo/Negro)",
     "categoria": "Electricidad",
     "descripcion": "Par de pinzas cocodrilo de 10 amperios con funda aislante de plástico. Rojo y negro.",
@@ -2402,7 +2308,7 @@
     "formaApariencia": "Pinzas metálicas con forma de cocodrilo y funda plástica de color."
   },
   {
-    "id": "152",
+    "id": "146",
     "nombre": "Clips Cocodrilo 30A Con funda plástica (Rojo/Negro)",
     "categoria": "Electricidad",
     "descripcion": "Par de pinzas cocodrilo de 30 amperios para corrientes más altas.",
@@ -2416,7 +2322,7 @@
     "formaApariencia": "Igual al de 10A pero más robusto."
   },
   {
-    "id": "153",
+    "id": "147",
     "nombre": "Codo 110 x 45° PVC",
     "categoria": "Plomeria",
     "descripcion": "Codo de PVC de 110mm con curva de 45 grados para instalaciones de desagüe.",
@@ -2432,7 +2338,7 @@
     "formaApariencia": "Codo de PVC blanco o gris con curva de 45°."
   },
   {
-    "id": "154",
+    "id": "148",
     "nombre": "Codo 110 x 90° PVC",
     "categoria": "Plomeria",
     "descripcion": "Codo de PVC de 110mm con curva de 90 grados para instalaciones de desagüe.",
@@ -2448,7 +2354,7 @@
     "formaApariencia": "Codo de PVC con curva de 90°."
   },
   {
-    "id": "155",
+    "id": "149",
     "nombre": "Codo Fusión 90° 20 mm",
     "categoria": "Plomeria",
     "descripcion": "Codo de polipropileno de 20mm para termofusión. Para cambio de dirección en instalaciones de agua caliente.",
@@ -2464,7 +2370,7 @@
     "formaApariencia": "Codo de polipropileno marrón o gris con bocas sin rosca."
   },
   {
-    "id": "156",
+    "id": "150",
     "nombre": "Codo Fusión 90° 25 mm",
     "categoria": "Plomeria",
     "descripcion": "Codo de polipropileno de 25mm para termofusión.",
@@ -2479,7 +2385,7 @@
     "formaApariencia": "Igual al de 20mm pero más grande."
   },
   {
-    "id": "157",
+    "id": "151",
     "nombre": "Codo Giny Plas 90° 3/4\" H-H",
     "categoria": "Plomeria",
     "descripcion": "Codo de polipropileno hembra-hembra de 3/4\" para cambio de dirección en instalaciones de agua.",
@@ -2495,7 +2401,7 @@
     "formaApariencia": "Codo marrón o blanco con dos bocas roscadas internas."
   },
   {
-    "id": "158",
+    "id": "152",
     "nombre": "Codo Hermético 90° 5\" (125 mm) Chapa",
     "categoria": "Plomeria",
     "descripcion": "Codo de 90° en chapa galvanizada de 5 pulgadas para conductos de ventilación.",
@@ -2511,7 +2417,7 @@
     "formaApariencia": "Codo de chapa galvanizada de 90° de diámetro grande."
   },
   {
-    "id": "159",
+    "id": "153",
     "nombre": "Codo Hermético 90° 6\" (150 mm) Chapa",
     "categoria": "Plomeria",
     "descripcion": "Codo de 90° en chapa galvanizada de 6 pulgadas para conductos de mayor caudal.",
@@ -2526,7 +2432,7 @@
     "formaApariencia": "Igual al de 5\" pero más grande."
   },
   {
-    "id": "160",
+    "id": "154",
     "nombre": "Conectores Plásticos 3/4\"",
     "categoria": "Electricidad",
     "descripcion": "Conector plástico para unir caño corrugado de 3/4\" a cajas de pase eléctricas.",
@@ -2542,7 +2448,7 @@
     "formaApariencia": "Pieza plástica con un extremo para el caño y otro para la caja."
   },
   {
-    "id": "161",
+    "id": "155",
     "nombre": "Conectores Plásticos 1\"",
     "categoria": "Electricidad",
     "descripcion": "Conector plástico para caño corrugado de 1\" a cajas eléctricas.",
@@ -2557,7 +2463,7 @@
     "formaApariencia": "Igual al de 3/4\" pero más grande."
   },
   {
-    "id": "162",
+    "id": "156",
     "nombre": "Conexión Desplaza 6 cm",
     "categoria": "Plomeria",
     "descripcion": "Conexión de desplazamiento de 6cm para instalar inodoro cuando el ramal está descentrado.",
@@ -2573,7 +2479,7 @@
     "formaApariencia": "Pieza de PVC o goma con eje descentrado."
   },
   {
-    "id": "163",
+    "id": "157",
     "nombre": "Conexión Desplaza 12 cm",
     "categoria": "Plomeria",
     "descripcion": "Conexión de desplazamiento de 12cm para mayor corrección de centro.",
@@ -2588,7 +2494,7 @@
     "formaApariencia": "Igual a la de 6cm pero con mayor desplazamiento."
   },
   {
-    "id": "164",
+    "id": "158",
     "nombre": "Conexión Fuelle Inodoro Extensible / Articulado",
     "categoria": "Plomeria",
     "descripcion": "Conexión de fuelle extensible y articulada para conectar el inodoro al ramal con flexibilidad.",
@@ -2604,7 +2510,7 @@
     "formaApariencia": "Tubo corrugado de goma o PVC flexible con bocas de unión en los extremos."
   },
   {
-    "id": "165",
+    "id": "159",
     "nombre": "Contratapa Franklin Plástica c/ botón",
     "categoria": "Plomeria",
     "descripcion": "Contratapa de descarga tipo Franklin con botón pulsador para cisternas de inodoro de colgar.",
@@ -2620,7 +2526,7 @@
     "formaApariencia": "Tapa rectangular de plástico blanco con botón circular en el centro."
   },
   {
-    "id": "166",
+    "id": "160",
     "nombre": "Contratapa Franklin Sin Armar (Sola)",
     "categoria": "Plomeria",
     "descripcion": "Contratapa para depósito tipo Franklin sin mecanismo. Solo la tapa.",
@@ -2635,7 +2541,7 @@
     "formaApariencia": "Tapa rectangular de plástico blanco."
   },
   {
-    "id": "167",
+    "id": "161",
     "nombre": "Depósito Monkoto 8 lts",
     "categoria": "Plomeria",
     "descripcion": "Depósito o cisterna de 8 litros para inodoro de colgar, marca Monkoto.",
@@ -2652,7 +2558,7 @@
     "formaApariencia": "Caja rectangular de plástico blanco con tapa."
   },
   {
-    "id": "168",
+    "id": "162",
     "nombre": "Depósito Sifolimp 16 lts",
     "categoria": "Plomeria",
     "descripcion": "Mochila de inodoro de mayor capacidad (16 litros), marca Sifolimp.",
@@ -2668,7 +2574,7 @@
     "formaApariencia": "Caja rectangular de plástico blanco, más grande que el de 8 litros."
   },
   {
-    "id": "169",
+    "id": "163",
     "nombre": "Destornillador Philips PH1 y PH2",
     "categoria": "Herramientas",
     "descripcion": "Set de dos destornilladores Phillips tamaño PH1 y PH2.",
@@ -2684,7 +2590,7 @@
     "formaApariencia": "Dos destornilladores con mango de color y punta en cruz."
   },
   {
-    "id": "170",
+    "id": "164",
     "nombre": "Destornillador Plano Punta imantada (Mediano)",
     "categoria": "Herramientas",
     "descripcion": "Destornillador de punta plana con imán en la punta para sujetar tornillos.",
@@ -2699,7 +2605,7 @@
     "formaApariencia": "Destornillador con punta plana y mango de plástico con grip."
   },
   {
-    "id": "171",
+    "id": "165",
     "nombre": "Disco 115 x 1,0 mm",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Disco de corte de 115mm x 1mm para amoladora angular. Para corte de metales.",
@@ -2715,7 +2621,7 @@
     "formaApariencia": "Disco delgado negro/gris con agujero central."
   },
   {
-    "id": "172",
+    "id": "166",
     "nombre": "Disco 180 x 1,6 mm",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Disco de corte de 180mm para amoladora de 7\".",
@@ -2731,7 +2637,7 @@
     "formaApariencia": "Disco más grande que el de 115mm."
   },
   {
-    "id": "173",
+    "id": "167",
     "nombre": "Disco 230 x 2,0 mm",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Disco de corte de 230mm para amoladora de 9\".",
@@ -2747,7 +2653,7 @@
     "formaApariencia": "Disco grande de corte."
   },
   {
-    "id": "174",
+    "id": "168",
     "nombre": "Disco Madera 115 mm",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Disco de sierra para madera de 115mm. Para usar en amoladora angular.",
@@ -2763,7 +2669,7 @@
     "formaApariencia": "Disco con dientes de sierra de 115mm."
   },
   {
-    "id": "175",
+    "id": "169",
     "nombre": "Disco de Desbaste Metal 4.5\" (115 x 6.4 mm)",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Disco abrasivo de desbaste de 115mm para amoladora. Más grueso que el de corte.",
@@ -2779,7 +2685,7 @@
     "formaApariencia": "Disco grueso y oscuro, más alto que el de corte."
   },
   {
-    "id": "176",
+    "id": "170",
     "nombre": "Enduido Plástico (1/2 kg)",
     "categoria": "Pintureria",
     "descripcion": "Enduido plástico para preparar paredes antes de pintar. Rellena imperfecciones.",
@@ -2796,7 +2702,7 @@
     "formaApariencia": "Pasta blanca en balde o bolsa."
   },
   {
-    "id": "177",
+    "id": "171",
     "nombre": "Entrerrosca Polipropileno 1/2\" M-M (Macho-Macho)",
     "categoria": "Plomeria",
     "descripcion": "Niple o entrerrosca de polipropileno macho-macho de 1/2\" para extender roscas.",
@@ -2812,7 +2718,7 @@
     "formaApariencia": "Pieza corta con rosca externa en ambos extremos."
   },
   {
-    "id": "178",
+    "id": "172",
     "nombre": "Ficha Hembra Común Blanca / Gris",
     "categoria": "Electricidad",
     "descripcion": "Toma hembra para cable. Se instala en un extremo del cable para conectar artefactos.",
@@ -2828,7 +2734,7 @@
     "formaApariencia": "Cuerpo plástico con agujeros para recibir los pines del macho."
   },
   {
-    "id": "179",
+    "id": "173",
     "nombre": "Ficha Hembra Reforzada Negra / De Goma",
     "categoria": "Electricidad",
     "descripcion": "Toma hembra reforzada de goma negra. Mayor resistencia mecánica y aislación.",
@@ -2844,7 +2750,7 @@
     "formaApariencia": "Cuerpo de goma negra, más robusto que la blanca."
   },
   {
-    "id": "180",
+    "id": "174",
     "nombre": "Ficha Macho Común Blanca / Gris",
     "categoria": "Electricidad",
     "descripcion": "Enchufe macho para cable. Se instala en el extremo del cable que va al tomacorriente.",
@@ -2860,7 +2766,7 @@
     "formaApariencia": "Cuerpo plástico blanco con dos pines metálicos."
   },
   {
-    "id": "181",
+    "id": "175",
     "nombre": "Ficha Macho Reforzada Negra / De Goma",
     "categoria": "Electricidad",
     "descripcion": "Enchufe macho reforzado de goma para uso intensivo en obra.",
@@ -2876,7 +2782,7 @@
     "formaApariencia": "Cuerpo de goma negra con pines metálicos."
   },
   {
-    "id": "182",
+    "id": "176",
     "nombre": "Ficha Triple Super Grande - 3 Patas (3P)",
     "categoria": "Electricidad",
     "descripcion": "Enchufe triple de tres patas para corriente trifásica o aparatos industriales.",
@@ -2891,7 +2797,7 @@
     "formaApariencia": "Enchufe grande con tres patas en forma triangular."
   },
   {
-    "id": "183",
+    "id": "177",
     "nombre": "Flexible Gas Latynflex 40 a 95 cm (1/2\" H-H)",
     "categoria": "Plomeria",
     "descripcion": "Flexible de gas extensible de 40 a 95cm, hembra-hembra, marca Latynflex.",
@@ -2907,22 +2813,7 @@
     "formaApariencia": "Tubo metálico ondulado plateado con tuercas en los extremos."
   },
   {
-    "id": "184",
-    "nombre": "Flexible Gas Latynflex 20 a 42 cm (1/2\" H-H)",
-    "categoria": "Plomeria",
-    "descripcion": "Flexible de gas corto de 20 a 42cm, hembra-hembra.",
-    "paraQueSirve": "Conectar artefactos cercanos a la llave de paso de gas.",
-    "quienLoPide": "Gasista para conexiones cortas.",
-    "comoSeUsa": "Igual que el largo.",
-    "ventaCruzada": [
-      "Flexible gas largo",
-      "Teflon amarillo"
-    ],
-    "datosClave": "20-42cm. Para distancias cortas.",
-    "formaApariencia": "Igual al largo pero más corto."
-  },
-  {
-    "id": "185",
+    "id": "178",
     "nombre": "Flotante Completo 1/2\" Válvula de alta presión - Bronce",
     "categoria": "Plomeria",
     "descripcion": "Mecanismo de flotante completo con válvula de bronce de alta presión para cisternas.",
@@ -2938,7 +2829,7 @@
     "formaApariencia": "Similar al de plástico pero con válvula de color cobre/bronce."
   },
   {
-    "id": "186",
+    "id": "179",
     "nombre": "Flotante Completo 3/4\" Válvula de alta presión - Bronce",
     "categoria": "Plomeria",
     "descripcion": "Flotante completo de 3/4\" con válvula de bronce para tanques de mayor caudal.",
@@ -2953,7 +2844,7 @@
     "formaApariencia": "Igual al de 1/2\" pero con conexión más grande."
   },
   {
-    "id": "187",
+    "id": "180",
     "nombre": "Fuelle Inodoro Largo Extensible / Articulado",
     "categoria": "Plomeria",
     "descripcion": "Fuelle largo extensible para conectar el inodoro al ramal con mayor flexibilidad.",
@@ -2969,7 +2860,7 @@
     "formaApariencia": "Tubo corrugado largo y flexible."
   },
   {
-    "id": "188",
+    "id": "181",
     "nombre": "Fuelle Inodoro Traful Hembra",
     "categoria": "Plomeria",
     "descripcion": "Conexión fuelle marca Traful con extremo hembra para inodoros.",
@@ -2984,7 +2875,7 @@
     "formaApariencia": "Tubo corrugado corto con extremo hembra."
   },
   {
-    "id": "189",
+    "id": "182",
     "nombre": "Gas Butano Kovea 227cc",
     "categoria": "Electricidad",
     "descripcion": "Cartucho de gas butano de 227cc marca Kovea para camping y uso general.",
@@ -2999,7 +2890,7 @@
     "formaApariencia": "Cilindro metálico azul y blanco con válvula en la parte superior."
   },
   {
-    "id": "190",
+    "id": "183",
     "nombre": "GANCHO p/ MEDIA SOMBRA",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Ganchos plásticos de broche para fijar mallas de media sombra y tejidos.",
@@ -3014,23 +2905,7 @@
     "formaApariencia": "Pequeño broche o clip plástico."
   },
   {
-    "id": "191",
-    "nombre": "GRAMPA - LAVATORIO 'S'",
-    "categoria": "Plomeria",
-    "descripcion": "Grapa en forma de S para sujetar lavatorios a la pared.",
-    "paraQueSirve": "Fijar el lavatorio de la pileta de baño o cocina a la pared para que no se mueva.",
-    "quienLoPide": "Plomero al instalar o reforzar un lavatorio.",
-    "comoSeUsa": "Instalar entre el lavatorio y la pared. Atornillar en la pared.",
-    "ventaCruzada": [
-      "Tornillo con taco",
-      "Sifón",
-      "Canilla"
-    ],
-    "datosClave": "Forma de S. Para lavatorios suspendidos de pared.",
-    "formaApariencia": "Grampa metálica en forma de S."
-  },
-  {
-    "id": "192",
+    "id": "184",
     "nombre": "Guante Nitrilo (color verde o azul)",
     "categoria": "Seguridad y EPP",
     "descripcion": "Guante de nitrilo desechable. Resistente a productos químicos y aceites.",
@@ -3046,7 +2921,7 @@
     "formaApariencia": "Guante delgado verde o azul, similar a guante quirúrgico."
   },
   {
-    "id": "193",
+    "id": "185",
     "nombre": "HACHA de MANO - 600 grs - CABO de MADERA - LACATUS",
     "categoria": "Herramientas",
     "descripcion": "Hacha de mano de 600 gramos con mango de madera. Para cortar leña y ramas.",
@@ -3062,7 +2937,7 @@
     "formaApariencia": "Hoja metálica con filo en un extremo y mango de madera."
   },
   {
-    "id": "194",
+    "id": "186",
     "nombre": "Hojas 18 Dientes Sin Par",
     "categoria": "Herramientas",
     "descripcion": "Hojas de sierra para arco Junior o serrucho con 18 dientes por pulgada.",
@@ -3078,7 +2953,7 @@
     "formaApariencia": "Hoja de acero delgada y dentada con agujeros en los extremos."
   },
   {
-    "id": "195",
+    "id": "187",
     "nombre": "Hojas 24 Dientes Sin Par",
     "categoria": "Herramientas",
     "descripcion": "Hojas de sierra con 24 dientes por pulgada para cortes más finos.",
@@ -3093,7 +2968,7 @@
     "formaApariencia": "Igual a las de 18 dientes pero con más dientes."
   },
   {
-    "id": "196",
+    "id": "188",
     "nombre": "Hojas Caladora Lacatus",
     "categoria": "Herramientas",
     "descripcion": "Set de hojas de sierra para caladora marca Lacatus. Para cortar madera, metal o plástico.",
@@ -3108,7 +2983,7 @@
     "formaApariencia": "Hojas pequeñas de sierra con sistema de fijación para caladora."
   },
   {
-    "id": "197",
+    "id": "189",
     "nombre": "Hojas Junior Miniflex",
     "categoria": "Herramientas",
     "descripcion": "Hojas de sierra para arco Junior de 6 pulgadas. Marca Miniflex.",
@@ -3124,7 +2999,7 @@
     "formaApariencia": "Hojas pequeñas de sierra dentada."
   },
   {
-    "id": "198",
+    "id": "190",
     "nombre": "Lija al agua #80 / #120 Gruesa",
     "categoria": "Herramientas",
     "descripcion": "Lija de papel resistente al agua, grano grueso (#80 o #120).",
@@ -3140,7 +3015,7 @@
     "formaApariencia": "Hoja rectangular de papel oscuro con abrasivo en un lado."
   },
   {
-    "id": "199",
+    "id": "191",
     "nombre": "Lija al agua #180 / #240 Media",
     "categoria": "Herramientas",
     "descripcion": "Lija al agua de grano medio (#180 o #240).",
@@ -3156,7 +3031,7 @@
     "formaApariencia": "Igual a las otras pero con grano más fino."
   },
   {
-    "id": "200",
+    "id": "192",
     "nombre": "Lija al agua #360 / #400 Fina",
     "categoria": "Herramientas",
     "descripcion": "Lija al agua de grano fino (#360 o #400).",
@@ -3172,7 +3047,7 @@
     "formaApariencia": "Hoja de papel con grano muy fino."
   },
   {
-    "id": "201",
+    "id": "193",
     "nombre": "Lija al agua #600 / #1000 Extra Fina",
     "categoria": "Herramientas",
     "descripcion": "Lija al agua extra fina (#600 o #1000) para acabados de alta calidad.",
@@ -3188,7 +3063,7 @@
     "formaApariencia": "Hoja de papel casi sin grano visible."
   },
   {
-    "id": "202",
+    "id": "194",
     "nombre": "Lija madera #40 / #60 Muy Gruesa",
     "categoria": "Herramientas",
     "descripcion": "Lija de madera de grano muy grueso (#40 o #60).",
@@ -3204,7 +3079,7 @@
     "formaApariencia": "Hoja de papel con grano muy visible y áspero."
   },
   {
-    "id": "203",
+    "id": "195",
     "nombre": "Lija madera #120 / #150 Fina",
     "categoria": "Herramientas",
     "descripcion": "Lija de madera de grano fino (#120 o #150).",
@@ -3220,7 +3095,7 @@
     "formaApariencia": "Hoja de papel con grano fino."
   },
   {
-    "id": "204",
+    "id": "196",
     "nombre": "Llave Ajustable (Francesa) 10\"",
     "categoria": "Herramientas",
     "descripcion": "Llave ajustable de 10 pulgadas con mandíbula regulable para distintos tamaños de tuercas.",
@@ -3236,7 +3111,7 @@
     "formaApariencia": "Llave metálica con mandíbula inferior fija y superior ajustable con rueda."
   },
   {
-    "id": "205",
+    "id": "197",
     "nombre": "Llave Mandril 13 mm",
     "categoria": "Herramientas",
     "descripcion": "Llave para mandril de taladro de 13mm. Para apretar y aflojar la broca del taladro.",
@@ -3252,7 +3127,7 @@
     "formaApariencia": "Pieza metálica pequeña con mango en T y punta cónica dentada."
   },
   {
-    "id": "206",
+    "id": "198",
     "nombre": "Llave Mandril 4 Medidas",
     "categoria": "Herramientas",
     "descripcion": "Llave para mandril que funciona en 4 medidas diferentes.",
@@ -3267,7 +3142,7 @@
     "formaApariencia": "Llave de mandril con cuatro extremos de diferente tamaño."
   },
   {
-    "id": "207",
+    "id": "199",
     "nombre": "Llave Stillson 14\"",
     "categoria": "Herramientas",
     "descripcion": "Llave para caños (Stillson) de 14 pulgadas. Agarra caños redondos con fuerza.",
@@ -3283,7 +3158,7 @@
     "formaApariencia": "Llave grande con dos mandíbulas dentadas, una fija y una ajustable."
   },
   {
-    "id": "208",
+    "id": "200",
     "nombre": "Llave de Esfera 1/2\" Polipropileno (Rosca H-H)",
     "categoria": "Plomeria",
     "descripcion": "Llave de paso de esfera de polipropileno de 1/2\" hembra-hembra.",
@@ -3299,7 +3174,7 @@
     "formaApariencia": "Válvula de plástico con palanca perpendicular al cuerpo."
   },
   {
-    "id": "209",
+    "id": "201",
     "nombre": "Llave de Esfera 3/4\" Polipropileno (Rosca H-H)",
     "categoria": "Plomeria",
     "descripcion": "Llave de paso de esfera de polipropileno de 3/4\" hembra-hembra.",
@@ -3315,7 +3190,7 @@
     "formaApariencia": "Igual a la de 1/2\" pero más grande."
   },
   {
-    "id": "210",
+    "id": "202",
     "nombre": "Machete Lacatus 22\"",
     "categoria": "Herramientas",
     "descripcion": "Machete de hoja de acero de 22 pulgadas marca Lacatus para cortar vegetación.",
@@ -3331,7 +3206,7 @@
     "formaApariencia": "Hoja larga y curva de acero con mango de plástico o goma."
   },
   {
-    "id": "211",
+    "id": "203",
     "nombre": "Martillo Bolita 220 grs",
     "categoria": "Herramientas",
     "descripcion": "Martillo con cabeza de bolita (semiesférica) de 220 gramos para trabajos de fragua y conformado.",
@@ -3347,7 +3222,7 @@
     "formaApariencia": "Martillo con un lado plano y otro semiesférico."
   },
   {
-    "id": "212",
+    "id": "204",
     "nombre": "Martillo Carpintero Lacatus 20 mm",
     "categoria": "Herramientas",
     "descripcion": "Martillo carpintero marca Lacatus de 20mm. Para clavar clavos en madera.",
@@ -3363,7 +3238,7 @@
     "formaApariencia": "Martillo carpintero clásico con uña trasera en V."
   },
   {
-    "id": "213",
+    "id": "205",
     "nombre": "Martillo Galponero 27 mm",
     "categoria": "Herramientas",
     "descripcion": "Martillo de mayor tamaño de 27mm para trabajos más pesados.",
@@ -3379,7 +3254,7 @@
     "formaApariencia": "Martillo de mayor tamaño con cabeza más pesada."
   },
   {
-    "id": "214",
+    "id": "206",
     "nombre": "Maza El Roble 1 kg",
     "categoria": "Herramientas",
     "descripcion": "Maza de 1 kilo marca El Roble para trabajos de demolición y albañilería.",
@@ -3395,7 +3270,7 @@
     "formaApariencia": "Martillo grande y pesado con cabeza cuadrada."
   },
   {
-    "id": "215",
+    "id": "207",
     "nombre": "Maza El Roble 1,5 kg",
     "categoria": "Herramientas",
     "descripcion": "Maza de 1.5 kilos marca El Roble para trabajos de demolición más exigentes.",
@@ -3411,7 +3286,7 @@
     "formaApariencia": "Igual a la de 1kg pero más grande y pesada."
   },
   {
-    "id": "216",
+    "id": "208",
     "nombre": "Mecha para hormigon 6 mm",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Broca de widia de 6mm para perforar hormigón y ladrillo.",
@@ -3426,7 +3301,7 @@
     "formaApariencia": "Broca con punta de widia y espiral."
   },
   {
-    "id": "217",
+    "id": "209",
     "nombre": "Mecha para hormigon 10 mm",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Broca de widia de 10mm para perforar hormigón.",
@@ -3441,7 +3316,7 @@
     "formaApariencia": "Broca más gruesa con punta de widia."
   },
   {
-    "id": "218",
+    "id": "210",
     "nombre": "Mecha para madera 6 mm",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Broca para madera de 6mm con punta de centrado.",
@@ -3457,7 +3332,7 @@
     "formaApariencia": "Broca con punta de V y espiral ancha."
   },
   {
-    "id": "219",
+    "id": "211",
     "nombre": "Mecha para madera 8 mm",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Broca para madera de 8mm.",
@@ -3473,7 +3348,7 @@
     "formaApariencia": "Igual a la de 6mm pero más gruesa."
   },
   {
-    "id": "220",
+    "id": "212",
     "nombre": "Mecha para madera 10 mm",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Broca para madera de 10mm para agujeros grandes.",
@@ -3488,7 +3363,7 @@
     "formaApariencia": "Broca de madera más gruesa."
   },
   {
-    "id": "221",
+    "id": "213",
     "nombre": "Niple Polipropileno 1/2\" x 10 cm M-M",
     "categoria": "Plomeria",
     "descripcion": "Niple de polipropileno macho-macho de 1/2\" y 10cm de largo para extender roscas.",
@@ -3504,7 +3379,7 @@
     "formaApariencia": "Tubo corto de polipropileno con rosca externa en ambos extremos."
   },
   {
-    "id": "222",
+    "id": "214",
     "nombre": "PINTURA AEROSOL ALUMINIO - 200 ml - DOBLE A",
     "categoria": "Pintureria",
     "descripcion": "Pintura aerosol color aluminio brillante. Da aspecto metálico.",
@@ -3520,7 +3395,7 @@
     "formaApariencia": "Lata de aerosol color plata/aluminio."
   },
   {
-    "id": "223",
+    "id": "215",
     "nombre": "PINTURA AEROSOL AZUL MARINO - 200 ml - DOBLE A",
     "categoria": "Pintureria",
     "descripcion": "Pintura aerosol color azul marino oscuro.",
@@ -3536,7 +3411,7 @@
     "formaApariencia": "Lata de aerosol azul oscuro."
   },
   {
-    "id": "224",
+    "id": "216",
     "nombre": "PINTURA AEROSOL BLANCO BRILLANTE - 200 ml - DOBLE A",
     "categoria": "Pintureria",
     "descripcion": "Pintura aerosol color blanco brillante.",
@@ -3552,7 +3427,7 @@
     "formaApariencia": "Lata de aerosol blanca."
   },
   {
-    "id": "225",
+    "id": "217",
     "nombre": "PINTURA AEROSOL ROJO - 200 ml - DOBLE A",
     "categoria": "Pintureria",
     "descripcion": "Pintura aerosol color rojo.",
@@ -3567,7 +3442,7 @@
     "formaApariencia": "Lata de aerosol roja."
   },
   {
-    "id": "226",
+    "id": "218",
     "nombre": "PISTOLA - APLICAR SILICONA - REFORZADA JAZAK",
     "categoria": "Herramientas",
     "descripcion": "Pistola de aplicación de silicona reforzada marca Jazak. Para cartuchos de sellador.",
@@ -3582,7 +3457,7 @@
     "formaApariencia": "Pistola metálica o de plástico reforzado con gatillo y barra de empuje."
   },
   {
-    "id": "227",
+    "id": "219",
     "nombre": "PULVERIZADOR a PRESION - 2 lts LACATUS",
     "categoria": "Herramientas",
     "descripcion": "Pulverizador de 2 litros con bomba de presión manual. Para líquidos en general.",
@@ -3598,7 +3473,7 @@
     "formaApariencia": "Envase de plástico con bomba manual y manguera con lanza."
   },
   {
-    "id": "228",
+    "id": "220",
     "nombre": "PULVERIZADOR a PRESION - 3 lts LACATUS",
     "categoria": "Herramientas",
     "descripcion": "Pulverizador de 3 litros con bomba de presión. Mayor capacidad.",
@@ -3613,7 +3488,7 @@
     "formaApariencia": "Igual al de 2 litros pero más grande."
   },
   {
-    "id": "229",
+    "id": "221",
     "nombre": "Pincel Plano 3\" (75 mm)",
     "categoria": "Pintureria",
     "descripcion": "Pincel plano de 75mm (3 pulgadas) para pintar superficies medianas.",
@@ -3630,7 +3505,7 @@
     "formaApariencia": "Mango de madera con cerdas planas de 75mm."
   },
   {
-    "id": "230",
+    "id": "222",
     "nombre": "Prolongador 3m x 3 tomas Reforzado (Cable Taller)",
     "categoria": "Electricidad",
     "descripcion": "Alargue reforzado de 3m con cable de taller y 3 tomas. Para uso en obra.",
@@ -3646,23 +3521,7 @@
     "formaApariencia": "Igual al estándar pero con cable más grueso y cuerpo más robusto."
   },
   {
-    "id": "231",
-    "nombre": "Ramal 'Y' 110 a 110",
-    "categoria": "Plomeria",
-    "descripcion": "Ramal en Y de PVC de 110mm a 110mm para desagüe. Permite bifurcar la instalación.",
-    "paraQueSirve": "Unir dos ramales de desagüe en uno solo o bifurcar la instalación.",
-    "quienLoPide": "Plomero al hacer instalación de desagüe cloacal.",
-    "comoSeUsa": "Pegar con adhesivo PVC. Verificar la dirección antes de pegar.",
-    "ventaCruzada": [
-      "Codo 110x90°",
-      "Codo 110x45°",
-      "Adhesivo PVC"
-    ],
-    "datosClave": "110mm. En Y = dos entradas y una salida. Para unir desagües.",
-    "formaApariencia": "Pieza de PVC en forma de Y con tres bocas de 110mm."
-  },
-  {
-    "id": "232",
+    "id": "223",
     "nombre": "Rejilla con Marco 10x10 Inox 4\" (Acero Inoxidable)",
     "categoria": "Plomeria",
     "descripcion": "Rejilla de desagüe de 4 pulgadas en acero inoxidable con marco de 10x10cm.",
@@ -3677,7 +3536,7 @@
     "formaApariencia": "Marco cuadrado de 10x10cm con rejilla de acero inoxidable."
   },
   {
-    "id": "233",
+    "id": "224",
     "nombre": "Remaches pop 3.2 x 8 mm 10-8",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Remaches ciegos de aluminio de 3.2mm x 8mm para unir chapas sin acceso al reverso.",
@@ -3693,7 +3552,7 @@
     "formaApariencia": "Remache cilíndrico de aluminio con vástago de acero."
   },
   {
-    "id": "234",
+    "id": "225",
     "nombre": "Remaches pop 4.0 x 10 mm 12-10",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Remaches ciegos de 4mm x 10mm para espesores medianos.",
@@ -3708,7 +3567,7 @@
     "formaApariencia": "Igual a los de 3.2mm pero más gruesos."
   },
   {
-    "id": "235",
+    "id": "226",
     "nombre": "Remaches pop 4.8 x 12 mm 14-12",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Remaches ciegos de 4.8mm x 12mm para chapas gruesas y uniones resistentes.",
@@ -3723,7 +3582,7 @@
     "formaApariencia": "El más robusto de los tres tamaños."
   },
   {
-    "id": "236",
+    "id": "227",
     "nombre": "Reparador Manguera 1/2\" Modelo 323 (Plástico)",
     "categoria": "Plomeria",
     "descripcion": "Reparador para manguera de riego de 1/2\" para cortar y unir mangueras rotas.",
@@ -3738,7 +3597,7 @@
     "formaApariencia": "Pieza plástica en forma de I con dos extremos para insertar la manguera."
   },
   {
-    "id": "237",
+    "id": "228",
     "nombre": "Reparador Manguera 3/4\" Modelo 322 (Plástico)",
     "categoria": "Plomeria",
     "descripcion": "Reparador para manguera de riego de 3/4\".",
@@ -3753,7 +3612,7 @@
     "formaApariencia": "Igual al de 1/2\" pero más grande."
   },
   {
-    "id": "238",
+    "id": "229",
     "nombre": "Repuesto Rodillo Nylon 23 cm",
     "categoria": "Pintureria",
     "descripcion": "Repuesto de rodillo de nylon de 23cm sin mango.",
@@ -3769,7 +3628,7 @@
     "formaApariencia": "Cilindro de nylon de 23cm con agujero central para el eje."
   },
   {
-    "id": "239",
+    "id": "230",
     "nombre": "Rodillo Nylon + Mango 23 cm",
     "categoria": "Pintureria",
     "descripcion": "Kit de rodillo de nylon de 23cm con mango incluido.",
@@ -3786,7 +3645,7 @@
     "formaApariencia": "Rodillo de nylon con mango de aluminio o plástico."
   },
   {
-    "id": "240",
+    "id": "231",
     "nombre": "Sifón Botella Universal Plástico Blanco con adaptadores",
     "categoria": "Plomeria",
     "descripcion": "Sifón en forma de botella con adaptadores para distintos tamaños de pileta y caño.",
@@ -3802,7 +3661,7 @@
     "formaApariencia": "Pieza de plástico blanco en forma de botella con dos bocas."
   },
   {
-    "id": "241",
+    "id": "232",
     "nombre": "Sifón Negro c/ Visor Simple (Goma/Plástico)",
     "categoria": "Plomeria",
     "descripcion": "Sifón simple de color negro con visor transparente para ver si está obstruido.",
@@ -3817,7 +3676,7 @@
     "formaApariencia": "Sifón negro con una parte transparente en la curva."
   },
   {
-    "id": "242",
+    "id": "233",
     "nombre": "Sombrerete 2 alas (H) 4\" (100 mm)",
     "categoria": "Plomeria",
     "descripcion": "Sombrerete en H de dos alas para proteger la salida de conductos de ventilación en techos.",
@@ -3833,7 +3692,7 @@
     "formaApariencia": "Pieza de chapa o plástico en forma de H con dos alas horizontales."
   },
   {
-    "id": "243",
+    "id": "234",
     "nombre": "Taco Mariposa Nº 1 (Simple)",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Taco mariposa para fijar elementos en paredes de durlock o placas de yeso.",
@@ -3849,22 +3708,7 @@
     "formaApariencia": "Perno con alas metálicas que se abren al apretar."
   },
   {
-    "id": "244",
-    "nombre": "Taco Mariposa Nº 2 (Doble)",
-    "categoria": "Fijaciones y buloneria",
-    "descripcion": "Taco mariposa doble para cargas más pesadas en durlock.",
-    "paraQueSirve": "Fijar cargas más pesadas en durlock como repisas cargadas o TV.",
-    "quienLoPide": "Quien quiere colgar algo pesado en pared de durlock.",
-    "comoSeUsa": "Igual que el Nº1 pero con mayor resistencia.",
-    "ventaCruzada": [
-      "Taco mariposa Nº1",
-      "Tornillo madera"
-    ],
-    "datosClave": "Nº2 = doble = más resistente que el Nº1. Para cargas más pesadas.",
-    "formaApariencia": "Igual al Nº1 pero más robusto."
-  },
-  {
-    "id": "245",
+    "id": "235",
     "nombre": "Tarugo SX (con borde) 6 mm",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Taco plástico de 6mm con borde de retención para paredes.",
@@ -3880,7 +3724,7 @@
     "formaApariencia": "Taco plástico pequeño con borde."
   },
   {
-    "id": "246",
+    "id": "236",
     "nombre": "Tarugo SX (con borde) 10 mm",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Taco plástico de 10mm para cargas más pesadas.",
@@ -3896,7 +3740,7 @@
     "formaApariencia": "Taco plástico más grande con borde."
   },
   {
-    "id": "247",
+    "id": "237",
     "nombre": "Tapón Macho Giny Plas 3/4\"",
     "categoria": "Plomeria",
     "descripcion": "Tapón macho de polipropileno de 3/4\" para cerrar el extremo de una rosca hembra.",
@@ -3911,7 +3755,7 @@
     "formaApariencia": "Pieza hexagonal de plástico marrón con rosca externa."
   },
   {
-    "id": "248",
+    "id": "238",
     "nombre": "Te 1/2\" H-H-H Polipropileno Roscado",
     "categoria": "Plomeria",
     "descripcion": "Tee de polipropileno de 1/2\" con tres bocas hembra para derivar la instalación de agua.",
@@ -3927,7 +3771,7 @@
     "formaApariencia": "Pieza en forma de T con tres bocas roscadas internas."
   },
   {
-    "id": "249",
+    "id": "239",
     "nombre": "Te Giny Plas 1/2\" (Rosca)",
     "categoria": "Plomeria",
     "descripcion": "Tee de polipropileno Giny Plas de 1/2\" roscado.",
@@ -3943,22 +3787,7 @@
     "formaApariencia": "Tee de polipropileno marrón o blanco en forma de T."
   },
   {
-    "id": "250",
-    "nombre": "Tenaza de Armador 9\" (Punta tipo 'paco')",
-    "categoria": "Herramientas",
-    "descripcion": "Tenaza de armador de 9 pulgadas con punta tipo paco. Para doblar y cortar alambre de construcción.",
-    "paraQueSirve": "Doblar y cortar alambre de armado en construcción. Atar hierros de losa y columnas.",
-    "quienLoPide": "Armador, albañil que trabaja con hierro.",
-    "comoSeUsa": "Agarrar el alambre con las puntas y doblar o cortar girando.",
-    "ventaCruzada": [
-      "Alambre negro recocido",
-      "Alicate de corte"
-    ],
-    "datosClave": "9\". Punta paco = especial para torcer alambre de armado.",
-    "formaApariencia": "Alicate con puntas largas y curvas especiales para alambre."
-  },
-  {
-    "id": "251",
+    "id": "240",
     "nombre": "Termofusión 20 mm",
     "categoria": "Plomeria",
     "descripcion": "Caño de polipropileno de 20mm para instalaciones de agua fría y caliente por termofusión.",
@@ -3974,7 +3803,7 @@
     "formaApariencia": "Tubo de polipropileno marrón o gris."
   },
   {
-    "id": "252",
+    "id": "241",
     "nombre": "Tijera Workpro Multiuso 8.1/2\"",
     "categoria": "Herramientas",
     "descripcion": "Tijera multiuso de 8.5 pulgadas marca Workpro. Para cortar telas, papeles, cables y materiales varios.",
@@ -3990,7 +3819,7 @@
     "formaApariencia": "Tijera mediana con hojas de acero y mango ergonómico."
   },
   {
-    "id": "253",
+    "id": "242",
     "nombre": "Tomacorriente schuko",
     "categoria": "Electricidad",
     "descripcion": "Tomacorriente tipo schuko (europeo) de dos fases redondas más tierra lateral.",
@@ -4005,7 +3834,7 @@
     "formaApariencia": "Tomacorriente con dos agujeros redondos y contactos de tierra en los lados."
   },
   {
-    "id": "254",
+    "id": "243",
     "nombre": "Tablero 6 bocas De Embutir (con puerta)",
     "categoria": "Electricidad",
     "descripcion": "Caja de tablero de 6 bocas para embutir en pared, con puerta de protección.",
@@ -4021,7 +3850,7 @@
     "formaApariencia": "Caja plástica con tapa y puerta, generalmente gris."
   },
   {
-    "id": "255",
+    "id": "244",
     "nombre": "Tornillo Drywall (Negro) 6x1 1/4",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Tornillo drywall negro de 6x1.1/4 para fijar placa de yeso a estructura.",
@@ -4036,7 +3865,7 @@
     "formaApariencia": "Tornillo negro con cabeza plana y punta fina."
   },
   {
-    "id": "256",
+    "id": "245",
     "nombre": "Tornillo Fix (Madera) 4x40",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Tornillo para madera de 4mm x 40mm con cabeza cónica.",
@@ -4052,7 +3881,7 @@
     "formaApariencia": "Tornillo plateado con cabeza cónica y ranura Phillips."
   },
   {
-    "id": "257",
+    "id": "246",
     "nombre": "Tornillo madera 3.5x35",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Tornillo para madera de 3.5mm x 35mm.",
@@ -4068,7 +3897,7 @@
     "formaApariencia": "Tornillo plateado con ranura Phillips."
   },
   {
-    "id": "258",
+    "id": "247",
     "nombre": "Tornillo madera 4x40",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Tornillo para madera de 4mm x 40mm.",
@@ -4083,7 +3912,7 @@
     "formaApariencia": "Tornillo plateado."
   },
   {
-    "id": "259",
+    "id": "248",
     "nombre": "Tornillo madera 4.5x50",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Tornillo para madera de 4.5mm x 50mm para maderas más gruesas.",
@@ -4098,7 +3927,7 @@
     "formaApariencia": "Tornillo plateado largo."
   },
   {
-    "id": "260",
+    "id": "249",
     "nombre": "Tuerca hexagonal M6",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Tuerca hexagonal métrica M6 para usar con bulón M6.",
@@ -4114,7 +3943,7 @@
     "formaApariencia": "Pequeña tuerca hexagonal de acero."
   },
   {
-    "id": "261",
+    "id": "250",
     "nombre": "Tuerca hexagonal M8",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Tuerca hexagonal métrica M8.",
@@ -4130,7 +3959,7 @@
     "formaApariencia": "Tuerca hexagonal más grande que la M6."
   },
   {
-    "id": "262",
+    "id": "251",
     "nombre": "Tuerca hexagonal M10",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Tuerca hexagonal métrica M10.",
@@ -4145,7 +3974,7 @@
     "formaApariencia": "Tuerca hexagonal grande."
   },
   {
-    "id": "263",
+    "id": "252",
     "nombre": "Tuercas Plásticas 3/4\"",
     "categoria": "Electricidad",
     "descripcion": "Tuercas plásticas de 3/4\" para fijar conectores de caño corrugado a cajas eléctricas.",
@@ -4160,7 +3989,7 @@
     "formaApariencia": "Tuerca plástica de color gris."
   },
   {
-    "id": "264",
+    "id": "253",
     "nombre": "Unión Doble 1/2\" Polipropileno (Marrón)",
     "categoria": "Plomeria",
     "descripcion": "Unión recta doble de polipropileno de 1/2\" para empalmar dos caños.",
@@ -4176,7 +4005,7 @@
     "formaApariencia": "Pieza cilíndrica de polipropileno marrón con rosca en ambos extremos."
   },
   {
-    "id": "265",
+    "id": "254",
     "nombre": "Unión Recta (Cupla) 1/2\" Polipropileno (Rosca H-H)",
     "categoria": "Plomeria",
     "descripcion": "Cupla de polipropileno hembra-hembra de 1/2\" para unir caños.",
@@ -4192,7 +4021,7 @@
     "formaApariencia": "Pieza corta de polipropileno con rosca interna en ambos extremos."
   },
   {
-    "id": "266",
+    "id": "255",
     "nombre": "WD-40 Flexi-Tapa 311 grs / 440 ml",
     "categoria": "Herramientas",
     "descripcion": "WD-40 en formato grande con tapa Flexi que permite aplicar en dos modos: spray amplio o chorro fino.",
@@ -4208,7 +4037,7 @@
     "formaApariencia": "Lata azul y amarilla WD-40 más grande con tapa flexible."
   },
   {
-    "id": "267",
+    "id": "256",
     "nombre": "Buscapolo Tipo destornillador",
     "categoria": "Electricidad",
     "descripcion": "Detector de tensión en forma de destornillador con luz indicadora.",
@@ -4224,7 +4053,7 @@
     "formaApariencia": "Destornillador de punta plana con cuerpo transparente que muestra la luz al detectar tensión."
   },
   {
-    "id": "268",
+    "id": "257",
     "nombre": "Bulon hexagonal M6/M8/M10",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Surtido de bulones hexagonales en tres medidas: M6, M8 y M10.",
@@ -4241,7 +4070,7 @@
     "formaApariencia": "Bulones hexagonales de tres tamaños diferentes."
   },
   {
-    "id": "269",
+    "id": "258",
     "nombre": "Cano corrugado 3/4\" rollo 25m Económico (Blanco/Gris)",
     "categoria": "Electricidad",
     "descripcion": "Caño corrugado de PVC de 3/4\" blanco/gris para instalaciones eléctricas. Versión económica.",
@@ -4257,7 +4086,7 @@
     "formaApariencia": "Tubo flexible acordonado de plástico blanco o gris."
   },
   {
-    "id": "270",
+    "id": "259",
     "nombre": "Cano corrugado 3/4\" rollo 25m Reforzado (Naranja)",
     "categoria": "Electricidad",
     "descripcion": "Caño corrugado de PVC de 3/4\" naranja reforzado para mayor resistencia mecánica.",
@@ -4272,7 +4101,7 @@
     "formaApariencia": "Tubo flexible acordonado de plástico naranja."
   },
   {
-    "id": "271",
+    "id": "260",
     "nombre": "Cano corrugado 1\" rollo 25m Económico (Blanco/Gris)",
     "categoria": "Electricidad",
     "descripcion": "Caño corrugado de 1\" blanco/gris para cables de mayor sección.",
@@ -4288,7 +4117,7 @@
     "formaApariencia": "Tubo flexible acordonado blanco de mayor diámetro."
   },
   {
-    "id": "272",
+    "id": "261",
     "nombre": "Cano corrugado 1\" rollo 25m Reforzado (Naranja)",
     "categoria": "Electricidad",
     "descripcion": "Caño corrugado de 1\" naranja reforzado para mayor protección.",
@@ -4303,7 +4132,7 @@
     "formaApariencia": "Tubo flexible naranja de mayor diámetro."
   },
   {
-    "id": "273",
+    "id": "262",
     "nombre": "Canilla Esférica Duke 1/2\" c/ manga",
     "categoria": "Plomeria",
     "descripcion": "Canilla de paso esférica marca Duke de 1/2\" con manga de apertura.",
@@ -4319,7 +4148,7 @@
     "formaApariencia": "Canilla plástica con palanca o manga para girar."
   },
   {
-    "id": "274",
+    "id": "263",
     "nombre": "Canilla Esférica Palanca 1/2\" p/ acople",
     "categoria": "Plomeria",
     "descripcion": "Canilla esférica de palanca de 1/2\" para usar con acople rápido.",
@@ -4335,7 +4164,7 @@
     "formaApariencia": "Canilla con palanca perpendicular y extremo para acople."
   },
   {
-    "id": "275",
+    "id": "264",
     "nombre": "Canilla Giny Plas 3/4\" con manga",
     "categoria": "Plomeria",
     "descripcion": "Canilla de paso Giny Plas de 3/4\" con manga para mayor caudal.",
@@ -4351,7 +4180,7 @@
     "formaApariencia": "Igual a la de 1/2\" pero más grande."
   },
   {
-    "id": "276",
+    "id": "265",
     "nombre": "Canilla Metálica Esférica 1/2\" Mariposa",
     "categoria": "Plomeria",
     "descripcion": "Canilla de paso de metal con mariposa de apertura. Mayor durabilidad que la plástica.",
@@ -4366,7 +4195,7 @@
     "formaApariencia": "Canilla metálica dorada/plateada con mariposa."
   },
   {
-    "id": "277",
+    "id": "266",
     "nombre": "Canilla Metálica Esférica 1/2\" Palanca",
     "categoria": "Plomeria",
     "descripcion": "Canilla de paso metálica de 1/2\" con palanca.",
@@ -4381,23 +4210,7 @@
     "formaApariencia": "Canilla metálica con palanca lateral."
   },
   {
-    "id": "278",
-    "nombre": "Bulón hexagonal M8",
-    "categoria": "Fijaciones y buloneria",
-    "descripcion": "Bulón hexagonal métrico M8 para uniones de media resistencia.",
-    "paraQueSirve": "Unir estructuras metálicas con mayor resistencia que el M6.",
-    "quienLoPide": "Herrero o mecánico.",
-    "comoSeUsa": "Con tuerca y arandela correspondiente.",
-    "ventaCruzada": [
-      "Tuerca M8",
-      "Arandela plana M8",
-      "Arandela grover M8"
-    ],
-    "datosClave": "M8. Más robusto que el M6. Para cargas medianas.",
-    "formaApariencia": "Bulón hexagonal de tamaño mediano."
-  },
-  {
-    "id": "279",
+    "id": "267",
     "nombre": "Bulon hexagonalM10",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Bulón hexagonal métrico M10 para uniones de alta resistencia.",
@@ -4412,7 +4225,7 @@
     "formaApariencia": "Bulón hexagonal grande."
   },
   {
-    "id": "280",
+    "id": "268",
     "nombre": "Bulón Hexagonal NC 1/4 x 1\"",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Bulón hexagonal de rosca gruesa (NC) de 1/4\" x 1\".",
@@ -4427,7 +4240,7 @@
     "formaApariencia": "Bulón hexagonal de tamaño pequeño."
   },
   {
-    "id": "281",
+    "id": "269",
     "nombre": "TORNILLO DRYWALL - 8 x 2\" p/ GRUESO",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Tornillo drywall grueso 8x2\" para fijar placa de yeso a estructura de madera.",
@@ -4442,7 +4255,7 @@
     "formaApariencia": "Tornillo negro con paso grueso y cabeza plana."
   },
   {
-    "id": "282",
+    "id": "270",
     "nombre": "Arandela plana 5/16 (M8)",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Arandela plana de 5/16 pulgada (equivalente M8) para distribuir carga.",
@@ -4458,7 +4271,7 @@
     "formaApariencia": "Disco metálico delgado con agujero de 8mm."
   },
   {
-    "id": "283",
+    "id": "271",
     "nombre": "Arandela plana 3/8 (M10)",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Arandela plana de 3/8 pulgada (M10) para bulones M10.",
@@ -4473,7 +4286,7 @@
     "formaApariencia": "Disco metálico con agujero de 10mm."
   },
   {
-    "id": "284",
+    "id": "272",
     "nombre": "Hojas de Repuesto Blíster x10",
     "categoria": "Herramientas",
     "descripcion": "Blíster con 10 hojas de repuesto para sierra o cutter.",
@@ -4488,7 +4301,7 @@
     "formaApariencia": "Blíster plástico con 10 hojas."
   },
   {
-    "id": "285",
+    "id": "273",
     "nombre": "CABO - HACHA - 35 cm",
     "categoria": "Herramientas",
     "descripcion": "Cabo o mango de madera de 35cm para hacha de mano.",
@@ -4504,23 +4317,7 @@
     "formaApariencia": "Mango de madera con forma ergonómica."
   },
   {
-    "id": "286",
-    "nombre": "Canilla Metálica Esférica 1/2\" Palanca",
-    "categoria": "Plomeria",
-    "descripcion": "Canilla de paso metálica esférica de 1/2\" con palanca de apertura rápida.",
-    "paraQueSirve": "Cortar el agua en líneas de 1/2\" con mayor durabilidad que la plástica.",
-    "quienLoPide": "Plomero que necesita durabilidad.",
-    "comoSeUsa": "Roscar con teflon. Palanca a 90° abre o cierra.",
-    "ventaCruzada": [
-      "Canilla metálica mariposa",
-      "Canilla plástica 1/2\"",
-      "Teflon"
-    ],
-    "datosClave": "Metálica. 1/2\". Palanca = más intuitiva.",
-    "formaApariencia": "Válvula metálica con palanca de acero."
-  },
-  {
-    "id": "287",
+    "id": "274",
     "nombre": "Arandela Plana 1/4",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Arandela plana de 1/4 pulgada de acero para distribuir carga de bulones.",
@@ -4536,7 +4333,7 @@
     "formaApariencia": "Disco metálico delgado con agujero central de 1/4\"."
   },
   {
-    "id": "288",
+    "id": "275",
     "nombre": "Arandela Plástica 1/2\" Malvar 1 bolsa (100 u.)",
     "categoria": "Plomeria",
     "descripcion": "Arandelas plásticas de 1/2\" marca Malvar para sellar uniones de plomería. Bolsa de 100 unidades.",
@@ -4552,7 +4349,7 @@
     "formaApariencia": "Arandela de plástico blando de 1/2\" de diámetro interior."
   },
   {
-    "id": "289",
+    "id": "276",
     "nombre": "Arandela Plástica 3/4\" 1 bolsa (100 u.)",
     "categoria": "Plomeria",
     "descripcion": "Arandelas plásticas de 3/4\" para plomería. Bolsa de 100 unidades.",
@@ -4568,7 +4365,7 @@
     "formaApariencia": "Igual a la de 1/2\" pero más grande."
   },
   {
-    "id": "290",
+    "id": "277",
     "nombre": "Arco de Sierra Junior 6\"",
     "categoria": "Herramientas",
     "descripcion": "Arco de sierra pequeño de 6 pulgadas para cortar en espacios reducidos.",
@@ -4584,7 +4381,7 @@
     "formaApariencia": "Arco metálico pequeño en forma de C con tensado de mariposa."
   },
   {
-    "id": "291",
+    "id": "278",
     "nombre": "ASIENTO - INODORO - ARENA - (INFLADO) MONKOTO",
     "categoria": "Plomeria",
     "descripcion": "Tapa y asiento para inodoro color arena (beige), relleno inflado para mayor comodidad. Marca Monkoto.",
@@ -4600,7 +4397,7 @@
     "formaApariencia": "Tapa oval de plástico color beige con relleno acolchado."
   },
   {
-    "id": "292",
+    "id": "279",
     "nombre": "ASIENTO - INODORO - FUERZA AEREA - (INFLADO) MONKOTO",
     "categoria": "Plomeria",
     "descripcion": "Tapa y asiento para inodoro con diseño Fuerza Aérea, relleno inflado. Marca Monkoto.",
@@ -4615,7 +4412,7 @@
     "formaApariencia": "Tapa oval con diseño impreso y relleno acolchado."
   },
   {
-    "id": "293",
+    "id": "280",
     "nombre": "ASIENTO - INODORO - NEGRO - (INFLADO) MONKOTO",
     "categoria": "Plomeria",
     "descripcion": "Tapa y asiento para inodoro color negro, relleno inflado. Marca Monkoto.",
@@ -4630,7 +4427,7 @@
     "formaApariencia": "Tapa oval negra con relleno acolchado."
   },
   {
-    "id": "294",
+    "id": "281",
     "nombre": "BANDEJA de PINTOR - p/ APOYAR PLANA - GRANDE",
     "categoria": "Pintureria",
     "descripcion": "Bandeja plana grande para cargar el rodillo de pintura. Se apoya en el piso o en un caballete.",
@@ -4646,7 +4443,7 @@
     "formaApariencia": "Bandeja rectangular plástica con zona honda y zona inclinada."
   },
   {
-    "id": "295",
+    "id": "282",
     "nombre": "BANDEJA de PINTOR - p/ APOYAR PLANA - MINI",
     "categoria": "Pintureria",
     "descripcion": "Bandeja plana pequeña para rodillos mini.",
@@ -4662,7 +4459,7 @@
     "formaApariencia": "Igual a la grande pero de menor tamaño."
   },
   {
-    "id": "296",
+    "id": "283",
     "nombre": "Boya Universal de Desborde Plástica",
     "categoria": "Plomeria",
     "descripcion": "Boya de desborde universal para cisternas. Activa el desagüe cuando el agua sube demasiado.",
@@ -4678,7 +4475,7 @@
     "formaApariencia": "Pieza plástica con flotador y válvula de desagüe."
   },
   {
-    "id": "297",
+    "id": "284",
     "nombre": "Bulon hexagonal M8",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Bulón hexagonal métrico M8 de acero para uniones de media resistencia.",
@@ -4694,7 +4491,7 @@
     "formaApariencia": "Bulón hexagonal de acero de tamaño mediano."
   },
   {
-    "id": "298",
+    "id": "285",
     "nombre": "CAJA - CAPSULADA C 800 - VACIA",
     "categoria": "Electricidad",
     "descripcion": "Caja capsulada de superficie modelo C800 vacía. Para instalar tomas o llaves a elección.",
@@ -4710,7 +4507,7 @@
     "formaApariencia": "Caja plástica de superficie con tapa frontal."
   },
   {
-    "id": "299",
+    "id": "286",
     "nombre": "CAJA - CAPSULADA C 801 - TOMA COMBINADA - 10 amp",
     "categoria": "Electricidad",
     "descripcion": "Caja capsulada con tomacorriente combinado (2P+T y schuko) de 10 amperios.",
@@ -4725,7 +4522,7 @@
     "formaApariencia": "Caja plástica de superficie con tapa frontal y toma visible."
   },
   {
-    "id": "300",
+    "id": "287",
     "nombre": "CAJA - CAPSULADA C 802 - 1 PUNTO - 10 amp",
     "categoria": "Electricidad",
     "descripcion": "Caja capsulada con un punto de toma de 10 amperios.",
@@ -4741,7 +4538,7 @@
     "formaApariencia": "Caja plástica con un tomacorriente en la tapa frontal."
   },
   {
-    "id": "301",
+    "id": "288",
     "nombre": "CAJA - CAPSULADA C 807 - PUNTO DOBLE - 10 amp",
     "categoria": "Electricidad",
     "descripcion": "Caja capsulada con doble tomacorriente de 10 amperios.",
@@ -4756,7 +4553,7 @@
     "formaApariencia": "Caja plástica con dos tomacorrientes en la tapa frontal."
   },
   {
-    "id": "302",
+    "id": "289",
     "nombre": "CAJA - LLAVE TERMICA - 1 a 2 - Con PUERTA p/ EMBUTIR KURBOX",
     "categoria": "Electricidad",
     "descripcion": "Caja para 1 a 2 disyuntores para embutir en pared con puerta. Marca Kurbox.",
@@ -4772,7 +4569,7 @@
     "formaApariencia": "Caja plástica pequeña con puerta, para embutir en pared."
   },
   {
-    "id": "303",
+    "id": "290",
     "nombre": "CAJA - LLAVE TERMICA - 2 a 4 - Con PUERTA p/ EMBUTIR",
     "categoria": "Electricidad",
     "descripcion": "Caja para 2 a 4 disyuntores para embutir en pared con puerta.",
@@ -4788,7 +4585,7 @@
     "formaApariencia": "Caja plástica mediana con puerta."
   },
   {
-    "id": "304",
+    "id": "291",
     "nombre": "CAÑAMO x 20 grs GM",
     "categoria": "Plomeria",
     "descripcion": "Cáñamo para sellar roscas de plomería. Se usa junto con pasta selladora.",
@@ -4804,7 +4601,7 @@
     "formaApariencia": "Ovillo de fibra natural color beige/crema."
   },
   {
-    "id": "305",
+    "id": "292",
     "nombre": "CERESITA x 1 lt WEBER",
     "categoria": "Pintureria",
     "descripcion": "Impermeabilizante hidrófugo líquido marca Weber Ceresita para proteger superficies de la humedad.",
@@ -4820,7 +4617,7 @@
     "formaApariencia": "Envase de 1 litro con líquido blanco o gris."
   },
   {
-    "id": "306",
+    "id": "293",
     "nombre": "CINTA - ALUMINIO - AUTOADHESIVA - 5 cm x 3 m - TRIGAMA",
     "categoria": "Adhesivos y selladores",
     "descripcion": "Cinta de aluminio autoadhesiva de 5cm x 3m marca Trigama para sellado de conductos.",
@@ -4836,7 +4633,7 @@
     "formaApariencia": "Rollo de cinta metálica plateada con papel protector."
   },
   {
-    "id": "307",
+    "id": "294",
     "nombre": "Cinta de Teflón 3/4\" x 10m Rollo individual con roldana plástica",
     "categoria": "Plomeria",
     "descripcion": "Cinta de teflón de 3/4\" en rollo individual con roldana plástica para mejor manejo.",
@@ -4852,7 +4649,7 @@
     "formaApariencia": "Rollo de cinta blanca con soporte plástico."
   },
   {
-    "id": "308",
+    "id": "295",
     "nombre": "CODO - H-H - 1\" - POLIPROPILENO GINY PLAS",
     "categoria": "Plomeria",
     "descripcion": "Codo de polipropileno hembra-hembra de 1\" para instalaciones de agua.",
@@ -4868,7 +4665,7 @@
     "formaApariencia": "Codo marrón o blanco de mayor tamaño que el de 3/4\"."
   },
   {
-    "id": "309",
+    "id": "296",
     "nombre": "CODO - M-H - 1/2\" - POLIPROPILENO GINY PLAS",
     "categoria": "Plomeria",
     "descripcion": "Codo de polipropileno macho-hembra de 1/2\" para cambiar de dirección y de tipo de rosca.",
@@ -4884,7 +4681,7 @@
     "formaApariencia": "Codo de polipropileno con un extremo con rosca externa y otro con rosca interna."
   },
   {
-    "id": "310",
+    "id": "297",
     "nombre": "CODO - M-H - 3/4\" - POLIPROPILENO GINY PLAS",
     "categoria": "Plomeria",
     "descripcion": "Codo macho-hembra de polipropileno de 3/4\".",
@@ -4899,7 +4696,7 @@
     "formaApariencia": "Igual al de 1/2\" M-H pero más grande."
   },
   {
-    "id": "311",
+    "id": "298",
     "nombre": "CODO - M-H - 1\" - POLIPROPILENO GINY PLAS",
     "categoria": "Plomeria",
     "descripcion": "Codo macho-hembra de polipropileno de 1\".",
@@ -4914,7 +4711,7 @@
     "formaApariencia": "El más grande de los codos M-H de polipropileno."
   },
   {
-    "id": "312",
+    "id": "299",
     "nombre": "Flexible Gas Latynflex20 a 42 cm (1/2\" H-H)",
     "categoria": "Plomeria",
     "descripcion": "Flexible de gas corto de 20 a 42cm hembra-hembra marca Latynflex.",
@@ -4929,7 +4726,7 @@
     "formaApariencia": "Tubo metálico ondulado corto con tuercas en los extremos."
   },
   {
-    "id": "313",
+    "id": "300",
     "nombre": "GRAMPA - LAVATORIO \"S\"",
     "categoria": "Plomeria",
     "descripcion": "Grapa en S para sujetar lavatorios suspendidos a la pared.",
@@ -4945,7 +4742,7 @@
     "formaApariencia": "Grampa metálica en forma de S."
   },
   {
-    "id": "314",
+    "id": "301",
     "nombre": "Phillips 4 x 150 mm Azul",
     "categoria": "Herramientas",
     "descripcion": "Punta de destornillador Phillips PH2 de 150mm de largo en color azul para atornillador eléctrico.",
@@ -4961,7 +4758,7 @@
     "formaApariencia": "Punta hexagonal de 6.35mm con extremo Phillips azul."
   },
   {
-    "id": "315",
+    "id": "302",
     "nombre": "Phillips 5 x 75 mm Azul",
     "categoria": "Herramientas",
     "descripcion": "Punta de destornillador Phillips PH2 corta de 75mm para atornillador eléctrico.",
@@ -4976,7 +4773,7 @@
     "formaApariencia": "Punta corta hexagonal con extremo Phillips azul."
   },
   {
-    "id": "316",
+    "id": "303",
     "nombre": "PINTURA AEROSOL NEGRO BRILLANTE - 200 ml - DOBLE A",
     "categoria": "Pintureria",
     "descripcion": "Pintura aerosol negro brillante 200ml marca Doble A.",
@@ -4992,7 +4789,7 @@
     "formaApariencia": "Lata de aerosol color negro."
   },
   {
-    "id": "317",
+    "id": "304",
     "nombre": "Plano 4 x 100 mm Rojo",
     "categoria": "Herramientas",
     "descripcion": "Punta de destornillador plano de 100mm para atornillador eléctrico. Color rojo.",
@@ -5007,7 +4804,7 @@
     "formaApariencia": "Punta hexagonal con extremo plano color rojo."
   },
   {
-    "id": "318",
+    "id": "305",
     "nombre": "Plano 5 x 75 mm Rojo",
     "categoria": "Herramientas",
     "descripcion": "Punta de destornillador plano corta de 75mm para atornillador eléctrico.",
@@ -5022,7 +4819,7 @@
     "formaApariencia": "Punta corta hexagonal con extremo plano rojo."
   },
   {
-    "id": "319",
+    "id": "306",
     "nombre": "Ramal \"Y\" 110 a 110",
     "categoria": "Plomeria",
     "descripcion": "Ramal en Y de PVC de 110mm para unir dos desagües en uno.",
@@ -5038,7 +4835,7 @@
     "formaApariencia": "Pieza PVC en forma de Y con tres bocas de 110mm."
   },
   {
-    "id": "320",
+    "id": "307",
     "nombre": "REGULADOR p/ GAS - MANGUERA de 1,50 m - CHICO (Mod 19/5)",
     "categoria": "Electricidad",
     "descripcion": "Regulador de gas domiciliario modelo 19/5 con manguera de 1.50m para garrafa de 10kg.",
@@ -5054,7 +4851,7 @@
     "formaApariencia": "Regulador metálico con manguera naranja o negra."
   },
   {
-    "id": "321",
+    "id": "308",
     "nombre": "Taco MariposaNº 2 (Doble)",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Taco mariposa doble Nº2 para fijar cargas pesadas en paredes de durlock.",
@@ -5069,7 +4866,7 @@
     "formaApariencia": "Similar al Nº1 pero más robusto."
   },
   {
-    "id": "322",
+    "id": "309",
     "nombre": "TELA ESMERIL - GRANO 36 RAPIFIX",
     "categoria": "Herramientas",
     "descripcion": "Tela esmeril de grano 36 marca Rapifix. Muy gruesa para remover material rápidamente.",
@@ -5085,7 +4882,7 @@
     "formaApariencia": "Hoja de tela resistente con abrasivo grueso en un lado."
   },
   {
-    "id": "323",
+    "id": "310",
     "nombre": "TELA ESMERIL - GRANO 80 RAPIFIX",
     "categoria": "Herramientas",
     "descripcion": "Tela esmeril de grano 80 marca Rapifix. Grano medio para metales.",
@@ -5100,7 +4897,7 @@
     "formaApariencia": "Hoja de tela con abrasivo medio."
   },
   {
-    "id": "324",
+    "id": "311",
     "nombre": "TELA ESMERIL - GRANO 100 - RAPIFIX",
     "categoria": "Herramientas",
     "descripcion": "Tela esmeril de grano 100 marca Rapifix. Para acabado fino en metal.",
@@ -5115,7 +4912,7 @@
     "formaApariencia": "Hoja de tela con abrasivo fino."
   },
   {
-    "id": "325",
+    "id": "312",
     "nombre": "TRAMPA - LAUCHA - MADERA",
     "categoria": "Materiales de obra",
     "descripcion": "Trampa mecánica de madera con resorte para capturar ratones.",
@@ -5130,7 +4927,7 @@
     "formaApariencia": "Tabla de madera con resorte de alambre y gancho para el cebo."
   },
   {
-    "id": "326",
+    "id": "313",
     "nombre": "TRAMPA - RATA - MADERA",
     "categoria": "Materiales de obra",
     "descripcion": "Trampa mecánica de madera más grande para capturar ratas.",
@@ -5145,7 +4942,7 @@
     "formaApariencia": "Igual a la de laucha pero de mayor tamaño."
   },
   {
-    "id": "327",
+    "id": "314",
     "nombre": "Tenaza de Armador9\" (Punta tipo \"paco\")",
     "categoria": "Herramientas",
     "descripcion": "Tenaza de armador de 9\" con punta tipo paco para doblar y cortar alambre de armado.",
@@ -5160,7 +4957,7 @@
     "formaApariencia": "Alicate con puntas especiales curvas para atar alambre."
   },
   {
-    "id": "328",
+    "id": "315",
     "nombre": "Tornillo madera 3.5x25/3.5x35/4x40/4.5x50",
     "categoria": "Fijaciones y buloneria",
     "descripcion": "Surtido de tornillos para madera en cuatro medidas: 3.5x25, 3.5x35, 4x40 y 4.5x50mm.",
