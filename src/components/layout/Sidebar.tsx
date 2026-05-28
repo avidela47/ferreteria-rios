@@ -13,10 +13,12 @@ import {
   FileText,
   Truck,
   LogOut,
+  BookOpen,
 } from 'lucide-react'
 
 const menu = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/dashboard/catalogo', label: 'Catalogo', icon: BookOpen },
   { href: '/dashboard/stock', label: 'Stock', icon: Package },
   { href: '/dashboard/ventas', label: 'Ventas', icon: ShoppingCart },
   { href: '/dashboard/compras', label: 'Compras', icon: TrendingUp },

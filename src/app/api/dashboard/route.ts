@@ -4,6 +4,8 @@ import Sale from '@/models/Sale'
 import Product from '@/models/Product'
 import Expense from '@/models/Expense'
 import TaxRecord from '@/models/TaxRecord'
+import '@/models/Category'
+import '@/models/Supplier'
 
 export async function GET() {
   try {
