@@ -91,7 +91,7 @@ export default function ProductosList({ onNuevo, onEditar }: Props) {
                       </div>
                     </td>
                     <td className="px-4 py-3 text-slate-500">
-                      {typeof p.categoria === 'object' ? p.categoria.nombre : p.categoria}
+                      {p.categoria && typeof p.categoria === 'object' ? p.categoria.nombre : (p.categoria ?? 'Sin categoría')}
                     </td>
                     <td className={`px-4 py-3 text-right font-medium ${stockBajo ? 'text-red-500' : 'text-slate-700'}`}>
                       {p.cantidad} {p.unidad}
