@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { IProduct } from '@/types'
 import { formatPeso } from '@/lib/utils'
 import { Pencil, Trash2, AlertTriangle, ChevronLeft, ChevronRight } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface Props {
   onNuevo: () => void
@@ -33,10 +34,25 @@ export default function ProductosList({ onNuevo, onEditar }: Props) {
   }, [buscar, pagina])
 
   async function eliminar(id: string) {
-  if (!confirm('¿Seguro que querés eliminar este producto?')) return
-  const res = await fetch(`/api/productos/${id}`, { method: 'DELETE' })
-  const json = await res.json()
-  if (json.ok) setProductos((prev) => prev.filter((p) => p._id !== id))
+  toast('¿Seguro que querés eliminar este producto?', {
+    action: {
+      label: 'Eliminar',
+      onClick: async () => {
+        const res = await fetch(`/api/productos/${id}`, { method: 'DELETE' })
+        const json = await res.json()
+        if (json.ok) {
+          toast.success('Producto eliminado')
+          setProductos((prev) => prev.filter((p) => p._id !== id))
+        } else {
+          toast.error('Error al eliminar')
+        }
+      },
+    },
+    cancel: {
+      label: 'Cancelar',
+      onClick: () => {},
+    },
+  })
 }
 
   const totalPaginas = Math.ceil(total / POR_PAGINA)
