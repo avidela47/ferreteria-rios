@@ -70,6 +70,7 @@ export default function ProductosList({ onNuevo, onEditar }: Props) {
           <table className="w-full text-sm">
             <thead>
               <tr className="text-left text-slate-500 border-b border-slate-100">
+                <th className="px-4 py-3 font-medium">Código</th>
                 <th className="px-4 py-3 font-medium">Producto</th>
                 <th className="px-4 py-3 font-medium">Categoria</th>
                 <th className="px-4 py-3 font-medium text-right">Stock</th>
@@ -81,45 +82,48 @@ export default function ProductosList({ onNuevo, onEditar }: Props) {
             </thead>
             <tbody>
               {productos.map((p) => {
-                const stockBajo = p.cantidad <= p.stockMinimo
-                return (
-                  <tr key={p._id} className="border-b border-slate-50 hover:bg-slate-50">
-                    <td className="px-4 py-3">
-                      <div className="flex items-center gap-2">
-                        {stockBajo && <AlertTriangle size={14} className="text-orange-500" />}
-                        <span className="font-medium text-slate-700">{p.nombre}</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-slate-500">
-                      {p.categoria && typeof p.categoria === 'object' ? p.categoria.nombre : (p.categoria ?? 'Sin categoría')}
-                    </td>
-                    <td className={`px-4 py-3 text-right font-medium ${stockBajo ? 'text-red-500' : 'text-slate-700'}`}>
-                      {p.cantidad} {p.unidad}
-                    </td>
-                    <td className="px-4 py-3 text-right text-slate-500">
-                      {formatPeso(p.precioCosto)}
-                    </td>
-                    <td className="px-4 py-3 text-right font-medium text-slate-700">
-                      {formatPeso(p.precioVenta)}
-                    </td>
-                    <td className="px-4 py-3 text-right">
-                      <span className="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full font-medium">
-                        {p.margen}%
-                      </span>
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center justify-center gap-2">
-                        <button onClick={() => onEditar(p)} className="text-slate-400 hover:text-blue-500 transition-colors">
-                          <Pencil size={15} />
-                        </button>
-                        <button onClick={() => eliminar(p._id)} className="text-slate-400 hover:text-red-500 transition-colors">
-                          <Trash2 size={15} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                )
-              })}
+  const stockBajo = p.cantidad <= p.stockMinimo
+  return (
+    <tr key={p._id} className="border-b border-slate-50 hover:bg-slate-50">
+      <td className="px-4 py-3 text-slate-400 text-xs">
+        {p.codigo}
+      </td>
+      <td className="px-4 py-3">
+        <div className="flex items-center gap-2">
+          {stockBajo && <AlertTriangle size={14} className="text-orange-500" />}
+          <span className="font-medium text-slate-700">{p.nombre}</span>
+        </div>
+      </td>
+      <td className="px-4 py-3 text-slate-500">
+        {p.categoria && typeof p.categoria === 'object' ? p.categoria.nombre : (p.categoria ?? 'Sin categoría')}
+      </td>
+      <td className={`px-4 py-3 text-right font-medium ${stockBajo ? 'text-red-500' : 'text-slate-700'}`}>
+        {p.cantidad} {p.unidad}
+      </td>
+      <td className="px-4 py-3 text-right text-slate-500">
+        {formatPeso(p.precioCosto)}
+      </td>
+      <td className="px-4 py-3 text-right font-medium text-slate-700">
+        {formatPeso(p.precioVenta)}
+      </td>
+      <td className="px-4 py-3 text-right">
+        <span className="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full font-medium">
+          {p.margen}%
+        </span>
+      </td>
+      <td className="px-4 py-3">
+        <div className="flex items-center justify-center gap-2">
+          <button onClick={() => onEditar(p)} className="text-slate-400 hover:text-blue-500 transition-colors">
+            <Pencil size={15} />
+          </button>
+          <button onClick={() => eliminar(p._id)} className="text-slate-400 hover:text-red-500 transition-colors">
+            <Trash2 size={15} />
+          </button>
+        </div>
+      </td>
+    </tr>
+  )
+})}
             </tbody>
           </table>
 

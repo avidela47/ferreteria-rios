@@ -37,6 +37,7 @@ export interface ISupplier {
 // ── PRODUCTOS ─────────────────────────────────────────────────────────────
 export interface IProduct {
   _id: string
+  codigo?: string
   nombre: string
   categoria: ICategory | string
   cantidad: number
