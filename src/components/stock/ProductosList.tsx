@@ -33,10 +33,11 @@ export default function ProductosList({ onNuevo, onEditar }: Props) {
   }, [buscar, pagina])
 
   async function eliminar(id: string) {
-    const res = await fetch(`/api/productos/${id}`, { method: 'DELETE' })
-    const json = await res.json()
-    if (json.ok) setProductos((prev) => prev.filter((p) => p._id !== id))
-  }
+  if (!confirm('¿Seguro que querés eliminar este producto?')) return
+  const res = await fetch(`/api/productos/${id}`, { method: 'DELETE' })
+  const json = await res.json()
+  if (json.ok) setProductos((prev) => prev.filter((p) => p._id !== id))
+}
 
   const totalPaginas = Math.ceil(total / POR_PAGINA)
 
