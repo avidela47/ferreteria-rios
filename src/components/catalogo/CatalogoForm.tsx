@@ -57,7 +57,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
     e.preventDefault()
     setLoading(true)
 
-    const url = ficha ? `/api/catalogo/${ficha.id}` : '/api/catalogo'
+    const url = ficha ? `/api/catalogo/${ficha._id}` : '/api/catalogo'
     const method = ficha ? 'PUT' : 'POST'
 
     const res = await fetch(url, {
