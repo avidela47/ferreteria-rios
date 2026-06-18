@@ -1,4 +1,5 @@
 export interface IFicha {
+  _id?: string
   id: string
   nombre: string
   categoria: string
