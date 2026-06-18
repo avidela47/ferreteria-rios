@@ -42,15 +42,26 @@ export default function CatalogoList({ onEditar }: Props) {
   }, [])
 
   async function eliminar(id: string) {
-    const res = await fetch(`/api/catalogo/${id}`, { method: 'DELETE' })
-    const json = await res.json()
-    if (json.ok) {
-      toast.success('Ficha eliminada')
-      setFichas((prev) => prev.filter((f) => f.id !== id))
-    } else {
-      toast.error('Error al eliminar')
-    }
-  }
+  toast('¿Seguro que querés eliminar esta ficha?', {
+    action: {
+      label: 'Eliminar',
+      onClick: async () => {
+        const res = await fetch(`/api/catalogo/${id}`, { method: 'DELETE' })
+        const json = await res.json()
+        if (json.ok) {
+          toast.success('Ficha eliminada')
+          setFichas((prev) => prev.filter((f) => f.id !== id))
+        } else {
+          toast.error('Error al eliminar')
+        }
+      },
+    },
+    cancel: {
+      label: 'Cancelar',
+      onClick: () => {},
+    },
+  })
+}
 
 
 
