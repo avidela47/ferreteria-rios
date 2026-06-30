@@ -38,11 +38,11 @@ export default function NuevaVenta({ onGuardado }: Props) {
   }, [])
 
   const productosFiltrados = buscar.length >= 2
-  ? productos.filter((p) =>
+    ? productos.filter((p) =>
       (p.nombre.toLowerCase().includes(buscar.toLowerCase()) ||
-       (p.codigo ?? '').toLowerCase().includes(buscar.toLowerCase())) && p.cantidad > 0
+        (p.codigo ?? '').toLowerCase().includes(buscar.toLowerCase())) && p.cantidad > 0
     ).slice(0, 8)
-  : []
+    : []
 
   function agregarProducto(p: IProduct) {
     const existe = items.find((i) => i.producto === p._id)
@@ -138,7 +138,10 @@ export default function NuevaVenta({ onGuardado }: Props) {
                     onClick={() => agregarProducto(p)}
                     className="w-full text-left px-4 py-2.5 hover:bg-slate-50 cursor-pointer flex items-center justify-between text-sm border-b last:border-0"
                   >
-                    <span className="font-medium text-slate-700">{p.nombre}</span>
+                    <span className="font-medium text-slate-700">
+                      {p.nombre}
+                      {p.codigo && <span className="text-slate-400 text-xs ml-2 font-normal">#{p.codigo}</span>}
+                    </span>
                     <span className="text-slate-400">
                       Stock: {p.cantidad} · {formatPeso(p.precioVenta)}
                     </span>
@@ -227,9 +230,9 @@ export default function NuevaVenta({ onGuardado }: Props) {
               className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 cursor-pointer"
             >
               <option value="efectivo">Efectivo</option>
-<option value="tarjeta">Tarjeta</option>
-<option value="transferencia">Transferencia</option>
-<option value="posnet">Posnet</option>
+              <option value="tarjeta">Tarjeta</option>
+              <option value="transferencia">Transferencia</option>
+              <option value="posnet">Posnet</option>
             </select>
           </div>
           <div>
