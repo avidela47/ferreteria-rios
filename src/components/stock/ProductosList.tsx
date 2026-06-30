@@ -127,7 +127,7 @@ export default function ProductosList({ onNuevo, onEditar }: Props) {
 </td>
       <td className="px-4 py-3 text-right">
         <span className="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full font-medium">
-          {p.margen}%
+          {Math.round(p.margen)}%
         </span>
       </td>
       <td className="px-4 py-3">
