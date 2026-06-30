@@ -30,16 +30,17 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
   const [loading, setLoading] = useState(false)
 
   const [form, setForm] = useState({
-    nombre: producto?.nombre ?? '',
-    categoria: getCategoriaId(producto?.categoria),
-    cantidad: producto?.cantidad ?? 0,
-    stockMinimo: producto?.stockMinimo ?? 5,
-    unidad: producto?.unidad ?? 'u.',
-    precioCosto: producto?.precioCosto ?? 0,
-    precioVenta: producto?.precioVenta ?? 0,
-    margen: producto?.margen ?? 0,
-    proveedor: getProveedorId(producto?.proveedor),
-  })
+  nombre: producto?.nombre ?? '',
+  codigo: producto?.codigo ?? '',
+  categoria: getCategoriaId(producto?.categoria),
+  cantidad: producto?.cantidad ?? 0,
+  stockMinimo: producto?.stockMinimo ?? 5,
+  unidad: producto?.unidad ?? 'u.',
+  precioCosto: producto?.precioCosto ?? 0,
+  precioVenta: producto?.precioVenta ?? 0,
+  margen: producto?.margen ?? 0,
+  proveedor: getProveedorId(producto?.proveedor),
+})
 
   useEffect(() => {
     const fetchData = async () => {
@@ -119,16 +120,28 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
         </div>
 
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Nombre</label>
-            <input
-              name="nombre"
-              value={form.nombre}
-              onChange={handleChange}
-              required
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-            />
-          </div>
+          <div className="grid grid-cols-3 gap-3">
+  <div>
+    <label className="block text-sm font-medium text-slate-700 mb-1">Código *</label>
+    <input
+      name="codigo"
+      value={form.codigo}
+      onChange={handleChange}
+      required
+      className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+    />
+  </div>
+  <div className="col-span-2">
+    <label className="block text-sm font-medium text-slate-700 mb-1">Nombre</label>
+    <input
+      name="nombre"
+      value={form.nombre}
+      onChange={handleChange}
+      required
+      className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+    />
+  </div>
+</div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
