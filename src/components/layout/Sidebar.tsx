@@ -37,7 +37,7 @@ export default function Sidebar({ nombreUsuario, rol }: SidebarProps) {
   const pathname = usePathname()
 
   return (
-    <aside className="w-64 bg-slate-900 h-screen flex flex-col overflow-y-auto">
+    <aside className="w-64 bg-slate-900 h-screen flex flex-col overflow-hidden">
       <div className="px-5 py-3">
         <Image
           src="/logo.png"
