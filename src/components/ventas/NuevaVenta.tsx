@@ -38,10 +38,11 @@ export default function NuevaVenta({ onGuardado }: Props) {
   }, [])
 
   const productosFiltrados = buscar.length >= 2
-    ? productos.filter((p) =>
-        p.nombre.toLowerCase().includes(buscar.toLowerCase()) && p.cantidad > 0
-      ).slice(0, 8)
-    : []
+  ? productos.filter((p) =>
+      (p.nombre.toLowerCase().includes(buscar.toLowerCase()) ||
+       (p.codigo ?? '').toLowerCase().includes(buscar.toLowerCase())) && p.cantidad > 0
+    ).slice(0, 8)
+  : []
 
   function agregarProducto(p: IProduct) {
     const existe = items.find((i) => i.producto === p._id)
