@@ -120,9 +120,11 @@ export default function ProductosList({ onNuevo, onEditar }: Props) {
       <td className="px-4 py-3 text-right text-slate-500">
         {formatPeso(p.precioCosto)}
       </td>
-      <td className="px-4 py-3 text-right font-medium text-slate-700">
-        {formatPeso(p.precioVenta)}
-      </td>
+      <td className="px-4 py-3 text-right">
+  <span className="bg-orange-100 text-orange-700 text-xs px-2 py-0.5 rounded-full font-medium">
+    {formatPeso(p.precioVenta)}
+  </span>
+</td>
       <td className="px-4 py-3 text-right">
         <span className="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full font-medium">
           {p.margen}%
