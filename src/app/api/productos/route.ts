@@ -22,10 +22,18 @@ export async function GET(req: NextRequest) {
     const filtro: Record<string, unknown> = { activo: true }
 
     if (buscar) {
-  filtro.$or = [
-    { nombre: { $regex: buscar, $options: 'i' } },
-    { codigo: { $regex: buscar, $options: 'i' } },
-  ]
+  const esCodigoExacto = /^\d+$/.test(buscar)
+  if (esCodigoExacto) {
+    filtro.$or = [
+      { codigo: buscar },
+      { nombre: { $regex: buscar, $options: 'i' } },
+    ]
+  } else {
+    filtro.$or = [
+      { nombre: { $regex: buscar, $options: 'i' } },
+      { codigo: { $regex: buscar, $options: 'i' } },
+    ]
+  }
 }
     if (categoria) {
       filtro.categoria = categoria
