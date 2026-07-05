@@ -92,23 +92,32 @@ export default function ProductosList({ onNuevo, onEditar, refresh }: Props) {
 
       <div className="bg-white rounded-lg shadow-sm">
         <div className="p-4 border-b border-slate-100 flex items-center gap-3">
-          <input
-            type="text"
-            placeholder="Buscar producto..."
-            value={buscar}
-            onChange={(e) => {
-              setBuscar(e.target.value)
-              setPagina(1)
-            }}
-            className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-          />
-          <button
-            onClick={onNuevo}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-          >
-            + Nuevo
-          </button>
-        </div>
+  <input
+    type="text"
+    placeholder="Buscar producto..."
+    value={buscar}
+    onChange={(e) => {
+      setBuscar(e.target.value)
+      setPagina(1)
+    }}
+    className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+  />
+  <button
+    onClick={() => {
+      setBuscar('')
+      setPagina(1)
+    }}
+    className="border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+  >
+    Borrar
+  </button>
+  <button
+    onClick={onNuevo}
+    className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+  >
+    + Nuevo
+  </button>
+</div>
 
         {loading ? (
           <div className="p-8 text-center text-slate-400 text-sm">Cargando...</div>
