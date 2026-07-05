@@ -9,9 +9,10 @@ import { toast } from 'sonner'
 interface Props {
   onNuevo: () => void
   onEditar: (producto: IProduct) => void
+  refresh: number
 }
 
-export default function ProductosList({ onNuevo, onEditar }: Props) {
+export default function ProductosList({ onNuevo, onEditar, refresh }: Props) {
   const [productos, setProductos] = useState<IProduct[]>([])
   const [loading, setLoading] = useState(true)
   const [buscar, setBuscar] = useState('')
@@ -32,7 +33,7 @@ export default function ProductosList({ onNuevo, onEditar }: Props) {
       setLoading(false)
     }
     fetchProductos()
-  }, [buscar, pagina])
+  }, [buscar, pagina, refresh])
 
   useEffect(() => {
     const fetchTotales = async () => {
@@ -46,7 +47,7 @@ export default function ProductosList({ onNuevo, onEditar }: Props) {
       }
     }
     fetchTotales()
-  }, [])
+  }, [refresh])
 
   async function eliminar(id: string) {
     toast('¿Seguro que querés eliminar este producto?', {
@@ -74,7 +75,6 @@ export default function ProductosList({ onNuevo, onEditar }: Props) {
 
   return (
     <div className="space-y-4">
-      {/* Cards resumen */}
       <div className="grid grid-cols-3 gap-4">
         <div className="bg-white rounded-lg shadow-sm p-4">
           <p className="text-xs text-slate-500 mb-1">Total productos</p>

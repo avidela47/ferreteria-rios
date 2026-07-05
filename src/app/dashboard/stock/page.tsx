@@ -41,9 +41,9 @@ export default function StockPage() {
       </div>
 
       <ProductosList
-        key={refresh}
         onNuevo={handleNuevo}
         onEditar={handleEditar}
+        refresh={refresh}
       />
 
       {mostrarForm && (
