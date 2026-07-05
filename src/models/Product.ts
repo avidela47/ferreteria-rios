@@ -2,6 +2,7 @@ import mongoose, { Schema, Document } from 'mongoose'
 
 export interface IProductDocument extends Document {
   nombre: string
+  codigo: string
   categoria: mongoose.Types.ObjectId
   cantidad: number
   stockMinimo: number
@@ -18,6 +19,7 @@ export interface IProductDocument extends Document {
 const ProductSchema = new Schema<IProductDocument>(
   {
     nombre: { type: String, required: true, trim: true },
+    codigo: { type: String, default: '', trim: true },
     categoria: { type: Schema.Types.ObjectId, ref: 'Category', required: false, default: null },
     cantidad: { type: Number, required: true, default: 0 },
     stockMinimo: { type: Number, default: 5 },
