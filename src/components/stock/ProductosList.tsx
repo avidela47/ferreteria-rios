@@ -136,7 +136,7 @@ export default function ProductosList({ onNuevo, onEditar, refresh }: Props) {
           >
             Borrar
           </button>
-          <a href="/dashboard/stock/imprimir" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors"><Printer size={16} /><span>Imprimir PDF</span></a>
+          <a href="/imprimir-stock" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors"><Printer size={16} /><span>Imprimir PDF</span></a>
           <button
             onClick={onNuevo}
             className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
