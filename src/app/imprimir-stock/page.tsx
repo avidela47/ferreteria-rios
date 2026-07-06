@@ -10,7 +10,10 @@ export default function ImprimirStockPage() {
 
   useEffect(() => {
     const fetchTodos = async () => {
-      const res = await fetch('/api/productos?limite=2000&pagina=1&ordenarPor=nombre&direccion=asc')
+      const params = new URLSearchParams(window.location.search)
+      const ordenarPor = params.get('ordenarPor') || 'nombre'
+      const direccion = params.get('direccion') || 'asc'
+      const res = await fetch('/api/productos?limite=2000&pagina=1&ordenarPor=' + ordenarPor + '&direccion=' + direccion)
       const json = await res.json()
       if (json.ok) setProductos(json.data)
       setLoading(false)
