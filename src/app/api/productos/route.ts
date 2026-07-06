@@ -5,11 +5,8 @@ import { calcularMargen } from '@/lib/utils'
 import '@/models/Category'
 import '@/models/Supplier'
 
-
 export async function GET(req: NextRequest) {
   try {
-    
-
     await connectDB()
 
     const { searchParams } = new URL(req.url)
@@ -18,23 +15,25 @@ export async function GET(req: NextRequest) {
     const buscar = searchParams.get('buscar') ?? ''
     const categoria = searchParams.get('categoria') ?? ''
     const stockBajo = searchParams.get('stockBajo') === 'true'
+    const ordenarPor = searchParams.get('ordenarPor') ?? 'nombre'
+    const direccion = searchParams.get('direccion') === 'desc' ? -1 : 1
 
     const filtro: Record<string, unknown> = { activo: true }
 
     if (buscar) {
-  const esCodigoExacto = /^\d+$/.test(buscar)
-  if (esCodigoExacto) {
-    filtro.$or = [
-      { codigo: buscar },
-      { nombre: { $regex: buscar, $options: 'i' } },
-    ]
-  } else {
-    filtro.$or = [
-      { nombre: { $regex: buscar, $options: 'i' } },
-      { codigo: { $regex: buscar, $options: 'i' } },
-    ]
-  }
-}
+      const esCodigoExacto = /^\d+$/.test(buscar)
+      if (esCodigoExacto) {
+        filtro.$or = [
+          { codigo: buscar },
+          { nombre: { $regex: buscar, $options: 'i' } },
+        ]
+      } else {
+        filtro.$or = [
+          { nombre: { $regex: buscar, $options: 'i' } },
+          { codigo: { $regex: buscar, $options: 'i' } },
+        ]
+      }
+    }
     if (categoria) {
       filtro.categoria = categoria
     }
@@ -46,7 +45,7 @@ export async function GET(req: NextRequest) {
     const productos = await Product.find(filtro)
       .populate('categoria', 'nombre')
       .populate('proveedor', 'nombre')
-      .sort({ nombre: 1 })
+      .sort({ [ordenarPor]: direccion })
       .skip((pagina - 1) * limite)
       .limit(limite)
 
