@@ -30,7 +30,7 @@ export default function NuevaVenta({ onGuardado }: Props) {
 
   useEffect(() => {
     const fetchProductos = async () => {
-      const res = await fetch('/api/productos?limite=200')
+      const res = await fetch('/api/productos?limite=1000')
       const json = await res.json()
       if (json.ok) setProductos(json.data)
     }

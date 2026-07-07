@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react'
 import { ISale } from '@/types'
 import { formatPeso, formatFechaHora } from '@/lib/utils'
-import { Ban } from 'lucide-react'
+import { Ban, Eye, X } from 'lucide-react'
 import { toast } from 'sonner'
 
 export default function VentasList() {
   const [ventas, setVentas] = useState<ISale[]>([])
   const [loading, setLoading] = useState(true)
+  const [ventaDetalle, setVentaDetalle] = useState<ISale | null>(null)
 
   useEffect(() => {
     const fetchVentas = async () => {
@@ -22,7 +23,7 @@ export default function VentasList() {
   }, [])
 
   async function anularVenta(id: string) {
-    const res = await fetch(`/api/ventas/${id}`, {
+    const res = await fetch('/api/ventas/' + id, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ estado: 'anulada' }),
@@ -30,22 +31,24 @@ export default function VentasList() {
     const json = await res.json()
     if (json.ok) {
       toast.success('Venta anulada — stock restaurado')
-      setVentas((prev) =>
-        prev.map((v) => (v._id === id ? { ...v, estado: 'anulada' as const } : v))
-      )
+      setVentas(function (prev) {
+        return prev.map(function (v) {
+          return v._id === id ? Object.assign({}, v, { estado: 'anulada' }) : v
+        })
+      })
     } else {
       toast.error('Solo el administrador puede anular ventas')
     }
   }
 
-  const formaPagoBadge = (forma: string) => {
+  const formaPagoBadge = function (forma: string) {
     const colores: Record<string, string> = {
       efectivo: 'bg-green-100 text-green-700',
       tarjeta: 'bg-blue-100 text-blue-700',
       transferencia: 'bg-purple-100 text-purple-700',
       posnet: 'bg-indigo-100 text-indigo-700',
     }
-    return colores[forma] ?? 'bg-slate-100 text-slate-700'
+    return colores[forma] || 'bg-slate-100 text-slate-700'
   }
 
   return (
@@ -76,51 +79,140 @@ export default function VentasList() {
             </tr>
           </thead>
           <tbody>
-            {ventas.map((v) => (
-              <tr key={v._id} className={`border-b border-slate-50 hover:bg-slate-50 ${v.estado === 'anulada' ? 'opacity-50' : ''}`}>
-                <td className="px-4 py-3 text-slate-500 font-medium">#{v.numero}</td>
-                <td className="px-4 py-3 text-slate-700">{v.cliente}</td>
-                <td className="px-4 py-3 text-slate-400 text-xs">
-                  {formatFechaHora(v.createdAt)}
-                </td>
-                <td className="px-4 py-3">
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${formaPagoBadge(v.formaPago)}`}>
-                    {v.formaPago}
-                  </span>
-                </td>
-                <td className="px-4 py-3 text-right font-medium text-slate-800">
-                  {formatPeso(v.total)}
-                </td>
-                <td className="px-4 py-3 text-right text-green-600 font-medium">
-                  {formatPeso(v.ganancia)}
-                </td>
-                <td className="px-4 py-3 text-center">
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                    v.estado === 'completada'
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-red-100 text-red-700'
-                  }`}>
-                    {v.estado}
-                  </span>
-                </td>
-                <td className="px-4 py-3 text-center text-slate-500">
-                  {v.items.length}
-                </td>
-                <td className="px-4 py-3 text-center">
-                  {v.estado === 'completada' && (
-                    <button
-                      onClick={() => anularVenta(v._id)}
-                      className="text-slate-300 hover:text-red-500 cursor-pointer transition-colors"
-                      title="Anular venta"
-                    >
-                      <Ban size={15} />
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
+            {ventas.map(function (v) {
+              return (
+                <tr key={v._id} className={'border-b border-slate-50 hover:bg-slate-50 ' + (v.estado === 'anulada' ? 'opacity-50' : '')}>
+                  <td className="px-4 py-3 text-slate-500 font-medium">#{v.numero}</td>
+                  <td className="px-4 py-3 text-slate-700">{v.cliente}</td>
+                  <td className="px-4 py-3 text-slate-400 text-xs">
+                    {formatFechaHora(v.createdAt)}
+                  </td>
+                  <td className="px-4 py-3">
+                    <span className={'text-xs px-2 py-0.5 rounded-full font-medium ' + formaPagoBadge(v.formaPago)}>
+                      {v.formaPago}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 text-right font-medium text-slate-800">
+                    {formatPeso(v.total)}
+                  </td>
+                  <td className="px-4 py-3 text-right text-green-600 font-medium">
+                    {formatPeso(v.ganancia)}
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    <span className={'text-xs px-2 py-0.5 rounded-full font-medium ' + (v.estado === 'completada' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700')}>
+                      {v.estado}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 text-center text-slate-500">
+                    {v.items.length}
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    <div className="flex items-center justify-center gap-2">
+                      <button
+                        onClick={function () { setVentaDetalle(v) }}
+                        className="text-slate-400 hover:text-blue-500 cursor-pointer transition-colors"
+                        title="Ver detalle"
+                      >
+                        <Eye size={15} />
+                      </button>
+                      {v.estado === 'completada' && (
+                        <button
+                          onClick={function () { anularVenta(v._id) }}
+                          className="text-slate-300 hover:text-red-500 cursor-pointer transition-colors"
+                          title="Anular venta"
+                        >
+                          <Ban size={15} />
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
+      )}
+
+      {ventaDetalle && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between p-5 border-b">
+              <h2 className="font-semibold text-slate-800">Venta #{ventaDetalle.numero}</h2>
+              <button onClick={function () { setVentaDetalle(null) }} className="text-slate-400 hover:text-slate-600 cursor-pointer">
+                <X size={20} />
+              </button>
+            </div>
+
+            <div className="p-5 space-y-4">
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <p className="text-xs text-slate-400">Cliente</p>
+                  <p className="font-medium text-slate-700">{ventaDetalle.cliente}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-slate-400">Forma de pago</p>
+                  <p className="font-medium text-slate-700 capitalize">{ventaDetalle.formaPago}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-slate-400">Fecha</p>
+                  <p className="font-medium text-slate-700">{formatFechaHora(ventaDetalle.createdAt)}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-slate-400">Estado</p>
+                  <p className="font-medium text-slate-700 capitalize">{ventaDetalle.estado}</p>
+                </div>
+              </div>
+
+              <div>
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Productos</p>
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="text-left text-slate-500 border-b border-slate-100">
+                      <th className="py-2 font-medium">Producto</th>
+                      <th className="py-2 font-medium text-center">Cant.</th>
+                      <th className="py-2 font-medium text-right">P. Unit.</th>
+                      <th className="py-2 font-medium text-right">Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {ventaDetalle.items.map(function (item, i) {
+                      return (
+                        <tr key={i} className="border-b border-slate-50">
+                          <td className="py-2 text-slate-700">{item.nombre}</td>
+                          <td className="py-2 text-center text-slate-500">{item.cantidad}</td>
+                          <td className="py-2 text-right text-slate-500">{formatPeso(item.precioVenta)}</td>
+                          <td className="py-2 text-right font-medium text-slate-800">{formatPeso(item.subtotal)}</td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+
+              {ventaDetalle.nota && (
+                <div>
+                  <p className="text-xs text-slate-400">Nota</p>
+                  <p className="text-sm text-slate-700">{ventaDetalle.nota}</p>
+                </div>
+              )}
+
+              <div className="border-t pt-3 space-y-1">
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-500">Costo total</span>
+                  <span className="text-slate-500">{formatPeso(ventaDetalle.costoTotal)}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-500">Ganancia</span>
+                  <span className="text-green-600 font-medium">{formatPeso(ventaDetalle.ganancia)}</span>
+                </div>
+                <div className="flex justify-between text-base font-bold">
+                  <span>Total</span>
+                  <span className="text-orange-500">{formatPeso(ventaDetalle.total)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )
