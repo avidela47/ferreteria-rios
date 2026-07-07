@@ -27,16 +27,17 @@ const CATEGORIAS = [
 export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
   const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
-    nombre: ficha?.nombre ?? '',
-    categoria: ficha?.categoria ?? 'Electricidad',
-    descripcion: ficha?.descripcion ?? '',
-    paraQueSirve: ficha?.paraQueSirve ?? '',
-    quienLoPide: ficha?.quienLoPide ?? '',
-    comoSeUsa: ficha?.comoSeUsa ?? '',
-    datosClave: ficha?.datosClave ?? '',
-    formaApariencia: ficha?.formaApariencia ?? '',
-    ventaCruzada: ficha?.ventaCruzada ?? [],
-  })
+  nombre: ficha?.nombre ?? '',
+  codigo: ficha?.codigo ?? '',
+  categoria: ficha?.categoria ?? 'Electricidad',
+  descripcion: ficha?.descripcion ?? '',
+  paraQueSirve: ficha?.paraQueSirve ?? '',
+  quienLoPide: ficha?.quienLoPide ?? '',
+  comoSeUsa: ficha?.comoSeUsa ?? '',
+  datosClave: ficha?.datosClave ?? '',
+  formaApariencia: ficha?.formaApariencia ?? '',
+  ventaCruzada: ficha?.ventaCruzada ?? [],
+})
   const [nuevaVenta, setNuevaVenta] = useState('')
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
@@ -92,16 +93,27 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
         </div>
 
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Nombre del producto *</label>
-            <input
-              name="nombre"
-              value={form.nombre}
-              onChange={handleChange}
-              required
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-            />
-          </div>
+          <div className="grid grid-cols-3 gap-3">
+  <div>
+    <label className="block text-sm font-medium text-slate-700 mb-1">Código</label>
+    <input
+      name="codigo"
+      value={form.codigo}
+      onChange={handleChange}
+      className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+    />
+  </div>
+  <div className="col-span-2">
+    <label className="block text-sm font-medium text-slate-700 mb-1">Nombre del producto *</label>
+    <input
+      name="nombre"
+      value={form.nombre}
+      onChange={handleChange}
+      required
+      className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+    />
+  </div>
+</div>
 
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">Categoría *</label>
