@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { IFicha } from '@/types/catalogo'
-import { X, Plus, Trash2 } from 'lucide-react'
+import { X, Plus, Trash2, Upload } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface Props {
@@ -26,23 +26,54 @@ const CATEGORIAS = [
 
 export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
   const [loading, setLoading] = useState(false)
+  const [subiendoImagen, setSubiendoImagen] = useState(false)
   const [form, setForm] = useState({
-  nombre: ficha?.nombre ?? '',
-  codigo: ficha?.codigo ?? '',
-  categoria: ficha?.categoria ?? 'Electricidad',
-  descripcion: ficha?.descripcion ?? '',
-  paraQueSirve: ficha?.paraQueSirve ?? '',
-  quienLoPide: ficha?.quienLoPide ?? '',
-  comoSeUsa: ficha?.comoSeUsa ?? '',
-  datosClave: ficha?.datosClave ?? '',
-  formaApariencia: ficha?.formaApariencia ?? '',
-  ventaCruzada: ficha?.ventaCruzada ?? [],
-})
+    nombre: ficha?.nombre ?? '',
+    codigo: ficha?.codigo ?? '',
+    imagen: ficha?.imagen ?? '',
+    categoria: ficha?.categoria ?? 'Electricidad',
+    descripcion: ficha?.descripcion ?? '',
+    paraQueSirve: ficha?.paraQueSirve ?? '',
+    quienLoPide: ficha?.quienLoPide ?? '',
+    comoSeUsa: ficha?.comoSeUsa ?? '',
+    datosClave: ficha?.datosClave ?? '',
+    formaApariencia: ficha?.formaApariencia ?? '',
+    ventaCruzada: ficha?.ventaCruzada ?? [],
+  })
   const [nuevaVenta, setNuevaVenta] = useState('')
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
     const { name, value } = e.target
     setForm((prev) => ({ ...prev, [name]: value }))
+  }
+
+  async function handleImagen(e: React.ChangeEvent<HTMLInputElement>) {
+    const archivo = e.target.files ? e.target.files[0] : null
+    if (!archivo) return
+
+    setSubiendoImagen(true)
+
+    const nombreArchivo = (form.codigo || form.nombre || Date.now().toString()).replace(/[^a-zA-Z0-9]/g, '_')
+
+    const formData = new FormData()
+    formData.append('imagen', archivo)
+    formData.append('nombre', nombreArchivo)
+
+    const res = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData,
+    })
+
+    const json = await res.json()
+
+    if (json.ok) {
+      setForm(function (prev) { return Object.assign({}, prev, { imagen: json.url }) })
+      toast.success('Imagen subida correctamente')
+    } else {
+      toast.error(json.error || 'Error al subir la imagen')
+    }
+
+    setSubiendoImagen(false)
   }
 
   function agregarVenta() {
@@ -93,27 +124,49 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
         </div>
 
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Foto del producto</label>
+            <div className="flex items-center gap-3">
+              {form.imagen ? (
+                <img src={form.imagen} alt="foto producto" className="w-20 h-20 object-cover rounded-lg border border-slate-200" />
+              ) : (
+                <div className="w-20 h-20 rounded-lg border border-dashed border-slate-300 flex items-center justify-center text-slate-300">
+                  <Upload size={20} />
+                </div>
+              )}
+              <div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImagen}
+                  className="text-xs text-slate-500"
+                />
+                {subiendoImagen && <p className="text-xs text-orange-500 mt-1">Subiendo imagen...</p>}
+              </div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-3 gap-3">
-  <div>
-    <label className="block text-sm font-medium text-slate-700 mb-1">Código</label>
-    <input
-      name="codigo"
-      value={form.codigo}
-      onChange={handleChange}
-      className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-    />
-  </div>
-  <div className="col-span-2">
-    <label className="block text-sm font-medium text-slate-700 mb-1">Nombre del producto *</label>
-    <input
-      name="nombre"
-      value={form.nombre}
-      onChange={handleChange}
-      required
-      className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-    />
-  </div>
-</div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Código</label>
+              <input
+                name="codigo"
+                value={form.codigo}
+                onChange={handleChange}
+                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              />
+            </div>
+            <div className="col-span-2">
+              <label className="block text-sm font-medium text-slate-700 mb-1">Nombre del producto *</label>
+              <input
+                name="nombre"
+                value={form.nombre}
+                onChange={handleChange}
+                required
+                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              />
+            </div>
+          </div>
 
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">Categoría *</label>

@@ -4,6 +4,7 @@ export interface IFichaDocument extends Document {
   id_ficha: string
   nombre: string
   codigo: string
+  imagen: string
   categoria: string
   descripcion: string
   paraQueSirve: string
@@ -20,6 +21,7 @@ const FichaSchema = new Schema<IFichaDocument>(
     id_ficha: { type: String },
     nombre: { type: String, required: true },
     codigo: { type: String, default: '' },
+    imagen: { type: String, default: '' },
     categoria: { type: String, default: '' },
     descripcion: { type: String, default: '' },
     paraQueSirve: { type: String, default: '' },
