@@ -10,9 +10,10 @@ interface Props {
   onNuevo: () => void
   onEditar: (producto: IProduct) => void
   refresh: number
+  esAdmin: boolean
 }
 
-export default function ProductosList({ onNuevo, onEditar, refresh }: Props) {
+export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: Props) {
   const [productos, setProductos] = useState<IProduct[]>([])
   const [loading, setLoading] = useState(true)
   const [buscar, setBuscar] = useState('')
@@ -137,12 +138,14 @@ export default function ProductosList({ onNuevo, onEditar, refresh }: Props) {
             Borrar
           </button>
           <a href={'/imprimir-stock?ordenarPor=' + ordenarPor + '&direccion=' + direccion} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors"><Printer size={16} /><span>Imprimir PDF</span></a>
-          <button
-            onClick={onNuevo}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-          >
-            + Nuevo
-          </button>
+          {esAdmin && (
+            <button
+              onClick={onNuevo}
+              className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+            >
+              + Nuevo
+            </button>
+          )}
         </div>
 
         {loading ? (
@@ -171,7 +174,9 @@ export default function ProductosList({ onNuevo, onEditar, refresh }: Props) {
                   <th className="px-4 py-3 font-medium text-right">Costo</th>
                   <th className="px-4 py-3 font-medium text-right">Venta</th>
                   <th className="px-4 py-3 font-medium text-right">Margen</th>
-                  <th className="px-4 py-3 font-medium text-center">Acciones</th>
+                  {esAdmin && (
+                    <th className="px-4 py-3 font-medium text-center">Acciones</th>
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -205,16 +210,18 @@ export default function ProductosList({ onNuevo, onEditar, refresh }: Props) {
                           {Math.round(p.margen)}%
                         </span>
                       </td>
-                      <td className="px-4 py-3">
-                        <div className="flex items-center justify-center gap-2">
-                          <button onClick={function () { onEditar(p) }} className="text-slate-400 hover:text-blue-500 transition-colors">
-                            <Pencil size={15} />
-                          </button>
-                          <button onClick={function () { eliminar(p._id) }} className="text-slate-400 hover:text-red-500 transition-colors">
-                            <Trash2 size={15} />
-                          </button>
-                        </div>
-                      </td>
+                      {esAdmin && (
+                        <td className="px-4 py-3">
+                          <div className="flex items-center justify-center gap-2">
+                            <button onClick={function () { onEditar(p) }} className="text-slate-400 hover:text-blue-500 transition-colors">
+                              <Pencil size={15} />
+                            </button>
+                            <button onClick={function () { eliminar(p._id) }} className="text-slate-400 hover:text-red-500 transition-colors">
+                              <Trash2 size={15} />
+                            </button>
+                          </div>
+                        </td>
+                      )}
                     </tr>
                   )
                 })}

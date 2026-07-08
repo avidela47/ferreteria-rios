@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import connectDB from '@/lib/db/mongoose'
 import Purchase from '@/models/Purchase'
-
+import { esAdmin } from '@/lib/permisos'
 
 export async function GET(req: NextRequest) {
   try {
-    
+    if (!(await esAdmin())) {
+      return NextResponse.json({ ok: false, error: 'No tenés permiso para esta acción' }, { status: 403 })
+    }
 
     await connectDB()
 
@@ -41,7 +43,9 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    
+    if (!(await esAdmin())) {
+      return NextResponse.json({ ok: false, error: 'No tenés permiso para esta acción' }, { status: 403 })
+    }
 
     await connectDB()
 
@@ -62,14 +66,12 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Calcular total
     let total = 0
     for (const item of items) {
       item.subtotal = item.precioCosto * item.cantidad
       total += item.subtotal
     }
 
-    // Número autoincremental
     const ultima = await Purchase.findOne().sort({ numero: -1 })
     const numero = ultima ? ultima.numero + 1 : 1
 

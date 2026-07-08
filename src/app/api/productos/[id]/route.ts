@@ -2,15 +2,13 @@ import { NextRequest, NextResponse } from 'next/server'
 import connectDB from '@/lib/db/mongoose'
 import Product from '@/models/Product'
 import { calcularMargen } from '@/lib/utils'
-
+import { esAdmin } from '@/lib/permisos'
 
 export async function GET(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    
-
     await connectDB()
     const { id } = await params
     const producto = await Product.findById(id)
@@ -33,7 +31,9 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    
+    if (!(await esAdmin())) {
+      return NextResponse.json({ ok: false, error: 'No tenés permiso para esta acción' }, { status: 403 })
+    }
 
     await connectDB()
     const { id } = await params
@@ -72,9 +72,9 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    
-
-    
+    if (!(await esAdmin())) {
+      return NextResponse.json({ ok: false, error: 'No tenés permiso para esta acción' }, { status: 403 })
+    }
 
     await connectDB()
     const { id } = await params

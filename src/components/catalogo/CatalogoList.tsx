@@ -9,6 +9,7 @@ import Image from 'next/image'
 
 interface Props {
   onEditar: (ficha: IFicha) => void
+  esAdmin: boolean
 }
 
 const COLORES_CATEGORIA: Record<string, string> = {
@@ -35,7 +36,7 @@ interface ProductoStock {
   unidad: string
 }
 
-export default function CatalogoList({ onEditar }: Props) {
+export default function CatalogoList({ onEditar, esAdmin }: Props) {
   const [fichas, setFichas] = useState<IFicha[]>([])
   const [productosMap, setProductosMap] = useState<Record<string, ProductoStock>>({})
   const [buscar, setBuscar] = useState('')
@@ -185,18 +186,22 @@ export default function CatalogoList({ onEditar }: Props) {
                       )}
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
-                      <button
-                        onClick={(e) => { e.stopPropagation(); onEditar(ficha) }}
-                        className="text-slate-400 hover:text-blue-500 transition-colors"
-                      >
-                        <Pencil size={15} />
-                      </button>
-                      <button
-                        onClick={(e) => { e.stopPropagation(); eliminar(ficha._id ?? '') }}
-                        className="text-slate-400 hover:text-red-500 transition-colors"
-                      >
-                        <Trash2 size={15} />
-                      </button>
+                      {esAdmin && (
+                        <>
+                          <button
+                            onClick={(e) => { e.stopPropagation(); onEditar(ficha) }}
+                            className="text-slate-400 hover:text-blue-500 transition-colors"
+                          >
+                            <Pencil size={15} />
+                          </button>
+                          <button
+                            onClick={(e) => { e.stopPropagation(); eliminar(ficha._id ?? '') }}
+                            className="text-slate-400 hover:text-red-500 transition-colors"
+                          >
+                            <Trash2 size={15} />
+                          </button>
+                        </>
+                      )}
                       {expandida === ficha._id
                         ? <ChevronUp size={16} className="text-slate-400" />
                         : <ChevronDown size={16} className="text-slate-400" />
@@ -208,7 +213,7 @@ export default function CatalogoList({ onEditar }: Props) {
                     <div className="border-t border-slate-100 p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-3">
                         {ficha.imagen && (
-                       <Image src={ficha.imagen} alt={ficha.nombre} width={150} height={150} className="w-[150px] h-[150px] rounded-lg border border-slate-200 object-contain bg-white" unoptimized />
+                         <Image src={ficha.imagen} alt={ficha.nombre} width={150} height={150} className="w-37.5 h-37.5 rounded-lg border border-slate-200 object-contain bg-white" unoptimized />
                         )}
                         <div>
                           <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Código</p>

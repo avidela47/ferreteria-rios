@@ -1,12 +1,16 @@
 'use client'
 
 import { useState } from 'react'
+import { useSession } from 'next-auth/react'
 import { Toaster } from 'sonner'
 import CatalogoList from '@/components/catalogo/CatalogoList'
 import CatalogoForm from '@/components/catalogo/CatalogoForm'
 import { IFicha } from '@/types/catalogo'
 
 export default function CatalogoPage() {
+  const { data: session } = useSession()
+  const esAdmin = session?.user?.rol === 'admin'
+
   const [mostrarForm, setMostrarForm] = useState(false)
   const [fichaEditar, setFichaEditar] = useState<IFicha | null>(null)
   const [refresh, setRefresh] = useState(0)
@@ -35,20 +39,23 @@ export default function CatalogoPage() {
           <h1 className="text-2xl font-bold text-slate-800">Catálogo de Productos</h1>
           <p className="text-slate-500 text-sm mt-1">Fichas técnicas y guía de venta</p>
         </div>
-        <button
-          onClick={handleNuevo}
-          className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-        >
-          + Nueva ficha
-        </button>
+        {esAdmin && (
+          <button
+            onClick={handleNuevo}
+            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          >
+            + Nueva ficha
+          </button>
+        )}
       </div>
 
       <CatalogoList
         key={refresh}
         onEditar={handleEditar}
+        esAdmin={esAdmin}
       />
 
-      {mostrarForm && (
+      {mostrarForm && esAdmin && (
         <CatalogoForm
           ficha={fichaEditar}
           onGuardado={handleGuardado}

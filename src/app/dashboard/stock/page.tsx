@@ -1,12 +1,16 @@
 'use client'
 
 import { useState } from 'react'
+import { useSession } from 'next-auth/react'
 import { IProduct } from '@/types'
 import ProductosList from '@/components/stock/ProductosList'
 import ProductoForm from '@/components/stock/ProductoForm'
 import { Toaster } from 'sonner'
 
 export default function StockPage() {
+  const { data: session } = useSession()
+  const esAdmin = session?.user?.rol === 'admin'
+
   const [mostrarForm, setMostrarForm] = useState(false)
   const [productoEditar, setProductoEditar] = useState<IProduct | null>(null)
   const [refresh, setRefresh] = useState(0)
@@ -44,9 +48,10 @@ export default function StockPage() {
         onNuevo={handleNuevo}
         onEditar={handleEditar}
         refresh={refresh}
+        esAdmin={esAdmin}
       />
 
-      {mostrarForm && (
+      {mostrarForm && esAdmin && (
         <ProductoForm
           producto={productoEditar}
           onGuardado={handleGuardado}

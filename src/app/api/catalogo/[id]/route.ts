@@ -1,9 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import connectDB from '@/lib/db/mongoose'
 import Ficha from '@/models/Ficha'
+import { esAdmin } from '@/lib/permisos'
 
 export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    if (!(await esAdmin())) {
+      return NextResponse.json({ ok: false, error: 'No tenés permiso para esta acción' }, { status: 403 })
+    }
+
     await connectDB()
     const { id } = await params
     const body = await req.json()
@@ -17,6 +22,10 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
 
 export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    if (!(await esAdmin())) {
+      return NextResponse.json({ ok: false, error: 'No tenés permiso para esta acción' }, { status: 403 })
+    }
+
     await connectDB()
     const { id } = await params
     await Ficha.findByIdAndDelete(id)

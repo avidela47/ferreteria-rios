@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import connectDB from '@/lib/db/mongoose'
 import Sale from '@/models/Sale'
 import Product from '@/models/Product'
+import { esAdmin } from '@/lib/permisos'
 
 
 export async function GET(
@@ -9,7 +10,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    
+
 
     await connectDB()
     const { id } = await params
@@ -32,9 +33,9 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    
-
-    
+    if (!(await esAdmin())) {
+      return NextResponse.json({ ok: false, error: 'Solo el administrador puede anular ventas' }, { status: 403 })
+    }
 
     await connectDB()
     const { id } = await params

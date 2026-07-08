@@ -16,16 +16,16 @@ import {
   BookOpen,
 } from 'lucide-react'
 
-const menu = [
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/dashboard/catalogo', label: 'Catalogo', icon: BookOpen },
-  { href: '/dashboard/stock', label: 'Stock', icon: Package },
-  { href: '/dashboard/ventas', label: 'Ventas', icon: ShoppingCart },
-  { href: '/dashboard/compras', label: 'Compras', icon: TrendingUp },
-  { href: '/dashboard/proveedores', label: 'Proveedores', icon: Truck },
-  { href: '/dashboard/gastos', label: 'Gastos', icon: Receipt },
-  { href: '/dashboard/impuestos', label: 'Impuestos', icon: FileText },
-  { href: '/dashboard/reportes', label: 'Reportes', icon: FileText },
+const menuCompleto = [
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, soloAdmin: false },
+  { href: '/dashboard/catalogo', label: 'Catalogo', icon: BookOpen, soloAdmin: false },
+  { href: '/dashboard/stock', label: 'Stock', icon: Package, soloAdmin: false },
+  { href: '/dashboard/ventas', label: 'Ventas', icon: ShoppingCart, soloAdmin: false },
+  { href: '/dashboard/compras', label: 'Compras', icon: TrendingUp, soloAdmin: true },
+  { href: '/dashboard/proveedores', label: 'Proveedores', icon: Truck, soloAdmin: true },
+  { href: '/dashboard/gastos', label: 'Gastos', icon: Receipt, soloAdmin: true },
+  { href: '/dashboard/impuestos', label: 'Impuestos', icon: FileText, soloAdmin: true },
+  { href: '/dashboard/reportes', label: 'Reportes', icon: FileText, soloAdmin: true },
 ]
 
 interface SidebarProps {
@@ -35,6 +35,10 @@ interface SidebarProps {
 
 export default function Sidebar({ nombreUsuario, rol }: SidebarProps) {
   const pathname = usePathname()
+  const esAdmin = rol === 'admin'
+  const menu = menuCompleto.filter(function (item) {
+    return !item.soloAdmin || esAdmin
+  })
 
   return (
     <aside className="w-64 bg-slate-900 h-screen flex flex-col overflow-hidden">
