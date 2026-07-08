@@ -1,12 +1,16 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useSession } from 'next-auth/react'
 import { ISale } from '@/types'
 import { formatPeso, formatFechaHora } from '@/lib/utils'
 import { Ban, Eye, X } from 'lucide-react'
 import { toast } from 'sonner'
 
 export default function VentasList() {
+  const { data: session } = useSession()
+  const esAdmin = session?.user?.rol === 'admin'
+
   const [ventas, setVentas] = useState<ISale[]>([])
   const [loading, setLoading] = useState(true)
   const [ventaDetalle, setVentaDetalle] = useState<ISale | null>(null)
@@ -115,7 +119,7 @@ export default function VentasList() {
                       >
                         <Eye size={15} />
                       </button>
-                      {v.estado === 'completada' && (
+                      {esAdmin && v.estado === 'completada' && (
                         <button
                           onClick={function () { anularVenta(v._id) }}
                           className="text-slate-300 hover:text-red-500 cursor-pointer transition-colors"
