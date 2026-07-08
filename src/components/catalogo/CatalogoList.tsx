@@ -102,15 +102,24 @@ export default function CatalogoList({ onEditar, esAdmin }: Props) {
 
   const categorias = [...new Set(fichas.map((f) => f.categoria))].sort()
 
-  const fichasFiltradas = fichas.filter((f) => {
-    const matchBuscar = buscar === '' ||
-      (f.nombre ?? '').toLowerCase().includes(buscar.toLowerCase()) ||
-      (f.codigo ?? '').toLowerCase().includes(buscar.toLowerCase()) ||
-      (f.descripcion ?? '').toLowerCase().includes(buscar.toLowerCase()) ||
-      (f.paraQueSirve ?? '').toLowerCase().includes(buscar.toLowerCase())
-    const matchCategoria = categoriaFiltro === '' || f.categoria === categoriaFiltro
-    return matchBuscar && matchCategoria
-  })
+  function normalizar(texto: string) {
+  return texto
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+}
+
+const buscarNormalizado = normalizar(buscar)
+
+const fichasFiltradas = fichas.filter((f) => {
+  const matchBuscar = buscar === '' ||
+    normalizar(f.nombre ?? '').includes(buscarNormalizado) ||
+    normalizar(f.codigo ?? '').includes(buscarNormalizado) ||
+    normalizar(f.descripcion ?? '').includes(buscarNormalizado) ||
+    normalizar(f.paraQueSirve ?? '').includes(buscarNormalizado)
+  const matchCategoria = categoriaFiltro === '' || f.categoria === categoriaFiltro
+  return matchBuscar && matchCategoria
+})
 
   const totalPaginas = Math.ceil(fichasFiltradas.length / POR_PAGINA)
   const fichasPagina = fichasFiltradas.slice((pagina - 1) * POR_PAGINA, pagina * POR_PAGINA)
