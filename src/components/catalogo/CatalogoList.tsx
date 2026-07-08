@@ -207,7 +207,7 @@ export default function CatalogoList({ onEditar }: Props) {
   <div className="border-t border-slate-100 p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
     <div className="space-y-3">
       {ficha.imagen && (
-        <img src={ficha.imagen} alt={ficha.nombre} className="w-full max-w-xs rounded-lg border border-slate-200 object-cover" />
+       <img src={ficha.imagen} alt={ficha.nombre} className="w-[150px] h-[150px] rounded-lg border border-slate-200 object-cover" />
       )}
       <div>
         <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Código</p>
