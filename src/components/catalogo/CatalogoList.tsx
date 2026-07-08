@@ -5,6 +5,7 @@ import { IFicha } from '@/types/catalogo'
 import { Pencil, Trash2, ChevronDown, ChevronUp, Search, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react'
 import { toast } from 'sonner'
 import { formatPeso } from '@/lib/utils'
+import Image from 'next/image'
 
 interface Props {
   onEditar: (ficha: IFicha) => void
@@ -203,69 +204,69 @@ export default function CatalogoList({ onEditar }: Props) {
                     </div>
                   </div>
 
-                 {expandida === ficha._id && (
-  <div className="border-t border-slate-100 p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div className="space-y-3">
-      {ficha.imagen && (
-       <img src={ficha.imagen} alt={ficha.nombre} className="w-[150px] h-[150px] rounded-lg border border-slate-200 object-cover" />
-      )}
-      <div>
-        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Código</p>
-        <p className="text-sm text-slate-700">{ficha.codigo || 'Sin código'}</p>
-      </div>
-      <div>
-        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Descripción</p>
-        <p className="text-sm text-slate-700">{ficha.descripcion}</p>
-      </div>
-      <div>
-        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Para qué sirve</p>
-        <p className="text-sm text-slate-700">{ficha.paraQueSirve}</p>
-      </div>
-      <div>
-        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Quién lo pide</p>
-        <p className="text-sm text-slate-700">{ficha.quienLoPide}</p>
-      </div>
-      <div>
-        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Cómo se usa</p>
-        <p className="text-sm text-slate-700">{ficha.comoSeUsa}</p>
-      </div>
-    </div>
-    <div className="space-y-3">
-      <div>
-        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Forma / Apariencia</p>
-        <p className="text-sm text-slate-700">{ficha.formaApariencia}</p>
-      </div>
-      <div>
-        <p className="text-xs font-semibold text-orange-500 uppercase tracking-wide mb-1">⚡ Datos clave</p>
-        <p className="text-sm text-slate-700 bg-orange-50 rounded-lg p-2">{ficha.datosClave}</p>
-      </div>
-      <div>
-        <p className="text-xs font-semibold text-green-600 uppercase tracking-wide mb-1">🔗 Venta cruzada</p>
-        <div className="flex flex-wrap gap-1">
-          {ficha.ventaCruzada.map((v, i) => (
-            <span key={i} className="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded-full border border-green-200">
-              {v}
-            </span>
-          ))}
-        </div>
-      </div>
-      <div className="flex gap-4 pt-2 border-t border-slate-100">
-        <div>
-          <p className="text-xs font-semibold text-orange-600 uppercase tracking-wide mb-1">Precio de venta</p>
-          <p className="text-sm font-medium text-slate-700">
-            {info ? formatPeso(info.precioVenta) : 'Sin stock cargado'}
-          </p>
-        </div>
-        <div>
-          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Stock</p>
-          <p className="text-sm font-medium text-slate-700">
-            {info ? info.cantidad + ' ' + info.unidad : '-'}
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
+                  {expandida === ficha._id && (
+                    <div className="border-t border-slate-100 p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-3">
+                        {ficha.imagen && (
+                       <Image src={ficha.imagen} alt={ficha.nombre} width={150} height={150} className="w-[150px] h-[150px] rounded-lg border border-slate-200 object-contain bg-white" unoptimized />
+                        )}
+                        <div>
+                          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Código</p>
+                          <p className="text-sm text-slate-700">{ficha.codigo || 'Sin código'}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Descripción</p>
+                          <p className="text-sm text-slate-700">{ficha.descripcion}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Para qué sirve</p>
+                          <p className="text-sm text-slate-700">{ficha.paraQueSirve}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Quién lo pide</p>
+                          <p className="text-sm text-slate-700">{ficha.quienLoPide}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Cómo se usa</p>
+                          <p className="text-sm text-slate-700">{ficha.comoSeUsa}</p>
+                        </div>
+                      </div>
+                      <div className="space-y-3">
+                        <div>
+                          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Forma / Apariencia</p>
+                          <p className="text-sm text-slate-700">{ficha.formaApariencia}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-orange-500 uppercase tracking-wide mb-1">⚡ Datos clave</p>
+                          <p className="text-sm text-slate-700 bg-orange-50 rounded-lg p-2">{ficha.datosClave}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-green-600 uppercase tracking-wide mb-1">🔗 Venta cruzada</p>
+                          <div className="flex flex-wrap gap-1">
+                            {ficha.ventaCruzada.map((v, i) => (
+                              <span key={i} className="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded-full border border-green-200">
+                                {v}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="flex gap-4 pt-2 border-t border-slate-100">
+                          <div>
+                            <p className="text-xs font-semibold text-orange-600 uppercase tracking-wide mb-1">Precio de venta</p>
+                            <p className="text-sm font-medium text-slate-700">
+                              {info ? formatPeso(info.precioVenta) : 'Sin stock cargado'}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Stock</p>
+                            <p className="text-sm font-medium text-slate-700">
+                              {info ? info.cantidad + ' ' + info.unidad : '-'}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )
             })}

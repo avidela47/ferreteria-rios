@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { IFicha } from '@/types/catalogo'
 import { X, Plus, Trash2, Upload } from 'lucide-react'
 import { toast } from 'sonner'
+import Image from 'next/image'
 
 interface Props {
   ficha?: IFicha | null
@@ -128,7 +129,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
             <label className="block text-sm font-medium text-slate-700 mb-1">Foto del producto</label>
             <div className="flex items-center gap-3">
               {form.imagen ? (
-                <img src={form.imagen} alt="foto producto" className="w-20 h-20 object-cover rounded-lg border border-slate-200" />
+                <Image src={form.imagen} alt="foto producto" width={80} height={80} className="w-20 h-20 object-cover rounded-lg border border-slate-200" unoptimized />
               ) : (
                 <div className="w-20 h-20 rounded-lg border border-dashed border-slate-300 flex items-center justify-center text-slate-300">
                   <Upload size={20} />
