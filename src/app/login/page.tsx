@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 export default function LoginPage() {
   const router = useRouter()
-  const [email, setEmail] = useState('')
+  const [usuario, setUsuario] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -17,6 +17,11 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
 
+    const usuarioLimpio = usuario.trim().toLowerCase()
+    const email = usuarioLimpio.includes('@')
+      ? usuarioLimpio
+      : usuarioLimpio + '@ferreteriarios.com'
+
     const res = await signIn('credentials', {
       email,
       password,
@@ -24,7 +29,7 @@ export default function LoginPage() {
     })
 
     if (res?.error) {
-      setError('Email o contrasena incorrectos')
+      setError('Usuario o contrasena incorrectos')
       setLoading(false)
       return
     }
@@ -58,14 +63,14 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-sm font-medium text-slate-700 mb-1">
-              Email
+              Usuario
             </label>
             <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-             className="w-full border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="admin@ferreteriarios.com"
+              type="text"
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
+              className="w-full border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="ariel"
               required
             />
           </div>
