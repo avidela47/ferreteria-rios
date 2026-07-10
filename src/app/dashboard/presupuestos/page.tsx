@@ -55,6 +55,10 @@ export default function PresupuestosPage() {
   const [nuevaCantidad, setNuevaCantidad] = useState(1)
 
   const [pedidoEditar, setPedidoEditar] = useState<PedidoGuardado | null>(null)
+  const [buscarProductoEdit, setBuscarProductoEdit] = useState('')
+  const [nuevoCodigoEdit, setNuevoCodigoEdit] = useState('')
+  const [nuevaDescripcionEdit, setNuevaDescripcionEdit] = useState('')
+  const [nuevaCantidadEdit, setNuevaCantidadEdit] = useState(1)
 
   useEffect(() => {
     if (!esAdmin) return
@@ -85,6 +89,13 @@ export default function PresupuestosPage() {
     ? productos.filter(function (p) {
         const texto = (p.nombre + ' ' + (p.codigo || '')).toLowerCase()
         return texto.includes(buscarProducto.toLowerCase())
+      }).slice(0, 8)
+    : []
+
+  const productosFiltradosEdit = buscarProductoEdit.length >= 2
+    ? productos.filter(function (p) {
+        const texto = (p.nombre + ' ' + (p.codigo || '')).toLowerCase()
+        return texto.includes(buscarProductoEdit.toLowerCase())
       }).slice(0, 8)
     : []
 
@@ -192,6 +203,10 @@ export default function PresupuestosPage() {
 
   function abrirEdicion(p: PedidoGuardado) {
     setPedidoEditar(p)
+    setBuscarProductoEdit('')
+    setNuevoCodigoEdit('')
+    setNuevaDescripcionEdit('')
+    setNuevaCantidadEdit(1)
   }
 
   function cerrarEdicion() {
@@ -209,6 +224,38 @@ export default function PresupuestosPage() {
     if (!pedidoEditar) return
     const copia = pedidoEditar.items.filter(function (_, i) { return i !== index })
     setPedidoEditar(Object.assign({}, pedidoEditar, { items: copia }))
+  }
+
+  function agregarDesdeStockEdicion(p: Producto) {
+    if (!pedidoEditar) return
+    const nuevoItem = {
+      codigo: p.codigo || '',
+      descripcion: p.nombre,
+      cantidad: 1,
+      nuevo: false,
+    }
+    const copia = pedidoEditar.items.concat([nuevoItem])
+    setPedidoEditar(Object.assign({}, pedidoEditar, { items: copia }))
+    setBuscarProductoEdit('')
+  }
+
+  function agregarNuevoEdicion() {
+    if (!pedidoEditar) return
+    if (!nuevaDescripcionEdit.trim()) {
+      toast.error('Escribí una descripción para el producto nuevo')
+      return
+    }
+    const nuevoItem = {
+      codigo: nuevoCodigoEdit.trim(),
+      descripcion: nuevaDescripcionEdit.trim(),
+      cantidad: nuevaCantidadEdit,
+      nuevo: true,
+    }
+    const copia = pedidoEditar.items.concat([nuevoItem])
+    setPedidoEditar(Object.assign({}, pedidoEditar, { items: copia }))
+    setNuevoCodigoEdit('')
+    setNuevaDescripcionEdit('')
+    setNuevaCantidadEdit(1)
   }
 
   async function guardarEdicion() {
@@ -480,6 +527,72 @@ export default function PresupuestosPage() {
             </div>
 
             <div className="p-5 space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Agregar producto desde stock
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={buscarProductoEdit}
+                    onChange={function (e) { setBuscarProductoEdit(e.target.value) }}
+                    placeholder="Buscar por nombre o código..."
+                    className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  />
+                  {productosFiltradosEdit.length > 0 && (
+                    <div className="absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg z-20 mt-1">
+                      {productosFiltradosEdit.map(function (p) {
+                        return (
+                          <button
+                            key={p._id}
+                            onClick={function () { agregarDesdeStockEdicion(p) }}
+                            className="w-full text-left px-4 py-2.5 hover:bg-slate-50 cursor-pointer text-sm border-b last:border-0"
+                          >
+                            <span className="font-medium text-slate-700">{p.nombre}</span>
+                            {p.codigo && <span className="text-slate-400 text-xs ml-2">#{p.codigo}</span>}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Agregar producto nuevo
+                </label>
+                <div className="grid grid-cols-6 gap-2">
+                  <input
+                    type="text"
+                    value={nuevoCodigoEdit}
+                    onChange={function (e) { setNuevoCodigoEdit(e.target.value) }}
+                    placeholder="Código"
+                    className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  />
+                  <input
+                    type="text"
+                    value={nuevaDescripcionEdit}
+                    onChange={function (e) { setNuevaDescripcionEdit(e.target.value) }}
+                    placeholder="Descripción"
+                    className="col-span-3 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  />
+                  <input
+                    type="number"
+                    value={nuevaCantidadEdit}
+                    onChange={function (e) { setNuevaCantidadEdit(Number(e.target.value)) }}
+                    min={1}
+                    className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  />
+                  <button
+                    onClick={agregarNuevoEdicion}
+                    className="col-span-1 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-sm font-medium transition-colors flex items-center justify-center"
+                  >
+                    <Plus size={16} />
+                  </button>
+                </div>
+              </div>
+
               <table className="w-full text-sm">
                 <thead>
                   <tr className="text-left text-slate-500 border-b border-slate-100">
@@ -494,7 +607,14 @@ export default function PresupuestosPage() {
                     return (
                       <tr key={i} className="border-b border-slate-50">
                         <td className="py-2 text-slate-500 text-xs">{item.codigo || '-'}</td>
-                        <td className="py-2 text-slate-700">{item.descripcion}</td>
+                        <td className="py-2 text-slate-700">
+                          {item.descripcion}
+                          {item.nuevo && (
+                            <span className="ml-2 text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full border border-blue-200">
+                              nuevo
+                            </span>
+                          )}
+                        </td>
                         <td className="py-2 text-center">
                           <input
                             type="number"
