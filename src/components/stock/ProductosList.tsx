@@ -229,26 +229,42 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
             </table>
 
             <div className="flex items-center justify-between px-4 py-3 border-t border-slate-100">
-              <span className="text-sm text-slate-500">
-                {total} productos - Pagina {pagina} de {totalPaginas}
-              </span>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={function () { setPagina(Math.max(1, pagina - 1)) }}
-                  disabled={pagina === 1}
-                  className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
-                >
-                  <ChevronLeft size={16} />
-                </button>
-                <button
-                  onClick={function () { setPagina(Math.min(totalPaginas, pagina + 1)) }}
-                  disabled={pagina === totalPaginas}
-                  className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
-                >
-                  <ChevronRight size={16} />
-                </button>
-              </div>
-            </div>
+  <span className="text-sm text-slate-500">
+    {total} productos - Pagina {pagina} de {totalPaginas}
+  </span>
+  <div className="flex items-center gap-1">
+    <button
+      onClick={function () { setPagina(Math.max(1, pagina - 1)) }}
+      disabled={pagina === 1}
+      className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+    >
+      <ChevronLeft size={16} />
+    </button>
+    {Array.from({ length: totalPaginas }, function (_, i) { return i + 1 }).map(function (n) {
+      return (
+        <button
+          key={n}
+          onClick={function () { setPagina(n) }}
+          className={
+            'w-8 h-8 rounded text-sm transition-colors ' +
+            (n === pagina
+              ? 'bg-orange-500 text-white font-medium'
+              : 'border border-slate-200 text-slate-500 hover:bg-slate-50')
+          }
+        >
+          {n}
+        </button>
+      )
+    })}
+    <button
+      onClick={function () { setPagina(Math.min(totalPaginas, pagina + 1)) }}
+      disabled={pagina === totalPaginas}
+      className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+    >
+      <ChevronRight size={16} />
+    </button>
+  </div>
+</div>
           </div>
         )}
       </div>

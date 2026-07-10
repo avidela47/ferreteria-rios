@@ -50,9 +50,9 @@ export default function CatalogoPage() {
       </div>
 
       <CatalogoList
-        key={refresh}
         onEditar={handleEditar}
         esAdmin={esAdmin}
+        refresh={refresh}
       />
 
       {mostrarForm && esAdmin && (

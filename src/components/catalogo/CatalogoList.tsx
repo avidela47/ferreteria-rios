@@ -10,6 +10,7 @@ import Image from 'next/image'
 interface Props {
   onEditar: (ficha: IFicha) => void
   esAdmin: boolean
+  refresh: number
 }
 
 const COLORES_CATEGORIA: Record<string, string> = {
@@ -36,7 +37,7 @@ interface ProductoStock {
   unidad: string
 }
 
-export default function CatalogoList({ onEditar, esAdmin }: Props) {
+export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
   const [fichas, setFichas] = useState<IFicha[]>([])
   const [productosMap, setProductosMap] = useState<Record<string, ProductoStock>>({})
   const [buscar, setBuscar] = useState('')
@@ -45,13 +46,13 @@ export default function CatalogoList({ onEditar, esAdmin }: Props) {
   const [pagina, setPagina] = useState(1)
 
   useEffect(() => {
-    const fetchFichas = async () => {
-      const res = await fetch('/api/catalogo')
-      const json = await res.json()
-      if (json.ok) setFichas(json.data)
-    }
-    fetchFichas()
-  }, [])
+  const fetchFichas = async () => {
+    const res = await fetch('/api/catalogo')
+    const json = await res.json()
+    if (json.ok) setFichas(json.data)
+  }
+  fetchFichas()
+}, [refresh])
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -287,26 +288,42 @@ const fichasFiltradas = fichas.filter((f) => {
           </div>
 
           <div className="flex items-center justify-between bg-white rounded-lg shadow-sm px-4 py-3">
-            <span className="text-sm text-slate-500">
-              {fichasFiltradas.length} fichas · Página {pagina} de {totalPaginas}
-            </span>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setPagina((p) => Math.max(1, p - 1))}
-                disabled={pagina === 1}
-                className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
-              >
-                <ChevronLeft size={16} />
-              </button>
-              <button
-                onClick={() => setPagina((p) => Math.min(totalPaginas, p + 1))}
-                disabled={pagina === totalPaginas}
-                className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
-              >
-                <ChevronRight size={16} />
-              </button>
-            </div>
-          </div>
+  <span className="text-sm text-slate-500">
+    {fichasFiltradas.length} fichas · Página {pagina} de {totalPaginas}
+  </span>
+  <div className="flex items-center gap-1">
+    <button
+      onClick={() => setPagina((p) => Math.max(1, p - 1))}
+      disabled={pagina === 1}
+      className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+    >
+      <ChevronLeft size={16} />
+    </button>
+    {Array.from({ length: totalPaginas }, function (_, i) { return i + 1 }).map(function (n) {
+      return (
+        <button
+          key={n}
+          onClick={() => setPagina(n)}
+          className={
+            'w-8 h-8 rounded text-sm transition-colors ' +
+            (n === pagina
+              ? 'bg-orange-500 text-white font-medium'
+              : 'border border-slate-200 text-slate-500 hover:bg-slate-50')
+          }
+        >
+          {n}
+        </button>
+      )
+    })}
+    <button
+      onClick={() => setPagina((p) => Math.min(totalPaginas, p + 1))}
+      disabled={pagina === totalPaginas}
+      className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+    >
+      <ChevronRight size={16} />
+    </button>
+  </div>
+</div>
         </>
       )}
     </div>
