@@ -13,6 +13,15 @@ export function formatPeso(monto: number): string {
   }).format(monto)
 }
 
+export function formatPesoEntero(monto: number): string {
+  return new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(monto)
+}
+
 export function formatFecha(fecha: Date | string): string {
   return new Intl.DateTimeFormat('es-AR', {
     day: '2-digit',
