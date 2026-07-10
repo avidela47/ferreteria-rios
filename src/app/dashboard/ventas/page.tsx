@@ -1,13 +1,33 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Toaster } from 'sonner'
 import VentasList from '@/components/ventas/VentasList'
 import NuevaVenta from '@/components/ventas/NuevaVenta'
+import { formatPeso } from '@/lib/utils'
+
+interface Estadisticas {
+  cantidad: number
+  total: number
+  costoTotal: number
+  ganancia: number
+  hoy: { cantidad: number; total: number }
+  mes: { cantidad: number; total: number }
+}
 
 export default function VentasPage() {
   const [vista, setVista] = useState<'lista' | 'nueva'>('lista')
   const [refresh, setRefresh] = useState(0)
+  const [stats, setStats] = useState<Estadisticas | null>(null)
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      const res = await fetch('/api/ventas/estadisticas')
+      const json = await res.json()
+      if (json.ok) setStats(json.data)
+    }
+    fetchStats()
+  }, [refresh])
 
   return (
     <div className="p-6">
@@ -24,6 +44,31 @@ export default function VentasPage() {
           {vista === 'lista' ? '+ Nueva venta' : '← Volver'}
         </button>
       </div>
+
+      {stats && (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div className="bg-white rounded-lg shadow-sm p-4">
+            <p className="text-xs text-slate-500 mb-1">Cantidad de ventas</p>
+            <p className="text-2xl font-bold text-slate-800">{stats.cantidad}</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-sm p-4">
+            <p className="text-xs text-slate-500 mb-1">Monto total (costo / venta)</p>
+            <p className="text-lg font-bold text-slate-800">{formatPeso(stats.total)}</p>
+            <p className="text-xs text-slate-400">Costo: {formatPeso(stats.costoTotal)}</p>
+            <p className="text-xs text-green-600 font-medium">Ganancia: {formatPeso(stats.ganancia)}</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-sm p-4">
+            <p className="text-xs text-slate-500 mb-1">Ventas de hoy</p>
+            <p className="text-lg font-bold text-orange-500">{formatPeso(stats.hoy.total)}</p>
+            <p className="text-xs text-slate-400">{stats.hoy.cantidad} ventas</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-sm p-4">
+            <p className="text-xs text-slate-500 mb-1">Ventas del mes</p>
+            <p className="text-lg font-bold text-orange-500">{formatPeso(stats.mes.total)}</p>
+            <p className="text-xs text-slate-400">{stats.mes.cantidad} ventas</p>
+          </div>
+        </div>
+      )}
 
       {vista === 'lista' ? (
         <VentasList key={refresh} />
