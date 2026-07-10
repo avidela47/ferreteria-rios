@@ -37,5 +37,5 @@ export function calcularMargen(precioCosto: number, precioVenta: number): number
 }
 
 export function calcularPrecioVenta(precioCosto: number, margen: number): number {
-  return Number((precioCosto * (1 + margen / 100)).toFixed(2))
+  return Math.round(precioCosto * (1 + margen / 100))
 }
