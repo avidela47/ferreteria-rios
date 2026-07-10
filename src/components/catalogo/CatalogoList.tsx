@@ -44,15 +44,16 @@ export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
   const [categoriaFiltro, setCategoriaFiltro] = useState('')
   const [expandida, setExpandida] = useState<string | null>(null)
   const [pagina, setPagina] = useState(1)
+  const [grupoPagina, setGrupoPagina] = useState(0)
 
   useEffect(() => {
-  const fetchFichas = async () => {
-    const res = await fetch('/api/catalogo')
-    const json = await res.json()
-    if (json.ok) setFichas(json.data)
-  }
-  fetchFichas()
-}, [refresh])
+    const fetchFichas = async () => {
+      const res = await fetch('/api/catalogo')
+      const json = await res.json()
+      if (json.ok) setFichas(json.data)
+    }
+    fetchFichas()
+  }, [refresh])
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -104,23 +105,23 @@ export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
   const categorias = [...new Set(fichas.map((f) => f.categoria))].sort()
 
   function normalizar(texto: string) {
-  return texto
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-}
+    return texto
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+  }
 
-const buscarNormalizado = normalizar(buscar)
+  const buscarNormalizado = normalizar(buscar)
 
-const fichasFiltradas = fichas.filter((f) => {
-  const matchBuscar = buscar === '' ||
-    normalizar(f.nombre ?? '').includes(buscarNormalizado) ||
-    normalizar(f.codigo ?? '').includes(buscarNormalizado) ||
-    normalizar(f.descripcion ?? '').includes(buscarNormalizado) ||
-    normalizar(f.paraQueSirve ?? '').includes(buscarNormalizado)
-  const matchCategoria = categoriaFiltro === '' || f.categoria === categoriaFiltro
-  return matchBuscar && matchCategoria
-})
+  const fichasFiltradas = fichas.filter((f) => {
+    const matchBuscar = buscar === '' ||
+      normalizar(f.nombre ?? '').includes(buscarNormalizado) ||
+      normalizar(f.codigo ?? '').includes(buscarNormalizado) ||
+      normalizar(f.descripcion ?? '').includes(buscarNormalizado) ||
+      normalizar(f.paraQueSirve ?? '').includes(buscarNormalizado)
+    const matchCategoria = categoriaFiltro === '' || f.categoria === categoriaFiltro
+    return matchBuscar && matchCategoria
+  })
 
   const totalPaginas = Math.ceil(fichasFiltradas.length / POR_PAGINA)
   const fichasPagina = fichasFiltradas.slice((pagina - 1) * POR_PAGINA, pagina * POR_PAGINA)
@@ -128,11 +129,13 @@ const fichasFiltradas = fichas.filter((f) => {
   function handleBuscar(valor: string) {
     setBuscar(valor)
     setPagina(1)
+    setGrupoPagina(0)
   }
 
   function handleCategoria(valor: string) {
     setCategoriaFiltro(valor)
     setPagina(1)
+    setGrupoPagina(0)
   }
 
   return (
@@ -223,7 +226,7 @@ const fichasFiltradas = fichas.filter((f) => {
                     <div className="border-t border-slate-100 p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-3">
                         {ficha.imagen && (
-                         <Image src={ficha.imagen} alt={ficha.nombre} width={150} height={150} className="w-37.5 h-37.5 rounded-lg border border-slate-200 object-contain bg-white" unoptimized />
+                          <Image src={ficha.imagen} alt={ficha.nombre} width={150} height={150} className="w-37.5 h-37.5 rounded-lg border border-slate-200 object-contain bg-white" unoptimized />
                         )}
                         <div>
                           <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Código</p>
@@ -288,42 +291,58 @@ const fichasFiltradas = fichas.filter((f) => {
           </div>
 
           <div className="flex items-center justify-between bg-white rounded-lg shadow-sm px-4 py-3">
-  <span className="text-sm text-slate-500">
-    {fichasFiltradas.length} fichas · Página {pagina} de {totalPaginas}
-  </span>
-  <div className="flex items-center gap-1">
-    <button
-      onClick={() => setPagina((p) => Math.max(1, p - 1))}
-      disabled={pagina === 1}
-      className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
-    >
-      <ChevronLeft size={16} />
-    </button>
-    {Array.from({ length: totalPaginas }, function (_, i) { return i + 1 }).map(function (n) {
-      return (
-        <button
-          key={n}
-          onClick={() => setPagina(n)}
-          className={
-            'w-8 h-8 rounded text-sm transition-colors ' +
-            (n === pagina
-              ? 'bg-orange-500 text-white font-medium'
-              : 'border border-slate-200 text-slate-500 hover:bg-slate-50')
-          }
-        >
-          {n}
-        </button>
-      )
-    })}
-    <button
-      onClick={() => setPagina((p) => Math.min(totalPaginas, p + 1))}
-      disabled={pagina === totalPaginas}
-      className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
-    >
-      <ChevronRight size={16} />
-    </button>
-  </div>
-</div>
+            <span className="text-sm text-slate-500">
+              {fichasFiltradas.length} fichas · Página {pagina} de {totalPaginas}
+            </span>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={function () {
+                  const nuevaPagina = Math.max(1, pagina - 1)
+                  setPagina(nuevaPagina)
+                  setGrupoPagina(Math.floor((nuevaPagina - 1) / 3))
+                }}
+                disabled={pagina === 1}
+                className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              {Array.from({ length: 3 }, function (_, i) { return grupoPagina * 3 + i + 1 })
+                .filter(function (n) { return n <= totalPaginas })
+                .map(function (n) {
+                  const esUltimoDelGrupo = n === Math.min((grupoPagina + 1) * 3, totalPaginas)
+                  return (
+                    <button
+                      key={n}
+                      onClick={function () {
+                        setPagina(n)
+                        if (esUltimoDelGrupo && n < totalPaginas) {
+                          setGrupoPagina(function (g) { return g + 1 })
+                        }
+                      }}
+                      className={
+                        'w-8 h-8 rounded text-sm transition-colors ' +
+                        (n === pagina
+                          ? 'bg-orange-500 text-white font-medium'
+                          : 'border border-slate-200 text-slate-500 hover:bg-slate-50')
+                      }
+                    >
+                      {n}
+                    </button>
+                  )
+                })}
+              <button
+                onClick={function () {
+                  const nuevaPagina = Math.min(totalPaginas, pagina + 1)
+                  setPagina(nuevaPagina)
+                  setGrupoPagina(Math.floor((nuevaPagina - 1) / 3))
+                }}
+                disabled={pagina === totalPaginas}
+                className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          </div>
         </>
       )}
     </div>

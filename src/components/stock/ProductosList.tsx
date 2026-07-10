@@ -22,6 +22,7 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
   const [totales, setTotales] = useState({ costo: 0, venta: 0 })
   const [ordenarPor, setOrdenarPor] = useState('nombre')
   const [direccion, setDireccion] = useState('asc')
+  const [grupoPagina, setGrupoPagina] = useState(0)
   const POR_PAGINA = 20
 
   useEffect(() => {
@@ -69,6 +70,7 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
       setDireccion('asc')
     }
     setPagina(1)
+    setGrupoPagina(0)
   }
 
   async function eliminar(id: string) {
@@ -125,6 +127,7 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
             onChange={function (e) {
               setBuscar(e.target.value)
               setPagina(1)
+              setGrupoPagina(0)
             }}
             className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
           />
@@ -132,6 +135,7 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
             onClick={function () {
               setBuscar('')
               setPagina(1)
+              setGrupoPagina(0)
             }}
             className="border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
           >
@@ -229,42 +233,58 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
             </table>
 
             <div className="flex items-center justify-between px-4 py-3 border-t border-slate-100">
-  <span className="text-sm text-slate-500">
-    {total} productos - Pagina {pagina} de {totalPaginas}
-  </span>
-  <div className="flex items-center gap-1">
-    <button
-      onClick={function () { setPagina(Math.max(1, pagina - 1)) }}
-      disabled={pagina === 1}
-      className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
-    >
-      <ChevronLeft size={16} />
-    </button>
-    {Array.from({ length: totalPaginas }, function (_, i) { return i + 1 }).map(function (n) {
-      return (
-        <button
-          key={n}
-          onClick={function () { setPagina(n) }}
-          className={
-            'w-8 h-8 rounded text-sm transition-colors ' +
-            (n === pagina
-              ? 'bg-orange-500 text-white font-medium'
-              : 'border border-slate-200 text-slate-500 hover:bg-slate-50')
-          }
-        >
-          {n}
-        </button>
-      )
-    })}
-    <button
-      onClick={function () { setPagina(Math.min(totalPaginas, pagina + 1)) }}
-      disabled={pagina === totalPaginas}
-      className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
-    >
-      <ChevronRight size={16} />
-    </button>
-  </div>
-</div>
+              <span className="text-sm text-slate-500">
+                {total} productos - Pagina {pagina} de {totalPaginas}
+              </span>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={function () {
+                    const nuevaPagina = Math.max(1, pagina - 1)
+                    setPagina(nuevaPagina)
+                    setGrupoPagina(Math.floor((nuevaPagina - 1) / 3))
+                  }}
+                  disabled={pagina === 1}
+                  className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+                >
+                  <ChevronLeft size={16} />
+                </button>
+                {Array.from({ length: 3 }, function (_, i) { return grupoPagina * 3 + i + 1 })
+                  .filter(function (n) { return n <= totalPaginas })
+                  .map(function (n) {
+                    const esUltimoDelGrupo = n === Math.min((grupoPagina + 1) * 3, totalPaginas)
+                    return (
+                      <button
+                        key={n}
+                        onClick={function () {
+                          setPagina(n)
+                          if (esUltimoDelGrupo && n < totalPaginas) {
+                            setGrupoPagina(function (g) { return g + 1 })
+                          }
+                        }}
+                        className={
+                          'w-8 h-8 rounded text-sm transition-colors ' +
+                          (n === pagina
+                            ? 'bg-orange-500 text-white font-medium'
+                            : 'border border-slate-200 text-slate-500 hover:bg-slate-50')
+                        }
+                      >
+                        {n}
+                      </button>
+                    )
+                  })}
+                <button
+                  onClick={function () {
+                    const nuevaPagina = Math.min(totalPaginas, pagina + 1)
+                    setPagina(nuevaPagina)
+                    setGrupoPagina(Math.floor((nuevaPagina - 1) / 3))
+                  }}
+                  disabled={pagina === totalPaginas}
+                  className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+                >
+                  <ChevronRight size={16} />
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>
