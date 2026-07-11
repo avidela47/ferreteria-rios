@@ -141,17 +141,27 @@ export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
   return (
     <div className="space-y-4">
       <div className="bg-white rounded-lg shadow-sm p-4 flex gap-3 items-center">
-        <div className="relative flex-1">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-          <input
-            type="text"
-            placeholder="Buscar por código, nombre, descripción o uso..."
-            value={buscar}
-            onChange={(e) => handleBuscar(e.target.value)}
-            className="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-          />
-        </div>
-        <select
+  <div className="relative flex-1">
+    <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+    <input
+      type="text"
+      placeholder="Buscar por código, nombre, descripción o uso..."
+      value={buscar}
+      onChange={(e) => handleBuscar(e.target.value)}
+      className="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+    />
+  </div>
+  <button
+    onClick={function () {
+      setBuscar('')
+      setPagina(1)
+      setGrupoPagina(0)
+    }}
+    className="border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+  >
+    Borrar
+  </button>
+  <select
           value={categoriaFiltro}
           onChange={(e) => handleCategoria(e.target.value)}
           className="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
