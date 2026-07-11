@@ -23,6 +23,8 @@ const CATEGORIAS = [
   'Materiales de obra',
   'Seguridad y EPP',
   'Lubricantes y Quimica',
+  'Gas',
+  'Varios',
 ]
 
 export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
