@@ -182,6 +182,10 @@ export interface IDashboard {
   ultimasVentas: ISale[]
   gastosMes: number
   impuestosPendientes: ITaxRecord[]
+  /** % de variación de ventas del mes vs. mes anterior. null si no hay dato del mes anterior */
+  tendenciaVentasMes?: number | null
+  /** % de variación de gastos del mes vs. mes anterior. null si no hay dato del mes anterior */
+  tendenciaGastosMes?: number | null
 }
 
 // ── API RESPONSES ─────────────────────────────────────────────────────────
