@@ -11,7 +11,7 @@ interface Estadisticas {
   total: number
   costoTotal: number
   ganancia: number
-  hoy: { cantidad: number; total: number }
+  hoy: { cantidad: number; total: number; ganancia: number }
   mes: { cantidad: number; total: number }
 }
 
@@ -61,6 +61,7 @@ export default function VentasPage() {
             <p className="text-xs text-slate-500 mb-1">Ventas de hoy</p>
             <p className="text-lg font-bold text-orange-500">{formatPeso(stats.hoy.total)}</p>
             <p className="text-xs text-slate-400">{stats.hoy.cantidad} ventas</p>
+            <p className="text-xs text-green-600 font-medium">Ganancia: {formatPeso(stats.hoy.ganancia)}</p>
           </div>
           <div className="bg-white rounded-lg shadow-sm p-4">
             <p className="text-xs text-slate-500 mb-1">Ventas del mes</p>
