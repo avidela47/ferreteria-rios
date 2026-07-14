@@ -57,13 +57,31 @@ export async function PUT(
     }
 
     if (body.estado === 'recibida' && compra.estado !== 'recibida') {
-      for (const item of compra.items) {
-        await Product.findByIdAndUpdate(item.producto, {
-          $inc: { cantidad: item.cantidad },
-          $set: { precioCosto: item.precioCosto },
-        })
-      }
+  for (const item of compra.items) {
+    if (item.nuevo || !item.producto) {
+      const nuevoProducto = await Product.create({
+        codigo: item.codigo || '',
+        nombre: item.nombre,
+        cantidad: item.cantidad,
+        stockMinimo: 5,
+        unidad: 'u.',
+        precioCosto: item.precioCosto,
+        precioVenta: item.precioCosto,
+        margen: 0,
+        categoria: null,
+        proveedor: compra.proveedor,
+        activo: true,
+      })
+      item.producto = nuevoProducto._id
+    } else {
+      await Product.findByIdAndUpdate(item.producto, {
+        $inc: { cantidad: item.cantidad },
+        $set: { precioCosto: item.precioCosto },
+      })
     }
+  }
+  await compra.save()
+}
 
     const compraActualizada = await Purchase.findByIdAndUpdate(
       id,

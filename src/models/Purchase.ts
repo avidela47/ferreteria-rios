@@ -2,11 +2,13 @@ import mongoose, { Schema, Document } from 'mongoose'
 import { EstadoCompra } from '@/types'
 
 export interface IPurchaseItemDocument {
-  producto: mongoose.Types.ObjectId
+  producto?: mongoose.Types.ObjectId | null
+  codigo?: string
   nombre: string
   cantidad: number
   precioCosto: number
   subtotal: number
+  nuevo?: boolean
 }
 
 export interface IPurchaseDocument extends Document {
@@ -21,11 +23,13 @@ export interface IPurchaseDocument extends Document {
 }
 
 const PurchaseItemSchema = new Schema<IPurchaseItemDocument>({
-  producto: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
+  producto: { type: Schema.Types.ObjectId, ref: 'Product', required: false, default: null },
+  codigo: { type: String, default: '' },
   nombre: { type: String, required: true },
   cantidad: { type: Number, required: true },
   precioCosto: { type: Number, required: true },
   subtotal: { type: Number, required: true },
+  nuevo: { type: Boolean, default: false },
 })
 
 const PurchaseSchema = new Schema<IPurchaseDocument>(
