@@ -12,13 +12,38 @@ export async function GET() {
     await connectDB()
 
     const ahora = new Date()
-    const inicioDia = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate(), 3, 0, 0)
-    inicioDia.setTime(inicioDia.getTime() - 3 * 60 * 60 * 1000)
-    const inicioSemana = new Date(ahora)
-    inicioSemana.setDate(ahora.getDate() - ahora.getDay())
-    inicioSemana.setHours(0, 0, 0, 0)
-    const inicioMes = new Date(ahora.getFullYear(), ahora.getMonth(), 1)
-    const inicioMesAnterior = new Date(ahora.getFullYear(), ahora.getMonth() - 1, 1)
+    const offsetArgentina = 3 * 60 * 60 * 1000
+    const ahoraArg = new Date(ahora.getTime() - offsetArgentina)
+
+    const inicioDia = new Date(Date.UTC(
+      ahoraArg.getUTCFullYear(),
+      ahoraArg.getUTCMonth(),
+      ahoraArg.getUTCDate(),
+      3, 0, 0
+    ))
+
+    const inicioSemana = new Date(ahoraArg)
+    inicioSemana.setUTCDate(ahoraArg.getUTCDate() - ahoraArg.getUTCDay())
+    const inicioSemanaFinal = new Date(Date.UTC(
+      inicioSemana.getUTCFullYear(),
+      inicioSemana.getUTCMonth(),
+      inicioSemana.getUTCDate(),
+      3, 0, 0
+    ))
+
+    const inicioMes = new Date(Date.UTC(
+      ahoraArg.getUTCFullYear(),
+      ahoraArg.getUTCMonth(),
+      1,
+      3, 0, 0
+    ))
+
+    const inicioMesAnterior = new Date(Date.UTC(
+      ahoraArg.getUTCFullYear(),
+      ahoraArg.getUTCMonth() - 1,
+      1,
+      3, 0, 0
+    ))
     // el mes anterior termina justo donde arranca el actual (exclusivo)
     const finMesAnterior = inicioMes
 
@@ -28,7 +53,7 @@ export async function GET() {
     ])
 
     const ventasSemana = await Sale.aggregate([
-      { $match: { estado: 'completada', createdAt: { $gte: inicioSemana } } },
+      { $match: { estado: 'completada', createdAt: { $gte: inicioSemanaFinal } } },
       { $group: { _id: null, total: { $sum: '$total' } } },
     ])
 

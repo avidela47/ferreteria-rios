@@ -6,9 +6,23 @@ export async function GET() {
   try {
     await connectDB()
 
-    const hoy = new Date()
-    const inicioHoy = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate())
-    const inicioMes = new Date(hoy.getFullYear(), hoy.getMonth(), 1)
+    const ahora = new Date()
+    const offsetArgentina = 3 * 60 * 60 * 1000
+    const ahoraArg = new Date(ahora.getTime() - offsetArgentina)
+
+    const inicioHoy = new Date(Date.UTC(
+      ahoraArg.getUTCFullYear(),
+      ahoraArg.getUTCMonth(),
+      ahoraArg.getUTCDate(),
+      3, 0, 0
+    ))
+
+    const inicioMes = new Date(Date.UTC(
+      ahoraArg.getUTCFullYear(),
+      ahoraArg.getUTCMonth(),
+      1,
+      3, 0, 0
+    ))
 
     const filtroActivas = { estado: 'completada' }
 
