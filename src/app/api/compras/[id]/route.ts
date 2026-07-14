@@ -103,7 +103,7 @@ export async function PUT(
 }
 
 export async function DELETE(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
@@ -113,6 +113,8 @@ export async function DELETE(
 
     await connectDB()
     const { id } = await params
+    const { searchParams } = new URL(req.url)
+    const definitivo = searchParams.get('definitivo') === 'true'
 
     const compra = await Purchase.findById(id)
 
@@ -122,9 +124,17 @@ export async function DELETE(
 
     if (compra.estado === 'recibida') {
       return NextResponse.json(
-        { ok: false, error: 'No se puede cancelar una orden ya recibida' },
+        { ok: false, error: 'No se puede eliminar una orden ya recibida' },
         { status: 400 }
       )
+    }
+
+    if (definitivo) {
+      await Purchase.findByIdAndDelete(id)
+      return NextResponse.json({
+        ok: true,
+        mensaje: 'Orden eliminada correctamente',
+      })
     }
 
     await Purchase.findByIdAndUpdate(id, { estado: 'cancelada' })

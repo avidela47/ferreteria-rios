@@ -5,6 +5,7 @@ import { IPurchase } from '@/types'
 import { formatPeso, formatFecha } from '@/lib/utils'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
+import { Trash2 } from 'lucide-react'
 
 const estadoColors: Record<string, string> = {
   borrador: 'bg-slate-100 text-slate-600',
@@ -59,6 +60,28 @@ export default function ComprasList() {
     }
   }
 
+  async function eliminarDefinitivo(id: string) {
+    toast('Seguro que queres eliminar esta orden definitivamente?', {
+      action: {
+        label: 'Eliminar',
+        onClick: async () => {
+          const res = await fetch(`/api/compras/${id}?definitivo=true`, { method: 'DELETE' })
+          const json = await res.json()
+          if (json.ok) {
+            toast.success('Orden eliminada')
+            setCompras((prev) => prev.filter((c) => c._id !== id))
+          } else {
+            toast.error(json.error ?? 'Error al eliminar')
+          }
+        },
+      },
+      cancel: {
+        label: 'Cancelar',
+        onClick: () => {},
+      },
+    })
+  }
+
   return (
     <div className="bg-white rounded-lg shadow-sm">
       <div className="p-4 border-b border-slate-100">
@@ -107,37 +130,46 @@ export default function ComprasList() {
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex items-center justify-center gap-2">
-  <button
-    onClick={() => router.push(`/dashboard/compras/${c._id}`)}
-    className="text-xs bg-slate-50 text-slate-600 hover:bg-slate-100 px-2 py-1 rounded cursor-pointer transition-colors"
-  >
-    Ver
-  </button>
-  {c.estado === 'borrador' && (
-    <button
-      onClick={() => cambiarEstado(c._id, 'enviada')}
-      className="text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 px-2 py-1 rounded cursor-pointer transition-colors"
-    >
-      Enviar
-    </button>
-  )}
-  {c.estado === 'enviada' && (
-    <button
-      onClick={() => cambiarEstado(c._id, 'recibida')}
-      className="text-xs bg-green-50 text-green-600 hover:bg-green-100 px-2 py-1 rounded cursor-pointer transition-colors"
-    >
-      Recibir
-    </button>
-  )}
-  {(c.estado === 'borrador' || c.estado === 'enviada') && (
-    <button
-      onClick={() => cancelar(c._id)}
-      className="text-xs bg-red-50 text-red-500 hover:bg-red-100 px-2 py-1 rounded cursor-pointer transition-colors"
-    >
-      Cancelar
-    </button>
-  )}
-</div>
+                    <button
+                      onClick={() => router.push(`/dashboard/compras/${c._id}`)}
+                      className="text-xs bg-slate-50 text-slate-600 hover:bg-slate-100 px-2 py-1 rounded cursor-pointer transition-colors"
+                    >
+                      Ver
+                    </button>
+                    {c.estado === 'borrador' && (
+                      <button
+                        onClick={() => cambiarEstado(c._id, 'enviada')}
+                        className="text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 px-2 py-1 rounded cursor-pointer transition-colors"
+                      >
+                        Enviar
+                      </button>
+                    )}
+                    {c.estado === 'enviada' && (
+                      <button
+                        onClick={() => cambiarEstado(c._id, 'recibida')}
+                        className="text-xs bg-green-50 text-green-600 hover:bg-green-100 px-2 py-1 rounded cursor-pointer transition-colors"
+                      >
+                        Recibir
+                      </button>
+                    )}
+                    {c.estado === 'enviada' && (
+                      <button
+                        onClick={() => cancelar(c._id)}
+                        className="text-xs bg-red-50 text-red-500 hover:bg-red-100 px-2 py-1 rounded cursor-pointer transition-colors"
+                      >
+                        Cancelar
+                      </button>
+                    )}
+                    {c.estado !== 'recibida' && (
+                      <button
+                        onClick={() => eliminarDefinitivo(c._id)}
+                        className="text-slate-300 hover:text-red-500 cursor-pointer transition-colors"
+                        title="Eliminar definitivamente"
+                      >
+                        <Trash2 size={15} />
+                      </button>
+                    )}
+                  </div>
                 </td>
               </tr>
             ))}
