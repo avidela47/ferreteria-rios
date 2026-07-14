@@ -46,6 +46,7 @@ export async function GET() {
             _id: null,
             cantidad: { $sum: 1 },
             total: { $sum: '$total' },
+            ganancia: { $sum: '$ganancia' },
           },
         },
       ]),
@@ -62,7 +63,7 @@ export async function GET() {
     ])
 
     const t = totales[0] || { cantidad: 0, total: 0, costoTotal: 0, ganancia: 0 }
-    const h = totalesHoy[0] || { cantidad: 0, total: 0 }
+    const h = totalesHoy[0] || { cantidad: 0, total: 0, ganancia: 0 }
     const m = totalesMes[0] || { cantidad: 0, total: 0 }
 
     return NextResponse.json({
@@ -72,7 +73,7 @@ export async function GET() {
         total: t.total,
         costoTotal: t.costoTotal,
         ganancia: t.ganancia,
-        hoy: { cantidad: h.cantidad, total: h.total },
+        hoy: { cantidad: h.cantidad, total: h.total, ganancia: h.ganancia },
         mes: { cantidad: m.cantidad, total: m.total },
       },
     })
