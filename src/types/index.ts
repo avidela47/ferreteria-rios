@@ -58,6 +58,7 @@ export type EstadoVenta = 'completada' | 'anulada'
 
 export interface ISaleItem {
   producto: IProduct | string
+  codigo?: string
   nombre: string
   cantidad: number
   precioCosto: number

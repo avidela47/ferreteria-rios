@@ -8,6 +8,7 @@ import { toast } from 'sonner'
 
 interface ItemVenta {
   producto: string
+  codigo: string
   nombre: string
   cantidad: number
   precioCosto: number
@@ -56,16 +57,17 @@ export default function NuevaVenta({ onGuardado }: Props) {
       )
     } else {
       setItems((prev) => [
-        ...prev,
-        {
-          producto: p._id,
-          nombre: p.nombre,
-          cantidad: 1,
-          precioCosto: p.precioCosto,
-          precioVenta: p.precioVenta,
-          subtotal: p.precioVenta,
-        },
-      ])
+  ...prev,
+  {
+    producto: p._id,
+    codigo: p.codigo ?? '',
+    nombre: p.nombre,
+    cantidad: 1,
+    precioCosto: p.precioCosto,
+    precioVenta: p.precioVenta,
+    subtotal: p.precioVenta,
+  },
+])
     }
     setBuscar('')
   }

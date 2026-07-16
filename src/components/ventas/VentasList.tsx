@@ -172,7 +172,8 @@ export default function VentasList() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="text-left text-slate-500 border-b border-slate-100">
-                      <th className="py-2 font-medium">Producto</th>
+                      <th className="py-2 font-medium">Código</th>
+<th className="py-2 font-medium">Producto</th>
                       <th className="py-2 font-medium text-center">Cant.</th>
                       <th className="py-2 font-medium text-right">P. Unit.</th>
                       <th className="py-2 font-medium text-right">Subtotal</th>
@@ -182,7 +183,8 @@ export default function VentasList() {
                     {ventaDetalle.items.map(function (item, i) {
                       return (
                         <tr key={i} className="border-b border-slate-50">
-                          <td className="py-2 text-slate-700">{item.nombre}</td>
+                          <td className="py-2 text-slate-500 text-xs">{item.codigo || '-'}</td>
+<td className="py-2 text-slate-700">{item.nombre}</td>
                           <td className="py-2 text-center text-slate-500">{item.cantidad}</td>
                           <td className="py-2 text-right text-slate-500">{formatPeso(item.precioVenta)}</td>
                           <td className="py-2 text-right font-medium text-slate-800">{formatPeso(item.subtotal)}</td>
