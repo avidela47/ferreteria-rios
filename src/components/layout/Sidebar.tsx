@@ -44,16 +44,16 @@ export default function Sidebar({ nombreUsuario, rol }: SidebarProps) {
 
   return (
     <aside className="w-64 bg-slate-900 h-screen flex flex-col overflow-hidden">
-      <div className="px-5 py-3">
-        <Image
-          src="/logo.png"
-          alt="Ferreteria Rios"
-          width={140}
-          height={70}
-          priority
-          style={{ mixBlendMode: 'screen' }}
-        />
-      </div>
+      <div className="px-5 py-3 flex justify-center">
+  <Image
+    src="/logo.png"
+    alt="Ferreteria Rios"
+    width={140}
+    height={70}
+    priority
+    style={{ mixBlendMode: 'screen' }}
+  />
+</div>
 
       <nav className="flex-1 px-3 space-y-0.5">
         {menu.map((item) => {
