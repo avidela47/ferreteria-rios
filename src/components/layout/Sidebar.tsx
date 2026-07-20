@@ -45,7 +45,7 @@ export default function Sidebar({ nombreUsuario, rol }: SidebarProps) {
   })
 
   return (
-    <aside className="w-64 bg-white h-screen flex flex-col overflow-hidden border-r border-slate-200">
+    <aside className="w-64 bg-slate-50 h-screen flex flex-col overflow-hidden border-r border-slate-200">
       <div className="px-5 py-2 flex justify-center shrink-0">
         <Image
           src="/logo.png"
