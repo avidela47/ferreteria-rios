@@ -187,6 +187,9 @@ export interface IDashboard {
   tendenciaVentasMes?: number | null
   /** % de variación de gastos del mes vs. mes anterior. null si no hay dato del mes anterior */
   tendenciaGastosMes?: number | null
+  gastosRecurrentesMes?: number
+  margenBrutoPromedio?: number
+  puntoEquilibrio?: number | null
 }
 
 // ── API RESPONSES ─────────────────────────────────────────────────────────

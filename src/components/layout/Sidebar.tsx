@@ -46,18 +46,18 @@ export default function Sidebar({ nombreUsuario, rol }: SidebarProps) {
 
   return (
     <aside className="w-64 bg-slate-900 h-screen flex flex-col overflow-hidden">
-      <div className="px-5 py-3 flex justify-center">
+      <div className="px-5 py-2 flex justify-center shrink-0">
   <Image
     src="/logo.png"
     alt="Ferreteria Rios"
-    width={140}
-    height={70}
+    width={110}
+    height={55}
     priority
     style={{ mixBlendMode: 'screen' }}
   />
 </div>
 
-      <nav className="flex-1 px-3 space-y-0.5">
+      <nav className="flex-1 px-3 space-y-0.5 overflow-y-auto">
         {menu.map((item) => {
           const Icon = item.icon
           const active = pathname === item.href
@@ -78,7 +78,7 @@ export default function Sidebar({ nombreUsuario, rol }: SidebarProps) {
         })}
       </nav>
 
-      <div className="px-3 py-3 border-t border-slate-700">
+      <div className="px-3 py-3 border-t border-slate-700 shrink-0">
         <div className="mb-2 px-3">
           <p className="text-white text-sm font-medium">{nombreUsuario}</p>
           <p className="text-slate-400 text-xs capitalize">{rol}</p>

@@ -77,6 +77,11 @@ export async function GET() {
       { $group: { _id: null, total: { $sum: '$monto' } } },
     ])
 
+    const gastosRecurrentesMes = await Expense.aggregate([
+      { $match: { activo: true, recurrente: true, fecha: { $gte: inicioMes } } },
+      { $group: { _id: null, total: { $sum: '$monto' } } },
+    ])
+
     const gastosMesAnterior = await Expense.aggregate([
       {
         $match: {
@@ -121,6 +126,11 @@ export async function GET() {
         ? Math.round(((totalGastosMes - totalGastosMesAnterior) / totalGastosMesAnterior) * 1000) / 10
         : null
 
+    const totalGastosRecurrentesMes = gastosRecurrentesMes[0]?.total ?? 0
+    const gananciaMesActual = ventasMes[0]?.ganancia ?? 0
+    const margenBrutoPromedio = totalVentasMes > 0 ? gananciaMesActual / totalVentasMes : 0
+    const puntoEquilibrio = margenBrutoPromedio > 0 ? totalGastosRecurrentesMes / margenBrutoPromedio : null
+
     return NextResponse.json({
       ok: true,
       data: {
@@ -133,6 +143,9 @@ export async function GET() {
         tendenciaVentasMes,
         gastosMes: totalGastosMes,
         tendenciaGastosMes,
+        gastosRecurrentesMes: totalGastosRecurrentesMes,
+        margenBrutoPromedio,
+        puntoEquilibrio,
         stockBajo,
         ultimasVentas,
         impuestosPendientes,
