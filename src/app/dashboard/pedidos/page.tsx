@@ -704,18 +704,21 @@ export default function PedidosPage() {
                           )}
                         </td>
                         <td className="py-2 text-right">
-                          {pedidoEditar.estado === 'borrador' ? (
-                            <input
-                              type="number"
-                              step="0.01"
-                              value={item.precioCosto}
-                              onChange={function (e) { cambiarPrecioEdicion(i, Number(e.target.value)) }}
-                              className="w-24 border border-slate-200 rounded px-2 py-1 text-right text-sm"
-                            />
-                          ) : (
-                            formatPeso(item.precioCosto)
-                          )}
-                        </td>
+  {pedidoEditar.estado === 'borrador' ? (
+    <input
+      type="number"
+      step="0.01"
+      value={item.precioCosto}
+      onChange={function (e) { cambiarPrecioEdicion(i, Number(e.target.value)) }}
+      className="w-24 border border-slate-200 rounded px-2 py-1 text-right text-sm"
+    />
+  ) : (
+    formatPeso(item.precioCosto)
+  )}
+</td>
+<td className="py-2 text-right font-medium text-slate-700">
+  {formatPeso(item.precioCosto * item.cantidad)}
+</td>
                         {pedidoEditar.estado === 'borrador' && (
                           <td className="py-2 text-center">
                             <button
@@ -732,10 +735,19 @@ export default function PedidosPage() {
                 </tbody>
               </table>
 
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Nota</label>
-                <textarea
-                  value={pedidoEditar.nota}
+              <div className="flex justify-end">
+  <div className="text-right">
+    <p className="text-sm text-slate-500">Total estimado</p>
+    <p className="text-xl font-bold text-orange-500">
+      {formatPeso(pedidoEditar.items.reduce(function (acc, i) { return acc + i.precioCosto * i.cantidad }, 0))}
+    </p>
+  </div>
+</div>
+
+<div>
+  <label className="block text-sm font-medium text-slate-700 mb-1">Nota</label>
+  <textarea
+    value={pedidoEditar.nota}
                   disabled={pedidoEditar.estado === 'confirmado'}
                   onChange={function (e) {
                     setPedidoEditar(Object.assign({}, pedidoEditar, { nota: e.target.value }))
