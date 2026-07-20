@@ -411,7 +411,7 @@ export default function PedidosPage() {
                     <th className="px-4 py-3 font-medium">Código</th>
                     <th className="px-4 py-3 font-medium">Producto</th>
                     <th className="px-4 py-3 font-medium text-center">Cantidad</th>
-                    <th className="px-4 py-3 font-medium text-right">Costo est.</th>
+                    <th className="px-4 py-3 font-medium text-right">Subtotal est.</th>
                     <th className="px-4 py-3"></th>
                   </tr>
                 </thead>
@@ -438,14 +438,17 @@ export default function PedidosPage() {
                           />
                         </td>
                         <td className="px-4 py-3 text-right">
-                          <input
-                            type="number"
-                            step="0.01"
-                            value={item.precioCosto}
-                            onChange={function (e) { cambiarPrecio(i, Number(e.target.value)) }}
-                            className="w-24 border border-slate-200 rounded px-2 py-1 text-right text-sm"
-                          />
-                        </td>
+  <div className="flex flex-col items-end gap-1">
+    <input
+      type="number"
+      step="0.01"
+      value={item.precioCosto}
+      onChange={function (e) { cambiarPrecio(i, Number(e.target.value)) }}
+      className="w-24 border border-slate-200 rounded px-2 py-1 text-right text-sm"
+    />
+    <span className="text-xs text-slate-400">{formatPeso(item.precioCosto * item.cantidad)}</span>
+  </div>
+</td>
                         <td className="px-4 py-3">
                           <button
                             onClick={function () { eliminarItem(i) }}
