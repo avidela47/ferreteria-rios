@@ -9,6 +9,8 @@ import { toast } from 'sonner'
 interface Props {
   onNuevo: () => void
   onEditar: (gasto: IExpense) => void
+  anio: number
+  mes: number
 }
 
 const categoriaColors: Record<string, string> = {
@@ -21,20 +23,22 @@ const categoriaColors: Record<string, string> = {
   otros: 'bg-slate-100 text-slate-600',
 }
 
-export default function GastosList({ onNuevo, onEditar }: Props) {
+export default function GastosList({ onNuevo, onEditar, anio, mes }: Props) {
   const [gastos, setGastos] = useState<IExpense[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchGastos = async () => {
       setLoading(true)
-      const res = await fetch('/api/gastos?limite=50')
+      const desde = new Date(anio, mes, 1).toISOString()
+      const hasta = new Date(anio, mes + 1, 0, 23, 59, 59).toISOString()
+      const res = await fetch('/api/gastos?limite=100&desde=' + desde + '&hasta=' + hasta)
       const json = await res.json()
       if (json.ok) setGastos(json.data)
       setLoading(false)
     }
     fetchGastos()
-  }, [])
+  }, [anio, mes])
 
   async function eliminar(id: string) {
     const res = await fetch(`/api/gastos/${id}`, { method: 'DELETE' })
@@ -52,6 +56,7 @@ export default function GastosList({ onNuevo, onEditar }: Props) {
 
   const totalRecurrentes = recurrentes.reduce(function (acc, g) { return acc + g.monto }, 0)
   const totalNoRecurrentes = noRecurrentes.reduce(function (acc, g) { return acc + g.monto }, 0)
+  const totalGeneral = totalRecurrentes + totalNoRecurrentes
 
   function tabla(lista: IExpense[]) {
     return (
@@ -113,29 +118,34 @@ export default function GastosList({ onNuevo, onEditar }: Props) {
 
   return (
     <div className="space-y-6">
+      <div className="bg-white rounded-lg shadow-sm p-4 flex items-center justify-between">
+        <div>
+          <p className="text-xs text-slate-500">Total gastado este mes</p>
+          <p className="text-2xl font-bold text-slate-800">{formatPeso(totalGeneral)}</p>
+        </div>
+        <button
+          onClick={onNuevo}
+          className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+        >
+          + Nuevo gasto
+        </button>
+      </div>
+
       <div className="bg-white rounded-lg shadow-sm">
         <div className="p-4 border-b border-slate-100 flex items-center justify-between">
           <div>
             <h2 className="font-medium text-slate-700">Gastos recurrentes (mensuales)</h2>
             <p className="text-xs text-slate-400 mt-0.5">Estos son los que definen el punto de equilibrio</p>
           </div>
-          <div className="flex items-center gap-3">
-            {recurrentes.length > 0 && (
-              <p className="text-sm text-slate-500">
-                Total: <span className="font-medium text-red-500">{formatPeso(totalRecurrentes)}</span>
-              </p>
-            )}
-            <button
-              onClick={onNuevo}
-              className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-            >
-              + Nuevo gasto
-            </button>
-          </div>
+          {recurrentes.length > 0 && (
+            <p className="text-sm text-slate-500">
+              Total: <span className="font-medium text-red-500">{formatPeso(totalRecurrentes)}</span>
+            </p>
+          )}
         </div>
         {recurrentes.length === 0 ? (
           <div className="p-8 text-center text-slate-400 text-sm">
-            No hay gastos recurrentes cargados
+            No hay gastos recurrentes este mes
           </div>
         ) : (
           tabla(recurrentes)
@@ -154,7 +164,7 @@ export default function GastosList({ onNuevo, onEditar }: Props) {
         </div>
         {noRecurrentes.length === 0 ? (
           <div className="p-8 text-center text-slate-400 text-sm">
-            No hay otros gastos cargados
+            No hay otros gastos este mes
           </div>
         ) : (
           tabla(noRecurrentes)
