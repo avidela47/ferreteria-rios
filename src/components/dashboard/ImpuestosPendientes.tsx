@@ -1,6 +1,7 @@
 import { ITaxRecord } from '@/types'
 import { formatPeso, formatFecha } from '@/lib/utils'
 import Link from 'next/link'
+import { FileWarning } from 'lucide-react'
 
 interface Props {
   impuestos: ITaxRecord[]
@@ -8,9 +9,14 @@ interface Props {
 
 export default function ImpuestosPendientes({ impuestos }: Props) {
   return (
-    <div className="bg-white rounded-lg shadow-sm p-5">
+    <div className="bg-white rounded-lg shadow-sm p-5 border-l-4 border-red-400">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-semibold text-slate-800">Impuestos pendientes</h2>
+        <div className="flex items-center gap-2">
+          <div className="bg-red-100 text-red-600 p-1.5 rounded-lg">
+            <FileWarning size={16} />
+          </div>
+          <h2 className="font-semibold text-slate-800">Impuestos pendientes</h2>
+        </div>
         <Link
           href="/dashboard/impuestos"
           className="text-xs text-blue-600 hover:underline cursor-pointer"

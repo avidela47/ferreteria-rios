@@ -1,5 +1,6 @@
 import { IProduct } from '@/types'
 import Link from 'next/link'
+import { AlertTriangle } from 'lucide-react'
 
 interface Props {
   productos: IProduct[]
@@ -7,9 +8,14 @@ interface Props {
 
 export default function StockBajoTable({ productos }: Props) {
   return (
-    <div className="bg-white rounded-lg shadow-sm p-5">
+    <div className="bg-white rounded-lg shadow-sm p-5 border-l-4 border-orange-400">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-semibold text-slate-800">Stock bajo</h2>
+        <div className="flex items-center gap-2">
+          <div className="bg-orange-100 text-orange-600 p-1.5 rounded-lg">
+            <AlertTriangle size={16} />
+          </div>
+          <h2 className="font-semibold text-slate-800">Stock bajo</h2>
+        </div>
         <Link
           href="/dashboard/stock"
           className="text-xs text-blue-600 hover:underline cursor-pointer"
