@@ -26,7 +26,6 @@ export async function POST(req: NextRequest) {
     }
 
     await connectDB()
-console.log('OrderRequest es:', typeof OrderRequest, OrderRequest)
 const body = await req.json()
     const { items, nota } = body
 
