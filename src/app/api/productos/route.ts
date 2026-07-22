@@ -90,8 +90,14 @@ export async function POST(req: NextRequest) {
       { ok: true, data: producto, mensaje: 'Producto creado correctamente' },
       { status: 201 }
     )
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('POST /api/productos', error)
+    if (error && typeof error === 'object' && 'code' in error && error.code === 11000) {
+      return NextResponse.json(
+        { ok: false, error: 'Ya existe un producto con ese código' },
+        { status: 400 }
+      )
+    }
     return NextResponse.json({ ok: false, error: 'Error del servidor' }, { status: 500 })
   }
 }

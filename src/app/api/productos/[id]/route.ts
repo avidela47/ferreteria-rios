@@ -61,8 +61,14 @@ export async function PUT(
       data: producto,
       mensaje: 'Producto actualizado correctamente',
     })
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('PUT /api/productos/[id]', error)
+    if (error && typeof error === 'object' && 'code' in error && error.code === 11000) {
+      return NextResponse.json(
+        { ok: false, error: 'Ya existe un producto con ese código' },
+        { status: 400 }
+      )
+    }
     return NextResponse.json({ ok: false, error: 'Error del servidor' }, { status: 500 })
   }
 }
