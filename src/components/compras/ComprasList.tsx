@@ -84,8 +84,11 @@ export default function ComprasList() {
 
   return (
     <div className="bg-white rounded-lg shadow-sm">
-      <div className="p-4 border-b border-slate-100">
+      <div className="p-4 border-b border-slate-100 flex items-center justify-between">
         <h2 className="font-medium text-slate-700">Ordenes de compra</h2>
+        <p className="text-sm text-slate-500">
+          Total: <span className="font-semibold text-orange-500">{formatPeso(compras.reduce(function (acc, c) { return acc + c.total }, 0))}</span>
+        </p>
       </div>
 
       {loading ? (
