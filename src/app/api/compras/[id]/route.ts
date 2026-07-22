@@ -57,40 +57,54 @@ export async function PUT(
     }
 
     if (body.estado === 'recibida' && compra.estado !== 'recibida') {
-  for (const item of compra.items) {
-    if (item.nuevo || !item.producto) {
-      if (item.codigo) {
-        const existe = await Product.findOne({ codigo: item.codigo, activo: true })
-        if (existe) {
-          return NextResponse.json(
-            { ok: false, error: 'El código "' + item.codigo + '" (' + item.nombre + ') ya existe en el stock. Corregí el código antes de recibir.' },
-            { status: 400 }
-          )
+      // Paso 1: validar TODO antes de tocar nada
+      const codigosEnEstaCompra = new Set<string>()
+      for (const item of compra.items) {
+        if ((item.nuevo || !item.producto) && item.codigo) {
+          if (codigosEnEstaCompra.has(item.codigo)) {
+            return NextResponse.json(
+              { ok: false, error: 'El código "' + item.codigo + '" (' + item.nombre + ') está repetido dentro de esta misma orden.' },
+              { status: 400 }
+            )
+          }
+          codigosEnEstaCompra.add(item.codigo)
+
+          const existe = await Product.findOne({ codigo: item.codigo, activo: true })
+          if (existe) {
+            return NextResponse.json(
+              { ok: false, error: 'El código "' + item.codigo + '" (' + item.nombre + ') ya existe en el stock. Corregí el código antes de recibir. No se modificó nada.' },
+              { status: 400 }
+            )
+          }
         }
       }
-      const nuevoProducto = await Product.create({
-        codigo: item.codigo || '',
-        nombre: item.nombre,
-        cantidad: item.cantidad,
-        stockMinimo: 5,
-        unidad: 'u.',
-        precioCosto: item.precioCosto,
-        precioVenta: item.precioCosto,
-        margen: 0,
-        categoria: null,
-        proveedor: compra.proveedor,
-        activo: true,
-      })
-      item.producto = nuevoProducto._id
-    } else {
-      await Product.findByIdAndUpdate(item.producto, {
-        $inc: { cantidad: item.cantidad },
-        $set: { precioCosto: item.precioCosto },
-      })
+
+      // Paso 2: recién ahora, todo validado, se crea/actualiza de verdad
+      for (const item of compra.items) {
+        if (item.nuevo || !item.producto) {
+          const nuevoProducto = await Product.create({
+            codigo: item.codigo || '',
+            nombre: item.nombre,
+            cantidad: item.cantidad,
+            stockMinimo: 5,
+            unidad: 'u.',
+            precioCosto: item.precioCosto,
+            precioVenta: item.precioCosto,
+            margen: 0,
+            categoria: null,
+            proveedor: compra.proveedor,
+            activo: true,
+          })
+          item.producto = nuevoProducto._id
+        } else {
+          await Product.findByIdAndUpdate(item.producto, {
+            $inc: { cantidad: item.cantidad },
+            $set: { precioCosto: item.precioCosto },
+          })
+        }
+      }
+      await compra.save()
     }
-  }
-  await compra.save()
-}
 
     const compraActualizada = await Purchase.findByIdAndUpdate(
       id,
