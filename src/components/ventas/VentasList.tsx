@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { ISale } from '@/types'
 import { formatPeso, formatFechaHora } from '@/lib/utils'
-import { Ban, Eye, X } from 'lucide-react'
+import { Ban, Eye, X, Printer } from 'lucide-react'
 import { toast } from 'sonner'
 
 export default function VentasList() {
@@ -142,9 +142,13 @@ export default function VentasList() {
           <div className="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between p-5 border-b">
               <h2 className="font-semibold text-slate-800">Venta #{ventaDetalle.numero}</h2>
-              <button onClick={function () { setVentaDetalle(null) }} className="text-slate-400 hover:text-slate-600 cursor-pointer">
-                <X size={20} />
-              </button>
+              <div className="flex items-center gap-3">
+                
+                  <a href={'/imprimir-venta?id=' + ventaDetalle._id} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-700 cursor-pointer transition-colors" title="Imprimir ticket"><Printer size={18} /></a>
+                <button onClick={function () { setVentaDetalle(null) }} className="text-slate-400 hover:text-slate-600 cursor-pointer">
+                  <X size={20} />
+                </button>
+              </div>
             </div>
 
             <div className="p-5 space-y-4">
@@ -173,7 +177,7 @@ export default function VentasList() {
                   <thead>
                     <tr className="text-left text-slate-500 border-b border-slate-100">
                       <th className="py-2 font-medium">Código</th>
-<th className="py-2 font-medium">Producto</th>
+                      <th className="py-2 font-medium">Producto</th>
                       <th className="py-2 font-medium text-center">Cant.</th>
                       <th className="py-2 font-medium text-right">P. Unit.</th>
                       <th className="py-2 font-medium text-right">Subtotal</th>
@@ -184,7 +188,7 @@ export default function VentasList() {
                       return (
                         <tr key={i} className="border-b border-slate-50">
                           <td className="py-2 text-slate-500 text-xs">{item.codigo || '-'}</td>
-<td className="py-2 text-slate-700">{item.nombre}</td>
+                          <td className="py-2 text-slate-700">{item.nombre}</td>
                           <td className="py-2 text-center text-slate-500">{item.cantidad}</td>
                           <td className="py-2 text-right text-slate-500">{formatPeso(item.precioVenta)}</td>
                           <td className="py-2 text-right font-medium text-slate-800">{formatPeso(item.subtotal)}</td>
