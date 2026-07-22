@@ -124,21 +124,23 @@ export default function OrdenDetalle({ id }: Props) {
         <table className="w-full text-sm mb-6">
           <thead>
             <tr className="border-b-2 border-slate-200">
-              <th className="text-left py-2 font-semibold text-slate-700">Producto</th>
-              <th className="text-center py-2 font-semibold text-slate-700">Cantidad</th>
-              <th className="text-right py-2 font-semibold text-slate-700">P. Unitario</th>
-              <th className="text-right py-2 font-semibold text-slate-700">Subtotal</th>
-            </tr>
+  <th className="text-left py-2 font-semibold text-slate-700">Código</th>
+  <th className="text-left py-2 font-semibold text-slate-700">Producto</th>
+  <th className="text-center py-2 font-semibold text-slate-700">Cantidad</th>
+  <th className="text-right py-2 font-semibold text-slate-700">P. Unitario</th>
+  <th className="text-right py-2 font-semibold text-slate-700">Subtotal</th>
+</tr>
           </thead>
           <tbody>
             {compra.items.map((item, i) => (
-              <tr key={i} className="border-b border-slate-100">
-                <td className="py-2.5 text-slate-700">{item.nombre}</td>
-                <td className="py-2.5 text-center text-slate-600">{item.cantidad}</td>
-                <td className="py-2.5 text-right text-slate-600">{formatPeso(item.precioCosto)}</td>
-                <td className="py-2.5 text-right font-medium text-slate-800">{formatPeso(item.subtotal)}</td>
-              </tr>
-            ))}
+  <tr key={i} className="border-b border-slate-100">
+    <td className="py-2.5 text-slate-500 text-xs">{item.codigo || '-'}</td>
+    <td className="py-2.5 text-slate-700">{item.nombre}</td>
+    <td className="py-2.5 text-center text-slate-600">{item.cantidad}</td>
+    <td className="py-2.5 text-right text-slate-600">{formatPeso(item.precioCosto)}</td>
+    <td className="py-2.5 text-right font-medium text-slate-800">{formatPeso(item.subtotal)}</td>
+  </tr>
+))}
           </tbody>
           <tfoot>
             <tr className="border-t-2 border-slate-200">

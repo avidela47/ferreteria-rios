@@ -26,24 +26,35 @@ export default function VentasList() {
     fetchVentas()
   }, [])
 
-  async function anularVenta(id: string) {
-    const res = await fetch('/api/ventas/' + id, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ estado: 'anulada' }),
-    })
-    const json = await res.json()
-    if (json.ok) {
-      toast.success('Venta anulada — stock restaurado')
-      setVentas(function (prev) {
-        return prev.map(function (v) {
-          return v._id === id ? Object.assign({}, v, { estado: 'anulada' }) : v
+  function anularVenta(id: string) {
+  toast('Seguro que queres anular esta venta? El stock se va a restaurar.', {
+    action: {
+      label: 'Anular',
+      onClick: async () => {
+        const res = await fetch('/api/ventas/' + id, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ estado: 'anulada' }),
         })
-      })
-    } else {
-      toast.error('Solo el administrador puede anular ventas')
-    }
-  }
+        const json = await res.json()
+        if (json.ok) {
+          toast.success('Venta anulada — stock restaurado')
+          setVentas(function (prev) {
+            return prev.map(function (v) {
+              return v._id === id ? Object.assign({}, v, { estado: 'anulada' }) : v
+            })
+          })
+        } else {
+          toast.error('Solo el administrador puede anular ventas')
+        }
+      },
+    },
+    cancel: {
+      label: 'Cancelar',
+      onClick: () => {},
+    },
+  })
+}
 
   const formaPagoBadge = function (forma: string) {
     const colores: Record<string, string> = {

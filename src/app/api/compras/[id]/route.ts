@@ -59,6 +59,15 @@ export async function PUT(
     if (body.estado === 'recibida' && compra.estado !== 'recibida') {
   for (const item of compra.items) {
     if (item.nuevo || !item.producto) {
+      if (item.codigo) {
+        const existe = await Product.findOne({ codigo: item.codigo, activo: true })
+        if (existe) {
+          return NextResponse.json(
+            { ok: false, error: 'El código "' + item.codigo + '" (' + item.nombre + ') ya existe en el stock. Corregí el código antes de recibir.' },
+            { status: 400 }
+          )
+        }
+      }
       const nuevoProducto = await Product.create({
         codigo: item.codigo || '',
         nombre: item.nombre,

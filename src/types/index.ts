@@ -87,10 +87,12 @@ export type EstadoCompra = 'borrador' | 'enviada' | 'recibida' | 'cancelada'
 
 export interface IPurchaseItem {
   producto: IProduct | string
+  codigo?: string
   nombre: string
   cantidad: number
   precioCosto: number
   subtotal: number
+  nuevo?: boolean
 }
 
 export interface IPurchase {
