@@ -85,15 +85,20 @@ export async function DELETE(
     await connectDB()
     const { id } = await params
 
-    const producto = await Product.findByIdAndUpdate(
-      id,
-      { activo: false },
-      { new: true }
-    )
+    const producto = await Product.findById(id)
 
     if (!producto) {
       return NextResponse.json({ ok: false, error: 'Producto no encontrado' }, { status: 404 })
     }
+
+    await Product.findByIdAndUpdate(
+      id,
+      {
+        activo: false,
+        codigo: producto.codigo ? producto.codigo + '_ELIMINADO_' + Date.now() : '',
+      },
+      { new: true }
+    )
 
     return NextResponse.json({
       ok: true,
