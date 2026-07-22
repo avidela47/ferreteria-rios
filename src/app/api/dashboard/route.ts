@@ -4,6 +4,7 @@ import Sale from '@/models/Sale'
 import Product from '@/models/Product'
 import Expense from '@/models/Expense'
 import TaxRecord from '@/models/TaxRecord'
+import StockAdjustment from '@/models/StockAdjustment'
 import '@/models/Category'
 import '@/models/Supplier'
 
@@ -111,6 +112,15 @@ export async function GET() {
       .sort({ vencimiento: 1 })
       .limit(5)
 
+    const bajasMes = await StockAdjustment.aggregate([
+      { $match: { createdAt: { $gte: inicioMes } } },
+      { $group: { _id: null, cantidad: { $sum: '$cantidad' }, total: { $sum: { $multiply: ['$cantidad', '$precioCosto'] } }, registros: { $sum: 1 } } },
+    ])
+
+    const ultimasBajas = await StockAdjustment.find()
+      .sort({ createdAt: -1 })
+      .limit(5)
+
     // --- Tendencias (null si no hay dato del mes anterior para comparar) ---
     const totalVentasMes = ventasMes[0]?.total ?? 0
     const totalVentasMesAnterior = ventasMesAnterior[0]?.total ?? 0
@@ -149,6 +159,10 @@ export async function GET() {
         stockBajo,
         ultimasVentas,
         impuestosPendientes,
+        bajasMesCantidad: bajasMes[0]?.cantidad ?? 0,
+        bajasMesTotal: bajasMes[0]?.total ?? 0,
+        bajasMesRegistros: bajasMes[0]?.registros ?? 0,
+        ultimasBajas,
       },
     })
   } catch (error) {

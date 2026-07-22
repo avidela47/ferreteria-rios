@@ -6,6 +6,7 @@ import StockBajoTable from '@/components/dashboard/StockBajoTable'
 import UltimasVentas from '@/components/dashboard/UltimasVentas'
 import ImpuestosPendientes from '@/components/dashboard/ImpuestosPendientes'
 import { formatPeso } from '@/lib/utils'
+import BajasStockCard from '@/components/dashboard/BajasStockCard'
 
 async function getDashboard(session: { user: { id: string } }): Promise<IDashboard | null> {
   try {
@@ -131,10 +132,16 @@ export default async function DashboardPage() {
 )}
 
       {/* Tablas */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <StockBajoTable productos={data?.stockBajo ?? []} />
-        <UltimasVentas ventas={data?.ultimasVentas ?? []} />
-      </div>
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <StockBajoTable productos={data?.stockBajo ?? []} />
+  <UltimasVentas ventas={data?.ultimasVentas ?? []} />
+  <BajasStockCard
+    cantidad={data?.bajasMesCantidad ?? 0}
+    total={data?.bajasMesTotal ?? 0}
+    registros={data?.bajasMesRegistros ?? 0}
+    ultimas={data?.ultimasBajas ?? []}
+  />
+</div>
 
       {/* Impuestos */}
       <ImpuestosPendientes impuestos={data?.impuestosPendientes ?? []} />

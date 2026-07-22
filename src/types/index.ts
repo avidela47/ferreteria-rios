@@ -174,6 +174,18 @@ export interface IReporteMensual {
 }
 
 // ── DASHBOARD ─────────────────────────────────────────────────────────────
+export interface IBajaStock {
+  _id: string
+  numero: number
+  codigo: string
+  nombre: string
+  cantidad: number
+  precioCosto: number
+  motivo: string
+  nota: string
+  createdAt: Date
+}
+
 export interface IDashboard {
   ventasHoy: number
   ventasSemana: number
@@ -192,6 +204,10 @@ export interface IDashboard {
   gastosRecurrentesMes?: number
   margenBrutoPromedio?: number
   puntoEquilibrio?: number | null
+  bajasMesCantidad?: number
+  bajasMesTotal?: number
+  bajasMesRegistros?: number
+  ultimasBajas?: IBajaStock[]
 }
 
 // ── API RESPONSES ─────────────────────────────────────────────────────────
