@@ -16,6 +16,7 @@ import {
   BookOpen,
   ClipboardList,
   ListChecks,
+  PackageMinus,
 } from 'lucide-react'
 
 const menuCompleto = [
@@ -27,6 +28,7 @@ const menuCompleto = [
   { href: '/dashboard/compras', label: 'Compras', icon: TrendingUp, soloAdmin: true },
   { href: '/dashboard/presupuestos', label: 'Presupuestos', icon: ClipboardList, soloAdmin: true },
   { href: '/dashboard/proveedores', label: 'Proveedores', icon: Truck, soloAdmin: true },
+  { href: '/dashboard/bajas-stock', label: 'Bajas de Stock', icon: PackageMinus, soloAdmin: true },
   { href: '/dashboard/gastos', label: 'Gastos', icon: Receipt, soloAdmin: true },
   { href: '/dashboard/impuestos', label: 'Impuestos', icon: FileText, soloAdmin: true },
   { href: '/dashboard/reportes', label: 'Reportes', icon: FileText, soloAdmin: true },
