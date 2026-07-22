@@ -96,8 +96,14 @@ export async function PUT(
         ? 'Orden recibida — stock actualizado correctamente'
         : 'Orden actualizada correctamente',
     })
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('PUT /api/compras/[id]', error)
+    if (error && typeof error === 'object' && 'code' in error && error.code === 11000) {
+      return NextResponse.json(
+        { ok: false, error: 'Ya existe un producto con ese código en el stock. Corregí el código antes de recibir la orden.' },
+        { status: 400 }
+      )
+    }
     return NextResponse.json({ ok: false, error: 'Error del servidor' }, { status: 500 })
   }
 }
