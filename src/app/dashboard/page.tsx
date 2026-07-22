@@ -134,13 +134,15 @@ export default async function DashboardPage() {
       {/* Tablas */}
 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
   <StockBajoTable productos={data?.stockBajo ?? []} />
-  <UltimasVentas ventas={data?.ultimasVentas ?? []} />
-  <BajasStockCard
-    cantidad={data?.bajasMesCantidad ?? 0}
-    total={data?.bajasMesTotal ?? 0}
-    registros={data?.bajasMesRegistros ?? 0}
-    ultimas={data?.ultimasBajas ?? []}
-  />
+  <div className="space-y-6">
+    <UltimasVentas ventas={data?.ultimasVentas ?? []} />
+    <BajasStockCard
+      cantidad={data?.bajasMesCantidad ?? 0}
+      total={data?.bajasMesTotal ?? 0}
+      registros={data?.bajasMesRegistros ?? 0}
+      ultimas={data?.ultimasBajas ?? []}
+    />
+  </div>
 </div>
 
       {/* Impuestos */}
