@@ -48,6 +48,13 @@ export async function GET() {
     // el mes anterior termina justo donde arranca el actual (exclusivo)
     const finMesAnterior = inicioMes
 
+    const finMesActual = new Date(Date.UTC(
+      ahoraArg.getUTCFullYear(),
+      ahoraArg.getUTCMonth() + 1,
+      1,
+      3, 0, 0
+    ))
+
     const ventasHoy = await Sale.aggregate([
       { $match: { estado: 'completada', createdAt: { $gte: inicioDia } } },
       { $group: { _id: null, total: { $sum: '$total' }, ganancia: { $sum: '$ganancia' }, cantidad: { $sum: 1 } } },
@@ -80,6 +87,11 @@ export async function GET() {
 
     const gastosRecurrentesMes = await Expense.aggregate([
       { $match: { activo: true, recurrente: true, fecha: { $gte: inicioMes } } },
+      { $group: { _id: null, total: { $sum: '$monto' } } },
+    ])
+
+    const impuestosPagadosMes = await TaxRecord.aggregate([
+      { $match: { pagado: true, vencimiento: { $gte: inicioMes, $lt: finMesActual } } },
       { $group: { _id: null, total: { $sum: '$monto' } } },
     ])
 
@@ -137,9 +149,11 @@ export async function GET() {
         : null
 
     const totalGastosRecurrentesMes = gastosRecurrentesMes[0]?.total ?? 0
+    const totalImpuestosPagadosMes = impuestosPagadosMes[0]?.total ?? 0
+    const totalFijosMes = totalGastosRecurrentesMes + totalImpuestosPagadosMes
     const gananciaMesActual = ventasMes[0]?.ganancia ?? 0
     const margenBrutoPromedio = totalVentasMes > 0 ? gananciaMesActual / totalVentasMes : 0
-    const puntoEquilibrio = margenBrutoPromedio > 0 ? totalGastosRecurrentesMes / margenBrutoPromedio : null
+    const puntoEquilibrio = margenBrutoPromedio > 0 ? totalFijosMes / margenBrutoPromedio : null
 
     return NextResponse.json({
       ok: true,
@@ -153,7 +167,7 @@ export async function GET() {
         tendenciaVentasMes,
         gastosMes: totalGastosMes,
         tendenciaGastosMes,
-        gastosRecurrentesMes: totalGastosRecurrentesMes,
+        gastosRecurrentesMes: totalFijosMes,
         margenBrutoPromedio,
         puntoEquilibrio,
         stockBajo,
