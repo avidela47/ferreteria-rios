@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { ISale } from '@/types'
 import { formatPeso, formatFechaHora } from '@/lib/utils'
-import { Ban, Eye, X, Printer } from 'lucide-react'
+import { Ban, Eye, X, Printer, ChevronLeft, ChevronRight } from 'lucide-react'
 import { toast } from 'sonner'
 
 export default function VentasList() {
@@ -14,47 +14,53 @@ export default function VentasList() {
   const [ventas, setVentas] = useState<ISale[]>([])
   const [loading, setLoading] = useState(true)
   const [ventaDetalle, setVentaDetalle] = useState<ISale | null>(null)
+  const [pagina, setPagina] = useState(1)
+  const [total, setTotal] = useState(0)
+  const POR_PAGINA = 50
 
   useEffect(() => {
     const fetchVentas = async () => {
       setLoading(true)
-      const res = await fetch('/api/ventas?limite=50')
+      const res = await fetch('/api/ventas?limite=' + POR_PAGINA + '&pagina=' + pagina)
       const json = await res.json()
-      if (json.ok) setVentas(json.data)
+      if (json.ok) {
+        setVentas(json.data)
+        setTotal(json.total ?? 0)
+      }
       setLoading(false)
     }
     fetchVentas()
-  }, [])
+  }, [pagina])
 
   function anularVenta(id: string) {
-  toast('Seguro que queres anular esta venta? El stock se va a restaurar.', {
-    action: {
-      label: 'Anular',
-      onClick: async () => {
-        const res = await fetch('/api/ventas/' + id, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ estado: 'anulada' }),
-        })
-        const json = await res.json()
-        if (json.ok) {
-          toast.success('Venta anulada — stock restaurado')
-          setVentas(function (prev) {
-            return prev.map(function (v) {
-              return v._id === id ? Object.assign({}, v, { estado: 'anulada' }) : v
-            })
+    toast('Seguro que queres anular esta venta? El stock se va a restaurar.', {
+      action: {
+        label: 'Anular',
+        onClick: async () => {
+          const res = await fetch('/api/ventas/' + id, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ estado: 'anulada' }),
           })
-        } else {
-          toast.error('Solo el administrador puede anular ventas')
-        }
+          const json = await res.json()
+          if (json.ok) {
+            toast.success('Venta anulada — stock restaurado')
+            setVentas(function (prev) {
+              return prev.map(function (v) {
+                return v._id === id ? Object.assign({}, v, { estado: 'anulada' }) : v
+              })
+            })
+          } else {
+            toast.error('Solo el administrador puede anular ventas')
+          }
+        },
       },
-    },
-    cancel: {
-      label: 'Cancelar',
-      onClick: () => {},
-    },
-  })
-}
+      cancel: {
+        label: 'Cancelar',
+        onClick: () => {},
+      },
+    })
+  }
 
   const formaPagoBadge = function (forma: string) {
     const colores: Record<string, string> = {
@@ -65,6 +71,8 @@ export default function VentasList() {
     }
     return colores[forma] || 'bg-slate-100 text-slate-700'
   }
+
+  const totalPaginas = Math.ceil(total / POR_PAGINA)
 
   return (
     <div className="bg-white rounded-lg shadow-sm">
@@ -79,73 +87,97 @@ export default function VentasList() {
           No hay ventas registradas
         </div>
       ) : (
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="text-left text-slate-500 border-b border-slate-100">
-              <th className="px-4 py-3 font-medium">N°</th>
-              <th className="px-4 py-3 font-medium">Cliente</th>
-              <th className="px-4 py-3 font-medium">Fecha</th>
-              <th className="px-4 py-3 font-medium">Forma pago</th>
-              <th className="px-4 py-3 font-medium text-right">Total</th>
-              <th className="px-4 py-3 font-medium text-right">Ganancia</th>
-              <th className="px-4 py-3 font-medium text-center">Estado</th>
-              <th className="px-4 py-3 font-medium text-center">Items</th>
-              <th className="px-4 py-3 font-medium text-center">Accion</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ventas.map(function (v) {
-              return (
-                <tr key={v._id} className={'border-b border-slate-50 hover:bg-slate-50 ' + (v.estado === 'anulada' ? 'opacity-50' : '')}>
-                  <td className="px-4 py-3 text-slate-500 font-medium">#{v.numero}</td>
-                  <td className="px-4 py-3 text-slate-700">{v.cliente}</td>
-                  <td className="px-4 py-3 text-slate-400 text-xs">
-                    {formatFechaHora(v.createdAt)}
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className={'text-xs px-2 py-0.5 rounded-full font-medium ' + formaPagoBadge(v.formaPago)}>
-                      {v.formaPago}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-right font-medium text-slate-800">
-                    {formatPeso(v.total)}
-                  </td>
-                  <td className="px-4 py-3 text-right text-green-600 font-medium">
-                    {formatPeso(v.ganancia)}
-                  </td>
-                  <td className="px-4 py-3 text-center">
-                    <span className={'text-xs px-2 py-0.5 rounded-full font-medium ' + (v.estado === 'completada' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700')}>
-                      {v.estado}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-center text-slate-500">
-                    {v.items.length}
-                  </td>
-                  <td className="px-4 py-3 text-center">
-                    <div className="flex items-center justify-center gap-2">
-                      <button
-                        onClick={function () { setVentaDetalle(v) }}
-                        className="text-slate-400 hover:text-blue-500 cursor-pointer transition-colors"
-                        title="Ver detalle"
-                      >
-                        <Eye size={15} />
-                      </button>
-                      {esAdmin && v.estado === 'completada' && (
+        <>
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-left text-slate-500 border-b border-slate-100">
+                <th className="px-4 py-3 font-medium">N°</th>
+                <th className="px-4 py-3 font-medium">Cliente</th>
+                <th className="px-4 py-3 font-medium">Fecha</th>
+                <th className="px-4 py-3 font-medium">Forma pago</th>
+                <th className="px-4 py-3 font-medium text-right">Total</th>
+                <th className="px-4 py-3 font-medium text-right">Ganancia</th>
+                <th className="px-4 py-3 font-medium text-center">Estado</th>
+                <th className="px-4 py-3 font-medium text-center">Items</th>
+                <th className="px-4 py-3 font-medium text-center">Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ventas.map(function (v) {
+                return (
+                  <tr key={v._id} className={'border-b border-slate-50 hover:bg-slate-50 ' + (v.estado === 'anulada' ? 'opacity-50' : '')}>
+                    <td className="px-4 py-3 text-slate-500 font-medium">#{v.numero}</td>
+                    <td className="px-4 py-3 text-slate-700">{v.cliente}</td>
+                    <td className="px-4 py-3 text-slate-400 text-xs">
+                      {formatFechaHora(v.createdAt)}
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className={'text-xs px-2 py-0.5 rounded-full font-medium ' + formaPagoBadge(v.formaPago)}>
+                        {v.formaPago}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-right font-medium text-slate-800">
+                      {formatPeso(v.total)}
+                    </td>
+                    <td className="px-4 py-3 text-right text-green-600 font-medium">
+                      {formatPeso(v.ganancia)}
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <span className={'text-xs px-2 py-0.5 rounded-full font-medium ' + (v.estado === 'completada' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700')}>
+                        {v.estado}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-center text-slate-500">
+                      {v.items.length}
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <div className="flex items-center justify-center gap-2">
                         <button
-                          onClick={function () { anularVenta(v._id) }}
-                          className="text-slate-300 hover:text-red-500 cursor-pointer transition-colors"
-                          title="Anular venta"
+                          onClick={function () { setVentaDetalle(v) }}
+                          className="text-slate-400 hover:text-blue-500 cursor-pointer transition-colors"
+                          title="Ver detalle"
                         >
-                          <Ban size={15} />
+                          <Eye size={15} />
                         </button>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
+                        {esAdmin && v.estado === 'completada' && (
+                          <button
+                            onClick={function () { anularVenta(v._id) }}
+                            className="text-slate-300 hover:text-red-500 cursor-pointer transition-colors"
+                            title="Anular venta"
+                          >
+                            <Ban size={15} />
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+
+          <div className="flex items-center justify-between px-4 py-3 border-t border-slate-100">
+            <span className="text-sm text-slate-500">
+              {total} ventas · Página {pagina} de {totalPaginas}
+            </span>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={function () { setPagina(Math.max(1, pagina - 1)) }}
+                disabled={pagina === 1}
+                className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                onClick={function () { setPagina(Math.min(totalPaginas, pagina + 1)) }}
+                disabled={pagina === totalPaginas}
+                className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          </div>
+        </>
       )}
 
       {ventaDetalle && (
@@ -154,8 +186,7 @@ export default function VentasList() {
             <div className="flex items-center justify-between p-5 border-b">
               <h2 className="font-semibold text-slate-800">Venta #{ventaDetalle.numero}</h2>
               <div className="flex items-center gap-3">
-                
-                  <a href={'/imprimir-venta?id=' + ventaDetalle._id} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-700 cursor-pointer transition-colors" title="Imprimir ticket"><Printer size={18} /></a>
+                <a href={'/imprimir-venta?id=' + ventaDetalle._id} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-700 cursor-pointer transition-colors" title="Imprimir ticket"><Printer size={18} /></a>
                 <button onClick={function () { setVentaDetalle(null) }} className="text-slate-400 hover:text-slate-600 cursor-pointer">
                   <X size={20} />
                 </button>
