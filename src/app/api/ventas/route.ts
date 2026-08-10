@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
     const total = await Sale.countDocuments(filtro)
     const ventas = await Sale.find(filtro)
       .populate('vendedor', 'nombre')
-      .sort({ createdAt: -1 })
+      .sort({ createdAt: -1, _id: -1 })
       .skip((pagina - 1) * limite)
       .limit(limite)
 
