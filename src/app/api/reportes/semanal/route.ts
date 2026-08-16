@@ -3,63 +3,38 @@ import connectDB from '@/lib/db/mongoose'
 import Sale from '@/models/Sale'
 import Expense from '@/models/Expense'
 
+function lunesDeLaSemana(fecha: Date) {
+  const d = new Date(fecha)
+  const dia = d.getUTCDay()
+  const diff = dia === 0 ? -6 : 1 - dia
+  d.setUTCDate(d.getUTCDate() + diff)
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 3, 0, 0))
+}
 
 export async function GET(req: NextRequest) {
   try {
-    
-
     await connectDB()
 
     const { searchParams } = new URL(req.url)
-    const desde = searchParams.get('desde')
-    const hasta = searchParams.get('hasta')
+    const semanaParam = searchParams.get('semanaInicio')
 
     const ahora = new Date()
-    const inicioSemana = desde
-      ? new Date(desde)
-      : new Date(ahora.setDate(ahora.getDate() - ahora.getDay()))
-    inicioSemana.setHours(0, 0, 0, 0)
+    const offsetArgentina = 3 * 60 * 60 * 1000
+    const ahoraArg = new Date(ahora.getTime() - offsetArgentina)
 
-    const finSemana = hasta
-      ? new Date(hasta)
-      : new Date(inicioSemana)
-    if (!hasta) {
-      finSemana.setDate(inicioSemana.getDate() + 6)
-      finSemana.setHours(23, 59, 59, 999)
+    const inicioSemana = semanaParam
+      ? lunesDeLaSemana(new Date(semanaParam + 'T12:00:00Z'))
+      : lunesDeLaSemana(ahoraArg)
+
+    const finSemana = new Date(inicioSemana.getTime() + 7 * 24 * 60 * 60 * 1000)
+
+    const filtroVentas = {
+      estado: 'completada',
+      createdAt: { $gte: inicioSemana, $lt: finSemana },
     }
 
-    // Ventas por día
-    const ventasPorDia = await Sale.aggregate([
-      {
-        $match: {
-          estado: 'completada',
-          createdAt: { $gte: inicioSemana, $lte: finSemana },
-        },
-      },
-      {
-        $group: {
-          _id: { $dayOfWeek: '$createdAt' },
-          total: { $sum: '$total' },
-          cantidad: { $sum: 1 },
-        },
-      },
-      { $sort: { _id: 1 } },
-    ])
-
-    const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
-    const ventasPorDiaMapeadas = dias.map((dia, i) => {
-      const found = ventasPorDia.find((v) => v._id === i + 1)
-      return { dia, total: found?.total ?? 0, cantidad: found?.cantidad ?? 0 }
-    })
-
-    // Totales ventas
-    const totalesVentas = await Sale.aggregate([
-      {
-        $match: {
-          estado: 'completada',
-          createdAt: { $gte: inicioSemana, $lte: finSemana },
-        },
-      },
+    const totales = await Sale.aggregate([
+      { $match: filtroVentas },
       {
         $group: {
           _id: null,
@@ -71,14 +46,25 @@ export async function GET(req: NextRequest) {
       },
     ])
 
-    // Top productos
-    const topProductos = await Sale.aggregate([
+    const ventasPorDia = await Sale.aggregate([
+      { $match: filtroVentas },
       {
-        $match: {
-          estado: 'completada',
-          createdAt: { $gte: inicioSemana, $lte: finSemana },
+        $group: {
+          _id: { $dayOfWeek: '$createdAt' },
+          total: { $sum: '$total' },
         },
       },
+      { $sort: { _id: 1 } },
+    ])
+
+    const nombresDias = ['', 'Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado']
+    const diasSemana = [2, 3, 4, 5, 6, 7, 1].map(function (numDia) {
+      const encontrado = ventasPorDia.find(function (v) { return v._id === numDia })
+      return { dia: nombresDias[numDia], total: encontrado ? encontrado.total : 0 }
+    })
+
+    const topProductos = await Sale.aggregate([
+      { $match: filtroVentas },
       { $unwind: '$items' },
       {
         $group: {
@@ -88,38 +74,29 @@ export async function GET(req: NextRequest) {
         },
       },
       { $sort: { total: -1 } },
-      { $limit: 5 },
+      { $limit: 10 },
       { $project: { nombre: '$_id', cantidad: 1, total: 1, _id: 0 } },
     ])
 
-    // Gastos de la semana
-    const totalesGastos = await Expense.aggregate([
-      {
-        $match: {
-          activo: true,
-          fecha: { $gte: inicioSemana, $lte: finSemana },
-        },
-      },
+    const totalGastosAgg = await Expense.aggregate([
+      { $match: { activo: true, fecha: { $gte: inicioSemana, $lt: finSemana } } },
       { $group: { _id: null, total: { $sum: '$monto' } } },
     ])
 
-    const data = totalesVentas[0] ?? {
-      totalVentas: 0,
-      totalCostos: 0,
-      ganancia: 0,
-      cantidadVentas: 0,
-    }
+    const data = totales[0] ?? { totalVentas: 0, totalCostos: 0, ganancia: 0, cantidadVentas: 0 }
+    const totalGastos = totalGastosAgg[0]?.total ?? 0
 
     return NextResponse.json({
       ok: true,
       data: {
-        semana: `${inicioSemana.toLocaleDateString('es-AR')} — ${finSemana.toLocaleDateString('es-AR')}`,
+        inicioSemana: inicioSemana.toISOString(),
+        finSemana: new Date(finSemana.getTime() - 1).toISOString(),
         totalVentas: data.totalVentas,
         totalCostos: data.totalCostos,
-        totalGastos: totalesGastos[0]?.total ?? 0,
         ganancia: data.ganancia,
+        totalGastos,
         cantidadVentas: data.cantidadVentas,
-        ventasPorDia: ventasPorDiaMapeadas,
+        diasSemana,
         topProductos,
       },
     })
