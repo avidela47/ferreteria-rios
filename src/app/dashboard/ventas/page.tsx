@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Toaster } from 'sonner'
+import { Toaster, toast } from 'sonner'
 import VentasList from '@/components/ventas/VentasList'
 import NuevaVenta from '@/components/ventas/NuevaVenta'
 import { formatPeso } from '@/lib/utils'
@@ -19,6 +19,7 @@ export default function VentasPage() {
   const [vista, setVista] = useState<'lista' | 'nueva'>('lista')
   const [refresh, setRefresh] = useState(0)
   const [stats, setStats] = useState<Estadisticas | null>(null)
+  const [cajaAbierta, setCajaAbierta] = useState<boolean | null>(null)
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -29,16 +30,39 @@ export default function VentasPage() {
     fetchStats()
   }, [refresh])
 
+  useEffect(() => {
+    const fetchCaja = async () => {
+      const res = await fetch('/api/caja')
+      const json = await res.json()
+      setCajaAbierta(json.ok && json.data !== null)
+    }
+    fetchCaja()
+  }, [refresh])
+
+  function handleNuevaVenta() {
+    if (vista === 'nueva') {
+      setVista('lista')
+      return
+    }
+    if (!cajaAbierta) {
+      toast.error('Caja cerrada. Por favor abrir caja en el Dashboard. No olvidar contar todos los billetes.', {
+        duration: 5000,
+      })
+      return
+    }
+    setVista('nueva')
+  }
+
   return (
     <div className="p-6">
-      <Toaster richColors position="top-right" />
+      <Toaster richColors position="top-center" />
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-slate-800">Ventas</h1>
           <p className="text-slate-500 text-sm mt-1">Punto de venta e historial</p>
         </div>
         <button
-          onClick={() => setVista(vista === 'lista' ? 'nueva' : 'lista')}
+          onClick={handleNuevaVenta}
           className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-colors"
         >
           {vista === 'lista' ? '+ Nueva venta' : '← Volver'}
