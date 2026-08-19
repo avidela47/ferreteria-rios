@@ -39,15 +39,13 @@ export async function GET() {
       return NextResponse.json({ ok: true, data: null })
     }
 
-    const { inicio, fin } = inicioFinDiaArgentina()
-
-    const ventasEfectivo = await Sale.aggregate([
-      { $match: { estado: 'completada', formaPago: 'efectivo', createdAt: { $gte: inicio, $lt: fin } } },
+        const ventasEfectivo = await Sale.aggregate([
+      { $match: { estado: 'completada', formaPago: 'efectivo', createdAt: { $gte: caja.horaApertura } } },
       { $group: { _id: null, total: { $sum: '$total' } } },
     ])
 
     const ventasOtros = await Sale.aggregate([
-      { $match: { estado: 'completada', formaPago: { $ne: 'efectivo' }, createdAt: { $gte: inicio, $lt: fin } } },
+      { $match: { estado: 'completada', formaPago: { $ne: 'efectivo' }, createdAt: { $gte: caja.horaApertura } } },
       { $group: { _id: '$formaPago', total: { $sum: '$total' } } },
     ])
 
@@ -90,9 +88,9 @@ export async function POST(req: NextRequest) {
 
     const fechaHoy = fechaHoyArgentina()
 
-    const existente = await CashRegister.findOne({ fecha: fechaHoy, estado: 'abierta' })
+        const existente = await CashRegister.findOne({ estado: 'abierta' })
     if (existente) {
-      return NextResponse.json({ ok: false, error: 'Ya hay una caja abierta hoy' }, { status: 400 })
+      return NextResponse.json({ ok: false, error: 'Ya hay una caja abierta sin cerrar. Cerrala antes de abrir otra.' }, { status: 400 })
     }
 
     const caja = await CashRegister.create({
