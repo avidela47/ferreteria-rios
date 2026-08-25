@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import { Toaster } from 'sonner'
+import Link from 'next/link'
+import { Star } from 'lucide-react'
 import ReporteSemanal from '@/components/reportes/ReporteSemanal'
 import ReporteMensual from '@/components/reportes/ReporteMensual'
 
@@ -37,6 +39,13 @@ export default function ReportesPage() {
           >
             Mensual
           </button>
+          <Link
+            href="/dashboard/reportes/pareto"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-colors"
+          >
+            <Star size={15} className="text-yellow-500" />
+            Análisis 80/20
+          </Link>
         </div>
       </div>
 
