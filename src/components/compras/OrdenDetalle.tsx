@@ -186,7 +186,11 @@ export default function OrdenDetalle({ id }: Props) {
           </p>
         )}
 
-        <table className="w-full text-sm mb-6">
+        {/* Sin tfoot a propósito: al paginar la impresión en varias hojas, el tfoot
+            se ancla mal (Chrome lo trata como fila que "repite" y lo empuja al
+            corte de la primera hoja en vez de al final real del contenido).
+            El total ahora es un bloque normal después de la tabla. */}
+        <table className="w-full text-sm">
           <thead>
             <tr className="border-b-2 border-slate-200">
               <th className="text-left py-2 font-semibold text-slate-700">Código</th>
@@ -242,13 +246,13 @@ export default function OrdenDetalle({ id }: Props) {
               )
             })}
           </tbody>
-          <tfoot>
-            <tr className="border-t-2 border-slate-200">
-              <td colSpan={esEditable ? 4 : 3} className="py-3 text-right font-bold text-slate-800">TOTAL</td>
-              <td className="py-3 text-right font-bold text-orange-500 text-base">{formatPeso(totalActual)}</td>
-            </tr>
-          </tfoot>
         </table>
+
+        {/* Total: bloque normal (no tfoot), pegado al final real del contenido en impresión */}
+        <div className="flex justify-end border-t-2 border-slate-200 py-3 mb-6 break-inside-avoid">
+          <span className="font-bold text-slate-800 mr-6">TOTAL</span>
+          <span className="font-bold text-orange-500 text-base">{formatPeso(totalActual)}</span>
+        </div>
 
         {compra.nota && (
           <div className="border-t pt-4">
@@ -268,6 +272,7 @@ export default function OrdenDetalle({ id }: Props) {
     nav, aside, .print\\:hidden { display: none !important; }
     body { background: white; }
     * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    tr, .break-inside-avoid { break-inside: avoid; }
   }
 `}</style>
     </>
