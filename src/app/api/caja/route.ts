@@ -14,15 +14,6 @@ function fechaHoyArgentina() {
   return y + '-' + m + '-' + d
 }
 
-function inicioFinDiaArgentina() {
-  const ahora = new Date()
-  const offsetArgentina = 3 * 60 * 60 * 1000
-  const ahoraArg = new Date(ahora.getTime() - offsetArgentina)
-  const inicio = new Date(Date.UTC(ahoraArg.getUTCFullYear(), ahoraArg.getUTCMonth(), ahoraArg.getUTCDate(), 3, 0, 0))
-  const fin = new Date(inicio.getTime() + 24 * 60 * 60 * 1000)
-  return { inicio, fin }
-}
-
 export async function GET() {
   try {
     const session = await auth()
@@ -39,7 +30,7 @@ export async function GET() {
       return NextResponse.json({ ok: true, data: null })
     }
 
-        const ventasEfectivo = await Sale.aggregate([
+    const ventasEfectivo = await Sale.aggregate([
       { $match: { estado: 'completada', formaPago: 'efectivo', createdAt: { $gte: caja.horaApertura } } },
       { $group: { _id: null, total: { $sum: '$total' } } },
     ])
@@ -88,9 +79,12 @@ export async function POST(req: NextRequest) {
 
     const fechaHoy = fechaHoyArgentina()
 
-        const existente = await CashRegister.findOne({ estado: 'abierta' })
+    // Antes bloqueaba si existía CUALQUIER caja abierta sin importar la fecha.
+    // Eso hacía que una caja vieja mal cerrada frenara la apertura para siempre.
+    // Ahora solo bloquea si la caja abierta es la de HOY (mismo criterio que el GET).
+    const existente = await CashRegister.findOne({ fecha: fechaHoy, estado: 'abierta' })
     if (existente) {
-      return NextResponse.json({ ok: false, error: 'Ya hay una caja abierta sin cerrar. Cerrala antes de abrir otra.' }, { status: 400 })
+      return NextResponse.json({ ok: false, error: 'Ya hay una caja abierta hoy. Cerrala antes de abrir otra.' }, { status: 400 })
     }
 
     const caja = await CashRegister.create({
