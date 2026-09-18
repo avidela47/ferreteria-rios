@@ -21,7 +21,7 @@ export default function VentasChart({ data }: Props) {
       </div>
       <div className="relative h-64 w-full min-w-0 overflow-hidden">
         <div className="absolute inset-0">
-          <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+          <ResponsiveContainer width="100%" height="100%" minWidth={0} debounce={200}>
             <LineChart data={data} margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
               <XAxis
