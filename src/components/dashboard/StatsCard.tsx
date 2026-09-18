@@ -78,7 +78,7 @@ export default function StatsCard({
 
   return (
     <div
-      className={`bg-white rounded-xl p-5 shadow-sm border-l-4 ${s.borde} hover:shadow-md transition-shadow duration-200`}
+      className={`bg-white rounded-2xl p-5 shadow-sm border-l-4 ${s.borde} hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200`}
     >
       <div className="flex items-start justify-between mb-3">
         <p className="text-sm text-slate-500 font-medium">{titulo}</p>
@@ -94,7 +94,7 @@ export default function StatsCard({
       <div className="flex items-center gap-2 mt-2">
         {hayTendencia && (
           <span
-            className={`inline-flex items-center gap-1 text-xs font-semibold px-1.5 py-0.5 rounded ${
+            className={`inline-flex items-center gap-1 text-xs font-semibold px-1.5 py-0.5 rounded-full ${
               tendenciaEsBuena ? 'text-emerald-700 bg-emerald-50' : 'text-red-700 bg-red-50'
             }`}
           >

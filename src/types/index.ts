@@ -58,7 +58,6 @@ export type EstadoVenta = 'completada' | 'anulada'
 
 export interface ISaleItem {
   producto: IProduct | string
-  codigo?: string
   nombre: string
   cantidad: number
   precioCosto: number
@@ -87,12 +86,10 @@ export type EstadoCompra = 'borrador' | 'enviada' | 'recibida' | 'cancelada'
 
 export interface IPurchaseItem {
   producto: IProduct | string
-  codigo?: string
   nombre: string
   cantidad: number
   precioCosto: number
   subtotal: number
-  nuevo?: boolean
 }
 
 export interface IPurchase {
@@ -174,18 +171,6 @@ export interface IReporteMensual {
 }
 
 // ── DASHBOARD ─────────────────────────────────────────────────────────────
-export interface IBajaStock {
-  _id: string
-  numero: number
-  codigo: string
-  nombre: string
-  cantidad: number
-  precioCosto: number
-  motivo: string
-  nota: string
-  createdAt: Date
-}
-
 export interface IDashboard {
   ventasHoy: number
   ventasSemana: number
@@ -201,13 +186,18 @@ export interface IDashboard {
   tendenciaVentasMes?: number | null
   /** % de variación de gastos del mes vs. mes anterior. null si no hay dato del mes anterior */
   tendenciaGastosMes?: number | null
-  gastosRecurrentesMes?: number
-  margenBrutoPromedio?: number
+  /** Punto de equilibrio del mes en curso, null si no se puede calcular (sin ventas todavía) */
   puntoEquilibrio?: number | null
+  margenBrutoPromedio?: number
+  gastosRecurrentesMes?: number
   bajasMesCantidad?: number
   bajasMesTotal?: number
   bajasMesRegistros?: number
-  ultimasBajas?: IBajaStock[]
+  ultimasBajas?: unknown[]
+  /** Ventas de los últimos 30 días, un punto por día, para el gráfico de línea */
+  ventasPorDia?: { fecha: string; total: number; ganancia: number }[]
+  /** Cantidad de productos activos por categoría (top 5 + Otros), para el gráfico donut */
+  productosPorCategoria?: { categoria: string; cantidad: number }[]
 }
 
 // ── API RESPONSES ─────────────────────────────────────────────────────────

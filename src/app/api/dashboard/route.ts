@@ -155,6 +155,56 @@ export async function GET() {
     const margenBrutoPromedio = totalVentasMes > 0 ? gananciaMesActual / totalVentasMes : 0
     const puntoEquilibrio = margenBrutoPromedio > 0 ? totalFijosMes / margenBrutoPromedio : null
 
+    // --- NUEVO: ventas de los últimos 30 días, para el gráfico de línea ---
+    const hace30dias = new Date(inicioDia)
+    hace30dias.setUTCDate(hace30dias.getUTCDate() - 29) // incluye hoy = 30 días
+
+    const ventasPorDiaRaw = await Sale.aggregate([
+      { $match: { estado: 'completada', createdAt: { $gte: hace30dias } } },
+      {
+        $group: {
+          _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt', timezone: '-03:00' } },
+          total: { $sum: '$total' },
+          ganancia: { $sum: '$ganancia' },
+        },
+      },
+    ])
+    const mapaVentasPorDia = new Map(ventasPorDiaRaw.map((v) => [v._id, v]))
+    const ventasPorDia = []
+    for (let i = 0; i < 30; i++) {
+      const dia = new Date(hace30dias)
+      dia.setUTCDate(hace30dias.getUTCDate() + i)
+      const clave = dia.toISOString().slice(0, 10)
+      const encontrado = mapaVentasPorDia.get(clave)
+      ventasPorDia.push({
+        fecha: clave.slice(8, 10) + '/' + clave.slice(5, 7),
+        total: encontrado?.total ?? 0,
+        ganancia: encontrado?.ganancia ?? 0,
+      })
+    }
+
+    // --- NUEVO: productos activos por categoría, para el donut ---
+    const productosConCategoria = await Product.find({ activo: true })
+      .select('categoria')
+      .populate('categoria', 'nombre')
+      .lean()
+
+    const conteoPorCategoria: Record<string, number> = {}
+    productosConCategoria.forEach((p) => {
+      const cat = p.categoria as unknown as { nombre?: string } | null
+      const nombre = cat?.nombre ?? 'Sin categoría'
+      conteoPorCategoria[nombre] = (conteoPorCategoria[nombre] ?? 0) + 1
+    })
+    const categoriasOrdenadas = Object.entries(conteoPorCategoria)
+      .map(([categoria, cantidad]) => ({ categoria, cantidad }))
+      .sort((a, b) => b.cantidad - a.cantidad)
+
+    const topCategorias = categoriasOrdenadas.slice(0, 5)
+    const restoCategorias = categoriasOrdenadas.slice(5)
+    const totalResto = restoCategorias.reduce((acc, c) => acc + c.cantidad, 0)
+    const productosPorCategoria =
+      totalResto > 0 ? [...topCategorias, { categoria: 'Otros', cantidad: totalResto }] : topCategorias
+
     return NextResponse.json({
       ok: true,
       data: {
@@ -177,6 +227,8 @@ export async function GET() {
         bajasMesTotal: bajasMes[0]?.total ?? 0,
         bajasMesRegistros: bajasMes[0]?.registros ?? 0,
         ultimasBajas,
+        ventasPorDia,
+        productosPorCategoria,
       },
     })
   } catch (error) {

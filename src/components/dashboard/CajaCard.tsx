@@ -80,7 +80,7 @@ export default function CajaCard() {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-lg shadow-sm p-5 border-l-4 border-slate-200">
+      <div className="bg-white rounded-2xl shadow-sm p-5 border-l-4 border-slate-200">
         <p className="text-sm text-slate-400">Cargando caja...</p>
       </div>
     )
@@ -88,9 +88,9 @@ export default function CajaCard() {
 
   if (!caja) {
     return (
-      <div className="bg-white rounded-lg shadow-sm p-5 border-l-4 border-slate-300">
+      <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5 border-l-4 border-slate-300">
         <div className="flex items-center gap-2 mb-3">
-          <div className="bg-slate-100 text-slate-500 p-1.5 rounded-lg">
+          <div className="bg-slate-100 text-slate-500 p-1.5 rounded-full">
             <Unlock size={16} />
           </div>
           <h2 className="font-semibold text-slate-800">Caja cerrada</h2>
@@ -102,12 +102,12 @@ export default function CajaCard() {
             value={montoInicial}
             onChange={function (e) { setMontoInicial(e.target.value) }}
             placeholder="Ej: 20000"
-            className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+            className="flex-1 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
           />
           <button
             onClick={abrirCaja}
             disabled={abriendo}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-colors disabled:opacity-50"
+            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-medium cursor-pointer transition-colors disabled:opacity-50"
           >
             {abriendo ? 'Abriendo...' : 'Abrir caja'}
           </button>
@@ -117,10 +117,10 @@ export default function CajaCard() {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-5 border-l-4 border-green-400">
+    <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5 border-l-4 border-green-400">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <div className="bg-green-100 text-green-600 p-1.5 rounded-lg">
+          <div className="bg-green-100 text-green-600 p-1.5 rounded-full">
             <Wallet size={16} />
           </div>
           <h2 className="font-semibold text-slate-800">Caja abierta</h2>
@@ -150,7 +150,7 @@ export default function CajaCard() {
       {!mostrarCierre ? (
         <button
           onClick={function () { setMostrarCierre(true) }}
-          className="w-full flex items-center justify-center gap-2 border border-slate-200 text-slate-600 hover:bg-slate-50 py-2 rounded-lg text-sm font-medium cursor-pointer transition-colors"
+          className="w-full flex items-center justify-center gap-2 border border-slate-200 text-slate-600 hover:bg-slate-50 py-2 rounded-xl text-sm font-medium cursor-pointer transition-colors"
         >
           <Lock size={15} /> Cerrar caja
         </button>
@@ -162,14 +162,14 @@ export default function CajaCard() {
           <div className="flex gap-2">
             <button
               onClick={function () { setMostrarCierre(false) }}
-              className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-lg text-sm cursor-pointer transition-colors"
+              className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-xl text-sm cursor-pointer transition-colors"
             >
               Cancelar
             </button>
             <button
               onClick={cerrarCaja}
               disabled={cerrando}
-              className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg text-sm font-medium cursor-pointer transition-colors disabled:opacity-50"
+              className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-xl text-sm font-medium cursor-pointer transition-colors disabled:opacity-50"
             >
               {cerrando ? 'Cerrando...' : 'Confirmar cierre'}
             </button>

@@ -8,6 +8,8 @@ import ImpuestosPendientes from '@/components/dashboard/ImpuestosPendientes'
 import { formatPeso } from '@/lib/utils'
 import BajasStockCard from '@/components/dashboard/BajasStockCard'
 import CajaCard from '@/components/dashboard/CajaCard'
+import VentasChart from '@/components/dashboard/VentasChart'
+import CategoriasChart from '@/components/dashboard/CategoriasChart'
 
 async function getDashboard(session: { user: { id: string } }): Promise<IDashboard | null> {
   try {
@@ -63,12 +65,24 @@ export default async function DashboardPage() {
 
   const data = await getDashboard(session)
 
+  const fechaHoy = new Date().toLocaleDateString('es-AR', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
+
   return (
     <div className="p-6 space-y-6 bg-slate-50 min-h-screen">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-slate-800">Dashboard</h1>
-        <p className="text-slate-500 text-sm mt-1">Resumen general del negocio</p>
+      <div className="flex items-start justify-between flex-wrap gap-2">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-800">
+            Hola, {session.user?.nombre ?? ''} 👋
+          </h1>
+          <p className="text-slate-500 text-sm mt-1">Resumen general del negocio</p>
+        </div>
+        <p className="text-sm text-slate-400 capitalize">{fechaHoy}</p>
       </div>
 
       {/* Stats */}
@@ -105,50 +119,58 @@ export default async function DashboardPage() {
           invertirColorTendencia
         />
       </div>
-      
-{/* Punto de equilibrio y Caja */}
-<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-  {data?.puntoEquilibrio != null && (
-    <div className="bg-white rounded-xl shadow-sm p-5 border border-slate-100">
-      <div className="flex items-center justify-between mb-2">
-        <h3 className="text-sm font-semibold text-slate-700">Punto de equilibrio del mes</h3>
-        <span className="text-xs text-slate-400">
-          Margen bruto promedio: {((data?.margenBrutoPromedio ?? 0) * 100).toFixed(1)}%
-        </span>
+
+      {/* Gráficos */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+          <VentasChart data={data?.ventasPorDia ?? []} />
+        </div>
+        <CategoriasChart data={data?.productosPorCategoria ?? []} />
       </div>
-      <p className="text-2xl font-bold text-slate-800">{formatPeso(data.puntoEquilibrio)}</p>
-      <p className="text-xs text-slate-500 mt-1">
-        Necesitás facturar esto para cubrir tus gastos fijos ({formatPeso(data?.gastosRecurrentesMes ?? 0)}) este mes
-      </p>
-      <div className="mt-3 h-2 bg-slate-100 rounded-full overflow-hidden">
-        <div
-          className={`h-full rounded-full transition-all ${(data?.ventasMes ?? 0) >= data.puntoEquilibrio ? 'bg-green-500' : 'bg-orange-500'}`}
-          style={{ width: `${Math.min(100, ((data?.ventasMes ?? 0) / data.puntoEquilibrio) * 100)}%` }}
-        />
+
+      {/* Punto de equilibrio y Caja */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {data?.puntoEquilibrio != null && (
+          <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5 border border-slate-100">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-sm font-semibold text-slate-700">Punto de equilibrio del mes</h3>
+              <span className="text-xs text-slate-400">
+                Margen bruto promedio: {((data?.margenBrutoPromedio ?? 0) * 100).toFixed(1)}%
+              </span>
+            </div>
+            <p className="text-2xl font-bold text-slate-800">{formatPeso(data.puntoEquilibrio)}</p>
+            <p className="text-xs text-slate-500 mt-1">
+              Necesitás facturar esto para cubrir tus gastos fijos ({formatPeso(data?.gastosRecurrentesMes ?? 0)}) este mes
+            </p>
+            <div className="mt-3 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+              <div
+                className={`h-full rounded-full transition-all ${(data?.ventasMes ?? 0) >= data.puntoEquilibrio ? 'bg-green-500' : 'bg-orange-500'}`}
+                style={{ width: `${Math.min(100, ((data?.ventasMes ?? 0) / data.puntoEquilibrio) * 100)}%` }}
+              />
+            </div>
+            <p className="text-xs text-slate-400 mt-1">
+              {(data?.ventasMes ?? 0) >= data.puntoEquilibrio
+                ? '✓ Ya superaste el punto de equilibrio este mes'
+                : `Facturaste ${formatPeso(data?.ventasMes ?? 0)} de ${formatPeso(data.puntoEquilibrio)} necesarios`}
+            </p>
+          </div>
+        )}
+        <CajaCard />
       </div>
-      <p className="text-xs text-slate-400 mt-1">
-        {(data?.ventasMes ?? 0) >= data.puntoEquilibrio
-          ? '✓ Ya superaste el punto de equilibrio este mes'
-          : `Facturaste ${formatPeso(data?.ventasMes ?? 0)} de ${formatPeso(data.puntoEquilibrio)} necesarios`}
-      </p>
-    </div>
-  )}
-  <CajaCard />
-</div>
 
       {/* Tablas */}
-<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-  <StockBajoTable productos={data?.stockBajo ?? []} />
-  <div className="space-y-6">
-    <UltimasVentas ventas={data?.ultimasVentas ?? []} />
-    <BajasStockCard
-      cantidad={data?.bajasMesCantidad ?? 0}
-      total={data?.bajasMesTotal ?? 0}
-      registros={data?.bajasMesRegistros ?? 0}
-      ultimas={data?.ultimasBajas ?? []}
-    />
-  </div>
-</div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <StockBajoTable productos={data?.stockBajo ?? []} />
+        <div className="space-y-6">
+          <UltimasVentas ventas={data?.ultimasVentas ?? []} />
+          <BajasStockCard
+            cantidad={data?.bajasMesCantidad ?? 0}
+            total={data?.bajasMesTotal ?? 0}
+            registros={data?.bajasMesRegistros ?? 0}
+            ultimas={data?.ultimasBajas ?? []}
+          />
+        </div>
+      </div>
 
       {/* Impuestos */}
       <ImpuestosPendientes impuestos={data?.impuestosPendientes ?? []} />
