@@ -19,7 +19,7 @@ export default function VentasChart({ data }: Props) {
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-sm font-semibold text-slate-700">Ventas últimos 30 días</h3>
       </div>
-      <div className="h-64">
+      <div className="h-48 w-full min-w-0 overflow-hidden">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
