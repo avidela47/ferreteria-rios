@@ -122,10 +122,12 @@ export default async function DashboardPage() {
 
       {/* Gráficos */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <VentasChart data={data?.ventasPorDia ?? []} />
+        <div className="lg:col-span-2 min-w-0">
+          <VentasChart data={data?.progresoMes ?? []} puntoEquilibrio={data?.puntoEquilibrio} />
         </div>
-        <CategoriasChart data={data?.productosPorCategoria ?? []} />
+        <div className="min-w-0">
+          <CategoriasChart data={data?.productosPorCategoria ?? []} />
+        </div>
       </div>
 
       {/* Punto de equilibrio y Caja */}

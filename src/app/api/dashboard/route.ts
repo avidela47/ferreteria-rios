@@ -155,12 +155,12 @@ export async function GET() {
     const margenBrutoPromedio = totalVentasMes > 0 ? gananciaMesActual / totalVentasMes : 0
     const puntoEquilibrio = margenBrutoPromedio > 0 ? totalFijosMes / margenBrutoPromedio : null
 
-    // --- NUEVO: ventas de los últimos 30 días, para el gráfico de línea ---
-    const hace30dias = new Date(inicioDia)
-    hace30dias.setUTCDate(hace30dias.getUTCDate() - 29) // incluye hoy = 30 días
+    // --- NUEVO: progreso acumulado del mes en curso (ventas, ganancia, gastos fijos) ---
+    // para graficar contra el punto de equilibrio, ya que ambos son conceptos del mes calendario
+    const diasTranscurridos = ahoraArg.getUTCDate()
 
-    const ventasPorDiaRaw = await Sale.aggregate([
-      { $match: { estado: 'completada', createdAt: { $gte: hace30dias } } },
+    const ventasPorDiaMesRaw = await Sale.aggregate([
+      { $match: { estado: 'completada', createdAt: { $gte: inicioMes, $lt: finMesActual } } },
       {
         $group: {
           _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt', timezone: '-03:00' } },
@@ -169,17 +169,50 @@ export async function GET() {
         },
       },
     ])
-    const mapaVentasPorDia = new Map(ventasPorDiaRaw.map((v) => [v._id, v]))
-    const ventasPorDia = []
-    for (let i = 0; i < 30; i++) {
-      const dia = new Date(hace30dias)
-      dia.setUTCDate(hace30dias.getUTCDate() + i)
-      const clave = dia.toISOString().slice(0, 10)
-      const encontrado = mapaVentasPorDia.get(clave)
-      ventasPorDia.push({
-        fecha: clave.slice(8, 10) + '/' + clave.slice(5, 7),
-        total: encontrado?.total ?? 0,
-        ganancia: encontrado?.ganancia ?? 0,
+    const mapaVentasPorDiaMes = new Map(ventasPorDiaMesRaw.map((v) => [v._id, v]))
+
+    const gastosFijosPorDiaRaw = await Expense.aggregate([
+      { $match: { activo: true, recurrente: true, fecha: { $gte: inicioMes, $lt: finMesActual } } },
+      {
+        $group: {
+          _id: { $dateToString: { format: '%Y-%m-%d', date: '$fecha', timezone: '-03:00' } },
+          total: { $sum: '$monto' },
+        },
+      },
+    ])
+    const impuestosPorDiaRaw = await TaxRecord.aggregate([
+      { $match: { pagado: true, vencimiento: { $gte: inicioMes, $lt: finMesActual } } },
+      {
+        $group: {
+          _id: { $dateToString: { format: '%Y-%m-%d', date: '$vencimiento', timezone: '-03:00' } },
+          total: { $sum: '$monto' },
+        },
+      },
+    ])
+    const mapaGastosFijosPorDia = new Map<string, number>()
+    gastosFijosPorDiaRaw.forEach((g) => {
+      mapaGastosFijosPorDia.set(g._id, (mapaGastosFijosPorDia.get(g._id) ?? 0) + g.total)
+    })
+    impuestosPorDiaRaw.forEach((g) => {
+      mapaGastosFijosPorDia.set(g._id, (mapaGastosFijosPorDia.get(g._id) ?? 0) + g.total)
+    })
+
+    let acumVentas = 0
+    let acumGanancia = 0
+    let acumGastosFijos = 0
+    const progresoMes = []
+    for (let dia = 1; dia <= diasTranscurridos; dia++) {
+      const fechaDelDia = new Date(Date.UTC(ahoraArg.getUTCFullYear(), ahoraArg.getUTCMonth(), dia, 3, 0, 0))
+      const clave = fechaDelDia.toISOString().slice(0, 10)
+      const ventaDia = mapaVentasPorDiaMes.get(clave)
+      acumVentas += ventaDia?.total ?? 0
+      acumGanancia += ventaDia?.ganancia ?? 0
+      acumGastosFijos += mapaGastosFijosPorDia.get(clave) ?? 0
+      progresoMes.push({
+        dia,
+        ventasAcumuladas: Math.round(acumVentas),
+        gananciaAcumulada: Math.round(acumGanancia),
+        gastosFijosAcumulados: Math.round(acumGastosFijos),
       })
     }
 
@@ -227,7 +260,7 @@ export async function GET() {
         bajasMesTotal: bajasMes[0]?.total ?? 0,
         bajasMesRegistros: bajasMes[0]?.registros ?? 0,
         ultimasBajas,
-        ventasPorDia,
+        progresoMes,
         productosPorCategoria,
       },
     })

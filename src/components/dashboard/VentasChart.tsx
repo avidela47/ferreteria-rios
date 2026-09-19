@@ -1,23 +1,31 @@
 'use client'
 
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, ReferenceLine } from 'recharts'
 import { formatPeso } from '@/lib/utils'
 
 interface Punto {
-  fecha: string
-  total: number
-  ganancia: number
+  dia: number
+  ventasAcumuladas: number
+  gananciaAcumulada: number
+  gastosFijosAcumulados: number
 }
 
 interface Props {
   data: Punto[]
+  puntoEquilibrio?: number | null
 }
 
-export default function VentasChart({ data }: Props) {
+const NOMBRES: Record<string, string> = {
+  ventasAcumuladas: 'Ventas',
+  gananciaAcumulada: 'Ganancia',
+  gastosFijosAcumulados: 'Gastos fijos',
+}
+
+export default function VentasChart({ data, puntoEquilibrio }: Props) {
   return (
     <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5 border border-slate-100">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-semibold text-slate-700">Ventas últimos 30 días</h3>
+        <h3 className="text-sm font-semibold text-slate-700">Progreso del mes vs. punto de equilibrio</h3>
       </div>
       <div className="relative h-64 w-full min-w-0 overflow-hidden">
         <div className="absolute inset-0">
@@ -25,11 +33,11 @@ export default function VentasChart({ data }: Props) {
             <LineChart data={data} margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
               <XAxis
-                dataKey="fecha"
+                dataKey="dia"
                 tick={{ fontSize: 11, fill: '#94a3b8' }}
                 axisLine={false}
                 tickLine={false}
-                interval={4}
+                label={{ value: 'Día del mes', position: 'insideBottom', offset: -2, fontSize: 10, fill: '#cbd5e1' }}
               />
               <YAxis
                 tick={{ fontSize: 11, fill: '#94a3b8' }}
@@ -40,20 +48,40 @@ export default function VentasChart({ data }: Props) {
               />
               <Tooltip
                 formatter={function (value, name) {
-                  return [formatPeso(Number(value ?? 0)), name === 'total' ? 'Ventas' : 'Ganancia']
+                  const clave = String(name)
+                  return [formatPeso(Number(value ?? 0)), NOMBRES[clave] ?? clave]
                 }}
                 labelFormatter={function (label) { return 'Día ' + label }}
-                contentStyle={{ borderRadius: 12, border: '1px solid #e2e8f0', fontSize: 12 }}
+                contentStyle={{ borderRadius: 12, border: '1px solid #e2e8f0', fontSize: 12, backgroundColor: '#fff' }}
               />
-              <Line type="monotone" dataKey="total" stroke="#f97316" strokeWidth={2.5} dot={false} />
-              <Line type="monotone" dataKey="ganancia" stroke="#22c55e" strokeWidth={2.5} dot={false} />
+              {puntoEquilibrio != null && (
+                <ReferenceLine
+                  y={puntoEquilibrio}
+                  stroke="#64748b"
+                  strokeDasharray="6 4"
+                  strokeWidth={1.5}
+                  label={{
+                    value: 'Punto de equilibrio',
+                    position: 'insideTopRight',
+                    fontSize: 10,
+                    fill: '#64748b',
+                  }}
+                />
+              )}
+              <Line type="monotone" dataKey="ventasAcumuladas" stroke="#f97316" strokeWidth={2.5} dot={false} />
+              <Line type="monotone" dataKey="gananciaAcumulada" stroke="#22c55e" strokeWidth={2.5} dot={false} />
+              <Line type="monotone" dataKey="gastosFijosAcumulados" stroke="#ef4444" strokeWidth={2} strokeDasharray="4 2" dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>
       </div>
-      <div className="flex items-center gap-4 mt-2 text-xs text-slate-500">
-        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-orange-500 inline-block" /> Ventas</span>
-        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-green-500 inline-block" /> Ganancia</span>
+      <div className="flex flex-wrap items-center gap-4 mt-2 text-xs text-slate-500">
+        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-orange-500 inline-block" /> Ventas acumuladas</span>
+        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-green-500 inline-block" /> Ganancia acumulada</span>
+        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block" /> Gastos fijos acumulados</span>
+        {puntoEquilibrio != null && (
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-0.5 bg-slate-400 inline-block" /> Punto de equilibrio</span>
+        )}
       </div>
     </div>
   )
