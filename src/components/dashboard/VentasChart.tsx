@@ -54,23 +54,25 @@ export default function VentasChart({ data, puntoEquilibrio }: Props) {
                 labelFormatter={function (label) { return 'Día ' + label }}
                 contentStyle={{ borderRadius: 12, border: '1px solid #e2e8f0', fontSize: 12, backgroundColor: '#fff' }}
               />
+              <Line type="monotone" dataKey="ventasAcumuladas" stroke="#f97316" strokeWidth={2.5} dot={false} />
+              <Line type="monotone" dataKey="gananciaAcumulada" stroke="#22c55e" strokeWidth={2.5} dot={false} />
+              <Line type="monotone" dataKey="gastosFijosAcumulados" stroke="#a855f7" strokeWidth={2} strokeDasharray="4 2" dot={false} />
               {puntoEquilibrio != null && (
                 <ReferenceLine
                   y={puntoEquilibrio}
-                  stroke="#64748b"
+                  ifOverflow="extendDomain"
+                  stroke="#0f172a"
                   strokeDasharray="6 4"
-                  strokeWidth={1.5}
+                  strokeWidth={2}
                   label={{
                     value: 'Punto de equilibrio',
                     position: 'insideTopRight',
                     fontSize: 10,
-                    fill: '#64748b',
+                    fontWeight: 600,
+                    fill: '#0f172a',
                   }}
                 />
               )}
-              <Line type="monotone" dataKey="ventasAcumuladas" stroke="#f97316" strokeWidth={2.5} dot={false} />
-              <Line type="monotone" dataKey="gananciaAcumulada" stroke="#22c55e" strokeWidth={2.5} dot={false} />
-              <Line type="monotone" dataKey="gastosFijosAcumulados" stroke="#ef4444" strokeWidth={2} strokeDasharray="4 2" dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -78,9 +80,9 @@ export default function VentasChart({ data, puntoEquilibrio }: Props) {
       <div className="flex flex-wrap items-center gap-4 mt-2 text-xs text-slate-500">
         <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-orange-500 inline-block" /> Ventas acumuladas</span>
         <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-green-500 inline-block" /> Ganancia acumulada</span>
-        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block" /> Gastos fijos acumulados</span>
+        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-purple-500 inline-block" /> Gastos fijos acumulados</span>
         {puntoEquilibrio != null && (
-          <span className="flex items-center gap-1.5"><span className="w-2.5 h-0.5 bg-slate-400 inline-block" /> Punto de equilibrio</span>
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-0.5 bg-slate-900 inline-block" /> Punto de equilibrio</span>
         )}
       </div>
     </div>
