@@ -49,7 +49,7 @@ export async function PUT(
       return NextResponse.json({ ok: false, error: 'Fiado no encontrado' }, { status: 404 })
     }
 
-    // --- Acción: marcar como pagado. Genera la venta correspondiente, NO vuelve a tocar stock (ya se descontó al cargar el fiado) ---
+    // --- Acción: marcar como pagado. Genera la venta correspondiente, NO vuelve a tocar stock ---
     if (body.estado === 'pagado') {
       if (fiado.estado === 'pagado') {
         return NextResponse.json({ ok: false, error: 'Este fiado ya está pagado' }, { status: 400 })
@@ -63,7 +63,7 @@ export async function PUT(
         cliente: fiado.cliente,
         items: fiado.items.map(function (item) {
           return {
-            producto: item.producto || undefined,
+            producto: item.producto,
             codigo: item.codigo,
             nombre: item.nombre,
             cantidad: item.cantidad,
@@ -95,35 +95,32 @@ export async function PUT(
     }
 
     if (body.items) {
-      // Devolver el stock de los items viejos que venían del inventario real
+      // Devolver el stock de los items viejos
       for (const itemViejo of fiado.items) {
-        if (itemViejo.producto) {
-          await Product.findByIdAndUpdate(itemViejo.producto, { $inc: { cantidad: itemViejo.cantidad } })
-        }
+        await Product.findByIdAndUpdate(itemViejo.producto, { $inc: { cantidad: itemViejo.cantidad } })
       }
 
       // Validar y descontar stock de los items nuevos
       let total = 0
       let costoTotal = 0
       for (const item of body.items) {
-        if (item.producto) {
-          const producto = await Product.findById(item.producto)
-          if (!producto) {
-            return NextResponse.json({ ok: false, error: `Producto ${item.nombre} no encontrado` }, { status: 404 })
-          }
-          if (producto.cantidad < item.cantidad) {
-            return NextResponse.json({ ok: false, error: `Stock insuficiente para ${producto.nombre}` }, { status: 400 })
-          }
-          item.precioCosto = producto.precioCosto
+        if (!item.producto) {
+          return NextResponse.json({ ok: false, error: `${item.nombre || 'Un producto'} no está vinculado al stock` }, { status: 400 })
         }
+        const producto = await Product.findById(item.producto)
+        if (!producto) {
+          return NextResponse.json({ ok: false, error: `Producto ${item.nombre} no encontrado` }, { status: 404 })
+        }
+        if (producto.cantidad < item.cantidad) {
+          return NextResponse.json({ ok: false, error: `Stock insuficiente para ${producto.nombre}` }, { status: 400 })
+        }
+        item.precioCosto = producto.precioCosto
         item.subtotal = item.precioVenta * item.cantidad
         total += item.subtotal
-        costoTotal += (item.precioCosto || 0) * item.cantidad
+        costoTotal += item.precioCosto * item.cantidad
       }
       for (const item of body.items) {
-        if (item.producto) {
-          await Product.findByIdAndUpdate(item.producto, { $inc: { cantidad: -item.cantidad } })
-        }
+        await Product.findByIdAndUpdate(item.producto, { $inc: { cantidad: -item.cantidad } })
       }
 
       fiado.items = body.items
@@ -167,11 +164,9 @@ export async function DELETE(
       )
     }
 
-    // Devolver stock de los items que venían del inventario real
+    // Devolver stock
     for (const item of fiado.items) {
-      if (item.producto) {
-        await Product.findByIdAndUpdate(item.producto, { $inc: { cantidad: item.cantidad } })
-      }
+      await Product.findByIdAndUpdate(item.producto, { $inc: { cantidad: item.cantidad } })
     }
 
     await Fiado.findByIdAndDelete(id)

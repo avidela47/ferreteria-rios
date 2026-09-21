@@ -1,14 +1,13 @@
 import mongoose, { Schema, Document } from 'mongoose'
 
 export interface IFiadoItemDocument {
-  producto?: mongoose.Types.ObjectId
+  producto: mongoose.Types.ObjectId
   codigo?: string
   nombre: string
   cantidad: number
   precioCosto: number
   precioVenta: number
   subtotal: number
-  nuevo: boolean
 }
 
 export interface IFiadoDocument extends Document {
@@ -28,14 +27,13 @@ export interface IFiadoDocument extends Document {
 
 const FiadoItemSchema = new Schema<IFiadoItemDocument>(
   {
-    producto: { type: Schema.Types.ObjectId, ref: 'Product' },
+    producto: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
     codigo: { type: String, default: '' },
     nombre: { type: String, required: true },
     cantidad: { type: Number, required: true },
     precioCosto: { type: Number, default: 0 },
     precioVenta: { type: Number, required: true },
     subtotal: { type: Number, required: true },
-    nuevo: { type: Boolean, default: false },
   },
   { _id: false }
 )

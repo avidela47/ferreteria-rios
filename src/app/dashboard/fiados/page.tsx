@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 import { Toaster } from 'sonner'
-import { Plus, Trash2, Eye, CheckCircle } from 'lucide-react'
+import { Trash2, Eye, CheckCircle } from 'lucide-react'
 import { formatPeso } from '@/lib/utils'
 
 interface Producto {
@@ -17,13 +17,12 @@ interface Producto {
 }
 
 interface ItemFiado {
-  producto?: string
+  producto: string
   codigo: string
   nombre: string
   cantidad: number
   precioVenta: number
   precioCosto: number
-  nuevo: boolean
 }
 
 interface FiadoGuardado {
@@ -52,17 +51,8 @@ export default function FiadosPage() {
   const [loading, setLoading] = useState(false)
   const [refresh, setRefresh] = useState(0)
 
-  const [nuevoCodigo, setNuevoCodigo] = useState('')
-  const [nuevoNombre, setNuevoNombre] = useState('')
-  const [nuevaCantidad, setNuevaCantidad] = useState(1)
-  const [nuevoPrecio, setNuevoPrecio] = useState(0)
-
   const [fiadoVer, setFiadoVer] = useState<FiadoGuardado | null>(null)
   const [buscarProductoEdit, setBuscarProductoEdit] = useState('')
-  const [nuevoCodigoEdit, setNuevoCodigoEdit] = useState('')
-  const [nuevoNombreEdit, setNuevoNombreEdit] = useState('')
-  const [nuevaCantidadEdit, setNuevaCantidadEdit] = useState(1)
-  const [nuevoPrecioEdit, setNuevoPrecioEdit] = useState(0)
 
   useEffect(() => {
     const fetchDatos = async () => {
@@ -105,31 +95,9 @@ export default function FiadosPage() {
         cantidad: 1,
         precioVenta: p.precioVenta,
         precioCosto: p.precioCosto,
-        nuevo: false,
       }])
     })
     setBuscarProducto('')
-  }
-
-  function agregarNuevo() {
-    if (!nuevoNombre.trim()) {
-      toast.error('Escribí un nombre para el producto nuevo')
-      return
-    }
-    setItems(function (prev) {
-      return prev.concat([{
-        codigo: nuevoCodigo.trim(),
-        nombre: nuevoNombre.trim(),
-        cantidad: nuevaCantidad,
-        precioVenta: nuevoPrecio,
-        precioCosto: 0,
-        nuevo: true,
-      }])
-    })
-    setNuevoCodigo('')
-    setNuevoNombre('')
-    setNuevaCantidad(1)
-    setNuevoPrecio(0)
   }
 
   function cambiarCantidad(index: number, valor: number) {
@@ -230,10 +198,6 @@ export default function FiadosPage() {
   function abrirVer(f: FiadoGuardado) {
     setFiadoVer(f)
     setBuscarProductoEdit('')
-    setNuevoCodigoEdit('')
-    setNuevoNombreEdit('')
-    setNuevaCantidadEdit(1)
-    setNuevoPrecioEdit(0)
   }
 
   function cerrarVer() {
@@ -269,31 +233,9 @@ export default function FiadosPage() {
       cantidad: 1,
       precioVenta: p.precioVenta,
       precioCosto: p.precioCosto,
-      nuevo: false,
     }
     setFiadoVer(Object.assign({}, fiadoVer, { items: fiadoVer.items.concat([nuevoItem]) }))
     setBuscarProductoEdit('')
-  }
-
-  function agregarNuevoEdicion() {
-    if (!fiadoVer) return
-    if (!nuevoNombreEdit.trim()) {
-      toast.error('Escribí un nombre para el producto nuevo')
-      return
-    }
-    const nuevoItem: ItemFiado = {
-      codigo: nuevoCodigoEdit.trim(),
-      nombre: nuevoNombreEdit.trim(),
-      cantidad: nuevaCantidadEdit,
-      precioVenta: nuevoPrecioEdit,
-      precioCosto: 0,
-      nuevo: true,
-    }
-    setFiadoVer(Object.assign({}, fiadoVer, { items: fiadoVer.items.concat([nuevoItem]) }))
-    setNuevoCodigoEdit('')
-    setNuevoNombreEdit('')
-    setNuevaCantidadEdit(1)
-    setNuevoPrecioEdit(0)
   }
 
   async function guardarEdicion() {
@@ -338,7 +280,7 @@ export default function FiadosPage() {
 
           <div className="bg-white rounded-lg shadow-sm p-4">
             <label className="block text-sm font-medium text-slate-700 mb-2">
-              Agregar producto desde stock
+              Buscar producto en stock
             </label>
             <div className="relative">
               <input
@@ -372,54 +314,10 @@ export default function FiadosPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-4">
-            <label className="block text-sm font-medium text-slate-700 mb-2">
-              Agregar producto nuevo (no está en stock)
-            </label>
-            <div className="grid grid-cols-6 gap-2">
-              <input
-                type="text"
-                value={nuevoCodigo}
-                onChange={function (e) { setNuevoCodigo(e.target.value) }}
-                placeholder="Código"
-                className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-              />
-              <input
-                type="text"
-                value={nuevoNombre}
-                onChange={function (e) { setNuevoNombre(e.target.value) }}
-                placeholder="Nombre del producto"
-                className="col-span-2 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-              />
-              <input
-                type="number"
-                value={nuevaCantidad}
-                onChange={function (e) { setNuevaCantidad(Number(e.target.value)) }}
-                min={1}
-                placeholder="Cant."
-                className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-              />
-              <input
-                type="number"
-                step="0.01"
-                value={nuevoPrecio}
-                onChange={function (e) { setNuevoPrecio(Number(e.target.value)) }}
-                placeholder="Precio"
-                className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-              />
-              <button
-                onClick={agregarNuevo}
-                className="col-span-1 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-sm font-medium transition-colors flex items-center justify-center"
-              >
-                <Plus size={16} />
-              </button>
-            </div>
-          </div>
-
           <div className="bg-white rounded-lg shadow-sm">
             {items.length === 0 ? (
               <div className="p-8 text-center text-slate-400 text-sm">
-                Agregá productos desde el stock o cargá productos nuevos
+                Buscá y agregá productos del stock
               </div>
             ) : (
               <table className="w-full text-sm">
@@ -437,14 +335,7 @@ export default function FiadosPage() {
                     return (
                       <tr key={i} className="border-b border-slate-50">
                         <td className="px-4 py-3 text-slate-500 text-xs">{item.codigo || '-'}</td>
-                        <td className="px-4 py-3 text-slate-700">
-                          {item.nombre}
-                          {item.nuevo && (
-                            <span className="ml-2 text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full border border-blue-200">
-                              nuevo
-                            </span>
-                          )}
-                        </td>
+                        <td className="px-4 py-3 text-slate-700">{item.nombre}</td>
                         <td className="px-4 py-3 text-center">
                           <input
                             type="number"
@@ -598,81 +489,36 @@ export default function FiadosPage() {
 
             <div className="p-5 space-y-4">
               {esAdmin && fiadoVer.estado === 'pendiente' && (
-                <>
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Agregar producto desde stock
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="text"
-                        value={buscarProductoEdit}
-                        onChange={function (e) { setBuscarProductoEdit(e.target.value) }}
-                        placeholder="Buscar por nombre o código..."
-                        className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-                      />
-                      {productosFiltradosEdit.length > 0 && (
-                        <div className="absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg z-20 mt-1">
-                          {productosFiltradosEdit.map(function (p) {
-                            return (
-                              <button
-                                key={p._id}
-                                onClick={function () { agregarDesdeStockEdicion(p) }}
-                                className="w-full text-left px-4 py-2.5 hover:bg-slate-50 cursor-pointer text-sm border-b last:border-0"
-                              >
-                                <span className="font-medium text-slate-700">{p.nombre}</span>
-                                {p.codigo && <span className="text-slate-400 text-xs ml-2">#{p.codigo}</span>}
-                              </button>
-                            )
-                          })}
-                        </div>
-                      )}
-                    </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Buscar producto en stock
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={buscarProductoEdit}
+                      onChange={function (e) { setBuscarProductoEdit(e.target.value) }}
+                      placeholder="Buscar por nombre o código..."
+                      className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                    />
+                    {productosFiltradosEdit.length > 0 && (
+                      <div className="absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg z-20 mt-1">
+                        {productosFiltradosEdit.map(function (p) {
+                          return (
+                            <button
+                              key={p._id}
+                              onClick={function () { agregarDesdeStockEdicion(p) }}
+                              className="w-full text-left px-4 py-2.5 hover:bg-slate-50 cursor-pointer text-sm border-b last:border-0"
+                            >
+                              <span className="font-medium text-slate-700">{p.nombre}</span>
+                              {p.codigo && <span className="text-slate-400 text-xs ml-2">#{p.codigo}</span>}
+                            </button>
+                          )
+                        })}
+                      </div>
+                    )}
                   </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Agregar producto nuevo
-                    </label>
-                    <div className="grid grid-cols-6 gap-2">
-                      <input
-                        type="text"
-                        value={nuevoCodigoEdit}
-                        onChange={function (e) { setNuevoCodigoEdit(e.target.value) }}
-                        placeholder="Código"
-                        className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-                      />
-                      <input
-                        type="text"
-                        value={nuevoNombreEdit}
-                        onChange={function (e) { setNuevoNombreEdit(e.target.value) }}
-                        placeholder="Nombre"
-                        className="col-span-2 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-                      />
-                      <input
-                        type="number"
-                        value={nuevaCantidadEdit}
-                        onChange={function (e) { setNuevaCantidadEdit(Number(e.target.value)) }}
-                        min={1}
-                        className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-                      />
-                      <input
-                        type="number"
-                        step="0.01"
-                        value={nuevoPrecioEdit}
-                        onChange={function (e) { setNuevoPrecioEdit(Number(e.target.value)) }}
-                        placeholder="Precio"
-                        className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-                      />
-                      <button
-                        onClick={agregarNuevoEdicion}
-                        className="col-span-1 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-sm font-medium transition-colors flex items-center justify-center"
-                      >
-                        <Plus size={16} />
-                      </button>
-                    </div>
-                  </div>
-                </>
+                </div>
               )}
 
               <table className="w-full text-sm">
@@ -692,14 +538,7 @@ export default function FiadosPage() {
                     return (
                       <tr key={i} className="border-b border-slate-50">
                         <td className="py-2 text-slate-500 text-xs">{item.codigo || '-'}</td>
-                        <td className="py-2 text-slate-700">
-                          {item.nombre}
-                          {item.nuevo && (
-                            <span className="ml-2 text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full border border-blue-200">
-                              nuevo
-                            </span>
-                          )}
-                        </td>
+                        <td className="py-2 text-slate-700">{item.nombre}</td>
                         <td className="py-2 text-center">
                           {editable ? (
                             <input

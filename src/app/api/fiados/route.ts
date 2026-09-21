@@ -41,24 +41,25 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, error: 'El fiado debe tener al menos un producto' }, { status: 400 })
     }
 
-    // Validar stock y calcular totales. Solo se valida/descuenta stock de items que vienen del inventario real (tienen "producto").
+    // Todo item tiene que venir del stock real
     let total = 0
     let costoTotal = 0
 
     for (const item of items) {
-      if (item.producto) {
-        const producto = await Product.findById(item.producto)
-        if (!producto) {
-          return NextResponse.json({ ok: false, error: `Producto ${item.nombre} no encontrado` }, { status: 404 })
-        }
-        if (producto.cantidad < item.cantidad) {
-          return NextResponse.json({ ok: false, error: `Stock insuficiente para ${producto.nombre}` }, { status: 400 })
-        }
-        item.precioCosto = producto.precioCosto
+      if (!item.producto) {
+        return NextResponse.json({ ok: false, error: `${item.nombre || 'Un producto'} no está vinculado al stock` }, { status: 400 })
       }
+      const producto = await Product.findById(item.producto)
+      if (!producto) {
+        return NextResponse.json({ ok: false, error: `Producto ${item.nombre} no encontrado` }, { status: 404 })
+      }
+      if (producto.cantidad < item.cantidad) {
+        return NextResponse.json({ ok: false, error: `Stock insuficiente para ${producto.nombre}` }, { status: 400 })
+      }
+      item.precioCosto = producto.precioCosto
       item.subtotal = item.precioVenta * item.cantidad
       total += item.subtotal
-      costoTotal += (item.precioCosto || 0) * item.cantidad
+      costoTotal += item.precioCosto * item.cantidad
     }
 
     const ultimo = await Fiado.findOne().sort({ numero: -1 })
@@ -75,11 +76,9 @@ export async function POST(req: NextRequest) {
       estado: 'pendiente',
     })
 
-    // Descontar stock solo de los items que vienen del inventario real
+    // Descontar stock
     for (const item of items) {
-      if (item.producto) {
-        await Product.findByIdAndUpdate(item.producto, { $inc: { cantidad: -item.cantidad } })
-      }
+      await Product.findByIdAndUpdate(item.producto, { $inc: { cantidad: -item.cantidad } })
     }
 
     return NextResponse.json(
