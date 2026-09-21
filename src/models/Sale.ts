@@ -2,7 +2,7 @@ import mongoose, { Schema, Document } from 'mongoose'
 import { FormaPago, EstadoVenta } from '@/types'
 
 export interface ISaleItemDocument {
-  producto: mongoose.Types.ObjectId
+  producto?: mongoose.Types.ObjectId
   codigo?: string
   nombre: string
   cantidad: number
@@ -27,7 +27,7 @@ export interface ISaleDocument extends Document {
 }
 
 const SaleItemSchema = new Schema<ISaleItemDocument>({
-  producto: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
+  producto: { type: Schema.Types.ObjectId, ref: 'Product', required: false },
   codigo: { type: String, default: '' },
   nombre: { type: String, required: true },
   cantidad: { type: Number, required: true },

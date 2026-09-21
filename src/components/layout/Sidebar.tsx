@@ -17,6 +17,7 @@ import {
   ClipboardList,
   ListChecks,
   PackageMinus,
+  Wallet,
 } from 'lucide-react'
 
 const menuCompleto = [
@@ -24,6 +25,7 @@ const menuCompleto = [
   { href: '/dashboard/catalogo', label: 'Catalogo', icon: BookOpen, soloAdmin: false },
   { href: '/dashboard/stock', label: 'Stock', icon: Package, soloAdmin: false },
   { href: '/dashboard/ventas', label: 'Ventas', icon: ShoppingCart, soloAdmin: false },
+  { href: '/dashboard/fiados', label: 'Fiados', icon: Wallet, soloAdmin: false },
   { href: '/dashboard/pedidos', label: 'Pedidos', icon: ListChecks, soloAdmin: true },
   { href: '/dashboard/compras', label: 'Compras', icon: TrendingUp, soloAdmin: true },
   { href: '/dashboard/presupuestos', label: 'Presupuestos', icon: ClipboardList, soloAdmin: true },
