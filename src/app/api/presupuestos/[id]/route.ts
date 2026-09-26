@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import connectDB from '@/lib/db/mongoose'
 import QuoteRequest from '@/models/QuoteRequest'
 import { esAdmin } from '@/lib/permisos'
+import '@/models/Supplier'
 
 export async function GET(
   _req: NextRequest,
