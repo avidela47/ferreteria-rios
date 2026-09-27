@@ -14,6 +14,7 @@ export interface IFichaDocument extends Document {
   datosClave: string
   formaApariencia: string
   activo: boolean
+  fuentes: { titulo: string; url: string }[]
 }
 
 const FichaSchema = new Schema<IFichaDocument>(
@@ -31,6 +32,7 @@ const FichaSchema = new Schema<IFichaDocument>(
     datosClave: { type: String, default: '' },
     formaApariencia: { type: String, default: '' },
     activo: { type: Boolean, default: true },
+    fuentes: { type: [{ titulo: String, url: String, _id: false }], default: [] },
   },
   { timestamps: true }
 )

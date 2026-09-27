@@ -62,6 +62,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
     formData.append('imagen', archivo)
     formData.append('nombre', nombreArchivo)
 
+    try {
     const res = await fetch('/api/upload', {
       method: 'POST',
       body: formData,
@@ -76,7 +77,11 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
       toast.error(json.error || 'Error al subir la imagen')
     }
 
-    setSubiendoImagen(false)
+    } catch {
+      toast.error('No se pudo subir la imagen. Intentá de nuevo.')
+    } finally {
+      setSubiendoImagen(false)
+    }
   }
 
   function agregarVenta() {
@@ -93,9 +98,10 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
     e.preventDefault()
     setLoading(true)
 
-    const url = ficha ? `/api/catalogo/${ficha._id}` : '/api/catalogo'
-    const method = ficha ? 'PUT' : 'POST'
+    const url = ficha?._id ? `/api/catalogo/${ficha._id}` : '/api/catalogo'
+    const method = ficha?._id ? 'PUT' : 'POST'
 
+    try {
     const res = await fetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
@@ -111,7 +117,11 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
       toast.error(json.error ?? 'Error al guardar')
     }
 
-    setLoading(false)
+    } catch {
+      toast.error('No se pudo guardar la ficha. Intentá de nuevo.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -127,11 +137,12 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
         </div>
 
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
+          {ficha?.productoId && <p className="rounded-lg bg-blue-50 p-3 text-sm text-blue-800">El nombre, código, categoría, precio y cantidad se actualizan desde Stock. Acá podés completar la información y subir la foto.</p>}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">Foto del producto</label>
             <div className="flex items-center gap-3">
               {form.imagen ? (
-                <Image src={form.imagen} alt="foto producto" width={80} height={80} className="w-20 h-20 object-cover rounded-lg border border-slate-200" unoptimized />
+                <Image src={form.imagen} alt="foto producto" width={80} height={80} className="w-20 h-20 object-contain rounded-lg border border-slate-200" unoptimized />
               ) : (
                 <div className="w-20 h-20 rounded-lg border border-dashed border-slate-300 flex items-center justify-center text-slate-300">
                   <Upload size={20} />
@@ -140,7 +151,8 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
               <div>
                 <input
                   type="file"
-                  accept="image/*"
+                  accept="image/jpeg,image/png,image/webp"
+                  disabled={subiendoImagen}
                   onChange={handleImagen}
                   className="text-xs text-slate-500"
                 />
@@ -154,6 +166,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
               <label className="block text-sm font-medium text-slate-700 mb-1">Código</label>
               <input
                 name="codigo"
+                readOnly={!!ficha?.productoId}
                 value={form.codigo}
                 onChange={handleChange}
                 className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
@@ -163,6 +176,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
               <label className="block text-sm font-medium text-slate-700 mb-1">Nombre del producto *</label>
               <input
                 name="nombre"
+                readOnly={!!ficha?.productoId}
                 value={form.nombre}
                 onChange={handleChange}
                 required
@@ -175,11 +189,12 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
             <label className="block text-sm font-medium text-slate-700 mb-1">Categoría *</label>
             <select
               name="categoria"
+              disabled={!!ficha?.productoId}
               value={form.categoria}
               onChange={handleChange}
               className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
             >
-              {CATEGORIAS.map((c) => (
+              {[...new Set([form.categoria, ...CATEGORIAS])].map((c) => (
                 <option key={c} value={c}>{c}</option>
               ))}
             </select>
@@ -291,7 +306,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
             </button>
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || subiendoImagen}
               className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
             >
               {loading ? 'Guardando...' : 'Guardar'}

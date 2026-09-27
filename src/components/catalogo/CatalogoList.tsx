@@ -5,12 +5,13 @@ import { IFicha } from '@/types/catalogo'
 import { Pencil, Trash2, ChevronDown, ChevronUp, Search, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react'
 import { toast } from 'sonner'
 import { formatPeso } from '@/lib/utils'
-import Image from 'next/image'
+import FotoProducto from './FotoProducto'
 
 interface Props {
   onEditar: (ficha: IFicha) => void
   esAdmin: boolean
   refresh: number
+  endpoint?: string
 }
 
 const COLORES_CATEGORIA: Record<string, string> = {
@@ -30,56 +31,41 @@ const COLORES_CATEGORIA: Record<string, string> = {
 
 const POR_PAGINA = 50
 
-interface ProductoStock {
-  codigo?: string
-  precioVenta: number
-  cantidad: number
-  unidad: string
-}
-
-export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
+export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/api/catalogo' }: Props) {
   const [fichas, setFichas] = useState<IFicha[]>([])
-  const [productosMap, setProductosMap] = useState<Record<string, ProductoStock>>({})
+  const [cargando, setCargando] = useState(true)
+  const [error, setError] = useState('')
+  const [sinImagen, setSinImagen] = useState(false)
+  const [recarga, setRecarga] = useState(0)
   const [buscar, setBuscar] = useState('')
   const [categoriaFiltro, setCategoriaFiltro] = useState('')
   const [expandida, setExpandida] = useState<string | null>(null)
   const [pagina, setPagina] = useState(1)
-  const [grupoPagina, setGrupoPagina] = useState(0)
 
   useEffect(() => {
-    const fetchFichas = async () => {
-      const res = await fetch('/api/catalogo')
-      const json = await res.json()
-      if (json.ok) setFichas(json.data)
-    }
-    fetchFichas()
-  }, [refresh])
-
-  useEffect(() => {
-    const fetchProductos = async () => {
-      const res = await fetch('/api/productos?limite=1000')
-      const json = await res.json()
-      if (json.ok) {
-        const mapa: Record<string, ProductoStock> = {}
-        for (let i = 0; i < json.data.length; i++) {
-          const p = json.data[i]
-          if (p.codigo) {
-            mapa[p.codigo] = {
-              codigo: p.codigo,
-              precioVenta: p.precioVenta,
-              cantidad: p.cantidad,
-              unidad: p.unidad,
-            }
-          }
-        }
-        setProductosMap(mapa)
+    const controller = new AbortController()
+    async function cargar() {
+      setCargando(true)
+      setError('')
+      try {
+        const res = await fetch(endpoint, { cache: 'no-store', signal: controller.signal })
+        const json = await res.json()
+        if (!res.ok || !json.ok) throw new Error(json.error || 'No se pudo cargar el catálogo')
+        setFichas(json.data)
+      } catch (e) {
+        if (!controller.signal.aborted) setError(e instanceof Error ? e.message : 'No se pudo conectar')
+      } finally {
+        if (!controller.signal.aborted) setCargando(false)
       }
     }
-    fetchProductos()
-  }, [])
+    void cargar()
+    function alVolver() { if (document.visibilityState === 'visible') void cargar() }
+    window.addEventListener('focus', alVolver)
+    return () => { controller.abort(); window.removeEventListener('focus', alVolver) }
+  }, [refresh, recarga, endpoint])
 
   async function eliminar(id: string) {
-    toast('¿Seguro que querés eliminar esta ficha?', {
+    toast('¿Eliminar el contenido de esta ficha? El producto seguirá en stock.', {
       action: {
         label: 'Eliminar',
         onClick: async () => {
@@ -87,9 +73,7 @@ export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
           const json = await res.json()
           if (json.ok) {
             toast.success('Ficha eliminada')
-            setFichas(function (prev) {
-              return prev.filter(function (f) { return f._id !== id })
-            })
+            setRecarga(r => r + 1)
           } else {
             toast.error('Error al eliminar')
           }
@@ -120,27 +104,32 @@ export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
       normalizar(f.descripcion ?? '').includes(buscarNormalizado) ||
       normalizar(f.paraQueSirve ?? '').includes(buscarNormalizado)
     const matchCategoria = categoriaFiltro === '' || f.categoria === categoriaFiltro
-    return matchBuscar && matchCategoria
+    return matchBuscar && matchCategoria && (!sinImagen || !f.imagen)
   })
 
-  const totalPaginas = Math.ceil(fichasFiltradas.length / POR_PAGINA)
-  const fichasPagina = fichasFiltradas.slice((pagina - 1) * POR_PAGINA, pagina * POR_PAGINA)
+  const totalPaginas = Math.max(1, Math.ceil(fichasFiltradas.length / POR_PAGINA))
+  const paginaActual = Math.min(pagina, totalPaginas)
+  const fichasPagina = fichasFiltradas.slice((paginaActual - 1) * POR_PAGINA, paginaActual * POR_PAGINA)
 
   function handleBuscar(valor: string) {
     setBuscar(valor)
     setPagina(1)
-    setGrupoPagina(0)
   }
 
   function handleCategoria(valor: string) {
     setCategoriaFiltro(valor)
     setPagina(1)
-    setGrupoPagina(0)
   }
 
   return (
     <div className="space-y-4">
-      <div className="bg-white rounded-lg shadow-sm p-4 flex gap-3 items-center">
+      <div className="flex flex-wrap gap-3 text-sm text-slate-600">
+        <span>{fichas.length} productos</span>
+        <span>· {fichas.filter(f => f.imagen).length} con foto</span>
+        <span>· {fichas.filter(f => !f.imagen).length} sin imagen</span>
+        <button type="button" onClick={() => setRecarga(r => r + 1)} className="font-medium text-orange-600">Actualizar stock y precios</button>
+      </div>
+      <div className="bg-white rounded-lg shadow-sm p-4 flex flex-wrap gap-3 items-center">
   <div className="relative flex-1">
     <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
     <input
@@ -154,8 +143,9 @@ export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
   <button
     onClick={function () {
       setBuscar('')
+      setCategoriaFiltro('')
+      setSinImagen(false)
       setPagina(1)
-      setGrupoPagina(0)
     }}
     className="border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
   >
@@ -171,12 +161,18 @@ export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
             <option key={c} value={c}>{c}</option>
           ))}
         </select>
+        <label className="flex items-center gap-2 text-sm text-slate-600">
+          <input type="checkbox" checked={sinImagen} onChange={e => { setSinImagen(e.target.checked); setPagina(1) }} />
+          Sin imagen
+        </label>
         <span className="text-sm text-slate-400 whitespace-nowrap">
           {fichasFiltradas.length} fichas
         </span>
       </div>
 
-      {fichasFiltradas.length === 0 ? (
+      {cargando ? <p role="status" className="p-8 text-center text-slate-500">Cargando catálogo...</p> : error ? (
+        <div role="alert" className="rounded-lg bg-red-50 p-6 text-red-700">{error} <button onClick={() => setRecarga(r => r + 1)} className="underline">Reintentar</button></div>
+      ) : fichasFiltradas.length === 0 ? (
         <div className="bg-white rounded-lg shadow-sm p-12 text-center">
           <BookOpen size={40} className="mx-auto text-slate-300 mb-3" />
           <p className="text-slate-400 text-sm">No hay fichas que coincidan</p>
@@ -185,12 +181,13 @@ export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
         <>
           <div className="space-y-2">
             {fichasPagina.map((ficha) => {
-              const info = ficha.codigo ? productosMap[ficha.codigo] : undefined
+              const clave = ficha.productoId ?? ficha._id ?? ficha.codigo ?? ''
+              const info = ficha.precioVenta !== undefined ? ficha : undefined
               return (
-                <div key={ficha._id} className="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div key={clave} className="bg-white rounded-lg shadow-sm overflow-hidden">
                   <div
                     className="flex items-center gap-3 p-4 cursor-pointer hover:bg-slate-50 transition-colors"
-                    onClick={() => setExpandida(expandida === ficha._id ? null : ficha._id ?? null)}
+                    onClick={() => setExpandida(expandida === clave ? null : clave)}
                   >
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
@@ -204,7 +201,7 @@ export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
                           {ficha.nombre}
                         </h3>
                       </div>
-                      {expandida !== ficha._id && (
+                      {expandida !== clave && (
                         <p className="text-xs text-slate-400 mt-1 truncate">{ficha.descripcion}</p>
                       )}
                     </div>
@@ -212,32 +209,32 @@ export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
                       {esAdmin && (
                         <>
                           <button
+                            aria-label="Editar ficha o subir imagen"
                             onClick={(e) => { e.stopPropagation(); onEditar(ficha) }}
                             className="text-slate-400 hover:text-blue-500 transition-colors"
                           >
                             <Pencil size={15} />
                           </button>
-                          <button
+                          {ficha._id && <button
+                            aria-label="Eliminar contenido de ficha"
                             onClick={(e) => { e.stopPropagation(); eliminar(ficha._id ?? '') }}
                             className="text-slate-400 hover:text-red-500 transition-colors"
                           >
                             <Trash2 size={15} />
-                          </button>
+                          </button>}
                         </>
                       )}
-                      {expandida === ficha._id
+                      {expandida === clave
                         ? <ChevronUp size={16} className="text-slate-400" />
                         : <ChevronDown size={16} className="text-slate-400" />
                       }
                     </div>
                   </div>
 
-                  {expandida === ficha._id && (
+                  {expandida === clave && (
                     <div className="border-t border-slate-100 p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-3">
-                        {ficha.imagen && (
-                          <Image src={ficha.imagen} alt={ficha.nombre} width={150} height={150} className="w-37.5 h-37.5 rounded-lg border border-slate-200 object-contain bg-white" unoptimized />
-                        )}
+                        <FotoProducto src={ficha.imagen} nombre={ficha.nombre} onCargar={esAdmin ? () => onEditar(ficha) : undefined} />
                         <div>
                           <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Código</p>
                           <p className="text-sm text-slate-700">{ficha.codigo || 'Sin código'}</p>
@@ -268,21 +265,25 @@ export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
                           <p className="text-xs font-semibold text-orange-500 uppercase tracking-wide mb-1">⚡ Datos clave</p>
                           <p className="text-sm text-slate-700 bg-orange-50 rounded-lg p-2">{ficha.datosClave}</p>
                         </div>
-                        <div>
+                        {!!ficha.ventaCruzada?.length && <div>
                           <p className="text-xs font-semibold text-green-600 uppercase tracking-wide mb-1">🔗 Venta cruzada</p>
                           <div className="flex flex-wrap gap-1">
-                            {ficha.ventaCruzada.map((v, i) => (
+                            {(ficha.ventaCruzada ?? []).map((v, i) => (
                               <span key={i} className="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded-full border border-green-200">
                                 {v}
                               </span>
                             ))}
                           </div>
-                        </div>
+                        </div>}
+                        {!!ficha.fuentes?.length && <div className="text-xs text-slate-500">
+                          <p className="mb-1 font-semibold">Fuentes de consulta</p>
+                          {ficha.fuentes.map(f => <a key={f.url} href={f.url} target="_blank" rel="noopener noreferrer" className="block text-blue-700 underline">{f.titulo}</a>)}
+                        </div>}
                         <div className="flex gap-4 pt-2 border-t border-slate-100">
                           <div>
                             <p className="text-xs font-semibold text-orange-600 uppercase tracking-wide mb-1">Precio de venta</p>
                             <p className="text-sm font-medium text-slate-700">
-                              {info ? formatPeso(info.precioVenta) : 'Sin stock cargado'}
+                              {info ? formatPeso(info.precioVenta ?? 0) : 'Sin precio registrado'}
                             </p>
                           </div>
                           <div>
@@ -300,38 +301,33 @@ export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
             })}
           </div>
 
-          <div className="flex items-center justify-between bg-white rounded-lg shadow-sm px-4 py-3">
+          <div className="flex flex-wrap gap-3 items-center justify-between bg-white rounded-lg shadow-sm px-4 py-3">
             <span className="text-sm text-slate-500">
-              {fichasFiltradas.length} fichas · Página {pagina} de {totalPaginas}
+              {fichasFiltradas.length} fichas · Página {paginaActual} de {totalPaginas}
             </span>
             <div className="flex items-center gap-1">
               <button
                 onClick={function () {
-                  const nuevaPagina = Math.max(1, pagina - 1)
+                  const nuevaPagina = Math.max(1, paginaActual - 1)
                   setPagina(nuevaPagina)
-                  setGrupoPagina(Math.floor((nuevaPagina - 1) / 3))
                 }}
-                disabled={pagina === 1}
+                disabled={paginaActual === 1}
                 className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
               >
                 <ChevronLeft size={16} />
               </button>
-              {Array.from({ length: 3 }, function (_, i) { return grupoPagina * 3 + i + 1 })
+              {Array.from({ length: 3 }, function (_, i) { return Math.floor((paginaActual - 1) / 3) * 3 + i + 1 })
                 .filter(function (n) { return n <= totalPaginas })
                 .map(function (n) {
-                  const esUltimoDelGrupo = n === Math.min((grupoPagina + 1) * 3, totalPaginas)
                   return (
                     <button
                       key={n}
                       onClick={function () {
                         setPagina(n)
-                        if (esUltimoDelGrupo && n < totalPaginas) {
-                          setGrupoPagina(function (g) { return g + 1 })
-                        }
                       }}
                       className={
                         'w-8 h-8 rounded text-sm transition-colors ' +
-                        (n === pagina
+                        (n === paginaActual
                           ? 'bg-orange-500 text-white font-medium'
                           : 'border border-slate-200 text-slate-500 hover:bg-slate-50')
                       }
@@ -342,11 +338,10 @@ export default function CatalogoList({ onEditar, esAdmin, refresh }: Props) {
                 })}
               <button
                 onClick={function () {
-                  const nuevaPagina = Math.min(totalPaginas, pagina + 1)
+                  const nuevaPagina = Math.min(totalPaginas, paginaActual + 1)
                   setPagina(nuevaPagina)
-                  setGrupoPagina(Math.floor((nuevaPagina - 1) / 3))
                 }}
-                disabled={pagina === totalPaginas}
+                disabled={paginaActual === totalPaginas}
                 className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
               >
                 <ChevronRight size={16} />
