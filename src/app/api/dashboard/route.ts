@@ -105,6 +105,11 @@ export async function GET() {
       { $group: { _id: null, total: { $sum: '$monto' } } },
     ])
 
+    const impuestosPagadosMesAnterior = await TaxRecord.aggregate([
+      { $match: { pagado: true, vencimiento: { $gte: inicioMesAnterior, $lt: finMesAnterior } } },
+      { $group: { _id: null, total: { $sum: '$monto' } } },
+    ])
+
     const stockBajo = await Product.find({
       activo: true,
       $expr: { $lte: ['$cantidad', '$stockMinimo'] },
@@ -143,10 +148,6 @@ export async function GET() {
 
     const totalGastosMes = gastosMes[0]?.total ?? 0
     const totalGastosMesAnterior = gastosMesAnterior[0]?.total ?? 0
-    const tendenciaGastosMes =
-      totalGastosMesAnterior > 0
-        ? Math.round(((totalGastosMes - totalGastosMesAnterior) / totalGastosMesAnterior) * 1000) / 10
-        : null
 
     const totalGastosRecurrentesMes = gastosRecurrentesMes[0]?.total ?? 0
     const totalImpuestosPagadosMes = impuestosPagadosMes[0]?.total ?? 0
@@ -154,6 +155,16 @@ export async function GET() {
     const gananciaMesActual = ventasMes[0]?.ganancia ?? 0
     const margenBrutoPromedio = totalVentasMes > 0 ? gananciaMesActual / totalVentasMes : 0
     const puntoEquilibrio = margenBrutoPromedio > 0 ? totalFijosMes / margenBrutoPromedio : null
+
+    // "Gastos del mes" tiene que incluir los impuestos pagados (viven en otra colección, TaxRecord),
+    // sino queda un número menor a "Gastos fijos" del gráfico, que sí los suma. Con esto es siempre >=.
+    const totalImpuestosPagadosMesAnterior = impuestosPagadosMesAnterior[0]?.total ?? 0
+    const gastosMesConImpuestos = totalGastosMes + totalImpuestosPagadosMes
+    const gastosMesAnteriorConImpuestos = totalGastosMesAnterior + totalImpuestosPagadosMesAnterior
+    const tendenciaGastosMesFinal =
+      gastosMesAnteriorConImpuestos > 0
+        ? Math.round(((gastosMesConImpuestos - gastosMesAnteriorConImpuestos) / gastosMesAnteriorConImpuestos) * 1000) / 10
+        : null
 
     // --- NUEVO: progreso acumulado del mes en curso (ventas, ganancia, gastos fijos) ---
     // para graficar contra el punto de equilibrio, ya que ambos son conceptos del mes calendario
@@ -248,8 +259,8 @@ export async function GET() {
         ventasMes: totalVentasMes,
         gananciaMes: ventasMes[0]?.ganancia ?? 0,
         tendenciaVentasMes,
-        gastosMes: totalGastosMes,
-        tendenciaGastosMes,
+        gastosMes: gastosMesConImpuestos,
+        tendenciaGastosMes: tendenciaGastosMesFinal,
         gastosRecurrentesMes: totalFijosMes,
         margenBrutoPromedio,
         puntoEquilibrio,
