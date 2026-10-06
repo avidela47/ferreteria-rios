@@ -1,5 +1,33 @@
 @import "tailwindcss";
 
+@theme {
+  /* Naranja de marca (#FF6B00) - pisa la rampa orange de Tailwind */
+  --color-orange-50: #FFEDE0;
+  --color-orange-100: #FFDEC7;
+  --color-orange-200: #FFC194;
+  --color-orange-300: #FFA96B;
+  --color-orange-400: #FF8C38;
+  --color-orange-500: #FF6B00;
+  --color-orange-600: #DB5C00;
+  --color-orange-700: #B24B00;
+  --color-orange-800: #8A3A00;
+  --color-orange-900: #662B00;
+  --color-orange-950: #3D1A00;
+
+  /* Navy de marca (#102A43) - pisa la rampa blue de Tailwind */
+  --color-blue-50: #E2E5E8;
+  --color-blue-100: #CAD0D6;
+  --color-blue-200: #9BA6B0;
+  --color-blue-300: #748392;
+  --color-blue-400: #45596C;
+  --color-blue-500: #102A43;
+  --color-blue-600: #0E243A;
+  --color-blue-700: #0B1D2F;
+  --color-blue-800: #091724;
+  --color-blue-900: #06111B;
+  --color-blue-950: #040A10;
+}
+
 button, [type="submit"], [type="button"], a {
   cursor: pointer;
 }
