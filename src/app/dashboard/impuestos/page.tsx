@@ -31,7 +31,7 @@ export default function ImpuestosPage() {
     <div className="p-6">
       <Toaster richColors position="top-right" />
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-800">Impuestos</h1>
+        <h1 className="text-2xl font-bold text-blue-500">Impuestos</h1>
         <p className="text-slate-500 text-sm mt-1">Control de vencimientos y pagos</p>
       </div>
 

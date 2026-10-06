@@ -120,7 +120,7 @@ export default function NuevaVenta({ onGuardado }: Props) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div className="lg:col-span-2 space-y-4">
-        <div className="bg-white rounded-lg shadow-sm p-4">
+        <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
           <label className="block text-sm font-medium text-slate-700 mb-2">
             Buscar producto
           </label>
@@ -130,10 +130,10 @@ export default function NuevaVenta({ onGuardado }: Props) {
               value={buscar}
               onChange={(e) => setBuscar(e.target.value)}
               placeholder="Escribi el nombre del producto..."
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
             {productosFiltrados.length > 0 && (
-              <div className="absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg z-10 mt-1">
+              <div className="absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-xl shadow-lg z-10 mt-1">
                 {productosFiltrados.map((p) => (
                   <button
                     key={p._id}
@@ -154,7 +154,7 @@ export default function NuevaVenta({ onGuardado }: Props) {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm">
+        <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200">
           {items.length === 0 ? (
             <div className="p-8 text-center text-slate-400 text-sm">
               Busca y agrega productos a la venta
@@ -162,7 +162,7 @@ export default function NuevaVenta({ onGuardado }: Props) {
           ) : (
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-slate-500 border-b border-slate-100">
+                <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
                   <th className="px-4 py-3 font-medium">Producto</th>
                   <th className="px-4 py-3 font-medium text-center">Cantidad</th>
                   <th className="px-4 py-3 font-medium text-right">P. Unit.</th>
@@ -194,7 +194,7 @@ export default function NuevaVenta({ onGuardado }: Props) {
                     <td className="px-4 py-3 text-right text-slate-500">
                       {formatPeso(item.precioVenta)}
                     </td>
-                    <td className="px-4 py-3 text-right font-medium text-slate-800">
+                    <td className="px-4 py-3 text-right font-medium text-blue-500">
                       {formatPeso(item.subtotal)}
                     </td>
                     <td className="px-4 py-3">
@@ -214,14 +214,14 @@ export default function NuevaVenta({ onGuardado }: Props) {
       </div>
 
       <div className="space-y-4">
-        <div className="bg-white rounded-lg shadow-sm p-4 space-y-3">
+        <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4 space-y-3">
           <h3 className="font-medium text-slate-700">Datos de la venta</h3>
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">Cliente</label>
             <input
               value={cliente}
               onChange={(e) => setCliente(e.target.value)}
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
           </div>
           <div>
@@ -229,7 +229,7 @@ export default function NuevaVenta({ onGuardado }: Props) {
             <select
               value={formaPago}
               onChange={(e) => setFormaPago(e.target.value)}
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 cursor-pointer"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 cursor-pointer"
             >
               <option value="efectivo">Efectivo</option>
               <option value="tarjeta">Tarjeta</option>
@@ -243,12 +243,12 @@ export default function NuevaVenta({ onGuardado }: Props) {
               value={nota}
               onChange={(e) => setNota(e.target.value)}
               placeholder="Opcional..."
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm p-4 space-y-2">
+        <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4 space-y-2">
           <h3 className="font-medium text-slate-700 mb-3">Resumen</h3>
           <div className="flex justify-between text-sm">
             <span className="text-slate-500">Subtotal</span>
@@ -271,7 +271,7 @@ export default function NuevaVenta({ onGuardado }: Props) {
         <button
           onClick={handleGuardar}
           disabled={loading || items.length === 0}
-          className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-medium cursor-pointer transition-colors disabled:opacity-50"
+          className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold cursor-pointer transition-colors disabled:opacity-50"
         >
           {loading ? 'Guardando...' : 'Confirmar venta'}
         </button>

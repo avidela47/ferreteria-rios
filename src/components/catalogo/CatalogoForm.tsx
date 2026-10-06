@@ -128,7 +128,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-5 border-b sticky top-0 bg-white z-10">
-          <h2 className="font-semibold text-slate-800">
+          <h2 className="font-semibold text-blue-500">
             {ficha ? 'Editar ficha' : 'Nueva ficha de producto'}
           </h2>
           <button onClick={onCerrar} className="text-slate-400 hover:text-slate-600">
@@ -137,14 +137,14 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
         </div>
 
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
-          {ficha?.productoId && <p className="rounded-lg bg-blue-50 p-3 text-sm text-blue-800">El nombre, código, categoría, precio y cantidad se actualizan desde Stock. Acá podés completar la información y subir la foto.</p>}
+          {ficha?.productoId && <p className="rounded-xl bg-blue-50 p-3 text-sm text-blue-800">El nombre, código, categoría, precio y cantidad se actualizan desde Stock. Acá podés completar la información y subir la foto.</p>}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">Foto del producto</label>
             <div className="flex items-center gap-3">
               {form.imagen ? (
-                <Image src={form.imagen} alt="foto producto" width={80} height={80} className="w-20 h-20 object-contain rounded-lg border border-slate-200" unoptimized />
+                <Image src={form.imagen} alt="foto producto" width={80} height={80} className="w-20 h-20 object-contain rounded-xl border border-slate-200" unoptimized />
               ) : (
-                <div className="w-20 h-20 rounded-lg border border-dashed border-slate-300 flex items-center justify-center text-slate-300">
+                <div className="w-20 h-20 rounded-xl border border-dashed border-slate-300 flex items-center justify-center text-slate-300">
                   <Upload size={20} />
                 </div>
               )}
@@ -169,7 +169,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
                 readOnly={!!ficha?.productoId}
                 value={form.codigo}
                 onChange={handleChange}
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
             </div>
             <div className="col-span-2">
@@ -180,7 +180,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
                 value={form.nombre}
                 onChange={handleChange}
                 required
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
             </div>
           </div>
@@ -192,7 +192,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
               disabled={!!ficha?.productoId}
               value={form.categoria}
               onChange={handleChange}
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
             >
               {[...new Set([form.categoria, ...CATEGORIAS])].map((c) => (
                 <option key={c} value={c}>{c}</option>
@@ -207,7 +207,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
               value={form.descripcion}
               onChange={handleChange}
               rows={2}
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
             />
           </div>
 
@@ -218,7 +218,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
               value={form.paraQueSirve}
               onChange={handleChange}
               rows={2}
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
             />
           </div>
 
@@ -229,7 +229,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
               value={form.quienLoPide}
               onChange={handleChange}
               rows={2}
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
             />
           </div>
 
@@ -240,7 +240,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
               value={form.comoSeUsa}
               onChange={handleChange}
               rows={2}
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
             />
           </div>
 
@@ -251,7 +251,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
               value={form.formaApariencia}
               onChange={handleChange}
               rows={2}
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
             />
           </div>
 
@@ -262,7 +262,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
               value={form.datosClave}
               onChange={handleChange}
               rows={2}
-              className="w-full border border-orange-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none bg-orange-50"
+              className="w-full border border-orange-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none bg-orange-50"
             />
           </div>
 
@@ -274,12 +274,12 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
                 onChange={(e) => setNuevaVenta(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); agregarVenta() } }}
                 placeholder="Agregar producto relacionado..."
-                className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400"
+                className="flex-1 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400"
               />
               <button
                 type="button"
                 onClick={agregarVenta}
-                className="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-lg text-sm transition-colors"
+                className="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-xl text-sm transition-colors"
               >
                 <Plus size={16} />
               </button>
@@ -300,14 +300,14 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
             <button
               type="button"
               onClick={onCerrar}
-              className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-lg text-sm hover:bg-slate-50 transition-colors"
+              className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-xl text-sm hover:bg-slate-50 transition-colors"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={loading || subiendoImagen}
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
+              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-xl text-sm font-medium transition-colors disabled:opacity-50"
             >
               {loading ? 'Guardando...' : 'Guardar'}
             </button>

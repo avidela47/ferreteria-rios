@@ -313,13 +313,13 @@ export default function PedidosPage() {
     <div className="p-6">
       <Toaster richColors position="top-right" />
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-800">Pedidos</h1>
+        <h1 className="text-2xl font-bold text-blue-500">Pedidos</h1>
         <p className="text-slate-500 text-sm mt-1">Lista de productos que necesitás comprar - no afecta el stock</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-white rounded-lg shadow-sm p-4">
+          <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
             <label className="block text-sm font-medium text-slate-700 mb-2">
               Agregar producto desde stock
             </label>
@@ -329,10 +329,10 @@ export default function PedidosPage() {
                 value={buscarProducto}
                 onChange={function (e) { setBuscarProducto(e.target.value) }}
                 placeholder="Buscar por nombre o código..."
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
               {productosFiltrados.length > 0 && (
-                <div className="absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg z-10 mt-1">
+                <div className="absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-xl shadow-lg z-10 mt-1">
                   {productosFiltrados.map(function (p) {
                     return (
                       <button
@@ -355,7 +355,7 @@ export default function PedidosPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-4">
+          <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
             <label className="block text-sm font-medium text-slate-700 mb-2">
               Agregar producto nuevo (no está en stock)
             </label>
@@ -365,14 +365,14 @@ export default function PedidosPage() {
                 value={nuevoCodigo}
                 onChange={function (e) { setNuevoCodigo(e.target.value) }}
                 placeholder="Código"
-                className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="col-span-1 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
               <input
                 type="text"
                 value={nuevoNombre}
                 onChange={function (e) { setNuevoNombre(e.target.value) }}
                 placeholder="Nombre del producto"
-                className="col-span-2 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="col-span-2 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
               <input
                 type="number"
@@ -380,7 +380,7 @@ export default function PedidosPage() {
                 onChange={function (e) { setNuevaCantidad(Number(e.target.value)) }}
                 min={1}
                 placeholder="Cant."
-                className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="col-span-1 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
               <input
                 type="number"
@@ -388,18 +388,18 @@ export default function PedidosPage() {
                 value={nuevoCosto}
                 onChange={function (e) { setNuevoCosto(Number(e.target.value)) }}
                 placeholder="Costo est."
-                className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="col-span-1 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
               <button
                 onClick={agregarNuevo}
-                className="col-span-1 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-sm font-medium transition-colors flex items-center justify-center"
+                className="col-span-1 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors flex items-center justify-center"
               >
                 <Plus size={16} />
               </button>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm">
+          <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200">
             {items.length === 0 ? (
               <div className="p-8 text-center text-slate-400 text-sm">
                 Agregá productos desde el stock o cargá productos nuevos
@@ -407,7 +407,7 @@ export default function PedidosPage() {
             ) : (
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-left text-slate-500 border-b border-slate-100">
+                  <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
                     <th className="px-4 py-3 font-medium">Código</th>
                     <th className="px-4 py-3 font-medium">Producto</th>
                     <th className="px-4 py-3 font-medium text-center">Cantidad</th>
@@ -434,7 +434,7 @@ export default function PedidosPage() {
                             value={item.cantidad}
                             onChange={function (e) { cambiarCantidad(i, Number(e.target.value)) }}
                             min={1}
-                            className="w-16 border border-slate-200 rounded-lg px-2 py-1 text-sm text-center"
+                            className="w-16 border border-slate-200 rounded-xl px-2 py-1 text-sm text-center"
                           />
                         </td>
                         <td className="px-4 py-3 text-right">
@@ -467,18 +467,18 @@ export default function PedidosPage() {
         </div>
 
         <div className="space-y-4">
-          <div className="bg-white rounded-lg shadow-sm p-4 space-y-3">
+          <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4 space-y-3">
             <h3 className="font-medium text-slate-700">Nota (opcional)</h3>
             <textarea
               value={nota}
               onChange={function (e) { setNota(e.target.value) }}
               rows={4}
               placeholder="Ej: cliente pidio esto la semana pasada..."
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
             />
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-4">
+          <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
             <div className="flex justify-between text-base font-bold">
               <span>Total estimado</span>
               <span className="text-orange-500">{formatPeso(totalEstimado)}</span>
@@ -488,7 +488,7 @@ export default function PedidosPage() {
           <button
             onClick={guardarPedido}
             disabled={loading || items.length === 0}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-medium cursor-pointer transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold cursor-pointer transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
           >
             <FileText size={18} />
             {loading ? 'Guardando...' : 'Guardar pedido'}
@@ -496,7 +496,7 @@ export default function PedidosPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm">
+      <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200">
         <div className="p-4 border-b border-slate-100">
           <h2 className="font-medium text-slate-700">Pedidos guardados</h2>
         </div>
@@ -505,7 +505,7 @@ export default function PedidosPage() {
         ) : (
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-slate-500 border-b border-slate-100">
+              <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
                 <th className="px-4 py-3 font-medium">N°</th>
                 <th className="px-4 py-3 font-medium text-center">Items</th>
                 <th className="px-4 py-3 font-medium text-right">Total estimado</th>
@@ -521,7 +521,7 @@ export default function PedidosPage() {
                   <tr key={p._id} className="border-b border-slate-50 hover:bg-slate-50">
                     <td className="px-4 py-3 font-medium text-slate-700">#{p.numero}</td>
                     <td className="px-4 py-3 text-center text-slate-500">{p.items.length}</td>
-                    <td className="px-4 py-3 text-right font-medium text-slate-800">{formatPeso(total)}</td>
+                    <td className="px-4 py-3 text-right font-medium text-blue-500">{formatPeso(total)}</td>
                     <td className="px-4 py-3 text-slate-400 text-xs">
                       {new Date(p.createdAt).toLocaleDateString('es-AR')}
                     </td>
@@ -580,7 +580,7 @@ export default function PedidosPage() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between p-5 border-b sticky top-0 bg-white z-10">
-              <h2 className="font-semibold text-slate-800">
+              <h2 className="font-semibold text-blue-500">
                 Pedido #{pedidoEditar.numero} ({pedidoEditar.estado})
               </h2>
               <button onClick={cerrarEdicion} className="text-slate-400 hover:text-slate-600 cursor-pointer">
@@ -601,10 +601,10 @@ export default function PedidosPage() {
                         value={buscarProductoEdit}
                         onChange={function (e) { setBuscarProductoEdit(e.target.value) }}
                         placeholder="Buscar por nombre o código..."
-                        className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                        className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
                       />
                       {productosFiltradosEdit.length > 0 && (
-                        <div className="absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg z-20 mt-1">
+                        <div className="absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-xl shadow-lg z-20 mt-1">
                           {productosFiltradosEdit.map(function (p) {
                             return (
                               <button
@@ -632,21 +632,21 @@ export default function PedidosPage() {
                         value={nuevoCodigoEdit}
                         onChange={function (e) { setNuevoCodigoEdit(e.target.value) }}
                         placeholder="Código"
-                        className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                        className="col-span-1 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
                       />
                       <input
                         type="text"
                         value={nuevoNombreEdit}
                         onChange={function (e) { setNuevoNombreEdit(e.target.value) }}
                         placeholder="Nombre"
-                        className="col-span-2 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                        className="col-span-2 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
                       />
                       <input
                         type="number"
                         value={nuevaCantidadEdit}
                         onChange={function (e) { setNuevaCantidadEdit(Number(e.target.value)) }}
                         min={1}
-                        className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                        className="col-span-1 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
                       />
                       <input
                         type="number"
@@ -654,11 +654,11 @@ export default function PedidosPage() {
                         value={nuevoCostoEdit}
                         onChange={function (e) { setNuevoCostoEdit(Number(e.target.value)) }}
                         placeholder="Costo"
-                        className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                        className="col-span-1 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
                       />
                       <button
                         onClick={agregarNuevoEdicion}
-                        className="col-span-1 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-sm font-medium transition-colors flex items-center justify-center"
+                        className="col-span-1 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors flex items-center justify-center"
                       >
                         <Plus size={16} />
                       </button>
@@ -669,7 +669,7 @@ export default function PedidosPage() {
 
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-left text-slate-500 border-b border-slate-100">
+                  <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
                     <th className="py-2 font-medium">Código</th>
                     <th className="py-2 font-medium">Producto</th>
                     <th className="py-2 font-medium text-center">Cantidad</th>
@@ -697,7 +697,7 @@ export default function PedidosPage() {
                               value={item.cantidad}
                               onChange={function (e) { cambiarCantidadEdicion(i, Number(e.target.value)) }}
                               min={1}
-                              className="w-16 border border-slate-200 rounded-lg px-2 py-1 text-sm text-center"
+                              className="w-16 border border-slate-200 rounded-xl px-2 py-1 text-sm text-center"
                             />
                           ) : (
                             item.cantidad
@@ -753,7 +753,7 @@ export default function PedidosPage() {
                     setPedidoEditar(Object.assign({}, pedidoEditar, { nota: e.target.value }))
                   }}
                   rows={3}
-                  className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none disabled:bg-slate-50"
+                  className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none disabled:bg-slate-50"
                 />
               </div>
 
@@ -762,14 +762,14 @@ export default function PedidosPage() {
                   <button
                     type="button"
                     onClick={cerrarEdicion}
-                    className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-lg text-sm hover:bg-slate-50 transition-colors"
+                    className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-xl text-sm hover:bg-slate-50 transition-colors"
                   >
                     Cancelar
                   </button>
                   <button
                     onClick={guardarEdicion}
                     disabled={loading}
-                    className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
+                    className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-xl text-sm font-medium transition-colors disabled:opacity-50"
                   >
                     {loading ? 'Guardando...' : 'Guardar cambios'}
                   </button>

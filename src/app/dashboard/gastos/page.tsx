@@ -59,18 +59,18 @@ export default function GastosPage() {
     <div className="p-6">
       <Toaster richColors position="top-right" />
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-800">Gastos</h1>
+        <h1 className="text-2xl font-bold text-blue-500">Gastos</h1>
         <p className="text-slate-500 text-sm mt-1">Egresos y gastos operativos</p>
       </div>
 
-      <div className="flex items-center justify-center gap-4 mb-6 bg-white rounded-lg shadow-sm p-3">
+      <div className="flex items-center justify-center gap-4 mb-6 bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-3">
         <button
           onClick={mesAnterior}
           className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors"
         >
           <ChevronLeft size={18} />
         </button>
-        <span className="text-base font-semibold text-slate-800 w-48 text-center">
+        <span className="text-base font-semibold text-blue-500 w-48 text-center">
           {NOMBRES_MES[mes]} {anio}
         </span>
         <button

@@ -62,7 +62,7 @@ export default function GastosList({ onNuevo, onEditar, anio, mes }: Props) {
     return (
       <table className="w-full text-sm">
         <thead>
-          <tr className="text-left text-slate-500 border-b border-slate-100">
+          <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
             <th className="px-4 py-3 font-medium">Descripcion</th>
             <th className="px-4 py-3 font-medium">Categoria</th>
             <th className="px-4 py-3 font-medium">Fecha</th>
@@ -110,7 +110,7 @@ export default function GastosList({ onNuevo, onEditar, anio, mes }: Props) {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-lg shadow-sm p-8 text-center text-slate-400 text-sm">
+      <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-8 text-center text-slate-400 text-sm">
         Cargando...
       </div>
     )
@@ -118,20 +118,20 @@ export default function GastosList({ onNuevo, onEditar, anio, mes }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow-sm p-4 flex items-center justify-between">
+      <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4 flex items-center justify-between">
         <div>
           <p className="text-xs text-slate-500">Total gastado este mes</p>
-          <p className="text-2xl font-bold text-slate-800">{formatPeso(totalGeneral)}</p>
+          <p className="text-2xl font-bold text-blue-500">{formatPeso(totalGeneral)}</p>
         </div>
         <button
           onClick={onNuevo}
-          className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors"
         >
           + Nuevo gasto
         </button>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm">
+      <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200">
         <div className="p-4 border-b border-slate-100 flex items-center justify-between">
           <div>
             <h2 className="font-medium text-slate-700">Gastos recurrentes (mensuales)</h2>
@@ -152,7 +152,7 @@ export default function GastosList({ onNuevo, onEditar, anio, mes }: Props) {
         )}
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm">
+      <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200">
         <div className="p-4 border-b border-slate-100">
           <h2 className="font-medium text-slate-700">Otros gastos e inversiones</h2>
           <p className="text-xs text-slate-400 mt-0.5">Compras únicas, mercadería, mejoras - no entran en el punto de equilibrio</p>

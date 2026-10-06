@@ -81,14 +81,14 @@ export default function ReporteSemanal() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-center gap-4 bg-white rounded-lg shadow-sm p-3">
+      <div className="flex items-center justify-center gap-4 bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-3">
         <button
           onClick={semanaAnterior}
           className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer"
         >
           <ChevronLeft size={18} />
         </button>
-        <span className="text-base font-semibold text-slate-800 w-56 text-center">
+        <span className="text-base font-semibold text-blue-500 w-56 text-center">
           {formatFechaCorta(lunesSeleccionado)} al {formatFechaCorta(domingo)}
         </span>
         <button
@@ -106,22 +106,22 @@ export default function ReporteSemanal() {
       ) : (
         <>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white rounded-lg p-5 shadow-sm border-l-4 border-l-blue-500">
+            <div className="bg-white rounded-xl p-5 shadow-sm border-l-4 border-l-blue-500">
               <p className="text-sm text-slate-500">Ventas</p>
-              <p className="text-2xl font-bold text-slate-800">{formatPeso(data.totalVentas)}</p>
+              <p className="text-2xl font-bold text-blue-500">{formatPeso(data.totalVentas)}</p>
               <p className="text-xs text-slate-400 mt-1">{data.cantidadVentas} transacciones</p>
             </div>
-            <div className="bg-white rounded-lg p-5 shadow-sm border-l-4 border-l-green-500">
+            <div className="bg-white rounded-xl p-5 shadow-sm border-l-4 border-l-green-500">
               <p className="text-sm text-slate-500">Ganancia bruta</p>
-              <p className="text-2xl font-bold text-slate-800">{formatPeso(data.ganancia)}</p>
+              <p className="text-2xl font-bold text-blue-500">{formatPeso(data.ganancia)}</p>
               <p className="text-xs text-slate-400 mt-1">sobre costo {formatPeso(data.totalCostos)}</p>
             </div>
-            <div className="bg-white rounded-lg p-5 shadow-sm border-l-4 border-l-red-500">
+            <div className="bg-white rounded-xl p-5 shadow-sm border-l-4 border-l-red-500">
               <p className="text-sm text-slate-500">Gastos</p>
-              <p className="text-2xl font-bold text-slate-800">{formatPeso(data.totalGastos)}</p>
+              <p className="text-2xl font-bold text-blue-500">{formatPeso(data.totalGastos)}</p>
               <p className="text-xs text-slate-400 mt-1">egresos del periodo</p>
             </div>
-            <div className="bg-white rounded-lg p-5 shadow-sm border-l-4 border-l-orange-500">
+            <div className="bg-white rounded-xl p-5 shadow-sm border-l-4 border-l-orange-500">
               <p className="text-sm text-slate-500">Resultado neto</p>
               <p className={'text-2xl font-bold ' + (data.ganancia - data.totalGastos >= 0 ? 'text-green-600' : 'text-red-500')}>
                 {formatPeso(data.ganancia - data.totalGastos)}
@@ -130,7 +130,7 @@ export default function ReporteSemanal() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-5">
+          <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5">
             <h3 className="font-medium text-slate-700 mb-4">Ventas por dia</h3>
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={data.diasSemana} barCategoryGap="60%">
@@ -147,11 +147,11 @@ export default function ReporteSemanal() {
           </div>
 
           {data.topProductos.length > 0 && (
-            <div className="bg-white rounded-lg shadow-sm p-5">
+            <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5">
               <h3 className="font-medium text-slate-700 mb-4">Top 10 productos de la semana</h3>
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-left text-slate-500 border-b">
+                  <tr className="text-left text-slate-400 border-b border-slate-100">
                     <th className="pb-2 font-medium">Producto</th>
                     <th className="pb-2 font-medium text-center">Cantidad</th>
                     <th className="pb-2 font-medium text-right">Total</th>

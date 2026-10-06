@@ -129,7 +129,7 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
         <span>· {fichas.filter(f => !f.imagen).length} sin imagen</span>
         <button type="button" onClick={() => setRecarga(r => r + 1)} className="font-medium text-orange-600">Actualizar stock y precios</button>
       </div>
-      <div className="bg-white rounded-lg shadow-sm p-4 flex flex-wrap gap-3 items-center">
+      <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4 flex flex-wrap gap-3 items-center">
   <div className="relative flex-1">
     <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
     <input
@@ -137,7 +137,7 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
       placeholder="Buscar por código, nombre, descripción o uso..."
       value={buscar}
       onChange={(e) => handleBuscar(e.target.value)}
-      className="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+      className="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
     />
   </div>
   <button
@@ -147,14 +147,14 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
       setSinImagen(false)
       setPagina(1)
     }}
-    className="border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+    className="border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-xl text-sm font-medium transition-colors"
   >
     Borrar
   </button>
   <select
           value={categoriaFiltro}
           onChange={(e) => handleCategoria(e.target.value)}
-          className="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+          className="border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
         >
           <option value="">Todas las categorías</option>
           {categorias.map((c) => (
@@ -171,9 +171,9 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
       </div>
 
       {cargando ? <p role="status" className="p-8 text-center text-slate-500">Cargando catálogo...</p> : error ? (
-        <div role="alert" className="rounded-lg bg-red-50 p-6 text-red-700">{error} <button onClick={() => setRecarga(r => r + 1)} className="underline">Reintentar</button></div>
+        <div role="alert" className="rounded-xl bg-red-50 p-6 text-red-700">{error} <button onClick={() => setRecarga(r => r + 1)} className="underline">Reintentar</button></div>
       ) : fichasFiltradas.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-sm p-12 text-center">
+        <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-12 text-center">
           <BookOpen size={40} className="mx-auto text-slate-300 mb-3" />
           <p className="text-slate-400 text-sm">No hay fichas que coincidan</p>
         </div>
@@ -184,7 +184,7 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
               const clave = ficha.productoId ?? ficha._id ?? ficha.codigo ?? ''
               const info = ficha.precioVenta !== undefined ? ficha : undefined
               return (
-                <div key={clave} className="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div key={clave} className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
                   <div
                     className="flex items-center gap-3 p-4 cursor-pointer hover:bg-slate-50 transition-colors"
                     onClick={() => setExpandida(expandida === clave ? null : clave)}
@@ -197,7 +197,7 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
                         {ficha.codigo && (
                           <span className="text-xs text-slate-400 font-mono">#{ficha.codigo}</span>
                         )}
-                        <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wide">
+                        <h3 className="text-sm font-semibold text-blue-500 uppercase tracking-wide">
                           {ficha.nombre}
                         </h3>
                       </div>
@@ -263,7 +263,7 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
                         </div>
                         <div>
                           <p className="text-xs font-semibold text-orange-500 uppercase tracking-wide mb-1">⚡ Datos clave</p>
-                          <p className="text-sm text-slate-700 bg-orange-50 rounded-lg p-2">{ficha.datosClave}</p>
+                          <p className="text-sm text-slate-700 bg-orange-50 rounded-xl p-2">{ficha.datosClave}</p>
                         </div>
                         {!!ficha.ventaCruzada?.length && <div>
                           <p className="text-xs font-semibold text-green-600 uppercase tracking-wide mb-1">🔗 Venta cruzada</p>
@@ -301,7 +301,7 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
             })}
           </div>
 
-          <div className="flex flex-wrap gap-3 items-center justify-between bg-white rounded-lg shadow-sm px-4 py-3">
+          <div className="flex flex-wrap gap-3 items-center justify-between bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 px-4 py-3">
             <span className="text-sm text-slate-500">
               {fichasFiltradas.length} fichas · Página {paginaActual} de {totalPaginas}
             </span>

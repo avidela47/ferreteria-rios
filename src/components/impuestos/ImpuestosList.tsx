@@ -67,7 +67,7 @@ export default function ImpuestosList({ onNuevo, onEditar }: Props) {
     .reduce((acc, i) => acc + i.monto, 0)
 
   return (
-    <div className="bg-white rounded-lg shadow-sm">
+    <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200">
       <div className="p-4 border-b border-slate-100 flex items-center justify-between">
         <div>
           <h2 className="font-medium text-slate-700">Registro de impuestos</h2>
@@ -79,7 +79,7 @@ export default function ImpuestosList({ onNuevo, onEditar }: Props) {
         </div>
         <button
           onClick={onNuevo}
-          className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors"
         >
           + Nuevo
         </button>
@@ -94,7 +94,7 @@ export default function ImpuestosList({ onNuevo, onEditar }: Props) {
       ) : (
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-left text-slate-500 border-b border-slate-100">
+            <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
               <th className="px-4 py-3 font-medium">Tipo</th>
               <th className="px-4 py-3 font-medium">Periodo</th>
               <th className="px-4 py-3 font-medium">Vencimiento</th>
@@ -118,7 +118,7 @@ export default function ImpuestosList({ onNuevo, onEditar }: Props) {
                     {formatFecha(i.vencimiento)}
                     {vencido && <span className="ml-1">⚠ Vencido</span>}
                   </td>
-                  <td className="px-4 py-3 text-right font-medium text-slate-800">
+                  <td className="px-4 py-3 text-right font-medium text-blue-500">
                     {formatPeso(i.monto)}
                   </td>
                   <td className="px-4 py-3 text-center">

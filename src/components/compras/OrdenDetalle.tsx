@@ -119,7 +119,7 @@ export default function OrdenDetalle({ id }: Props) {
           <button
             onClick={guardarCambios}
             disabled={guardando}
-            className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm cursor-pointer transition-colors disabled:opacity-50"
+            className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl text-sm cursor-pointer transition-colors disabled:opacity-50"
           >
             <Save size={16} /> {guardando ? 'Guardando...' : 'Guardar cambios'}
           </button>
@@ -127,14 +127,14 @@ export default function OrdenDetalle({ id }: Props) {
         {esEditable && (
           <button
             onClick={marcarEnviada}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm cursor-pointer transition-colors"
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl text-sm cursor-pointer transition-colors"
           >
             Marcar como enviada
           </button>
         )}
         <button
           onClick={imprimir}
-          className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm cursor-pointer transition-colors"
+          className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm cursor-pointer transition-colors"
         >
           <Printer size={16} /> Imprimir / PDF
         </button>
@@ -154,7 +154,7 @@ export default function OrdenDetalle({ id }: Props) {
             <p className="text-slate-500 text-sm mt-1">Bv. Los Granaderos Nº 2019 - Bº San Martin · Cordoba</p>
           </div>
           <div className="text-right">
-            <h1 className="text-2xl font-bold text-slate-800">ORDEN DE COMPRA</h1>
+            <h1 className="text-2xl font-bold text-blue-500">ORDEN DE COMPRA</h1>
             <p className="text-orange-500 font-bold text-lg mt-1">{numeroFormato}</p>
             <p className="text-slate-500 text-sm mt-1">Fecha: {formatFecha(compra.createdAt)}</p>
             <span className={
@@ -170,9 +170,9 @@ export default function OrdenDetalle({ id }: Props) {
         </div>
 
         {proveedor && (
-          <div className="bg-slate-50 rounded-lg p-4 mb-6">
+          <div className="bg-slate-50 rounded-xl p-4 mb-6">
             <p className="text-xs text-slate-400 uppercase font-medium mb-2">Proveedor</p>
-            <p className="font-semibold text-slate-800">{proveedor.nombre}</p>
+            <p className="font-semibold text-blue-500">{proveedor.nombre}</p>
             {proveedor.cuit && <p className="text-slate-500 text-sm">CUIT: {proveedor.cuit}</p>}
             {proveedor.telefono && <p className="text-slate-500 text-sm">Tel: {proveedor.telefono}</p>}
             {proveedor.email && <p className="text-slate-500 text-sm">Email: {proveedor.email}</p>}
@@ -231,7 +231,7 @@ export default function OrdenDetalle({ id }: Props) {
                     ) : formatPeso(item.precioCosto)}
                     {esEditable && <span className="hidden print:inline">{formatPeso(item.precioCosto)}</span>}
                   </td>
-                  <td className="py-2.5 text-right font-medium text-slate-800">{formatPeso(item.subtotal)}</td>
+                  <td className="py-2.5 text-right font-medium text-blue-500">{formatPeso(item.subtotal)}</td>
                   {esEditable && (
                     <td className="py-2.5 text-center print:hidden">
                       <button
@@ -250,7 +250,7 @@ export default function OrdenDetalle({ id }: Props) {
 
         {/* Total: bloque normal (no tfoot), pegado al final real del contenido en impresión */}
         <div className="flex justify-end border-t-2 border-slate-200 py-3 mb-6 break-inside-avoid">
-          <span className="font-bold text-slate-800 mr-6">TOTAL</span>
+          <span className="font-bold text-blue-500 mr-6">TOTAL</span>
           <span className="font-bold text-orange-500 text-base">{formatPeso(totalActual)}</span>
         </div>
 

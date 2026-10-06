@@ -166,7 +166,7 @@ export default function NuevaCompra({ onGuardado }: Props) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div className="lg:col-span-2 space-y-4">
-        <div className="bg-white rounded-lg shadow-sm p-4">
+        <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
           <label className="block text-sm font-medium text-slate-700 mb-2">
             Agregar producto desde stock
           </label>
@@ -176,10 +176,10 @@ export default function NuevaCompra({ onGuardado }: Props) {
               value={buscar}
               onChange={function (e) { setBuscar(e.target.value) }}
               placeholder="Buscar por nombre o código..."
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
             {productosFiltrados.length > 0 && (
-              <div className="absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg z-10 mt-1">
+              <div className="absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-xl shadow-lg z-10 mt-1">
                 {productosFiltrados.map(function (p) {
                   return (
                     <button
@@ -202,7 +202,7 @@ export default function NuevaCompra({ onGuardado }: Props) {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm p-4">
+        <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
           <label className="block text-sm font-medium text-slate-700 mb-2">
             Agregar producto nuevo (no está en stock)
           </label>
@@ -212,14 +212,14 @@ export default function NuevaCompra({ onGuardado }: Props) {
               value={nuevoCodigo}
               onChange={function (e) { setNuevoCodigo(e.target.value) }}
               placeholder="Código"
-              className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="col-span-1 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
             <input
               type="text"
               value={nuevoNombre}
               onChange={function (e) { setNuevoNombre(e.target.value) }}
               placeholder="Nombre del producto"
-              className="col-span-2 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="col-span-2 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
             <input
               type="number"
@@ -227,7 +227,7 @@ export default function NuevaCompra({ onGuardado }: Props) {
               onChange={function (e) { setNuevaCantidad(Number(e.target.value)) }}
               min={1}
               placeholder="Cant."
-              className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="col-span-1 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
             <input
               type="number"
@@ -235,18 +235,18 @@ export default function NuevaCompra({ onGuardado }: Props) {
               value={nuevoCosto}
               onChange={function (e) { setNuevoCosto(Number(e.target.value)) }}
               placeholder="Costo"
-              className="col-span-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="col-span-1 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
             <button
               onClick={agregarNuevo}
-              className="col-span-1 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-sm font-medium transition-colors flex items-center justify-center"
+              className="col-span-1 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors flex items-center justify-center"
             >
               <Plus size={16} />
             </button>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm">
+        <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200">
           {items.length === 0 ? (
             <div className="p-8 text-center text-slate-400 text-sm">
               Busca y agrega productos a la orden
@@ -254,7 +254,7 @@ export default function NuevaCompra({ onGuardado }: Props) {
           ) : (
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-slate-500 border-b border-slate-100">
+                <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
                   <th className="px-4 py-3 font-medium">Código</th>
                   <th className="px-4 py-3 font-medium">Producto</th>
                   <th className="px-4 py-3 font-medium text-center">Cantidad</th>
@@ -302,7 +302,7 @@ export default function NuevaCompra({ onGuardado }: Props) {
                           className="w-24 border border-slate-200 rounded px-2 py-1 text-right text-sm focus:outline-none focus:ring-1 focus:ring-orange-400"
                         />
                       </td>
-                      <td className="px-4 py-3 text-right font-medium text-slate-800">
+                      <td className="px-4 py-3 text-right font-medium text-blue-500">
                         {formatPeso(item.subtotal)}
                       </td>
                       <td className="px-4 py-3">
@@ -323,7 +323,7 @@ export default function NuevaCompra({ onGuardado }: Props) {
       </div>
 
       <div className="space-y-4">
-        <div className="bg-white rounded-lg shadow-sm p-4 space-y-3">
+        <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4 space-y-3">
           <h3 className="font-medium text-slate-700">Datos de la orden</h3>
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">
@@ -333,7 +333,7 @@ export default function NuevaCompra({ onGuardado }: Props) {
               value={proveedor}
               onChange={function (e) { setProveedor(e.target.value) }}
               required
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 cursor-pointer"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 cursor-pointer"
             >
               <option value="">Seleccionar...</option>
               {proveedores.map(function (p) {
@@ -347,12 +347,12 @@ export default function NuevaCompra({ onGuardado }: Props) {
               value={nota}
               onChange={function (e) { setNota(e.target.value) }}
               placeholder="Opcional..."
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm p-4">
+        <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
           <div className="flex justify-between text-base font-bold">
             <span>Total orden</span>
             <span className="text-orange-500">{formatPeso(total)}</span>
@@ -362,7 +362,7 @@ export default function NuevaCompra({ onGuardado }: Props) {
         <button
           onClick={handleGuardar}
           disabled={loading || items.length === 0}
-          className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-medium cursor-pointer transition-colors disabled:opacity-50"
+          className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold cursor-pointer transition-colors disabled:opacity-50"
         >
           {loading ? 'Guardando...' : 'Crear orden de compra'}
         </button>

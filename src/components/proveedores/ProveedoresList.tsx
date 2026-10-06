@@ -31,12 +31,12 @@ export default function ProveedoresList({ onNuevo, onEditar }: Props) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm">
+    <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200">
       <div className="p-4 border-b border-slate-100 flex items-center justify-between">
         <h2 className="font-medium text-slate-700">Lista de proveedores</h2>
         <button
           onClick={onNuevo}
-          className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-colors"
+          className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-medium cursor-pointer transition-colors"
         >
           + Nuevo
         </button>
@@ -51,7 +51,7 @@ export default function ProveedoresList({ onNuevo, onEditar }: Props) {
       ) : (
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-left text-slate-500 border-b border-slate-100">
+            <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
               <th className="px-4 py-3 font-medium">Nombre</th>
               <th className="px-4 py-3 font-medium">Telefono</th>
               <th className="px-4 py-3 font-medium">Email</th>

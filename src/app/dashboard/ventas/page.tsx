@@ -58,12 +58,12 @@ export default function VentasPage() {
       <Toaster richColors position="top-center" />
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800">Ventas</h1>
+          <h1 className="text-2xl font-bold text-blue-500">Ventas</h1>
           <p className="text-slate-500 text-sm mt-1">Punto de venta e historial</p>
         </div>
         <button
           onClick={handleNuevaVenta}
-          className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-colors"
+          className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-medium cursor-pointer transition-colors"
         >
           {vista === 'lista' ? '+ Nueva venta' : '← Volver'}
         </button>
@@ -71,23 +71,23 @@ export default function VentasPage() {
 
       {stats && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white rounded-lg shadow-sm p-4">
+          <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
             <p className="text-xs text-slate-500 mb-1">Cantidad de ventas</p>
-            <p className="text-2xl font-bold text-slate-800">{stats.cantidad}</p>
+            <p className="text-2xl font-bold text-blue-500">{stats.cantidad}</p>
           </div>
-          <div className="bg-white rounded-lg shadow-sm p-4">
+          <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
             <p className="text-xs text-slate-500 mb-1">Monto total (costo / venta)</p>
-            <p className="text-lg font-bold text-slate-800">{formatPeso(stats.total)}</p>
+            <p className="text-lg font-bold text-blue-500">{formatPeso(stats.total)}</p>
             <p className="text-xs text-slate-400">Costo: {formatPeso(stats.costoTotal)}</p>
             <p className="text-xs text-green-600 font-medium">Ganancia: {formatPeso(stats.ganancia)}</p>
           </div>
-          <div className="bg-white rounded-lg shadow-sm p-4">
+          <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
             <p className="text-xs text-slate-500 mb-1">Ventas de hoy</p>
             <p className="text-lg font-bold text-orange-500">{formatPeso(stats.hoy.total)}</p>
             <p className="text-xs text-slate-400">{stats.hoy.cantidad} ventas</p>
             <p className="text-xs text-green-600 font-medium">Ganancia: {formatPeso(stats.hoy.ganancia)}</p>
           </div>
-          <div className="bg-white rounded-lg shadow-sm p-4">
+          <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
             <p className="text-xs text-slate-500 mb-1">Ventas del mes</p>
             <p className="text-lg font-bold text-orange-500">{formatPeso(stats.mes.total)}</p>
             <p className="text-xs text-slate-400">{stats.mes.cantidad} ventas</p>

@@ -170,13 +170,13 @@ async function eliminarBaja(id: string) {
     <div className="p-6">
       <Toaster richColors position="top-right" />
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-800">Bajas de Stock</h1>
+        <h1 className="text-2xl font-bold text-blue-500">Bajas de Stock</h1>
         <p className="text-slate-500 text-sm mt-1">Rotura, uso interno o pérdida — no afecta ventas ni facturación</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-white rounded-lg shadow-sm p-4">
+          <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
             <label className="block text-sm font-medium text-slate-700 mb-2">
               Buscar producto
             </label>
@@ -186,10 +186,10 @@ async function eliminarBaja(id: string) {
                 value={buscar}
                 onChange={function (e) { setBuscar(e.target.value) }}
                 placeholder="Buscar por nombre o código..."
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
               {productosFiltrados.length > 0 && (
-                <div className="absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-lg shadow-lg z-10 mt-1">
+                <div className="absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-xl shadow-lg z-10 mt-1">
                   {productosFiltrados.map(function (p) {
                     return (
                       <button
@@ -210,7 +210,7 @@ async function eliminarBaja(id: string) {
             </div>
 
             {productoSeleccionado && (
-              <div className="mt-4 bg-slate-50 rounded-lg p-3 flex items-center justify-between">
+              <div className="mt-4 bg-slate-50 rounded-xl p-3 flex items-center justify-between">
                 <div>
                   <p className="font-medium text-slate-700 text-sm">{productoSeleccionado.nombre}</p>
                   <p className="text-xs text-slate-400">
@@ -227,7 +227,7 @@ async function eliminarBaja(id: string) {
             )}
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-4 space-y-4">
+          <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4 space-y-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">Cantidad</label>
               <input
@@ -235,7 +235,7 @@ async function eliminarBaja(id: string) {
                 min={1}
                 value={cantidad}
                 onChange={function (e) { setCantidad(Number(e.target.value)) }}
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
             </div>
 
@@ -244,7 +244,7 @@ async function eliminarBaja(id: string) {
               <select
                 value={motivo}
                 onChange={function (e) { setMotivo(e.target.value) }}
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               >
                 <option value="rotura">Rotura</option>
                 <option value="uso_interno">Uso interno</option>
@@ -260,14 +260,14 @@ async function eliminarBaja(id: string) {
                 onChange={function (e) { setNota(e.target.value) }}
                 rows={3}
                 placeholder="Detalle adicional..."
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none"
               />
             </div>
           </div>
         </div>
 
         <div className="space-y-4">
-          <div className="bg-white rounded-lg shadow-sm p-4">
+          <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4">
             <p className="text-xs text-slate-500 mb-1">Total perdido registrado</p>
             <p className="text-2xl font-bold text-red-500">{formatPeso(totalPerdidoMes)}</p>
             <p className="text-xs text-slate-400 mt-1">{bajas.length} bajas registradas</p>
@@ -276,14 +276,14 @@ async function eliminarBaja(id: string) {
           <button
             onClick={registrarBaja}
             disabled={loading || !productoSeleccionado}
-            className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg font-medium cursor-pointer transition-colors disabled:opacity-50"
+            className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl font-semibold cursor-pointer transition-colors disabled:opacity-50"
           >
             {loading ? 'Registrando...' : 'Registrar baja de stock'}
           </button>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm">
+      <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200">
         <div className="p-4 border-b border-slate-100">
           <h2 className="font-medium text-slate-700">Historial de bajas</h2>
         </div>
@@ -292,7 +292,7 @@ async function eliminarBaja(id: string) {
         ) : (
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-slate-500 border-b border-slate-100">
+              <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
                 <th className="px-4 py-3 font-medium">N°</th>
                 <th className="px-4 py-3 font-medium">Código</th>
                 <th className="px-4 py-3 font-medium">Producto</th>

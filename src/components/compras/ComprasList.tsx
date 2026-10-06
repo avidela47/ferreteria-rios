@@ -83,7 +83,7 @@ export default function ComprasList() {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm">
+    <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200">
       <div className="p-4 border-b border-slate-100 flex items-center justify-between">
         <h2 className="font-medium text-slate-700">Ordenes de compra</h2>
         <p className="text-sm text-slate-500">
@@ -100,7 +100,7 @@ export default function ComprasList() {
       ) : (
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-left text-slate-500 border-b border-slate-100">
+            <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
               <th className="px-4 py-3 font-medium">N°</th>
               <th className="px-4 py-3 font-medium">Proveedor</th>
               <th className="px-4 py-3 font-medium">Fecha</th>
@@ -123,7 +123,7 @@ export default function ComprasList() {
                 <td className="px-4 py-3 text-center text-slate-500">
                   {c.items.length}
                 </td>
-                <td className="px-4 py-3 text-right font-medium text-slate-800">
+                <td className="px-4 py-3 text-right font-medium text-blue-500">
                   {formatPeso(c.total)}
                 </td>
                 <td className="px-4 py-3 text-center">

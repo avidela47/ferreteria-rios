@@ -64,7 +64,7 @@ export default function ImpuestoForm({ impuesto, onGuardado, onCerrar }: Props) 
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-lg">
         <div className="flex items-center justify-between p-5 border-b">
-          <h2 className="font-semibold text-slate-800">
+          <h2 className="font-semibold text-blue-500">
             {impuesto ? 'Editar impuesto' : 'Nuevo impuesto'}
           </h2>
           <button onClick={onCerrar} className="text-slate-400 hover:text-slate-600">
@@ -81,7 +81,7 @@ export default function ImpuestoForm({ impuesto, onGuardado, onCerrar }: Props) 
                 value={form.tipo}
                 onChange={handleChange}
                 required
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               >
                 {tipos.map((t) => (
                   <option key={t} value={t}>{t}</option>
@@ -96,7 +96,7 @@ export default function ImpuestoForm({ impuesto, onGuardado, onCerrar }: Props) 
                 onChange={handleChange}
                 placeholder="Ej: Mayo 2026"
                 required
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function ImpuestoForm({ impuesto, onGuardado, onCerrar }: Props) 
                 onChange={handleChange}
                 min={0}
                 required
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
             </div>
             <div>
@@ -123,7 +123,7 @@ export default function ImpuestoForm({ impuesto, onGuardado, onCerrar }: Props) 
                 value={form.vencimiento}
                 onChange={handleChange}
                 required
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
             </div>
           </div>
@@ -135,7 +135,7 @@ export default function ImpuestoForm({ impuesto, onGuardado, onCerrar }: Props) 
               value={form.comprobante}
               onChange={handleChange}
               placeholder="N° de comprobante"
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
           </div>
 
@@ -146,7 +146,7 @@ export default function ImpuestoForm({ impuesto, onGuardado, onCerrar }: Props) 
               value={form.nota}
               onChange={handleChange}
               placeholder="Opcional..."
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
           </div>
 
@@ -168,14 +168,14 @@ export default function ImpuestoForm({ impuesto, onGuardado, onCerrar }: Props) 
             <button
               type="button"
               onClick={onCerrar}
-              className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-lg text-sm hover:bg-slate-50 transition-colors"
+              className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-xl text-sm hover:bg-slate-50 transition-colors"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
+              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-xl text-sm font-medium transition-colors disabled:opacity-50"
             >
               {loading ? 'Guardando...' : 'Guardar'}
             </button>

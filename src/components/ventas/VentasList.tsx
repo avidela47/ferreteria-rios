@@ -75,7 +75,7 @@ export default function VentasList() {
   const totalPaginas = Math.ceil(total / POR_PAGINA)
 
   return (
-    <div className="bg-white rounded-lg shadow-sm">
+    <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200">
       <div className="p-4 border-b border-slate-100">
         <h2 className="font-medium text-slate-700">Historial de ventas</h2>
       </div>
@@ -90,7 +90,7 @@ export default function VentasList() {
         <>
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-slate-500 border-b border-slate-100">
+              <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
                 <th className="px-4 py-3 font-medium">N°</th>
                 <th className="px-4 py-3 font-medium">Cliente</th>
                 <th className="px-4 py-3 font-medium">Fecha</th>
@@ -116,7 +116,7 @@ export default function VentasList() {
                         {v.formaPago}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-right font-medium text-slate-800">
+                    <td className="px-4 py-3 text-right font-medium text-blue-500">
                       {formatPeso(v.total)}
                     </td>
                     <td className="px-4 py-3 text-right text-green-600 font-medium">
@@ -184,7 +184,7 @@ export default function VentasList() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between p-5 border-b">
-              <h2 className="font-semibold text-slate-800">Venta #{ventaDetalle.numero}</h2>
+              <h2 className="font-semibold text-blue-500">Venta #{ventaDetalle.numero}</h2>
               <div className="flex items-center gap-3">
                 <a href={'/imprimir-venta?id=' + ventaDetalle._id} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-700 cursor-pointer transition-colors" title="Imprimir ticket"><Printer size={18} /></a>
                 <button onClick={function () { setVentaDetalle(null) }} className="text-slate-400 hover:text-slate-600 cursor-pointer">
@@ -217,7 +217,7 @@ export default function VentasList() {
                 <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Productos</p>
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="text-left text-slate-500 border-b border-slate-100">
+                    <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
                       <th className="py-2 font-medium">Código</th>
                       <th className="py-2 font-medium">Producto</th>
                       <th className="py-2 font-medium text-center">Cant.</th>
@@ -233,7 +233,7 @@ export default function VentasList() {
                           <td className="py-2 text-slate-700">{item.nombre}</td>
                           <td className="py-2 text-center text-slate-500">{item.cantidad}</td>
                           <td className="py-2 text-right text-slate-500">{formatPeso(item.precioVenta)}</td>
-                          <td className="py-2 text-right font-medium text-slate-800">{formatPeso(item.subtotal)}</td>
+                          <td className="py-2 text-right font-medium text-blue-500">{formatPeso(item.subtotal)}</td>
                         </tr>
                       )
                     })}

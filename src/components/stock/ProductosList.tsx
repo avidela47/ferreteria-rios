@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { IProduct } from '@/types'
 import { formatPeso, formatPesoEntero } from '@/lib/utils'
-import { Pencil, Trash2, AlertTriangle, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Printer } from 'lucide-react'
+import { Pencil, Trash2, AlertTriangle, ChevronLeft, ChevronRight, Printer } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface Props {
@@ -11,11 +11,6 @@ interface Props {
   onEditar: (producto: IProduct) => void
   refresh: number
   esAdmin: boolean
-}
-
-function FlechaOrden({ campo, ordenarPor, direccion }: { campo: string; ordenarPor: string; direccion: string }) {
-  if (ordenarPor !== campo) return null
-  return direccion === 'asc' ? <ChevronUp size={13} className="inline ml-1" /> : <ChevronDown size={13} className="inline ml-1" />
 }
 
 export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: Props) {
@@ -109,21 +104,21 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-white rounded-lg shadow-sm p-4">
-          <p className="text-xs text-slate-500 mb-1">Total productos</p>
-          <p className="text-2xl font-bold text-slate-800">{total}</p>
+        <div className="bg-white rounded-3xl shadow-sm p-5">
+          <p className="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Total productos</p>
+          <p className="text-2xl font-bold text-blue-500">{total}</p>
         </div>
-        <div className="bg-white rounded-lg shadow-sm p-4">
-          <p className="text-xs text-slate-500 mb-1">Costo total stock</p>
-          <p className="text-2xl font-bold text-slate-800">{formatPeso(totales.costo)}</p>
+        <div className="bg-white rounded-3xl shadow-sm p-5">
+          <p className="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Costo total stock</p>
+          <p className="text-2xl font-bold text-blue-500">{formatPeso(totales.costo)}</p>
         </div>
-        <div className="bg-white rounded-lg shadow-sm p-4">
-          <p className="text-xs text-slate-500 mb-1">Venta total stock</p>
+        <div className="bg-white rounded-3xl shadow-sm p-5">
+          <p className="text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">Venta total stock</p>
           <p className="text-2xl font-bold text-orange-500">{formatPeso(totales.venta)}</p>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm">
+      <div className="bg-white rounded-3xl shadow-sm">
         <div className="p-4 border-b border-slate-100 flex items-center gap-3">
           <input
             type="text"
@@ -134,7 +129,7 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
               setPagina(1)
               setGrupoPagina(0)
             }}
-            className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+            className="flex-1 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
           />
           <button
             onClick={function () {
@@ -142,15 +137,15 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
               setPagina(1)
               setGrupoPagina(0)
             }}
-            className="border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+            className="border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-xl text-sm font-medium transition-colors"
           >
             Borrar
           </button>
-          <a href={'/imprimir-stock?ordenarPor=' + ordenarPor + '&direccion=' + direccion} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors"><Printer size={16} /><span>Imprimir PDF</span></a>
+          <a href={'/imprimir-stock?ordenarPor=' + ordenarPor + '&direccion=' + direccion} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-xl text-sm font-medium transition-colors"><Printer size={16} /><span>Imprimir PDF</span></a>
           {esAdmin && (
             <button
               onClick={onNuevo}
-              className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+              className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors"
             >
               + Nuevo
             </button>
@@ -165,49 +160,19 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
           <div>
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-slate-500 border-b border-slate-100">
-                  <th
-                    className="px-4 py-3 font-medium cursor-pointer hover:text-slate-800 select-none"
-                    onClick={function () { ordenar('codigo') }}
-                  >
-                    <span>Codigo<FlechaOrden campo="codigo" ordenarPor={ordenarPor} direccion={direccion} /></span>
+                <tr className="text-left text-slate-400 border-b border-slate-100">
+                  <th className="px-4 py-3 font-semibold cursor-pointer hover:text-blue-500 select-none" onClick={function () { ordenar('codigo') }}>
+                    <span>Codigo</span>
                   </th>
-                  <th
-                    className="px-4 py-3 font-medium cursor-pointer hover:text-slate-800 select-none"
-                    onClick={function () { ordenar('nombre') }}
-                  >
-                    <span>Producto<FlechaOrden campo="nombre" ordenarPor={ordenarPor} direccion={direccion} /></span>
+                  <th className="px-4 py-3 font-semibold cursor-pointer hover:text-blue-500 select-none" onClick={function () { ordenar('nombre') }}>
+                    <span>Producto</span>
                   </th>
-                  <th className="px-4 py-3 font-medium">
-                    Categoria
-                  </th>
-                  <th
-                    className="px-4 py-3 font-medium text-right cursor-pointer hover:text-slate-800 select-none"
-                    onClick={function () { ordenar('cantidad') }}
-                  >
-                    <span>Stock<FlechaOrden campo="cantidad" ordenarPor={ordenarPor} direccion={direccion} /></span>
-                  </th>
-                  <th
-                    className="px-4 py-3 font-medium text-right cursor-pointer hover:text-slate-800 select-none"
-                    onClick={function () { ordenar('precioCosto') }}
-                  >
-                    <span>Costo<FlechaOrden campo="precioCosto" ordenarPor={ordenarPor} direccion={direccion} /></span>
-                  </th>
-                  <th
-                    className="px-4 py-3 font-medium text-right cursor-pointer hover:text-slate-800 select-none"
-                    onClick={function () { ordenar('precioVenta') }}
-                  >
-                    <span>Venta<FlechaOrden campo="precioVenta" ordenarPor={ordenarPor} direccion={direccion} /></span>
-                  </th>
-                  <th
-                    className="px-4 py-3 font-medium text-right cursor-pointer hover:text-slate-800 select-none"
-                    onClick={function () { ordenar('margen') }}
-                  >
-                    <span>Margen<FlechaOrden campo="margen" ordenarPor={ordenarPor} direccion={direccion} /></span>
-                  </th>
-                  {esAdmin && (
-                    <th className="px-4 py-3 font-medium text-center">Acciones</th>
-                  )}
+                  <th className="px-4 py-3 font-semibold">Categoria</th>
+                  <th className="px-4 py-3 font-semibold text-right">Stock</th>
+                  <th className="px-4 py-3 font-semibold text-right">Costo</th>
+                  <th className="px-4 py-3 font-semibold text-right">Venta</th>
+                  <th className="px-4 py-3 font-semibold text-right">Margen</th>
+                  {esAdmin && <th className="px-4 py-3 font-semibold text-center">Acciones</th>}
                 </tr>
               </thead>
               <tbody>
@@ -225,21 +190,15 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
                       <td className="px-4 py-3 text-slate-500">
                         {p.categoria && typeof p.categoria === 'object' ? p.categoria.nombre : (p.categoria || 'Sin categoria')}
                       </td>
-                      <td className={'px-4 py-3 text-right font-medium ' + (stockBajo ? 'text-red-500' : 'text-slate-700')}>
+                      <td className={'px-4 py-3 text-right font-semibold ' + (stockBajo ? 'text-red-500' : 'text-slate-700')}>
                         {p.cantidad} {p.unidad}
                       </td>
-                      <td className="px-4 py-3 text-right text-slate-500">
-                        {formatPeso(p.precioCosto)}
+                      <td className="px-4 py-3 text-right text-slate-500">{formatPeso(p.precioCosto)}</td>
+                      <td className="px-4 py-3 text-right">
+                        <span className="bg-orange-100 text-orange-700 text-xs px-2 py-0.5 rounded-full font-semibold">{formatPesoEntero(p.precioVenta)}</span>
                       </td>
                       <td className="px-4 py-3 text-right">
-                        <span className="bg-orange-100 text-orange-700 text-xs px-2 py-0.5 rounded-full font-medium">
-  {formatPesoEntero(p.precioVenta)}
-</span>
-                      </td>
-                      <td className="px-4 py-3 text-right">
-                        <span className="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full font-medium">
-                          {Math.round(p.margen)}%
-                        </span>
+                        <span className="bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded-full font-semibold">{Math.round(p.margen)}%</span>
                       </td>
                       {esAdmin && (
                         <td className="px-4 py-3">
@@ -260,9 +219,7 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
             </table>
 
             <div className="flex items-center justify-between px-4 py-3 border-t border-slate-100">
-              <span className="text-sm text-slate-500">
-                {total} productos - Pagina {pagina} de {totalPaginas}
-              </span>
+              <span className="text-sm text-slate-500">{total} productos - Pagina {pagina} de {totalPaginas}</span>
               <div className="flex items-center gap-1">
                 <button
                   onClick={function () {
@@ -271,7 +228,7 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
                     setGrupoPagina(Math.floor((nuevaPagina - 1) / 3))
                   }}
                   disabled={pagina === 1}
-                  className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+                  className="p-1.5 rounded-xl border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
                 >
                   <ChevronLeft size={16} />
                 </button>
@@ -288,12 +245,7 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
                             setGrupoPagina(function (g) { return g + 1 })
                           }
                         }}
-                        className={
-                          'w-8 h-8 rounded text-sm transition-colors ' +
-                          (n === pagina
-                            ? 'bg-orange-500 text-white font-medium'
-                            : 'border border-slate-200 text-slate-500 hover:bg-slate-50')
-                        }
+                        className={'w-8 h-8 rounded-xl text-sm transition-colors ' + (n === pagina ? 'bg-orange-500 text-white font-semibold' : 'border border-slate-200 text-slate-500 hover:bg-slate-50')}
                       >
                         {n}
                       </button>
@@ -306,7 +258,7 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
                     setGrupoPagina(Math.floor((nuevaPagina - 1) / 3))
                   }}
                   disabled={pagina === totalPaginas}
-                  className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+                  className="p-1.5 rounded-xl border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
                 >
                   <ChevronRight size={16} />
                 </button>

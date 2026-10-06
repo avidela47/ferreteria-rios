@@ -41,7 +41,7 @@ export default function ReporteMensual() {
         <select
           value={mes}
           onChange={(e) => setMes(Number(e.target.value))}
-          className="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+          className="border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
         >
           {meses.map((m, i) => (
             <option key={i} value={i + 1}>{m}</option>
@@ -50,7 +50,7 @@ export default function ReporteMensual() {
         <select
           value={anio}
           onChange={(e) => setAnio(Number(e.target.value))}
-          className="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+          className="border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
         >
           {anios.map((a) => (
             <option key={a} value={a}>{a}</option>
@@ -66,22 +66,22 @@ export default function ReporteMensual() {
         <>
           {/* Cards */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white rounded-lg p-5 shadow-sm border-l-4 border-l-blue-500">
+            <div className="bg-white rounded-xl p-5 shadow-sm border-l-4 border-l-blue-500">
               <p className="text-sm text-slate-500">Ventas del mes</p>
-              <p className="text-2xl font-bold text-slate-800">{formatPeso(data.totalVentas)}</p>
+              <p className="text-2xl font-bold text-blue-500">{formatPeso(data.totalVentas)}</p>
               <p className="text-xs text-slate-400 mt-1">{data.cantidadVentas} transacciones</p>
             </div>
-            <div className="bg-white rounded-lg p-5 shadow-sm border-l-4 border-l-green-500">
+            <div className="bg-white rounded-xl p-5 shadow-sm border-l-4 border-l-green-500">
               <p className="text-sm text-slate-500">Ganancia bruta</p>
-              <p className="text-2xl font-bold text-slate-800">{formatPeso(data.ganancia)}</p>
+              <p className="text-2xl font-bold text-blue-500">{formatPeso(data.ganancia)}</p>
               <p className="text-xs text-slate-400 mt-1">costo {formatPeso(data.totalCostos)}</p>
             </div>
-            <div className="bg-white rounded-lg p-5 shadow-sm border-l-4 border-l-red-500">
+            <div className="bg-white rounded-xl p-5 shadow-sm border-l-4 border-l-red-500">
               <p className="text-sm text-slate-500">Gastos del mes</p>
-              <p className="text-2xl font-bold text-slate-800">{formatPeso(data.totalGastos)}</p>
+              <p className="text-2xl font-bold text-blue-500">{formatPeso(data.totalGastos)}</p>
               <p className="text-xs text-slate-400 mt-1">impuestos {formatPeso(data.totalImpuestos)}</p>
             </div>
-            <div className="bg-white rounded-lg p-5 shadow-sm border-l-4 border-l-orange-500">
+            <div className="bg-white rounded-xl p-5 shadow-sm border-l-4 border-l-orange-500">
               <p className="text-sm text-slate-500">Resultado neto</p>
               <p className={`text-2xl font-bold ${data.ganancia - data.totalGastos - data.totalImpuestos >= 0 ? 'text-green-600' : 'text-red-500'}`}>
                 {formatPeso(data.ganancia - data.totalGastos - data.totalImpuestos)}
@@ -92,7 +92,7 @@ export default function ReporteMensual() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Ventas por semana */}
-            <div className="bg-white rounded-lg shadow-sm p-5">
+            <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5">
               <h3 className="font-medium text-slate-700 mb-4">Ventas por semana</h3>
               {data.ventasPorSemana.length === 0 ? (
                 <p className="text-sm text-slate-400 text-center py-8">Sin datos</p>
@@ -112,7 +112,7 @@ export default function ReporteMensual() {
             </div>
 
             {/* Gastos por categoria */}
-            <div className="bg-white rounded-lg shadow-sm p-5">
+            <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5">
               <h3 className="font-medium text-slate-700 mb-4">Gastos por categoria</h3>
               {data.gastosPorCategoria.length === 0 ? (
                 <p className="text-sm text-slate-400 text-center py-8">Sin gastos registrados</p>
@@ -141,11 +141,11 @@ export default function ReporteMensual() {
 
           {/* Top productos */}
           {data.topProductos.length > 0 && (
-            <div className="bg-white rounded-lg shadow-sm p-5">
+            <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5">
               <h3 className="font-medium text-slate-700 mb-4">Top 10 productos del mes</h3>
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-left text-slate-500 border-b">
+                  <tr className="text-left text-slate-400 border-b border-slate-100">
                     <th className="pb-2 font-medium">Producto</th>
                     <th className="pb-2 font-medium text-center">Cantidad</th>
                     <th className="pb-2 font-medium text-right">Total</th>

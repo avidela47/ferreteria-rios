@@ -111,7 +111,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-5 border-b">
-          <h2 className="font-semibold text-slate-800">
+          <h2 className="font-semibold text-blue-500">
             {producto ? 'Editar producto' : 'Nuevo producto'}
           </h2>
           <button onClick={onCerrar} className="text-slate-400 hover:text-slate-600 cursor-pointer">
@@ -128,7 +128,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
       value={form.codigo}
       onChange={handleChange}
       required
-      className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+      className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
     />
   </div>
   <div className="col-span-2">
@@ -138,7 +138,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
       value={form.nombre}
       onChange={handleChange}
       required
-      className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+      className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
     />
   </div>
 </div>
@@ -151,7 +151,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
                 value={form.categoria}
                 onChange={handleChange}
                 required
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 cursor-pointer"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 cursor-pointer"
               >
                 <option value="">Seleccionar...</option>
                 {categorias.map((c) => (
@@ -165,7 +165,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
                 name="proveedor"
                 value={form.proveedor}
                 onChange={handleChange}
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 cursor-pointer"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 cursor-pointer"
               >
                 <option value="">Sin proveedor</option>
                 {proveedores.map((p) => (
@@ -184,7 +184,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
                 value={form.cantidad}
                 onChange={handleChange}
                 min={0}
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
             </div>
             <div>
@@ -195,7 +195,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
                 value={form.stockMinimo}
                 onChange={handleChange}
                 min={0}
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
             </div>
             <div>
@@ -204,7 +204,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
                 name="unidad"
                 value={form.unidad}
                 onChange={handleChange}
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
             </div>
           </div>
@@ -220,7 +220,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
                 onChange={handleChange}
                 min={0}
                 required
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
             </div>
             <div>
@@ -232,7 +232,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
                 value={form.margen}
                 onChange={handleChange}
                 min={0}
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
             </div>
             <div>
@@ -245,7 +245,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
                 onChange={handleChange}
                 min={0}
                 required
-                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
             </div>
           </div>
@@ -254,14 +254,14 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
             <button
               type="button"
               onClick={onCerrar}
-              className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-lg text-sm hover:bg-slate-50 cursor-pointer transition-colors"
+              className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-xl text-sm hover:bg-slate-50 cursor-pointer transition-colors"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg text-sm font-medium cursor-pointer transition-colors disabled:opacity-50"
+              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-xl text-sm font-medium cursor-pointer transition-colors disabled:opacity-50"
             >
               {loading ? 'Guardando...' : 'Guardar'}
             </button>
