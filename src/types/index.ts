@@ -143,6 +143,18 @@ export interface ITaxRecord {
   updatedAt: Date
 }
 
+// ── BAJAS DE STOCK ────────────────────────────────────────────────────────
+export type MotivoBaja = 'rotura' | 'uso_interno' | 'perdida' | 'otro'
+
+export interface IBajaStock {
+  _id: string
+  nombre: string
+  motivo: MotivoBaja
+  cantidad: number
+  precioCosto?: number
+  createdAt: Date
+}
+
 // ── REPORTES ──────────────────────────────────────────────────────────────
 export interface IReporteSemanal {
   semana: string
@@ -193,7 +205,7 @@ export interface IDashboard {
   bajasMesCantidad?: number
   bajasMesTotal?: number
   bajasMesRegistros?: number
-  ultimasBajas?: unknown[]
+  ultimasBajas?: IBajaStock[]
   /** Progreso acumulado del mes en curso (día 1 hasta hoy): ventas, ganancia y gastos fijos acumulados, para graficar contra el punto de equilibrio */
   progresoMes?: { dia: number; ventasAcumuladas: number; gananciaAcumulada: number; gastosFijosAcumulados: number }[]
   /** Cantidad de productos activos por categoría (top 5 + Otros), para el gráfico donut */

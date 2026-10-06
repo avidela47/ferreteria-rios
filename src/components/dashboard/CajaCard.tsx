@@ -80,7 +80,7 @@ export default function CajaCard() {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-2xl shadow-sm p-5 border-l-4 border-slate-200">
+      <div className="bg-white rounded-3xl shadow-sm p-5">
         <p className="text-sm text-slate-400">Cargando caja...</p>
       </div>
     )
@@ -88,12 +88,12 @@ export default function CajaCard() {
 
   if (!caja) {
     return (
-      <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5 border-l-4 border-slate-300">
+      <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5">
         <div className="flex items-center gap-2 mb-3">
-          <div className="bg-slate-100 text-slate-500 p-1.5 rounded-full">
+          <div className="bg-slate-100 text-slate-500 p-1.5 rounded-xl">
             <Unlock size={16} />
           </div>
-          <h2 className="font-semibold text-slate-800">Caja cerrada</h2>
+          <h2 className="font-bold text-blue-500">Caja cerrada</h2>
         </div>
         <p className="text-xs text-slate-400 mb-3">Ingresá el efectivo inicial para abrir la caja de hoy</p>
         <div className="flex gap-2">
@@ -107,7 +107,7 @@ export default function CajaCard() {
           <button
             onClick={abrirCaja}
             disabled={abriendo}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-medium cursor-pointer transition-colors disabled:opacity-50"
+            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer transition-colors disabled:opacity-50"
           >
             {abriendo ? 'Abriendo...' : 'Abrir caja'}
           </button>
@@ -117,13 +117,13 @@ export default function CajaCard() {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5 border-l-4 border-green-400">
+    <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5 border-2 border-emerald-400">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <div className="bg-green-100 text-green-600 p-1.5 rounded-full">
+          <div className="bg-emerald-50 text-emerald-600 p-1.5 rounded-xl">
             <Wallet size={16} />
           </div>
-          <h2 className="font-semibold text-slate-800">Caja abierta</h2>
+          <h2 className="font-bold text-blue-500">Caja abierta</h2>
         </div>
         <span className="text-xs text-slate-400">Inició: {caja.usuarioApertura}</span>
       </div>
@@ -131,45 +131,45 @@ export default function CajaCard() {
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
           <p className="text-xs text-slate-400">Caja inicial</p>
-          <p className="text-base font-bold text-slate-800">{formatPeso(caja.montoInicial)}</p>
+          <p className="text-base font-bold text-blue-500">{formatPeso(caja.montoInicial)}</p>
         </div>
         <div>
           <p className="text-xs text-slate-400">Ventas efectivo hoy</p>
-          <p className="text-base font-bold text-slate-800">{formatPeso(caja.efectivoVentas)}</p>
+          <p className="text-base font-bold text-blue-500">{formatPeso(caja.efectivoVentas)}</p>
         </div>
         <div>
           <p className="text-xs text-slate-400">Efectivo esperado en caja</p>
-          <p className="text-lg font-bold text-green-600">{formatPeso(caja.efectivoEsperado)}</p>
+          <p className="text-lg font-bold text-emerald-600">{formatPeso(caja.efectivoEsperado)}</p>
         </div>
         <div>
           <p className="text-xs text-slate-400">Otros medios (tarjeta/transf./posnet)</p>
-          <p className="text-lg font-bold text-blue-600">{formatPeso(caja.otrosVentas)}</p>
+          <p className="text-lg font-bold text-blue-500">{formatPeso(caja.otrosVentas)}</p>
         </div>
       </div>
 
       {!mostrarCierre ? (
         <button
           onClick={function () { setMostrarCierre(true) }}
-          className="w-full flex items-center justify-center gap-2 border border-slate-200 text-slate-600 hover:bg-slate-50 py-2 rounded-xl text-sm font-medium cursor-pointer transition-colors"
+          className="w-full flex items-center justify-center gap-2 border border-slate-200 text-blue-500 hover:bg-slate-50 py-2 rounded-xl text-sm font-semibold cursor-pointer transition-colors"
         >
           <Lock size={15} /> Cerrar caja
         </button>
       ) : (
         <div className="space-y-2">
-          <p className="text-xs text-orange-600">
+          <p className="text-xs text-orange-600 font-medium">
             Confirmás el cierre de caja de hoy? Efectivo final: {formatPeso(caja.efectivoEsperado)}
           </p>
           <div className="flex gap-2">
             <button
               onClick={function () { setMostrarCierre(false) }}
-              className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-xl text-sm cursor-pointer transition-colors"
+              className="flex-1 border border-slate-200 text-blue-500 py-2 rounded-xl text-sm cursor-pointer transition-colors"
             >
               Cancelar
             </button>
             <button
               onClick={cerrarCaja}
               disabled={cerrando}
-              className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-xl text-sm font-medium cursor-pointer transition-colors disabled:opacity-50"
+              className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-xl text-sm font-semibold cursor-pointer transition-colors disabled:opacity-50"
             >
               {cerrando ? 'Cerrando...' : 'Confirmar cierre'}
             </button>

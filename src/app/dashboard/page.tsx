@@ -8,16 +8,12 @@ import ImpuestosPendientes from '@/components/dashboard/ImpuestosPendientes'
 import { formatPeso } from '@/lib/utils'
 import BajasStockCard from '@/components/dashboard/BajasStockCard'
 import CajaCard from '@/components/dashboard/CajaCard'
-import VentasChart from '@/components/dashboard/VentasChart'
-import CategoriasChart from '@/components/dashboard/CategoriasChart'
 
 async function getDashboard(session: { user: { id: string } }): Promise<IDashboard | null> {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/dashboard`, {
       cache: 'no-store',
-      headers: {
-        'x-user-id': session.user.id,
-      },
+      headers: { 'x-user-id': session.user.id },
     })
     const json = await res.json()
     return json.data
@@ -26,7 +22,6 @@ async function getDashboard(session: { user: { id: string } }): Promise<IDashboa
   }
 }
 
-// Iconos inline (sin dependencias externas)
 function IconoVentas() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-5 h-5">
@@ -65,88 +60,36 @@ export default async function DashboardPage() {
 
   const data = await getDashboard(session)
 
-  const fechaHoy = new Date().toLocaleDateString('es-AR', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  })
-
   return (
-    <div className="p-6 space-y-6 bg-slate-50 min-h-screen">
-      {/* Header */}
-      <div className="flex items-start justify-between flex-wrap gap-2">
-        <div>
-          <h1 className="text-2xl font-bold text-slate-800">
-            Hola, {session.user?.nombre ?? ''} 👋
-          </h1>
-          <p className="text-slate-500 text-sm mt-1">Resumen general del negocio</p>
-        </div>
-        <p className="text-sm text-slate-400 capitalize">{fechaHoy}</p>
+    <div className="p-6 space-y-6 min-h-screen">
+      <div>
+        <h1 className="text-2xl font-bold text-blue-500">Hola, {session.user?.nombre} 👋</h1>
+        <p className="text-slate-500 text-sm mt-1">Resumen general del negocio</p>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard
-          titulo="Ventas hoy"
-          valor={formatPeso(data?.ventasHoy ?? 0)}
-          subtitulo={`${data?.cantidadVentasHoy ?? 0} transacciones`}
-          color="blue"
-          icon={<IconoVentas />}
-        />
-        <StatsCard
-          titulo="Ganancia hoy"
-          valor={formatPeso(data?.gananciaHoy ?? 0)}
-          subtitulo="margen bruto"
-          color="green"
-          icon={<IconoGanancia />}
-        />
-        <StatsCard
-          titulo="Ventas del mes"
-          valor={formatPeso(data?.ventasMes ?? 0)}
-          subtitulo={`Ganancia: ${formatPeso(data?.gananciaMes ?? 0)}`}
-          color="orange"
-          icon={<IconoCalendario />}
-          tendencia={data?.tendenciaVentasMes}
-        />
-        <StatsCard
-          titulo="Gastos del mes"
-          valor={formatPeso(data?.gastosMes ?? 0)}
-          subtitulo="compras, impuestos y otros egresos"
-          color="red"
-          icon={<IconoGastos />}
-          tendencia={data?.tendenciaGastosMes}
-          invertirColorTendencia
-        />
+        <StatsCard titulo="Ventas hoy" valor={formatPeso(data?.ventasHoy ?? 0)} subtitulo={`${data?.cantidadVentasHoy ?? 0} transacciones`} color="blue" icon={<IconoVentas />} />
+        <StatsCard titulo="Ganancia hoy" valor={formatPeso(data?.gananciaHoy ?? 0)} subtitulo="margen bruto" color="green" icon={<IconoGanancia />} />
+        <StatsCard titulo="Ventas del mes" valor={formatPeso(data?.ventasMes ?? 0)} subtitulo={`Ganancia: ${formatPeso(data?.gananciaMes ?? 0)}`} color="orange" icon={<IconoCalendario />} tendencia={data?.tendenciaVentasMes} />
+        <StatsCard titulo="Gastos del mes" valor={formatPeso(data?.gastosMes ?? 0)} subtitulo="compras, impuestos y otros egresos" color="red" icon={<IconoGastos />} tendencia={data?.tendenciaGastosMes} invertirColorTendencia />
       </div>
 
-      {/* Gráficos */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 min-w-0">
-          <VentasChart data={data?.progresoMes ?? []} puntoEquilibrio={data?.puntoEquilibrio} />
-        </div>
-        <div className="min-w-0">
-          <CategoriasChart data={data?.productosPorCategoria ?? []} />
-        </div>
-      </div>
-
-      {/* Punto de equilibrio y Caja */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {data?.puntoEquilibrio != null && (
-          <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5 border border-slate-100">
+          <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-semibold text-slate-700">Punto de equilibrio del mes</h3>
-              <span className="text-xs text-slate-400">
+              <h3 className="text-sm font-bold text-blue-500">Punto de equilibrio del mes</h3>
+              <span className="text-xs text-slate-400 bg-slate-50 px-2.5 py-1 rounded-full font-medium">
                 Margen bruto promedio: {((data?.margenBrutoPromedio ?? 0) * 100).toFixed(1)}%
               </span>
             </div>
-            <p className="text-2xl font-bold text-slate-800">{formatPeso(data.puntoEquilibrio)}</p>
+            <p className="text-2xl font-bold text-blue-500">{formatPeso(data.puntoEquilibrio)}</p>
             <p className="text-xs text-slate-500 mt-1">
               Necesitás facturar esto para cubrir tus gastos fijos ({formatPeso(data?.gastosRecurrentesMes ?? 0)}) este mes
             </p>
             <div className="mt-3 h-2.5 bg-slate-100 rounded-full overflow-hidden">
               <div
-                className={`h-full rounded-full transition-all ${(data?.ventasMes ?? 0) >= data.puntoEquilibrio ? 'bg-green-500' : 'bg-orange-500'}`}
+                className={`h-full rounded-full transition-all ${(data?.ventasMes ?? 0) >= data.puntoEquilibrio ? 'bg-emerald-500' : 'bg-orange-500'}`}
                 style={{ width: `${Math.min(100, ((data?.ventasMes ?? 0) / data.puntoEquilibrio) * 100)}%` }}
               />
             </div>
@@ -160,7 +103,6 @@ export default async function DashboardPage() {
         <CajaCard />
       </div>
 
-      {/* Tablas */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <StockBajoTable productos={data?.stockBajo ?? []} />
         <div className="space-y-6">
@@ -174,7 +116,6 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Impuestos */}
       <ImpuestosPendientes impuestos={data?.impuestosPendientes ?? []} />
     </div>
   )

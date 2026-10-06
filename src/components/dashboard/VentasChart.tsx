@@ -23,9 +23,9 @@ const NOMBRES: Record<string, string> = {
 
 export default function VentasChart({ data, puntoEquilibrio }: Props) {
   return (
-    <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5 border border-slate-100">
+    <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-semibold text-slate-700">Progreso del mes vs. punto de equilibrio</h3>
+        <h3 className="text-sm font-bold text-blue-500">Progreso del mes vs. punto de equilibrio</h3>
       </div>
       <div className="relative h-64 w-full min-w-0 overflow-hidden">
         <div className="absolute inset-0">
@@ -52,25 +52,19 @@ export default function VentasChart({ data, puntoEquilibrio }: Props) {
                   return [formatPeso(Number(value ?? 0)), NOMBRES[clave] ?? clave]
                 }}
                 labelFormatter={function (label) { return 'Día ' + label }}
-                contentStyle={{ borderRadius: 12, border: '1px solid #e2e8f0', fontSize: 12, backgroundColor: '#fff' }}
+                contentStyle={{ borderRadius: 14, border: 'none', boxShadow: '0 8px 24px rgba(16,42,67,0.12)', fontSize: 12, backgroundColor: '#fff' }}
               />
-              <Line type="monotone" dataKey="ventasAcumuladas" stroke="#f97316" strokeWidth={2.5} dot={false} />
-              <Line type="monotone" dataKey="gananciaAcumulada" stroke="#22c55e" strokeWidth={2.5} dot={false} />
-              <Line type="monotone" dataKey="gastosFijosAcumulados" stroke="#a855f7" strokeWidth={2} strokeDasharray="4 2" dot={false} />
+              <Line type="monotone" dataKey="ventasAcumuladas" stroke="#FF6B00" strokeWidth={3} dot={false} />
+              <Line type="monotone" dataKey="gananciaAcumulada" stroke="#102A43" strokeWidth={3} dot={false} />
+              <Line type="monotone" dataKey="gastosFijosAcumulados" stroke="#9AA6B4" strokeWidth={2} strokeDasharray="4 2" dot={false} />
               {puntoEquilibrio != null && (
                 <ReferenceLine
                   y={puntoEquilibrio}
                   ifOverflow="extendDomain"
-                  stroke="#0f172a"
+                  stroke="#06111B"
                   strokeDasharray="6 4"
                   strokeWidth={2}
-                  label={{
-                    value: 'Punto de equilibrio',
-                    position: 'insideTopRight',
-                    fontSize: 10,
-                    fontWeight: 600,
-                    fill: '#0f172a',
-                  }}
+                  label={{ value: 'Punto de equilibrio', position: 'insideTopRight', fontSize: 10, fontWeight: 600, fill: '#06111B' }}
                 />
               )}
             </LineChart>
@@ -79,10 +73,10 @@ export default function VentasChart({ data, puntoEquilibrio }: Props) {
       </div>
       <div className="flex flex-wrap items-center gap-4 mt-2 text-xs text-slate-500">
         <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-orange-500 inline-block" /> Ventas acumuladas</span>
-        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-green-500 inline-block" /> Ganancia acumulada</span>
-        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-purple-500 inline-block" /> Gastos fijos acumulados</span>
+        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block" /> Ganancia acumulada</span>
+        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-slate-400 inline-block" /> Gastos fijos acumulados</span>
         {puntoEquilibrio != null && (
-          <span className="flex items-center gap-1.5"><span className="w-2.5 h-0.5 bg-slate-900 inline-block" /> Punto de equilibrio</span>
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-0.5 bg-blue-900 inline-block" /> Punto de equilibrio</span>
         )}
       </div>
     </div>
