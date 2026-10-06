@@ -1,6 +1,9 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap');
 
 @theme {
+  --font-sans: 'Sora', system-ui, -apple-system, sans-serif;
+
   /* Naranja de marca (#FF6B00) - pisa la rampa orange de Tailwind */
   --color-orange-50: #FFEDE0;
   --color-orange-100: #FFDEC7;
@@ -30,4 +33,8 @@
 
 button, [type="submit"], [type="button"], a {
   cursor: pointer;
+}
+
+body {
+  font-family: var(--font-sans);
 }
