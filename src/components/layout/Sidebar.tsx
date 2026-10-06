@@ -49,8 +49,8 @@ export default function Sidebar({ nombreUsuario, rol }: SidebarProps) {
   })
 
   return (
-    <aside className="w-64 bg-blue-500 h-screen flex flex-col overflow-hidden">
-            <div className="px-5 py-5 flex justify-center shrink-0">
+    <aside className="w-64 bg-white h-screen flex flex-col overflow-hidden border-r border-slate-100">
+      <div className="px-5 py-5 flex justify-center shrink-0">
         <Image
           src="/logo.png"
           alt="Ferreteria Rios"
@@ -71,7 +71,7 @@ export default function Sidebar({ nombreUsuario, rol }: SidebarProps) {
               className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
                 active
                   ? 'bg-orange-500 text-white'
-                  : 'text-white/65 hover:bg-white/10 hover:text-white'
+                  : 'text-slate-500 hover:bg-slate-100 hover:text-blue-500'
               }`}
             >
               <Icon size={18} />
@@ -81,14 +81,14 @@ export default function Sidebar({ nombreUsuario, rol }: SidebarProps) {
         })}
       </nav>
 
-      <div className="px-3 py-4 border-t border-white/10 shrink-0">
+      <div className="px-3 py-4 border-t border-slate-100 shrink-0">
         <div className="mb-2 px-3.5">
-          <p className="text-white text-sm font-semibold">{nombreUsuario}</p>
-          <p className="text-white/45 text-xs capitalize">{rol}</p>
+          <p className="text-blue-500 text-sm font-semibold">{nombreUsuario}</p>
+          <p className="text-slate-400 text-xs capitalize">{rol}</p>
         </div>
         <button
           onClick={() => signOut({ callbackUrl: '/login' })}
-          className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-white/65 hover:bg-white/10 hover:text-white transition-colors w-full cursor-pointer"
+          className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-slate-100 hover:text-blue-500 transition-colors w-full cursor-pointer"
         >
           <LogOut size={18} />
           Cerrar sesion
