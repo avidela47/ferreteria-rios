@@ -8,6 +8,8 @@ import ImpuestosPendientes from '@/components/dashboard/ImpuestosPendientes'
 import { formatPeso } from '@/lib/utils'
 import BajasStockCard from '@/components/dashboard/BajasStockCard'
 import CajaCard from '@/components/dashboard/CajaCard'
+import VentasChart from '@/components/dashboard/VentasChart'
+import CategoriasChart from '@/components/dashboard/CategoriasChart'
 
 async function getDashboard(session: { user: { id: string } }): Promise<IDashboard | null> {
   try {
@@ -101,6 +103,15 @@ export default async function DashboardPage() {
           </div>
         )}
         <CajaCard />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2 min-w-0">
+          <VentasChart data={data?.progresoMes ?? []} puntoEquilibrio={data?.puntoEquilibrio} />
+        </div>
+        <div className="min-w-0">
+          <CategoriasChart data={data?.productosPorCategoria ?? []} />
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

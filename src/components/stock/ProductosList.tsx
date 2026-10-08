@@ -13,6 +13,13 @@ interface Props {
   esAdmin: boolean
 }
 
+function FlechaOrden({ campo, ordenarPor, direccion }: { campo: string; ordenarPor: string; direccion: string }) {
+  if (ordenarPor !== campo) {
+    return <span className="ml-1 text-slate-300">↕</span>
+  }
+  return <span className="ml-1 text-orange-500">{direccion === 'asc' ? '↑' : '↓'}</span>
+}
+
 export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: Props) {
   const [productos, setProductos] = useState<IProduct[]>([])
   const [loading, setLoading] = useState(true)
@@ -163,15 +170,29 @@ export default function ProductosList({ onNuevo, onEditar, refresh, esAdmin }: P
                 <tr className="text-left text-slate-400 border-b border-slate-100">
                   <th className="px-4 py-3 font-semibold cursor-pointer hover:text-blue-500 select-none" onClick={function () { ordenar('codigo') }}>
                     <span>Codigo</span>
+                    <FlechaOrden campo="codigo" ordenarPor={ordenarPor} direccion={direccion} />
                   </th>
                   <th className="px-4 py-3 font-semibold cursor-pointer hover:text-blue-500 select-none" onClick={function () { ordenar('nombre') }}>
                     <span>Producto</span>
+                    <FlechaOrden campo="nombre" ordenarPor={ordenarPor} direccion={direccion} />
                   </th>
                   <th className="px-4 py-3 font-semibold">Categoria</th>
-                  <th className="px-4 py-3 font-semibold text-right">Stock</th>
-                  <th className="px-4 py-3 font-semibold text-right">Costo</th>
-                  <th className="px-4 py-3 font-semibold text-right">Venta</th>
-                  <th className="px-4 py-3 font-semibold text-right">Margen</th>
+                  <th className="px-4 py-3 font-semibold text-right cursor-pointer hover:text-blue-500 select-none" onClick={function () { ordenar('cantidad') }}>
+                    <span>Stock</span>
+                    <FlechaOrden campo="cantidad" ordenarPor={ordenarPor} direccion={direccion} />
+                  </th>
+                  <th className="px-4 py-3 font-semibold text-right cursor-pointer hover:text-blue-500 select-none" onClick={function () { ordenar('precioCosto') }}>
+                    <span>Costo</span>
+                    <FlechaOrden campo="precioCosto" ordenarPor={ordenarPor} direccion={direccion} />
+                  </th>
+                  <th className="px-4 py-3 font-semibold text-right cursor-pointer hover:text-blue-500 select-none" onClick={function () { ordenar('precioVenta') }}>
+                    <span>Venta</span>
+                    <FlechaOrden campo="precioVenta" ordenarPor={ordenarPor} direccion={direccion} />
+                  </th>
+                  <th className="px-4 py-3 font-semibold text-right cursor-pointer hover:text-blue-500 select-none" onClick={function () { ordenar('margen') }}>
+                    <span>Margen</span>
+                    <FlechaOrden campo="margen" ordenarPor={ordenarPor} direccion={direccion} />
+                  </th>
                   {esAdmin && <th className="px-4 py-3 font-semibold text-center">Acciones</th>}
                 </tr>
               </thead>
