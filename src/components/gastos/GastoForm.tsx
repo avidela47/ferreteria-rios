@@ -63,9 +63,9 @@ export default function GastoForm({ gasto, onGuardado, onCerrar }: Props) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-lg">
-        <div className="flex items-center justify-between p-5 border-b">
-          <h2 className="font-semibold text-blue-500">
+      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg">
+        <div className="flex items-center justify-between p-5 border-b border-slate-100">
+          <h2 className="font-bold text-blue-500">
             {gasto ? 'Editar gasto' : 'Nuevo gasto'}
           </h2>
           <button onClick={onCerrar} className="text-slate-400 hover:text-slate-600">
@@ -75,7 +75,7 @@ export default function GastoForm({ gasto, onGuardado, onCerrar }: Props) {
 
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Descripcion *</label>
+            <label className="block text-sm font-semibold text-blue-500 mb-1">Descripcion *</label>
             <input
               name="descripcion"
               value={form.descripcion}
@@ -87,7 +87,7 @@ export default function GastoForm({ gasto, onGuardado, onCerrar }: Props) {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Categoria *</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Categoria *</label>
               <select
                 name="categoria"
                 value={form.categoria}
@@ -101,7 +101,7 @@ export default function GastoForm({ gasto, onGuardado, onCerrar }: Props) {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Monto *</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Monto *</label>
               <input
                 name="monto"
                 type="number"
@@ -117,7 +117,7 @@ export default function GastoForm({ gasto, onGuardado, onCerrar }: Props) {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Fecha *</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Fecha *</label>
               <input
                 name="fecha"
                 type="date"
@@ -128,7 +128,7 @@ export default function GastoForm({ gasto, onGuardado, onCerrar }: Props) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Comprobante</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Comprobante</label>
               <input
                 name="comprobante"
                 value={form.comprobante}
@@ -164,7 +164,7 @@ export default function GastoForm({ gasto, onGuardado, onCerrar }: Props) {
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-xl text-sm font-medium transition-colors disabled:opacity-50"
+              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-xl text-sm font-semibold transition-colors disabled:opacity-50"
             >
               {loading ? 'Guardando...' : 'Guardar'}
             </button>

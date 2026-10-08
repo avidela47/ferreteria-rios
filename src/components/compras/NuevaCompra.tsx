@@ -254,7 +254,7 @@ export default function NuevaCompra({ onGuardado }: Props) {
           ) : (
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
+                <tr className="text-left text-slate-400 border-b border-slate-100">
                   <th className="px-4 py-3 font-medium">Código</th>
                   <th className="px-4 py-3 font-medium">Producto</th>
                   <th className="px-4 py-3 font-medium text-center">Cantidad</th>

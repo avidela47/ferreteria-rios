@@ -312,7 +312,7 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
                   setPagina(nuevaPagina)
                 }}
                 disabled={paginaActual === 1}
-                className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+                className="p-1.5 rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
               >
                 <ChevronLeft size={16} />
               </button>
@@ -342,7 +342,7 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
                   setPagina(nuevaPagina)
                 }}
                 disabled={paginaActual === totalPaginas}
-                className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+                className="p-1.5 rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
               >
                 <ChevronRight size={16} />
               </button>

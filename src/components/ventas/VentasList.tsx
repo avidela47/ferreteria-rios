@@ -90,7 +90,7 @@ export default function VentasList() {
         <>
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
+              <tr className="text-left text-slate-400 border-b border-slate-100">
                 <th className="px-4 py-3 font-medium">N°</th>
                 <th className="px-4 py-3 font-medium">Cliente</th>
                 <th className="px-4 py-3 font-medium">Fecha</th>
@@ -164,14 +164,14 @@ export default function VentasList() {
               <button
                 onClick={function () { setPagina(Math.max(1, pagina - 1)) }}
                 disabled={pagina === 1}
-                className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+                className="p-1.5 rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
               >
                 <ChevronLeft size={16} />
               </button>
               <button
                 onClick={function () { setPagina(Math.min(totalPaginas, pagina + 1)) }}
                 disabled={pagina === totalPaginas}
-                className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
+                className="p-1.5 rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 transition-colors"
               >
                 <ChevronRight size={16} />
               </button>
@@ -182,9 +182,9 @@ export default function VentasList() {
 
       {ventaDetalle && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between p-5 border-b">
-              <h2 className="font-semibold text-blue-500">Venta #{ventaDetalle.numero}</h2>
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between p-5 border-b border-slate-100">
+              <h2 className="font-bold text-blue-500">Venta #{ventaDetalle.numero}</h2>
               <div className="flex items-center gap-3">
                 <a href={'/imprimir-venta?id=' + ventaDetalle._id} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-700 cursor-pointer transition-colors" title="Imprimir ticket"><Printer size={18} /></a>
                 <button onClick={function () { setVentaDetalle(null) }} className="text-slate-400 hover:text-slate-600 cursor-pointer">
@@ -217,7 +217,7 @@ export default function VentasList() {
                 <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Productos</p>
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
+                    <tr className="text-left text-slate-400 border-b border-slate-100">
                       <th className="py-2 font-medium">Código</th>
                       <th className="py-2 font-medium">Producto</th>
                       <th className="py-2 font-medium text-center">Cant.</th>
@@ -248,7 +248,7 @@ export default function VentasList() {
                 </div>
               )}
 
-              <div className="border-t pt-3 space-y-1">
+              <div className="border-t border-slate-100 pt-3 space-y-1">
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">Costo total</span>
                   <span className="text-slate-500">{formatPeso(ventaDetalle.costoTotal)}</span>

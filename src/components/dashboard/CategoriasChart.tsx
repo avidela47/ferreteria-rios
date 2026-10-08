@@ -1,6 +1,7 @@
 'use client'
 
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
+import { PALETA_CATEGORIAS, TOOLTIP_STYLE } from '@/lib/colores'
 
 interface Item {
   categoria: string
@@ -10,8 +11,6 @@ interface Item {
 interface Props {
   data: Item[]
 }
-
-const COLORES = ['#FF6B00', '#102A43', '#FFA96B', '#748392', '#1C8A4B', '#C9D1DB']
 
 export default function CategoriasChart({ data }: Props) {
   const total = data.reduce(function (acc, d) { return acc + d.cantidad }, 0)
@@ -33,14 +32,14 @@ export default function CategoriasChart({ data }: Props) {
                 strokeWidth={0}
               >
                 {data.map(function (_, i) {
-                  return <Cell key={i} fill={COLORES[i % COLORES.length]} />
+                  return <Cell key={i} fill={PALETA_CATEGORIAS[i % PALETA_CATEGORIAS.length]} />
                 })}
               </Pie>
               <Tooltip
                 formatter={function (value, name) {
                   return [Number(value ?? 0) + ' productos', name]
                 }}
-                contentStyle={{ borderRadius: 14, border: 'none', boxShadow: '0 8px 24px rgba(16,42,67,0.12)', fontSize: 12, backgroundColor: '#fff' }}
+                contentStyle={TOOLTIP_STYLE}
                 wrapperStyle={{ zIndex: 50 }}
               />
             </PieChart>
@@ -56,7 +55,7 @@ export default function CategoriasChart({ data }: Props) {
             return (
               <div key={item.categoria} className="flex items-center justify-between text-xs gap-2">
                 <span className="flex items-center gap-1.5 text-slate-600 truncate min-w-0">
-                  <span className="w-2 h-2 rounded-full inline-block shrink-0" style={{ backgroundColor: COLORES[i % COLORES.length] }} />
+                  <span className="w-2 h-2 rounded-full inline-block shrink-0" style={{ backgroundColor: PALETA_CATEGORIAS[i % PALETA_CATEGORIAS.length] }} />
                   <span className="truncate">{item.categoria}</span>
                 </span>
                 <span className="text-slate-400 shrink-0">{pct}%</span>

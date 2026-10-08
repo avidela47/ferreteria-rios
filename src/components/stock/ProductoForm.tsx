@@ -109,9 +109,9 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between p-5 border-b">
-          <h2 className="font-semibold text-blue-500">
+      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between p-5 border-b border-slate-100">
+          <h2 className="font-bold text-blue-500">
             {producto ? 'Editar producto' : 'Nuevo producto'}
           </h2>
           <button onClick={onCerrar} className="text-slate-400 hover:text-slate-600 cursor-pointer">
@@ -122,7 +122,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
           <div className="grid grid-cols-3 gap-3">
   <div>
-    <label className="block text-sm font-medium text-slate-700 mb-1">Código *</label>
+    <label className="block text-sm font-semibold text-blue-500 mb-1">Código *</label>
     <input
       name="codigo"
       value={form.codigo}
@@ -132,7 +132,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
     />
   </div>
   <div className="col-span-2">
-    <label className="block text-sm font-medium text-slate-700 mb-1">Nombre</label>
+    <label className="block text-sm font-semibold text-blue-500 mb-1">Nombre</label>
     <input
       name="nombre"
       value={form.nombre}
@@ -145,7 +145,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Categoria</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Categoria</label>
               <select
                 name="categoria"
                 value={form.categoria}
@@ -160,7 +160,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Proveedor</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Proveedor</label>
               <select
                 name="proveedor"
                 value={form.proveedor}
@@ -177,7 +177,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
 
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Stock</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Stock</label>
               <input
                 name="cantidad"
                 type="number"
@@ -188,7 +188,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Stock minimo</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Stock minimo</label>
               <input
                 name="stockMinimo"
                 type="number"
@@ -199,7 +199,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Unidad</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Unidad</label>
               <input
                 name="unidad"
                 value={form.unidad}
@@ -211,7 +211,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
 
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Precio costo</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Precio costo</label>
               <input
                 name="precioCosto"
                 type="number"
@@ -224,7 +224,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Margen %</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Margen %</label>
               <input
                 name="margen"
                 step="0.01"
@@ -236,7 +236,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Precio venta</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Precio venta</label>
               <input
                 name="precioVenta"
                 step="0.01"
@@ -261,7 +261,7 @@ export default function ProductoForm({ producto, onGuardado, onCerrar }: Props) 
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-xl text-sm font-medium cursor-pointer transition-colors disabled:opacity-50"
+              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-xl text-sm font-semibold cursor-pointer transition-colors disabled:opacity-50"
             >
               {loading ? 'Guardando...' : 'Guardar'}
             </button>

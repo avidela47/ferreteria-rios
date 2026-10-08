@@ -84,7 +84,7 @@ export default function ReporteSemanal() {
       <div className="flex items-center justify-center gap-4 bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-3">
         <button
           onClick={semanaAnterior}
-          className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer"
+          className="p-1.5 rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer"
         >
           <ChevronLeft size={18} />
         </button>
@@ -93,7 +93,7 @@ export default function ReporteSemanal() {
         </span>
         <button
           onClick={semanaSiguiente}
-          className="p-1.5 rounded border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer"
+          className="p-1.5 rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer"
         >
           <ChevronRight size={18} />
         </button>

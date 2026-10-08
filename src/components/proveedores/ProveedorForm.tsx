@@ -53,9 +53,9 @@ export default function ProveedorForm({ proveedor, onGuardado, onCerrar }: Props
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-lg">
-        <div className="flex items-center justify-between p-5 border-b">
-          <h2 className="font-semibold text-blue-500">
+      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg">
+        <div className="flex items-center justify-between p-5 border-b border-slate-100">
+          <h2 className="font-bold text-blue-500">
             {proveedor ? 'Editar proveedor' : 'Nuevo proveedor'}
           </h2>
           <button onClick={onCerrar} className="text-slate-400 hover:text-slate-600 cursor-pointer">
@@ -65,7 +65,7 @@ export default function ProveedorForm({ proveedor, onGuardado, onCerrar }: Props
 
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Nombre *</label>
+            <label className="block text-sm font-semibold text-blue-500 mb-1">Nombre *</label>
             <input
               name="nombre"
               value={form.nombre}
@@ -77,7 +77,7 @@ export default function ProveedorForm({ proveedor, onGuardado, onCerrar }: Props
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Telefono</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Telefono</label>
               <input
                 name="telefono"
                 value={form.telefono}
@@ -86,7 +86,7 @@ export default function ProveedorForm({ proveedor, onGuardado, onCerrar }: Props
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Email</label>
               <input
                 name="email"
                 type="email"
@@ -99,7 +99,7 @@ export default function ProveedorForm({ proveedor, onGuardado, onCerrar }: Props
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">CUIT</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">CUIT</label>
               <input
                 name="cuit"
                 value={form.cuit}
@@ -108,7 +108,7 @@ export default function ProveedorForm({ proveedor, onGuardado, onCerrar }: Props
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Direccion</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Direccion</label>
               <input
                 name="direccion"
                 value={form.direccion}
@@ -129,7 +129,7 @@ export default function ProveedorForm({ proveedor, onGuardado, onCerrar }: Props
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-xl text-sm font-medium cursor-pointer transition-colors disabled:opacity-50"
+              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-xl text-sm font-semibold cursor-pointer transition-colors disabled:opacity-50"
             >
               {loading ? 'Guardando...' : 'Guardar'}
             </button>

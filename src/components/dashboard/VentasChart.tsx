@@ -2,6 +2,7 @@
 
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, ReferenceLine } from 'recharts'
 import { formatPeso } from '@/lib/utils'
+import { COLORES, TOOLTIP_STYLE } from '@/lib/colores'
 
 interface Punto {
   dia: number
@@ -52,19 +53,19 @@ export default function VentasChart({ data, puntoEquilibrio }: Props) {
                   return [formatPeso(Number(value ?? 0)), NOMBRES[clave] ?? clave]
                 }}
                 labelFormatter={function (label) { return 'Día ' + label }}
-                contentStyle={{ borderRadius: 14, border: 'none', boxShadow: '0 8px 24px rgba(16,42,67,0.12)', fontSize: 12, backgroundColor: '#fff' }}
+                contentStyle={TOOLTIP_STYLE}
               />
-              <Line type="monotone" dataKey="ventasAcumuladas" stroke="#FF6B00" strokeWidth={3} dot={false} />
-              <Line type="monotone" dataKey="gananciaAcumulada" stroke="#102A43" strokeWidth={3} dot={false} />
-              <Line type="monotone" dataKey="gastosFijosAcumulados" stroke="#9AA6B4" strokeWidth={2} strokeDasharray="4 2" dot={false} />
+              <Line type="monotone" dataKey="ventasAcumuladas" stroke={COLORES.naranja} strokeWidth={3} dot={false} />
+              <Line type="monotone" dataKey="gananciaAcumulada" stroke={COLORES.navy} strokeWidth={3} dot={false} />
+              <Line type="monotone" dataKey="gastosFijosAcumulados" stroke={COLORES.gris} strokeWidth={2} strokeDasharray="4 2" dot={false} />
               {puntoEquilibrio != null && (
                 <ReferenceLine
                   y={puntoEquilibrio}
                   ifOverflow="extendDomain"
-                  stroke="#06111B"
+                  stroke={COLORES.navyOscuro}
                   strokeDasharray="6 4"
                   strokeWidth={2}
-                  label={{ value: 'Punto de equilibrio', position: 'insideTopRight', fontSize: 10, fontWeight: 600, fill: '#06111B' }}
+                  label={{ value: 'Punto de equilibrio', position: 'insideTopRight', fontSize: 10, fontWeight: 600, fill: COLORES.navyOscuro }}
                 />
               )}
             </LineChart>

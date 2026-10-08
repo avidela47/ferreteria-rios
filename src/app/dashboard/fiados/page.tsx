@@ -322,7 +322,7 @@ export default function FiadosPage() {
             ) : (
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
+                  <tr className="text-left text-slate-400 border-b border-slate-100">
                     <th className="px-4 py-3 font-medium">Código</th>
                     <th className="px-4 py-3 font-medium">Producto</th>
                     <th className="px-4 py-3 font-medium text-center">Cantidad</th>
@@ -412,7 +412,7 @@ export default function FiadosPage() {
         ) : (
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
+              <tr className="text-left text-slate-400 border-b border-slate-100">
                 <th className="px-4 py-3 font-medium">N°</th>
                 <th className="px-4 py-3 font-medium">Cliente</th>
                 <th className="px-4 py-3 font-medium text-center">Items</th>
@@ -477,9 +477,9 @@ export default function FiadosPage() {
 
       {fiadoVer && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between p-5 border-b sticky top-0 bg-white z-10">
-              <h2 className="font-semibold text-blue-500">
+              <h2 className="font-bold text-blue-500">
                 Fiado #{fiadoVer.numero} - {fiadoVer.cliente} ({fiadoVer.estado})
               </h2>
               <button onClick={cerrarVer} className="text-slate-400 hover:text-slate-600 cursor-pointer">
@@ -523,7 +523,7 @@ export default function FiadosPage() {
 
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-left text-slate-400 border-b border-slate-100 border-slate-100">
+                  <tr className="text-left text-slate-400 border-b border-slate-100">
                     <th className="py-2 font-medium">Código</th>
                     <th className="py-2 font-medium">Producto</th>
                     <th className="py-2 font-medium text-center">Cantidad</th>
@@ -594,7 +594,7 @@ export default function FiadosPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Nota</label>
+                <label className="block text-sm font-semibold text-blue-500 mb-1">Nota</label>
                 <textarea
                   value={fiadoVer.nota}
                   disabled={!esAdmin || fiadoVer.estado === 'pagado'}
@@ -618,7 +618,7 @@ export default function FiadosPage() {
                   <button
                     onClick={guardarEdicion}
                     disabled={loading}
-                    className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-xl text-sm font-medium transition-colors disabled:opacity-50"
+                    className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-xl text-sm font-semibold transition-colors disabled:opacity-50"
                   >
                     {loading ? 'Guardando...' : 'Guardar cambios'}
                   </button>

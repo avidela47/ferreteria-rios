@@ -126,9 +126,9 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-5 border-b sticky top-0 bg-white z-10">
-          <h2 className="font-semibold text-blue-500">
+          <h2 className="font-bold text-blue-500">
             {ficha ? 'Editar ficha' : 'Nueva ficha de producto'}
           </h2>
           <button onClick={onCerrar} className="text-slate-400 hover:text-slate-600">
@@ -139,7 +139,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
           {ficha?.productoId && <p className="rounded-xl bg-blue-50 p-3 text-sm text-blue-800">El nombre, código, categoría, precio y cantidad se actualizan desde Stock. Acá podés completar la información y subir la foto.</p>}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Foto del producto</label>
+            <label className="block text-sm font-semibold text-blue-500 mb-1">Foto del producto</label>
             <div className="flex items-center gap-3">
               {form.imagen ? (
                 <Image src={form.imagen} alt="foto producto" width={80} height={80} className="w-20 h-20 object-contain rounded-xl border border-slate-200" unoptimized />
@@ -163,7 +163,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
 
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Código</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Código</label>
               <input
                 name="codigo"
                 readOnly={!!ficha?.productoId}
@@ -173,7 +173,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
               />
             </div>
             <div className="col-span-2">
-              <label className="block text-sm font-medium text-slate-700 mb-1">Nombre del producto *</label>
+              <label className="block text-sm font-semibold text-blue-500 mb-1">Nombre del producto *</label>
               <input
                 name="nombre"
                 readOnly={!!ficha?.productoId}
@@ -186,7 +186,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Categoría *</label>
+            <label className="block text-sm font-semibold text-blue-500 mb-1">Categoría *</label>
             <select
               name="categoria"
               disabled={!!ficha?.productoId}
@@ -201,7 +201,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Descripción</label>
+            <label className="block text-sm font-semibold text-blue-500 mb-1">Descripción</label>
             <textarea
               name="descripcion"
               value={form.descripcion}
@@ -212,7 +212,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Para qué sirve</label>
+            <label className="block text-sm font-semibold text-blue-500 mb-1">Para qué sirve</label>
             <textarea
               name="paraQueSirve"
               value={form.paraQueSirve}
@@ -223,7 +223,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Quién lo pide</label>
+            <label className="block text-sm font-semibold text-blue-500 mb-1">Quién lo pide</label>
             <textarea
               name="quienLoPide"
               value={form.quienLoPide}
@@ -234,7 +234,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Cómo se usa</label>
+            <label className="block text-sm font-semibold text-blue-500 mb-1">Cómo se usa</label>
             <textarea
               name="comoSeUsa"
               value={form.comoSeUsa}
@@ -245,7 +245,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Forma / Apariencia</label>
+            <label className="block text-sm font-semibold text-blue-500 mb-1">Forma / Apariencia</label>
             <textarea
               name="formaApariencia"
               value={form.formaApariencia}
@@ -307,7 +307,7 @@ export default function CatalogoForm({ ficha, onGuardado, onCerrar }: Props) {
             <button
               type="submit"
               disabled={loading || subiendoImagen}
-              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-xl text-sm font-medium transition-colors disabled:opacity-50"
+              className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-xl text-sm font-semibold transition-colors disabled:opacity-50"
             >
               {loading ? 'Guardando...' : 'Guardar'}
             </button>
