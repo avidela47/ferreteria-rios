@@ -38,51 +38,54 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-900">
-      <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-sm">
-        <div className="flex justify-center mb-6">
+    <div className="min-h-screen flex items-center justify-center bg-[#F6F3EE] p-4">
+      <div className="bg-white p-8 rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 w-full max-w-sm">
+        <div className="flex justify-center mb-4">
           <Image
             src="/logo.png"
             alt="Ferreteria Rios"
-            width={180}
-            height={180}
+            width={140}
+            height={140}
             priority
           />
         </div>
 
-        <p className="text-center text-slate-500 mb-8 text-sm">
+        <h1 className="text-center text-xl font-bold text-blue-500 mb-1">
+          Bienvenido
+        </h1>
+        <p className="text-center text-slate-400 mb-8 text-sm">
           Sistema de gestion
         </p>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mb-4 text-sm">
+          <div className="bg-red-50 text-red-600 px-4 py-3 rounded-xl mb-4 text-sm font-medium">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1.5">
               Usuario
             </label>
             <input
               type="text"
               value={usuario}
               onChange={(e) => setUsuario(e.target.value)}
-              className="w-full border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-blue-500 focus:outline-none focus:ring-2 focus:ring-orange-400"
               placeholder="ariel"
               required
             />
           </div>
           <div className="mb-6">
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1.5">
               Password
             </label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-slate-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-blue-500 focus:outline-none focus:ring-2 focus:ring-orange-400"
               placeholder="••••••••"
               required
             />
@@ -90,7 +93,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-orange-500 text-white py-2.5 rounded-md hover:bg-orange-600 transition font-medium disabled:opacity-50 cursor-pointer"
+            className="w-full bg-orange-500 text-white py-3 rounded-xl hover:bg-orange-600 transition-colors font-semibold disabled:opacity-50 cursor-pointer"
           >
             {loading ? 'Ingresando...' : 'Ingresar'}
           </button>
