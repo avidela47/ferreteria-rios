@@ -18,6 +18,7 @@ import {
   ListChecks,
   PackageMinus,
   Wallet,
+  CalendarDays,
 } from 'lucide-react'
 
 const menuCompleto = [
@@ -25,6 +26,7 @@ const menuCompleto = [
   { href: '/dashboard/catalogo', label: 'Catalogo', icon: BookOpen, soloAdmin: false },
   { href: '/dashboard/stock', label: 'Stock', icon: Package, soloAdmin: false },
   { href: '/dashboard/ventas', label: 'Ventas', icon: ShoppingCart, soloAdmin: false },
+  { href: '/dashboard/ventas-dia', label: 'Ventas del día', icon: CalendarDays, soloAdmin: false },
   { href: '/dashboard/fiados', label: 'Fiados', icon: Wallet, soloAdmin: false },
   { href: '/dashboard/pedidos', label: 'Pedidos', icon: ListChecks, soloAdmin: true },
   { href: '/dashboard/compras', label: 'Compras', icon: TrendingUp, soloAdmin: true },
