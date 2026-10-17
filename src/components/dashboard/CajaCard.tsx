@@ -1,21 +1,36 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import { formatPeso } from '@/lib/utils'
 import { toast } from 'sonner'
 import { Wallet, Lock, Unlock } from 'lucide-react'
 
-// Si se cierra antes de esta hora (Argentina) sale la siesta; desde esta hora, "hasta mañana"
-const HORA_CORTE_SIESTA = 16
+// [Suposición] el "1630" del nombre del video es la hora de corte: antes de las 16:30 siesta, desde ahí noche
+const HORA_CORTE_SIESTA = 16.5
 
 function horaArgentina(fecha: Date): number {
-  const h = new Intl.DateTimeFormat('en-US', {
+  const partes = new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/Argentina/Buenos_Aires',
     hour: 'numeric',
+    minute: 'numeric',
     hourCycle: 'h23',
-  }).format(fecha)
-  return Number(h)
+  }).formatToParts(fecha)
+  let h = 0
+  let m = 0
+  for (const p of partes) {
+    if (p.type === 'hour') h = Number(p.value)
+    if (p.type === 'minute') m = Number(p.value)
+  }
+  return h + m / 60
+}
+
+function reproducir(v: HTMLVideoElement | null) {
+  if (!v) return
+  v.play().catch(function () {
+    // si el navegador bloquea el sonido, se reproduce sin audio
+    v.muted = true
+    v.play().catch(function () {})
+  })
 }
 
 interface CajaData {
@@ -46,12 +61,6 @@ export default function CajaCard() {
   useEffect(() => {
     fetchCaja()
   }, [])
-
-  useEffect(() => {
-    if (!despedida) return
-    const t = setTimeout(function () { setDespedida(null) }, 10000)
-    return function () { clearTimeout(t) }
-  }, [despedida])
 
   async function fetchCaja() {
     setLoading(true)
@@ -126,25 +135,25 @@ export default function CajaCard() {
 
   const banner = despedida ? (
     <div
-      className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4"
       onClick={function () { setDespedida(null) }}
     >
-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-6 text-center">
-        <Image
-          src="/tito-bulon.png"
-          alt="Tito Bulón"
-          width={220}
-          height={220}
-          className="mx-auto"
+      <div
+        className="bg-white rounded-3xl shadow-2xl w-full max-w-md p-4 text-center"
+        onClick={function (e) { e.stopPropagation() }}
+      >
+        <video
+          key={despedida}
+          ref={reproducir}
+          src={despedida === 'siesta' ? '/tito-bulon-siesta-1630.mp4' : '/tito-bulon-que-descanses.mp4'}
+          autoPlay
+          playsInline
+          onEnded={function () { setDespedida(null) }}
+          className="w-full max-h-[70vh] rounded-2xl bg-black"
         />
-        <h2 className="text-xl font-bold text-blue-500 mt-2">
-          {despedida === 'siesta'
-            ? 'Tito Bulón se fue a dormir la siesta 😴'
-            : 'Tito Bulón se fue a dormir, ¡hasta mañana! 🌙'}
-        </h2>
         <button
           onClick={function () { setDespedida(null) }}
-          className="mt-4 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-xl text-sm font-semibold cursor-pointer transition-colors"
+          className="mt-3 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-xl text-sm font-semibold cursor-pointer transition-colors"
         >
           Listo
         </button>
