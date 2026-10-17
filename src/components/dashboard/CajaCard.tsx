@@ -5,7 +5,7 @@ import { formatPeso } from '@/lib/utils'
 import { toast } from 'sonner'
 import { Wallet, Lock, Unlock } from 'lucide-react'
 
-// [Suposición] el "1630" del nombre del video es la hora de corte: antes de las 16:30 siesta, desde ahí noche
+// Antes de las 16:30 (hora Argentina) sale la siesta; desde las 16:30 sale la noche
 const HORA_CORTE_SIESTA = 16.5
 
 function horaArgentina(fecha: Date): number {
@@ -56,7 +56,7 @@ export default function CajaCard() {
   const [contado, setContado] = useState('')
   const [retiro, setRetiro] = useState('')
   const [nota, setNota] = useState('')
-  const [despedida, setDespedida] = useState<'siesta' | 'noche' | null>(null)
+  const [despedida, setDespedida] = useState<'apertura' | 'siesta' | 'noche' | null>(null)
 
   useEffect(() => {
     fetchCaja()
@@ -92,6 +92,7 @@ export default function CajaCard() {
     const json = await res.json()
     if (json.ok) {
       toast.success('Caja abierta correctamente')
+      setDespedida('apertura')
       setMontoInicial('')
       fetchCaja()
     } else {
@@ -145,7 +146,13 @@ export default function CajaCard() {
         <video
           key={despedida}
           ref={reproducir}
-          src={despedida === 'siesta' ? '/tito-bulon-siesta-1630.mp4' : '/tito-bulon-que-descanses.mp4'}
+          src={
+            despedida === 'apertura'
+              ? '/tito-bulon-buena-jornada.mp4'
+              : despedida === 'siesta'
+                ? '/tito-bulon-siesta-1630.mp4'
+                : '/tito-bulon-que-descanses.mp4'
+          }
           autoPlay
           playsInline
           onEnded={function () { setDespedida(null) }}
