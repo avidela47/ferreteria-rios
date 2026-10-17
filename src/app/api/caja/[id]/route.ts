@@ -11,6 +11,10 @@ function inicioFinDeFecha(fecha: string) {
   return { inicio, fin }
 }
 
+function redondear(n: number) {
+  return Math.round(n * 100) / 100
+}
+
 export async function PUT(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -31,6 +35,38 @@ export async function PUT(
     }
     if (caja.estado === 'cerrada') {
       return NextResponse.json({ ok: false, error: 'Esta caja ya está cerrada' }, { status: 400 })
+    }
+
+    // Arqueo (opcional): efectivo contado y retiro. Se valida antes de escribir nada.
+    const arqueo: Record<string, number> = {}
+    const hayArqueo = body.efectivoContado !== undefined && body.efectivoContado !== null
+
+    if (hayArqueo) {
+      const contado = Number(body.efectivoContado)
+      const retiro = Number(body.retiro ?? 0)
+
+      if (!Number.isFinite(contado) || contado < 0) {
+        return NextResponse.json({ ok: false, error: 'El efectivo contado no es válido' }, { status: 400 })
+      }
+      if (!Number.isFinite(retiro) || retiro < 0) {
+        return NextResponse.json({ ok: false, error: 'El retiro no es válido' }, { status: 400 })
+      }
+      if (retiro > contado) {
+        return NextResponse.json({ ok: false, error: 'El retiro no puede ser mayor al efectivo contado' }, { status: 400 })
+      }
+
+      // Mismo criterio que la tarjeta del dashboard: ventas en efectivo desde la apertura
+      const ventasDesdeApertura = await Sale.aggregate([
+        { $match: { estado: 'completada', formaPago: 'efectivo', createdAt: { $gte: caja.horaApertura } } },
+        { $group: { _id: null, total: { $sum: '$total' } } },
+      ])
+      const esperado = caja.montoInicial + (ventasDesdeApertura[0]?.total ?? 0)
+
+      arqueo.efectivoEsperado = redondear(esperado)
+      arqueo.efectivoContado = redondear(contado)
+      arqueo.retiro = redondear(retiro)
+      arqueo.diferencia = redondear(contado - esperado)
+      arqueo.efectivoQueda = redondear(contado - retiro)
     }
 
     const { inicio, fin } = inicioFinDeFecha(caja.fecha)
@@ -55,6 +91,7 @@ export async function PUT(
         otrosVentas,
         efectivoFinal: caja.montoInicial + efectivoVentas,
         otrosFinal: otrosVentas,
+        ...arqueo,
         usuarioCierre: session.user?.nombre ?? '',
         horaCierre: new Date(),
         nota: body.nota ?? '',

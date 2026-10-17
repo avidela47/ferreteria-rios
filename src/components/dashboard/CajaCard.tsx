@@ -21,9 +21,13 @@ export default function CajaCard() {
   const [caja, setCaja] = useState<CajaData | null>(null)
   const [loading, setLoading] = useState(true)
   const [montoInicial, setMontoInicial] = useState('')
+  const [montoSugerido, setMontoSugerido] = useState<number | null>(null)
   const [abriendo, setAbriendo] = useState(false)
   const [cerrando, setCerrando] = useState(false)
   const [mostrarCierre, setMostrarCierre] = useState(false)
+  const [contado, setContado] = useState('')
+  const [retiro, setRetiro] = useState('')
+  const [nota, setNota] = useState('')
 
   useEffect(() => {
     fetchCaja()
@@ -33,7 +37,15 @@ export default function CajaCard() {
     setLoading(true)
     const res = await fetch('/api/caja')
     const json = await res.json()
-    if (json.ok) setCaja(json.data)
+    if (json.ok) {
+      setCaja(json.data)
+      if (!json.data && json.montoSugerido !== null && json.montoSugerido !== undefined) {
+        setMontoSugerido(json.montoSugerido)
+        setMontoInicial(String(json.montoSugerido))
+      } else {
+        setMontoSugerido(null)
+      }
+    }
     setLoading(false)
   }
 
@@ -59,13 +71,25 @@ export default function CajaCard() {
     setAbriendo(false)
   }
 
+  function abrirCierre() {
+    if (!caja) return
+    setContado(String(Math.round(caja.efectivoEsperado * 100) / 100))
+    setRetiro('')
+    setNota('')
+    setMostrarCierre(true)
+  }
+
   async function cerrarCaja() {
     if (!caja) return
     setCerrando(true)
     const res = await fetch('/api/caja/' + caja._id, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({}),
+      body: JSON.stringify({
+        efectivoContado: Number(contado),
+        retiro: Number(retiro === '' ? 0 : retiro),
+        nota: nota,
+      }),
     })
     const json = await res.json()
     if (json.ok) {
@@ -95,7 +119,11 @@ export default function CajaCard() {
           </div>
           <h2 className="font-bold text-blue-500">Caja cerrada</h2>
         </div>
-        <p className="text-xs text-slate-400 mb-3">Ingresá el efectivo inicial para abrir la caja de hoy</p>
+        <p className="text-xs text-slate-400 mb-3">
+          {montoSugerido !== null
+            ? 'Sugerido: ' + formatPeso(montoSugerido) + ' (lo que quedó al cerrar la última caja). Podés editarlo.'
+            : 'Ingresá el efectivo inicial para abrir la caja de hoy'}
+        </p>
         <div className="flex gap-2">
           <input
             type="number"
@@ -115,6 +143,19 @@ export default function CajaCard() {
       </div>
     )
   }
+
+  const contadoNum = Number(contado)
+  const retiroNum = Number(retiro === '' ? 0 : retiro)
+  const retiroMayor = contado !== '' && retiroNum > contadoNum
+  const valido =
+    contado !== '' &&
+    Number.isFinite(contadoNum) &&
+    contadoNum >= 0 &&
+    Number.isFinite(retiroNum) &&
+    retiroNum >= 0 &&
+    retiroNum <= contadoNum
+  const dif = valido ? Math.round((contadoNum - caja.efectivoEsperado) * 100) / 100 : 0
+  const queda = valido ? Math.round((contadoNum - retiroNum) * 100) / 100 : 0
 
   return (
     <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-5 border-2 border-emerald-400">
@@ -149,16 +190,78 @@ export default function CajaCard() {
 
       {!mostrarCierre ? (
         <button
-          onClick={function () { setMostrarCierre(true) }}
+          onClick={abrirCierre}
           className="w-full flex items-center justify-center gap-2 border border-slate-200 text-blue-500 hover:bg-slate-50 py-2 rounded-xl text-sm font-semibold cursor-pointer transition-colors"
         >
           <Lock size={15} /> Cerrar caja
         </button>
       ) : (
-        <div className="space-y-2">
-          <p className="text-xs text-orange-600 font-medium">
-            Confirmás el cierre de caja de hoy? Efectivo final: {formatPeso(caja.efectivoEsperado)}
-          </p>
+        <div className="space-y-3">
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">
+                Contado en caja
+              </label>
+              <input
+                type="number"
+                min={0}
+                step="0.01"
+                value={contado}
+                onChange={function (e) { setContado(e.target.value) }}
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wide text-slate-400 mb-1">
+                Retiro
+              </label>
+              <input
+                type="number"
+                min={0}
+                step="0.01"
+                value={retiro}
+                placeholder="0"
+                onChange={function (e) { setRetiro(e.target.value) }}
+                className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              />
+            </div>
+          </div>
+
+          {retiroMayor && (
+            <p className="text-xs text-red-500 font-medium">El retiro no puede ser mayor a lo contado</p>
+          )}
+
+          <div className="bg-slate-50 rounded-2xl p-3 space-y-1 text-sm">
+            <div className="flex justify-between">
+              <span className="text-slate-500">Esperado</span>
+              <span className="font-semibold text-blue-500">{formatPeso(caja.efectivoEsperado)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-slate-500">Diferencia</span>
+              {!valido ? (
+                <span className="text-slate-300">—</span>
+              ) : dif === 0 ? (
+                <span className="font-semibold text-emerald-600">Sin diferencia</span>
+              ) : dif < 0 ? (
+                <span className="font-semibold text-red-500">Faltante {formatPeso(-dif)}</span>
+              ) : (
+                <span className="font-semibold text-orange-600">Sobrante {formatPeso(dif)}</span>
+              )}
+            </div>
+            <div className="flex justify-between">
+              <span className="text-slate-500">Queda para mañana</span>
+              <span className="font-bold text-emerald-600">{valido ? formatPeso(queda) : '—'}</span>
+            </div>
+          </div>
+
+          <input
+            type="text"
+            value={nota}
+            onChange={function (e) { setNota(e.target.value) }}
+            placeholder="Nota (opcional), por ejemplo el motivo de una diferencia"
+            className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+          />
+
           <div className="flex gap-2">
             <button
               onClick={function () { setMostrarCierre(false) }}
@@ -168,7 +271,7 @@ export default function CajaCard() {
             </button>
             <button
               onClick={cerrarCaja}
-              disabled={cerrando}
+              disabled={cerrando || !valido}
               className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-xl text-sm font-semibold cursor-pointer transition-colors disabled:opacity-50"
             >
               {cerrando ? 'Cerrando...' : 'Confirmar cierre'}

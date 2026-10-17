@@ -10,6 +10,11 @@ export interface ICashRegisterDocument extends Document {
   otrosVentas: number
   efectivoFinal: number
   otrosFinal: number
+  efectivoEsperado: number | null
+  efectivoContado: number | null
+  retiro: number
+  diferencia: number | null
+  efectivoQueda: number | null
   usuarioCierre: string
   horaCierre: Date | null
   nota: string
@@ -28,6 +33,11 @@ const CashRegisterSchema = new Schema<ICashRegisterDocument>(
     otrosVentas: { type: Number, default: 0 },
     efectivoFinal: { type: Number, default: 0 },
     otrosFinal: { type: Number, default: 0 },
+    efectivoEsperado: { type: Number, default: null },
+    efectivoContado: { type: Number, default: null },
+    retiro: { type: Number, default: 0 },
+    diferencia: { type: Number, default: null },
+    efectivoQueda: { type: Number, default: null },
     usuarioCierre: { type: String, default: '' },
     horaCierre: { type: Date, default: null },
     nota: { type: String, default: '' },

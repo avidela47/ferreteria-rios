@@ -27,7 +27,17 @@ export async function GET() {
     const caja = await CashRegister.findOne({ fecha: fechaHoy, estado: 'abierta' })
 
     if (!caja) {
-      return NextResponse.json({ ok: true, data: null })
+      // Sugerencia para abrir: lo que quedó en la última caja cerrada con arqueo
+      const ultima = await CashRegister.findOne({
+        estado: 'cerrada',
+        efectivoQueda: { $ne: null },
+      }).sort({ horaCierre: -1 })
+
+      return NextResponse.json({
+        ok: true,
+        data: null,
+        montoSugerido: ultima ? ultima.efectivoQueda : null,
+      })
     }
 
     const ventasEfectivo = await Sale.aggregate([
