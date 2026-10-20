@@ -115,6 +115,32 @@ export default function NuevaCompra({ onGuardado }: Props) {
     })
   }
 
+  // Cantidad escrita a mano (vacío = 0 mientras se tipea; al salir del campo vuelve a 1)
+  function setCantidadManual(index: number, valor: string) {
+    const num = valor === '' ? 0 : Number(valor)
+    if (!Number.isFinite(num) || num < 0) return
+    setItems(function (prev) {
+      const copia = prev.slice()
+      copia[index] = Object.assign({}, copia[index], {
+        cantidad: num,
+        subtotal: num * copia[index].precioCosto,
+      })
+      return copia
+    })
+  }
+
+  function corregirCantidad(index: number) {
+    setItems(function (prev) {
+      if (prev[index].cantidad > 0) return prev
+      const copia = prev.slice()
+      copia[index] = Object.assign({}, copia[index], {
+        cantidad: 1,
+        subtotal: copia[index].precioCosto,
+      })
+      return copia
+    })
+  }
+
   function cambiarPrecio(index: number, precio: number) {
     setItems(function (prev) {
       const copia = prev.slice()
@@ -137,6 +163,10 @@ export default function NuevaCompra({ onGuardado }: Props) {
   async function handleGuardar() {
     if (items.length === 0) {
       toast.error('Agrega al menos un producto')
+      return
+    }
+    if (items.some(function (i) { return !(i.cantidad > 0) })) {
+      toast.error('Hay productos con cantidad 0')
       return
     }
     if (!proveedor) {
@@ -284,7 +314,15 @@ export default function NuevaCompra({ onGuardado }: Props) {
                           >
                             <Minus size={14} />
                           </button>
-                          <span className="w-8 text-center font-medium">{item.cantidad}</span>
+                          <input
+                            type="number"
+                            min={1}
+                            value={item.cantidad === 0 ? '' : item.cantidad}
+                            onChange={function (e) { setCantidadManual(i, e.target.value) }}
+                            onBlur={function () { corregirCantidad(i) }}
+                            onFocus={function (e) { e.target.select() }}
+                            className="w-20 border border-slate-200 rounded px-2 py-1 text-center font-medium text-sm focus:outline-none focus:ring-1 focus:ring-orange-400"
+                          />
                           <button
                             onClick={function () { cambiarCantidad(i, 1) }}
                             className="text-slate-400 hover:text-green-500 cursor-pointer"
