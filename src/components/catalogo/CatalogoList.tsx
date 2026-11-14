@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { IFicha } from '@/types/catalogo'
-import { Pencil, Trash2, ChevronDown, ChevronUp, Search, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Pencil, Trash2, ChevronDown, ChevronUp, Search, BookOpen, ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react'
 import { toast } from 'sonner'
 import { formatPeso } from '@/lib/utils'
 import FotoProducto from './FotoProducto'
@@ -35,7 +35,6 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
   const [fichas, setFichas] = useState<IFicha[]>([])
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState('')
-  const [sinImagen, setSinImagen] = useState(false)
   const [recarga, setRecarga] = useState(0)
   const [buscar, setBuscar] = useState('')
   const [categoriaFiltro, setCategoriaFiltro] = useState('')
@@ -95,17 +94,19 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
       .replace(/[\u0300-\u036f]/g, '')
   }
 
-  const buscarNormalizado = normalizar(buscar)
+  const palabras = normalizar(buscar).split(/\s+/).filter(Boolean)
 
-  const fichasFiltradas = fichas.filter((f) => {
-    const matchBuscar = buscar === '' ||
-      normalizar(f.nombre ?? '').includes(buscarNormalizado) ||
-      normalizar(f.codigo ?? '').includes(buscarNormalizado) ||
-      normalizar(f.descripcion ?? '').includes(buscarNormalizado) ||
-      normalizar(f.paraQueSirve ?? '').includes(buscarNormalizado)
-    const matchCategoria = categoriaFiltro === '' || f.categoria === categoriaFiltro
-    return matchBuscar && matchCategoria && (!sinImagen || !f.imagen)
-  })
+  const fichasFiltradas = fichas
+    .map((f) => {
+      const principal = normalizar([f.codigo, f.nombre, f.categoria].filter(Boolean).join(' '))
+      const extra = normalizar([f.descripcion, f.paraQueSirve].filter(Boolean).join(' '))
+      const enPrincipal = palabras.every((p) => principal.includes(p))
+      const enTodo = palabras.every((p) => (principal + ' ' + extra).includes(p))
+      return { f, enPrincipal, enTodo }
+    })
+    .filter(({ f, enTodo }) => enTodo && (categoriaFiltro === '' || f.categoria === categoriaFiltro))
+    .sort((a, b) => Number(b.enPrincipal) - Number(a.enPrincipal))
+    .map(({ f }) => f)
 
   const totalPaginas = Math.max(1, Math.ceil(fichasFiltradas.length / POR_PAGINA))
   const paginaActual = Math.min(pagina, totalPaginas)
@@ -123,11 +124,15 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap gap-3 text-sm text-slate-600">
-        <span>{fichas.length} productos</span>
-        <span>· {fichas.filter(f => f.imagen).length} con foto</span>
-        <span>· {fichas.filter(f => !f.imagen).length} sin imagen</span>
-        <button type="button" onClick={() => setRecarga(r => r + 1)} className="font-medium text-orange-600">Actualizar stock y precios</button>
+      <div className="flex justify-end">
+        <button
+          type="button"
+          onClick={() => setRecarga(r => r + 1)}
+          className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors"
+        >
+          <RefreshCw size={16} />
+          Actualizar stock y precios
+        </button>
       </div>
       <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-200 p-4 flex flex-wrap gap-3 items-center">
   <div className="relative flex-1">
@@ -144,7 +149,6 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
     onClick={function () {
       setBuscar('')
       setCategoriaFiltro('')
-      setSinImagen(false)
       setPagina(1)
     }}
     className="border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2 rounded-xl text-sm font-medium transition-colors"
@@ -161,13 +165,6 @@ export default function CatalogoList({ onEditar, esAdmin, refresh, endpoint = '/
             <option key={c} value={c}>{c}</option>
           ))}
         </select>
-        <label className="flex items-center gap-2 text-sm text-slate-600">
-          <input type="checkbox" checked={sinImagen} onChange={e => { setSinImagen(e.target.checked); setPagina(1) }} />
-          Sin imagen
-        </label>
-        <span className="text-sm text-slate-400 whitespace-nowrap">
-          {fichasFiltradas.length} fichas
-        </span>
       </div>
 
       {cargando ? <p role="status" className="p-8 text-center text-slate-500">Cargando catálogo...</p> : error ? (
