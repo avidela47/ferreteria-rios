@@ -41,9 +41,10 @@ const menuCompleto = [
 interface SidebarProps {
   nombreUsuario: string
   rol: string
+  abierto?: boolean
 }
 
-export default function Sidebar({ nombreUsuario, rol }: SidebarProps) {
+export default function Sidebar({ nombreUsuario, rol, abierto = false }: SidebarProps) {
   const pathname = usePathname()
   const esAdmin = rol === 'admin'
   const menu = menuCompleto.filter(function (item) {
@@ -51,7 +52,10 @@ export default function Sidebar({ nombreUsuario, rol }: SidebarProps) {
   })
 
   return (
-    <aside className="w-64 bg-white h-screen flex flex-col overflow-hidden border-r border-slate-100">
+    <aside
+      id="menu-lateral"
+      className={`app-sidebar w-64 bg-white h-screen flex flex-col overflow-hidden border-r border-slate-100 print:hidden${abierto ? ' open' : ''}`}
+    >
       <div className="px-5 py-5 flex justify-center shrink-0">
         <Image
           src="/logo.png"
